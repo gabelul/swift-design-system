@@ -5,9 +5,13 @@
 フォーマットは [Keep a Changelog](https://keepachangelog.com/ja/1.0.0/) に基づいており、
 このプロジェクトは [セマンティックバージョニング](https://semver.org/lang/ja/spec/v2.0.0.html) に準拠しています。
 
-## [未リリース]
+## [1.0.9] - 2025-11-08
 
-なし
+### 追加
+- **比較リンク自動更新** - prepare-next-releaseワークフローの改善
+  - タグからバージョンを自動抽出
+  - [未リリース]の比較リンクを最新バージョンに自動更新
+  - リリース後の手動リンク更新作業が不要に
 
 ## [1.0.8] - 2025-11-08
 
@@ -199,7 +203,8 @@
 - DocC 対応
   - GitHub Pages での自動ドキュメント公開
 
-[未リリース]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.8...HEAD
+[未リリース]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.9...HEAD
+[1.0.9]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.8...v1.0.9
 [1.0.8]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.7...v1.0.8
 [1.0.7]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.6...v1.0.7
 [1.0.6]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.5...v1.0.6
