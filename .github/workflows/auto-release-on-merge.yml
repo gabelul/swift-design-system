@@ -212,10 +212,14 @@ jobs:
             echo "ℹ️ CHANGELOG.mdに既に「未リリース」セクションが存在します"
           fi
 
-          # 比較リンクを最新バージョンに更新（必ず変更を発生させる）
+          # 比較リンクを最新バージョンに更新
           sed -i "s|\[未リリース\]: .*|\[未リリース\]: https://github.com/no-problem-dev/swift-design-system/compare/$VERSION_TAG...HEAD|" CHANGELOG.md
 
-          echo "✅ CHANGELOG.mdの比較リンクを $VERSION_TAG に更新しました"
+          # 必ず変更を発生させるため、自動生成コメントを追加
+          echo "" >> CHANGELOG.md
+          echo "<!-- Auto-generated on $(date -u +%Y-%m-%dT%H:%M:%SZ) by release workflow -->" >> CHANGELOG.md
+
+          echo "✅ CHANGELOG.mdを更新しました"
 
       - name: Commit and push next release branch
         run: |
