@@ -1,9 +1,10 @@
 name: Prepare Next Release
 
-# GitHub Releaseが公開された後、次のリリースに向けた準備PRを自動作成
+# タグプッシュ後、次のリリースに向けた準備ブランチを自動作成
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:  # 手動実行も可能にする
 
 jobs:
