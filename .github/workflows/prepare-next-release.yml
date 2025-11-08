@@ -4,6 +4,7 @@ name: Prepare Next Release
 on:
   release:
     types: [published]
+  workflow_dispatch:  # 手動実行も可能にする
 
 jobs:
   prepare-next-release:
