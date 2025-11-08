@@ -5,9 +5,11 @@
 フォーマットは [Keep a Changelog](https://keepachangelog.com/ja/1.0.0/) に基づいており、
 このプロジェクトは [セマンティックバージョニング](https://semver.org/lang/ja/spec/v2.0.0.html) に準拠しています。
 
-## [未リリース]
+## [1.0.8] - 2025-11-08
 
-なし
+### 修正
+- **prepare-next-releaseワークフロー検証** - ドラフトPR自動作成の動作確認
+  - 「未リリース」セクションが存在しない場合のPR作成フローを検証
 
 ## [1.0.7] - 2025-11-08
 
@@ -193,7 +195,8 @@
 - DocC 対応
   - GitHub Pages での自動ドキュメント公開
 
-[未リリース]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.7...HEAD
+[未リリース]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.8...HEAD
+[1.0.8]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.7...v1.0.8
 [1.0.7]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.6...v1.0.7
 [1.0.6]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.4...v1.0.5
