@@ -36,10 +36,19 @@ jobs:
       - name: Update CHANGELOG.md
         id: update_changelog
         run: |
-          # "# 変更履歴"の後に新しいUnreleasedセクションを挿入（存在しない場合のみ）
+          # "## \[未リリース\]"セクションが存在しない場合のみ挿入
           if ! grep -q "## \[未リリース\]" CHANGELOG.md; then
-            # 一時ファイルを使用して挿入
-            awk '/^# 変更履歴$/ {print; print ""; print "## [未リリース]"; print ""; print "なし"; print ""; next} 1' CHANGELOG.md > CHANGELOG.tmp
+            # 最初の"## ["で始まるバージョンセクションの前に挿入
+            awk '
+              /^## \[/ && !inserted {
+                print "## [未リリース]"
+                print ""
+                print "なし"
+                print ""
+                inserted = 1
+              }
+              { print }
+            ' CHANGELOG.md > CHANGELOG.tmp
             mv CHANGELOG.tmp CHANGELOG.md
             echo "updated=true" >> $GITHUB_OUTPUT
           else
