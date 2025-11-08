@@ -34,9 +34,22 @@ jobs:
         run: |
           git checkout -b chore/prepare-next-release
 
+      - name: Extract version from tag
+        id: version
+        run: |
+          # タグからバージョンを抽出（workflow_dispatchの場合は最新タグを使用）
+          if [ "${{ github.event_name }}" = "push" ]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+          else
+            VERSION=$(git describe --tags --abbrev=0 | sed 's/^v//')
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Update CHANGELOG.md
         id: update_changelog
         run: |
+          VERSION=${{ steps.version.outputs.version }}
+
           # "## \[未リリース\]"セクションが存在しない場合のみ挿入
           if ! grep -q "## \[未リリース\]" CHANGELOG.md; then
             # 最初の"## ["で始まるバージョンセクションの前に挿入
@@ -51,6 +64,11 @@ jobs:
               { print }
             ' CHANGELOG.md > CHANGELOG.tmp
             mv CHANGELOG.tmp CHANGELOG.md
+
+            # 比較リンクセクションを更新
+            # [未リリース]のリンクを最新バージョンに更新
+            sed -i "s|\[未リリース\]: https://github.com/no-problem-dev/swift-design-system/compare/v.*\.\.\.HEAD|[未リリース]: https://github.com/no-problem-dev/swift-design-system/compare/v${VERSION}...HEAD|" CHANGELOG.md
+
             echo "updated=true" >> $GITHUB_OUTPUT
           else
             echo "updated=false" >> $GITHUB_OUTPUT
