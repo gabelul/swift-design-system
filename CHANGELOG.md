@@ -7,6 +7,10 @@
 
 ## [未リリース]
 
+なし
+
+## [1.0.6] - 2025-11-08
+
 ### 追加
 - ドキュメントの改善とリリースフロー検証
 
@@ -177,7 +181,8 @@
 - DocC 対応
   - GitHub Pages での自動ドキュメント公開
 
-[未リリース]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.5...HEAD
+[未リリース]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.6...HEAD
+[1.0.6]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.5...v1.0.6
 [1.0.5]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.2...v1.0.3
