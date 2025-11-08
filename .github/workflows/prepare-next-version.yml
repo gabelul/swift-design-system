@@ -4,6 +4,12 @@ name: Prepare Next Version
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      current_version:
+        description: '現在のバージョン (例: 1.0.3)'
+        required: true
+        type: string
 
 jobs:
   prepare-next-version:
@@ -19,9 +25,13 @@ jobs:
       - name: Extract version from tag
         id: extract_version
         run: |
-          # タグから現在のバージョンを取得（例: v1.0.2 → 1.0.2）
-          CURRENT_VERSION="${{ github.event.release.tag_name }}"
-          CURRENT_VERSION="${CURRENT_VERSION#v}"
+          # 手動実行の場合は入力値を使用、リリースイベントの場合はタグから取得
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            CURRENT_VERSION="${{ github.event.inputs.current_version }}"
+          else
+            CURRENT_VERSION="${{ github.event.release.tag_name }}"
+            CURRENT_VERSION="${CURRENT_VERSION#v}"
+          fi
           echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
 
           # パッチバージョンをインクリメント（例: 1.0.2 → 1.0.3）

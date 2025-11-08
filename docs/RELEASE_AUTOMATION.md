@@ -102,18 +102,37 @@ v1.0.2 リリース後の次期バージョン v1.0.3 の開発準備PRです。
 
 ## 手動での次バージョン準備
 
-自動化が失敗した場合や、手動で実行したい場合は、以下のスクリプトを使用できます：
+自動化が失敗した場合や、手動で実行したい場合は、以下の方法があります：
+
+### 方法1: GitHub Actions で手動実行
+
+GitHubのUIから実行：
+
+1. リポジトリの「Actions」タブを開く
+2. 「Prepare Next Version」ワークフローを選択
+3. 「Run workflow」ボタンをクリック
+4. 現在のバージョンを入力（例: `1.0.3`）
+5. 「Run workflow」を実行
+
+または、CLIから実行：
+
+```bash
+# gh CLIで手動実行
+gh workflow run prepare-next-version.yml -f current_version=1.0.3
+```
+
+### 方法2: スクリプトで手動実行
 
 ```bash
 # 現在のバージョンを指定して実行
-./scripts/prepare_next_version.sh 1.0.2
+./scripts/prepare_next_version.sh 1.0.3
 ```
 
 このスクリプトは以下を実行します：
 
 1. mainブランチであることを確認
 2. mainブランチを最新化
-3. `prepare/v1.0.3` ブランチを作成
+3. `prepare/v1.0.4` ブランチを作成
 4. CHANGELOG.md の「未リリース」セクションをリセット
 5. 変更をコミット・プッシュ
 6. PRを作成
