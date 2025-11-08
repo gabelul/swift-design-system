@@ -7,6 +7,12 @@
 
 ## [未リリース]
 
+## [1.0.1] - 2025-01-08
+
+### 修正
+- Swift 6のStrictConcurrency機能がデフォルトで有効になっているため、明示的な設定を削除
+- Package.swiftの不要なswiftSettings設定を削除してビルドエラーを解消
+
 ## [1.0.0] - 2025-01-08
 
 ### 追加
@@ -70,5 +76,6 @@
 - DocC 対応
   - GitHub Pages での自動ドキュメント公開
 
-[未リリース]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.0...HEAD
+[未リリース]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/no-problem-dev/swift-design-system/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/no-problem-dev/swift-design-system/releases/tag/v1.0.0
