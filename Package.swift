@@ -21,17 +21,11 @@ let package = Package(
     targets: [
         .target(
             name: "DesignSystem",
-            dependencies: [],
-            swiftSettings: [
-                .enableUpcomingFeature("StrictConcurrency")
-            ]
+            dependencies: []
         ),
         .testTarget(
             name: "DesignSystemTests",
-            dependencies: ["DesignSystem"],
-            swiftSettings: [
-                .enableUpcomingFeature("StrictConcurrency")
-            ]
+            dependencies: ["DesignSystem"]
         ),
     ]
 )
