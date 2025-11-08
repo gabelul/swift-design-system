@@ -27,7 +27,7 @@ import Foundation
 /// - `xxl`: 32pt - とても大きい間隔
 /// - `xxxl`: 48pt - 非常に大きい間隔
 /// - `xxxxl`: 64pt - 最大の間隔
-public protocol SpacingScale {
+public protocol SpacingScale: Sendable {
     /// 間隔なし（0pt）
     var none: CGFloat { get }
 

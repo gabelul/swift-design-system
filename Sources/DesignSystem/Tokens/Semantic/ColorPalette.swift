@@ -30,7 +30,7 @@ import SwiftUI
 /// // アプリで使用
 /// ThemeProvider(lightPalette: MyBrandPalette())
 /// ```
-public protocol ColorPalette {
+public protocol ColorPalette: Sendable {
     // MARK: - Primary Colors
 
     /// 主要なアクションやブランド要素に使用

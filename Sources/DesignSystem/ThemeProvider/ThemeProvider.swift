@@ -46,6 +46,7 @@ import SwiftUI
 /// themeProvider?.applyCustomTheme(colorPalette: MyBrandPalette())
 /// ```
 @Observable
+@MainActor
 public final class ThemeProvider {
     /// 現在のカラースキーム
     public var colorScheme: ThemeColorScheme

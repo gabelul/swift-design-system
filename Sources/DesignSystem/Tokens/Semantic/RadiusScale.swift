@@ -29,7 +29,7 @@ import Foundation
 /// - `xl`: 16pt - とても大きい角丸
 /// - `xxl`: 20pt - 非常に大きい角丸
 /// - `full`: 9999pt - 完全な円形（ボタン、アバターなど）
-public protocol RadiusScale {
+public protocol RadiusScale: Sendable {
     /// 角丸なし（0pt）
     var none: CGFloat { get }
 

@@ -23,7 +23,7 @@ import SwiftUI
 /// - **Large**: 56pt高さ - 主要なアクション（デフォルト）
 /// - **Medium**: 48pt高さ - 標準的なボタン
 /// - **Small**: 40pt高さ - コンパクトなレイアウト
-public enum ButtonSize {
+public enum ButtonSize: Sendable {
     /// 大きいサイズ（56pt）- 主要なアクション
     case large
 
