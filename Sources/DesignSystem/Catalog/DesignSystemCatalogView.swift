@@ -54,7 +54,7 @@ public struct DesignSystemCatalogView: View {
                                             Spacer()
 
                                             Image(systemName: "chevron.right")
-                                                .font(.caption)
+                                                .typography(.labelMedium)
                                                 .foregroundStyle(colorPalette.onSurfaceVariant)
                                         }
                                         .padding(.horizontal, spacing.md)
@@ -119,6 +119,8 @@ public struct DesignSystemCatalogView: View {
             switch item.name {
             case "カラー":
                 ColorsCatalogView()
+            case "タイポグラフィ":
+                TypographyCatalogView()
             case "スペーシング":
                 SpacingCatalogView()
             case "角丸":
@@ -177,7 +179,7 @@ private struct InfoLinkRow: View {
                     Text(value)
                         .typography(.bodyMedium)
                     Image(systemName: "arrow.up.right.square")
-                        .font(.caption)
+                        .typography(.labelMedium)
                 }
                 .foregroundStyle(colorPalette.primary)
             }
