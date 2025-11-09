@@ -157,6 +157,13 @@ public enum Typography {
         .system(size: size, weight: weight, design: .default)
     }
 
+    /// SwiftUI Font with custom design
+    /// - Parameter design: フォントデザイン（.default, .serif, .rounded, .monospaced）
+    /// - Returns: 指定されたデザインのフォント
+    public func font(design: Font.Design) -> Font {
+        .system(size: size, weight: weight, design: design)
+    }
+
     /// 行の高さ（Line Height）
     /// Material Design 3仕様に基づく
     public var lineHeight: CGFloat {

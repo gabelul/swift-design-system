@@ -27,6 +27,9 @@ struct TypographyCatalogView: View {
                 // Label
                 labelSection
 
+                // Font Design
+                fontDesignSection
+
                 // 使用例
                 usageSection
             }
@@ -151,6 +154,26 @@ struct TypographyCatalogView: View {
         }
     }
 
+    // MARK: - Font Design Section
+
+    @ViewBuilder
+    private var fontDesignSection: some View {
+        SectionCard(title: "フォントデザイン") {
+            VStack(alignment: .leading, spacing: spacing.lg) {
+                Text("4種類のフォントデザインが利用可能です。iOS/macOSのシステムフォントに対応しています。")
+                    .typography(.bodySmall)
+                    .foregroundStyle(colorPalette.onSurfaceVariant)
+
+                VStack(spacing: spacing.lg) {
+                    FontDesignDemoView(design: .default, name: "Default (ゴシック)", sampleText: "こんにちは世界 Hello World 123")
+                    FontDesignDemoView(design: .serif, name: "Serif (明朝)", sampleText: "こんにちは世界 Hello World 123")
+                    FontDesignDemoView(design: .rounded, name: "Rounded (丸ゴシック)", sampleText: "こんにちは世界 Hello World 123")
+                    FontDesignDemoView(design: .monospaced, name: "Monospaced (等幅)", sampleText: "こんにちは世界 Hello World 123")
+                }
+            }
+        }
+    }
+
     // MARK: - Usage Section
 
     @ViewBuilder
@@ -166,6 +189,9 @@ struct TypographyCatalogView: View {
 
                 Text("本文テキスト")
                     .typography(.bodyMedium)
+
+                Text("明朝体で表示")
+                    .typography(.bodyMedium, design: .serif)
 
                 Text("ラベル")
                     .typography(.labelSmall)
@@ -237,6 +263,32 @@ private struct SpecLabel: View {
                 .fontDesign(.monospaced)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
         }
+    }
+}
+
+/// フォントデザインのデモ表示コンポーネント
+private struct FontDesignDemoView: View {
+    @Environment(\.colorPalette) private var colorPalette
+    @Environment(\.spacingScale) private var spacing
+
+    let design: Font.Design
+    let name: String
+    let sampleText: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: spacing.sm) {
+            // デザイン名
+            Text(name)
+                .typography(.titleSmall)
+                .foregroundStyle(colorPalette.onSurface)
+
+            // サンプルテキスト
+            Text(sampleText)
+                .typography(.bodyLarge, design: design)
+                .foregroundStyle(colorPalette.onSurface)
+                .padding(.vertical, spacing.xs)
+        }
+        .padding(.vertical, spacing.xs)
     }
 }
 
