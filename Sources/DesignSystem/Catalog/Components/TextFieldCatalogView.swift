@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// TextFieldコンポーネントのカタログビュー
+/// TextField component catalog view
 struct TextFieldCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -13,17 +13,17 @@ struct TextFieldCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                // 概要
-                Text("テキストフィールドはユーザーからテキスト入力を受け取るコンポーネントです")
+                // Overview
+                Text("Text fields are components for capturing user text input.")
                     .typography(.bodyMedium)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
                     .padding(.horizontal, spacing.lg)
                     .padding(.top, spacing.lg)
 
-                // スタイルバリエーション
-                SectionCard(title: "スタイルバリエーション") {
+                // Style variations
+                SectionCard(title: "Style Variations") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("2つのスタイルが利用可能")
+                        Text("Two styles are available.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -31,24 +31,24 @@ struct TextFieldCatalogView: View {
                             DSTextField(
                                 "Outlined",
                                 text: $email,
-                                placeholder: "メールアドレス",
+                                placeholder: "Email address",
                                 style: .outlined
                             )
 
                             DSTextField(
                                 "Filled",
                                 text: $password,
-                                placeholder: "パスワード",
+                                placeholder: "Password",
                                 style: .filled
                             )
                         }
                     }
                 }
 
-                // アイコン付き
-                SectionCard(title: "アイコン付き") {
+                // With icons
+                SectionCard(title: "With Icons") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("先頭または末尾にアイコンを配置可能")
+                        Text("Place icons at the leading or trailing edge.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -64,7 +64,7 @@ struct TextFieldCatalogView: View {
                             DSTextField(
                                 "Trailing Icon",
                                 text: $search,
-                                placeholder: "検索",
+                                placeholder: "Search",
                                 style: .outlined,
                                 trailingIcon: "magnifyingglass"
                             )
@@ -72,7 +72,7 @@ struct TextFieldCatalogView: View {
                             DSTextField(
                                 "Both Icons",
                                 text: $password,
-                                placeholder: "パスワード",
+                                placeholder: "Password",
                                 style: .outlined,
                                 leadingIcon: "lock",
                                 trailingIcon: "eye"
@@ -81,50 +81,50 @@ struct TextFieldCatalogView: View {
                     }
                 }
 
-                // サポートテキスト
-                SectionCard(title: "サポートテキスト") {
+                // Supporting text
+                SectionCard(title: "Supporting Text") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("補助的な情報を表示")
+                        Text("Show additional helper information below the field.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
                         DSTextField(
-                            "ユーザー名",
+                            "Username",
                             text: $username,
-                            placeholder: "ユーザー名を入力",
+                            placeholder: "Enter username",
                             style: .outlined,
-                            supportingText: "3文字以上20文字以内で入力してください"
+                            supportingText: "Please enter 3–20 characters."
                         )
                     }
                 }
 
-                // エラー状態
-                SectionCard(title: "エラー状態") {
+                // Error state
+                SectionCard(title: "Error State") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("バリデーションエラーの表示")
+                        Text("Display validation errors.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
                         DSTextField(
-                            "メールアドレス",
+                            "Email",
                             text: $email,
                             placeholder: "example@email.com",
                             style: .outlined,
-                            error: "メールアドレスの形式が正しくありません",
+                            error: "The email address format is invalid.",
                             leadingIcon: "envelope"
                         )
                     }
                 }
 
-                // 複数行テキスト
-                SectionCard(title: "複数行テキスト") {
+                // Multiline text
+                SectionCard(title: "Multiline Text") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("長いテキスト入力用")
+                        Text("For longer text input.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("メッセージ")
+                            Text("Message")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurface.opacity(0.7))
 
@@ -141,24 +141,24 @@ struct TextFieldCatalogView: View {
                                         .stroke(colorPalette.outline, lineWidth: 1)
                                 )
 
-                            Text("メッセージを入力してください")
+                            Text("Please enter a message.")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
                         }
                     }
                 }
 
-                // 使用例
-                SectionCard(title: "使用例") {
+                // Usage
+                SectionCard(title: "Usage") {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("SwiftUI での使用方法")
+                        Text("How to use in SwiftUI")
                             .typography(.titleSmall)
 
                         Text("""
                         @State private var email = ""
 
                         DSTextField(
-                            "メールアドレス",
+                            "Email",
                             text: $email,
                             placeholder: "example@email.com",
                             style: .outlined,
@@ -173,10 +173,10 @@ struct TextFieldCatalogView: View {
                     }
                 }
 
-                // フォーム例
-                SectionCard(title: "フォーム例") {
+                // Form example
+                SectionCard(title: "Form Example") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("実際のフォームでの使用例")
+                        Text("Example usage in a real form.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -187,7 +187,7 @@ struct TextFieldCatalogView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
 
                                 DSTextField(
-                                    "メールアドレス",
+                                    "Email",
                                     text: $email,
                                     placeholder: "example@email.com",
                                     style: .outlined,
@@ -195,18 +195,18 @@ struct TextFieldCatalogView: View {
                                 )
 
                                 DSTextField(
-                                    "パスワード",
+                                    "Password",
                                     text: $password,
-                                    placeholder: "パスワード",
+                                    placeholder: "Password",
                                     style: .outlined,
-                                    supportingText: "8文字以上で入力してください",
+                                    supportingText: "Enter at least 8 characters.",
                                     leadingIcon: "lock"
                                 )
 
                                 DSTextField(
-                                    "ユーザー名",
+                                    "Username",
                                     text: $username,
-                                    placeholder: "ユーザー名",
+                                    placeholder: "Username",
                                     style: .outlined,
                                     leadingIcon: "person"
                                 )

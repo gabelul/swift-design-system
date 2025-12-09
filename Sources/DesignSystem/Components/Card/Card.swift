@@ -1,34 +1,35 @@
 import SwiftUI
 
-/// カードコンポーネント
+/// Card component.
 ///
-/// コンテンツをグループ化して表示するための汎用コンテナ。
-/// Surface色の背景、角丸、影によって他の要素から分離されます。
+/// Generic container for grouping and displaying content.
+/// Uses the surface color, corner radius, and elevation to separate content from
+/// the surrounding UI.
 ///
-/// ## 使用例
+/// ## Example
 /// ```swift
 /// @Environment(\.spacingScale) var spacing
 ///
 /// Card {
 ///     VStack(alignment: .leading, spacing: spacing.md) {
-///         Text("タイトル")
+///         Text("Title")
 ///             .typography(.titleMedium)
-///         Text("説明文")
+///         Text("Description")
 ///             .typography(.bodyMedium)
 ///     }
 /// }
 ///
-/// // Elevationレベルを指定
+/// // Specify elevation level
 /// Card(elevation: .level3) {
-///     Text("浮き上がったカード")
+///     Text("Elevated card")
 /// }
 /// ```
 ///
-/// ## 使用シーン
-/// - リスト項目のグループ化
-/// - 情報カード
-/// - ダッシュボードウィジェット
-/// - 設定セクション
+/// ## Use cases
+/// - Grouping list items
+/// - Information cards
+/// - Dashboard widgets
+/// - Settings sections
 public struct Card<Content: View>: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -43,8 +44,8 @@ public struct Card<Content: View>: View {
         @ViewBuilder content: () -> Content
     ) {
         self.elevation = elevation
-        // デフォルトはspacing.lgだが、initの時点では@Environmentが使えないため、
-        // nilの場合はbodyでspacing.lgを適用
+        // Default padding is spacing.lg, but @Environment is not available in init,
+        // so we use a fixed value here and align with spacing.lg in practice.
         self.padding = padding ?? EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
         self.content = content()
     }
@@ -62,7 +63,8 @@ public struct Card<Content: View>: View {
 // MARK: - Convenience Initializers
 
 public extension Card {
-    /// パディングを個別指定（spacing tokensを使用することを推奨）
+    /// Initializes a card with custom edge insets.
+    /// Prefer using spacing tokens for consistency.
     init(
         elevation: Elevation = .level1,
         top: CGFloat,
@@ -78,7 +80,8 @@ public extension Card {
         )
     }
 
-    /// 全方向同じパディング（spacing tokensを使用することを推奨）
+    /// Initializes a card with the same padding on all sides.
+    /// Prefer using spacing tokens for consistency.
     init(
         elevation: Elevation = .level1,
         allSides padding: CGFloat,

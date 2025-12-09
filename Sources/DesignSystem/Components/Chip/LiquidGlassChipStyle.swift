@@ -1,11 +1,12 @@
 import SwiftUI
 
-/// Liquid Glass Chipスタイル
+/// Liquid Glass chip style.
 ///
-/// Apple WWDC 2024で発表されたLiquid Glass デザイン言語に基づく半透明のChipスタイルです。
-/// iOS 26+の公式`.glassEffect()`APIを使用し、プレミアム感のある表現を提供します。
+/// Semi‑transparent chip style based on the Liquid Glass design language
+/// announced at Apple WWDC 2024. Uses the official `.glassEffect()` API on
+/// iOS 26+ to provide a premium appearance.
 ///
-/// ## 使用例
+/// ## Example
 /// ```swift
 /// Chip("Premium", systemImage: "star.fill")
 ///     .chipStyle(.liquidGlass)
@@ -16,13 +17,13 @@ import SwiftUI
 ///     .foregroundColor(.purple)
 /// ```
 ///
-/// ## 視覚的特徴
-/// - 背景: Liquid Glass effect（`.glassEffect()`）
-/// - 動的適応: 周囲のコンテンツに基づいて色が変化
-/// - インタラクティブ: タッチに反応する半透明エフェクト
-/// - アニメーション: スムーズなタップフィードバック
+/// ## Visual characteristics
+/// - Background: Liquid Glass effect (`.glassEffect()`)
+/// - Dynamic adaptation: color responds to surrounding content
+/// - Interactive: semi‑transparent effect that reacts to touch
+/// - Animation: smooth tap feedback
 ///
-/// ## システム要件
+/// ## System requirements
 /// - iOS 26.0+
 /// - macOS 26.0+
 @available(iOS 26.0, macOS 26.0, *)
@@ -73,7 +74,7 @@ public struct LiquidGlassChipStyle: ChipStyle, Sendable {
 
 @available(iOS 26.0, macOS 26.0, *)
 public extension ChipStyle where Self == LiquidGlassChipStyle {
-    /// Liquid Glass Chipスタイル
+    /// Liquid Glass chip style.
     static var liquidGlass: LiquidGlassChipStyle {
         LiquidGlassChipStyle()
     }

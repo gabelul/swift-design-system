@@ -2,41 +2,41 @@ import SwiftUI
 
 // MARK: - Animate Modifier
 
-/// アニメーションモディファイア（アクセシビリティ自動対応）
+/// Animation modifier with automatic accessibility handling.
 ///
-/// 値の変化に応じてアニメーションを適用します。
-/// システムの「視差効果を減らす」設定が有効な場合、自動的にアニメーションを最小化します。
+/// Applies animations when the bound value changes.
+/// When the system “Reduce Motion” setting is enabled, animations are minimized.
 ///
-/// ## アクセシビリティ対応
-/// - WCAG 2.1 Success Criterion 2.3.3 (Animation from Interactions) に準拠
-/// - `accessibilityReduceMotion` が有効な場合、アニメーションを瞬時の変化（10ms）に変更
-/// - ユーザーが手動で設定を行う必要がなく、自動的に適切なアニメーションを提供
+/// ## Accessibility
+/// - Conforms to WCAG 2.1 Success Criterion 2.3.3 (Animation from Interactions).
+/// - When `accessibilityReduceMotion` is enabled, animations are reduced to an almost instant change (10ms).
+/// - Users do not need to configure anything manually; appropriate animations are chosen automatically.
 ///
-/// ## 使用例
+/// ## Example
 /// ```swift
 /// @Environment(\.motion) var motion
 /// @State private var isPressed = false
 ///
-/// Button("タップ") {
+/// Button("Tap") {
 ///     isPressed.toggle()
 /// }
 /// .scaleEffect(isPressed ? 0.98 : 1.0)
 /// .animate(motion.tap, value: isPressed)
 /// ```
 ///
-/// ## Motion との組み合わせ
+/// ## Using together with Motion tokens
 /// ```swift
-/// // フェードイン/アウト
-/// Text("メッセージ")
+/// // Fade in/out
+/// Text("Message")
 ///     .opacity(isVisible ? 1 : 0)
 ///     .animate(motion.fadeIn, value: isVisible)
 ///
-/// // スライド
+/// // Slide
 /// SomeView()
 ///     .offset(x: selectedTab == .home ? 0 : -UIScreen.main.bounds.width)
 ///     .animate(motion.slide, value: selectedTab)
 ///
-/// // スプリング
+/// // Spring
 /// Circle()
 ///     .offset(y: isDragging ? dragOffset : 0)
 ///     .animate(motion.spring, value: dragOffset)
@@ -44,16 +44,16 @@ import SwiftUI
 public struct AnimateModifier<V: Equatable>: ViewModifier {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    /// 適用するアニメーション
+    /// Animation to apply.
     let animation: Animation
 
-    /// 監視する値（この値が変化するとアニメーションが実行される）
+    /// Value to observe (animation runs when this changes).
     let value: V
 
-    /// イニシャライザ
+    /// Initializer.
     /// - Parameters:
-    ///   - animation: 適用するアニメーション（Motionプロトコルから取得することを推奨）
-    ///   - value: 監視する値
+    ///   - animation: Animation to apply (typically from a `Motion` implementation).
+    ///   - value: Value to observe.
     public init(animation: Animation, value: V) {
         self.animation = animation
         self.value = value
@@ -70,27 +70,27 @@ public struct AnimateModifier<V: Equatable>: ViewModifier {
 // MARK: - View Extension
 
 public extension View {
-    /// アニメーションを適用（アクセシビリティ自動対応）
+    /// Applies an animation with automatic accessibility handling.
     ///
-    /// 値の変化に応じてアニメーションを適用します。
-    /// システムの「視差効果を減らす」設定が有効な場合、自動的にアニメーションを最小化します。
+    /// Applies the given animation when the observed value changes.
+    /// If the system “Reduce Motion” setting is enabled, the animation is minimized.
     ///
     /// - Parameters:
-    ///   - animation: 適用するアニメーション
-    ///   - value: 監視する値（この値が変化するとアニメーションが実行される）
-    /// - Returns: アニメーションが適用されたビュー
+    ///   - animation: Animation to apply.
+    ///   - value: Value to observe (animation runs when this changes).
+    /// - Returns: A view with the animation applied.
     ///
-    /// ## 推奨される使用方法
+    /// ## Recommended usage
     /// ```swift
     /// @Environment(\.motion) var motion
     ///
-    /// // ボタンの押下フィードバック
-    /// Button("ボタン") { }
+    /// // Button press feedback
+    /// Button("Button") { }
     ///     .scaleEffect(isPressed ? 0.98 : 1.0)
     ///     .animate(motion.tap, value: isPressed)
     ///
-    /// // 状態の切り替え
-    /// Toggle("設定", isOn: $isEnabled)
+    /// // State change
+    /// Toggle("Settings", isOn: $isEnabled)
     ///     .foregroundColor(isEnabled ? .blue : .gray)
     ///     .animate(motion.toggle, value: isEnabled)
     /// ```

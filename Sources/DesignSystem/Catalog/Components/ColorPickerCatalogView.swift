@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// ColorPickerのカタログビュー
+/// ColorPicker catalog view
 struct ColorPickerCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -13,16 +13,16 @@ struct ColorPickerCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: spacing.xl) {
-                // ヘッダー
+                // Header
                 headerSection
 
-                // 基本的な使用例
+                // Basic usage
                 basicUsageSection
 
-                // プリセットバリエーション
+                // Preset variations
                 presetVariationsSection
 
-                // 使用例コード
+                // Code example
                 codeExampleSection
             }
             .padding(spacing.lg)
@@ -44,7 +44,7 @@ struct ColorPickerCatalogView: View {
                 .typography(.headlineLarge)
                 .foregroundStyle(colorPalette.onBackground)
 
-            Text("プリセットカラーから色を選択")
+            Text("Select a color from a preset palette.")
                 .typography(.bodyMedium)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
                 .multilineTextAlignment(.center)
@@ -54,11 +54,11 @@ struct ColorPickerCatalogView: View {
 
     private var basicUsageSection: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("基本的な使用例")
+            Text("Basic usage")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
 
-            Text("タグやカテゴリに適したカラーセット（tagFriendly）")
+            Text("Color set suitable for tags and categories (tagFriendly).")
                 .typography(.bodySmall)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -75,7 +75,7 @@ struct ColorPickerCatalogView: View {
                             )
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("選択中の色")
+                            Text("Selected color")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
                             Text(hex)
@@ -84,7 +84,7 @@ struct ColorPickerCatalogView: View {
                                 .fontDesign(.monospaced)
                         }
                     } else {
-                        Text("色を選択してください")
+                        Text("Select a color.")
                             .typography(.bodyMedium)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
                     }
@@ -95,8 +95,8 @@ struct ColorPickerCatalogView: View {
                 .background(colorPalette.surfaceVariant.opacity(0.3))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
 
-                // 選択ボタン
-                Button(selectedColor1 == nil ? "色を選択" : "色を変更") {
+                // Select button
+                Button(selectedColor1 == nil ? "Select Color" : "Change Color") {
                     showColorPicker1 = true
                 }
                 .buttonStyle(.primary)
@@ -112,11 +112,11 @@ struct ColorPickerCatalogView: View {
 
     private var presetVariationsSection: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("プリセットバリエーション")
+            Text("Preset variations")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
 
-            Text("全プリミティブカラー（allPrimitives）")
+            Text("All primitive colors (allPrimitives).")
                 .typography(.bodySmall)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -133,7 +133,7 @@ struct ColorPickerCatalogView: View {
                             )
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("選択中の色")
+                            Text("Selected color")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
                             Text(hex)
@@ -142,7 +142,7 @@ struct ColorPickerCatalogView: View {
                                 .fontDesign(.monospaced)
                         }
                     } else {
-                        Text("色を選択してください")
+                        Text("Select a color.")
                             .typography(.bodyMedium)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
                     }
@@ -153,8 +153,8 @@ struct ColorPickerCatalogView: View {
                 .background(colorPalette.surfaceVariant.opacity(0.3))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
 
-                // 選択ボタン
-                Button(selectedColor2 == nil ? "色を選択" : "色を変更") {
+                // Select button
+                Button(selectedColor2 == nil ? "Select Color" : "Change Color") {
                     showColorPicker2 = true
                 }
                 .buttonStyle(.secondary)
@@ -170,7 +170,7 @@ struct ColorPickerCatalogView: View {
 
     private var codeExampleSection: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("使用例コード")
+            Text("Code example")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
 
@@ -179,7 +179,7 @@ struct ColorPickerCatalogView: View {
                     @State private var selectedColor: String?
                     @State private var showColorPicker = false
 
-                    Button("色を選択") {
+                    Button("Select Color") {
                         showColorPicker = true
                     }
                     .colorPicker(
@@ -189,15 +189,15 @@ struct ColorPickerCatalogView: View {
                     )
                     """)
 
-                Text("プリセット:")
+                Text("Presets:")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                Text("• .tagFriendly - タグやカテゴリ用の10色")
+                Text("• .tagFriendly – 10 colors suitable for tags and categories.")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                Text("• .allPrimitives - 全プリミティブカラー（11色）")
+                Text("• .allPrimitives – all primitive colors (11 colors).")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
             }

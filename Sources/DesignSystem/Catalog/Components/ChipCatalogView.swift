@@ -1,9 +1,9 @@
 import SwiftUI
 
-/// Chipコンポーネントのカタログビュー
+/// Chip component catalog view
 ///
-/// Chipコンポーネントの全バリエーション（スタイル、サイズ、状態）を
-/// 実例とコードで紹介します。
+/// Shows all Chip variations (style, size, state)
+/// with live examples and code snippets.
 struct ChipCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -21,18 +21,18 @@ struct ChipCatalogView: View {
                         .typography(.displaySmall)
                         .foregroundColor(colors.onBackground)
 
-                    Text("コンパクトなラベルコンポーネント。ステータス表示、カテゴリ、フィルター、ユーザー入力など様々な用途で使用できます。")
+                    Text("Compact label component. Useful for statuses, categories, filters, and user input chips.")
                         .typography(.bodyLarge)
                         .foregroundColor(colors.onSurfaceVariant)
                 }
                 .padding(.horizontal, spacing.lg)
 
-                // Style Variants
-                sectionCard(title: "スタイルバリアント") {
+                // Style variants
+                sectionCard(title: "Style Variants") {
                     VStack(alignment: .leading, spacing: spacing.lg) {
                         styleVariantRow(
                             title: "Filled",
-                            description: "塗りつぶし背景。ステータス、カテゴリラベルに最適"
+                            description: "Filled background. Best for statuses and category labels."
                         ) {
                             Chip("Active", systemImage: "circle.fill")
                                 .chipStyle(.filled)
@@ -51,7 +51,7 @@ struct ChipCatalogView: View {
 
                         styleVariantRow(
                             title: "Outlined",
-                            description: "境界線のみ。フィルター選択、セカンダリカテゴリに最適"
+                            description: "Outlined only. Great for filters and secondary categories."
                         ) {
                             Chip("Filter 1", systemImage: "line.3.horizontal.decrease", isSelected: $isFilter1Selected)
                                 .chipStyle(.outlined)
@@ -68,7 +68,7 @@ struct ChipCatalogView: View {
                         if #available(iOS 26.0, macOS 26.0, *) {
                             styleVariantRow(
                                 title: "Liquid Glass",
-                                description: "半透明のガラス効果。プレミアム感のある表現に最適（iOS 26+）"
+                                description: "Translucent glass effect. Ideal for premium-feeling surfaces (iOS 26+)."
                             ) {
                                 Chip("Premium", systemImage: "star.fill")
                                     .chipStyle(.liquidGlass)
@@ -86,8 +86,8 @@ struct ChipCatalogView: View {
                     }
                 }
 
-                // Size Variants
-                sectionCard(title: "サイズバリアント") {
+                // Size variants
+                sectionCard(title: "Size Variants") {
                     VStack(alignment: .leading, spacing: spacing.md) {
                         HStack(spacing: spacing.md) {
                             VStack(alignment: .leading, spacing: spacing.xs) {
@@ -95,7 +95,7 @@ struct ChipCatalogView: View {
                                     .typography(.labelMedium)
                                     .foregroundColor(colors.onSurfaceVariant)
 
-                                Text("32pt高さ、標準的な用途")
+                                Text("32pt height. Standard use.")
                                     .typography(.bodySmall)
                                     .foregroundColor(colors.onSurfaceVariant.opacity(0.7))
                             }
@@ -160,10 +160,10 @@ struct ChipCatalogView: View {
                     }
                 }
 
-                // Use Cases
-                sectionCard(title: "ユースケース") {
+                // Use cases
+                sectionCard(title: "Use Cases") {
                     VStack(alignment: .leading, spacing: spacing.lg) {
-                        useCaseRow(title: "ステータス表示") {
+                        useCaseRow(title: "Status chips") {
                             HStack(spacing: spacing.sm) {
                                 Chip("Active", systemImage: "circle.fill")
                                     .chipStyle(.filled)
@@ -184,7 +184,7 @@ struct ChipCatalogView: View {
 
                         Divider()
 
-                        useCaseRow(title: "カテゴリタグ") {
+                        useCaseRow(title: "Category tags") {
                             FlowLayout(spacing: spacing.xs) {
                                 Chip("Technology", systemImage: "laptopcomputer")
                                     .chipStyle(.outlined)
@@ -206,7 +206,7 @@ struct ChipCatalogView: View {
 
                         Divider()
 
-                        useCaseRow(title: "フィルター") {
+                        useCaseRow(title: "Filters") {
                             FlowLayout(spacing: spacing.sm) {
                                 Chip("All Items", systemImage: "square.grid.2x2", isSelected: .constant(true))
                                     .chipStyle(.outlined)
@@ -221,34 +221,34 @@ struct ChipCatalogView: View {
                     }
                 }
 
-                // Best Practices
-                sectionCard(title: "ベストプラクティス") {
+                // Best practices
+                sectionCard(title: "Best Practices") {
                     VStack(alignment: .leading, spacing: spacing.md) {
                         BestPracticeItem(
                             icon: "checkmark.circle.fill",
-                            title: "適切な用途",
-                            description: "ステータス、カテゴリ、フィルター、タグなど、簡潔な情報の表示に使用",
+                            title: "Use in the right places",
+                            description: "Use for statuses, categories, filters, tags, and other concise information.",
                             isGood: true
                         )
 
                         BestPracticeItem(
                             icon: "checkmark.circle.fill",
-                            title: "明確なラベル",
-                            description: "1-2語の短く明確なラベルを使用。長文は避ける",
+                            title: "Clear labels",
+                            description: "Use short, clear labels (1–2 words). Avoid long strings.",
                             isGood: true
                         )
 
                         BestPracticeItem(
                             icon: "xmark.circle.fill",
-                            title: "過度な使用",
-                            description: "画面内のChipが多すぎると視覚的ノイズになる。重要な情報のみに限定",
+                            title: "Overuse",
+                            description: "Too many chips create visual noise. Limit usage to important information.",
                             isGood: false
                         )
 
                         BestPracticeItem(
                             icon: "checkmark.circle.fill",
-                            title: "スタイルの一貫性",
-                            description: "同じコンテキストでは同じスタイルを使用。Filled/Outlinedを混在させない",
+                            title: "Consistent styling",
+                            description: "Use a consistent style within the same context. Avoid mixing Filled and Outlined.",
                             isGood: true
                         )
                     }

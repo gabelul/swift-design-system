@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// FABコンポーネントのカタログビュー
+/// FAB component catalog view
 struct FloatingActionButtonCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -9,14 +9,14 @@ struct FloatingActionButtonCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                // 概要
+                // Overview
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Floating Action Button (FAB) は画面上で最も重要なアクションを表すボタンです")
+                    Text("The Floating Action Button (FAB) represents the most important action on a screen.")
                         .typography(.bodyMedium)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
 
                     if tapCount > 0 {
-                        Text("タップ回数: \(tapCount)")
+                        Text("Tap count: \(tapCount)")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.primary)
                     }
@@ -24,10 +24,10 @@ struct FloatingActionButtonCatalogView: View {
                 .padding(.horizontal, spacing.lg)
                 .padding(.top, spacing.lg)
 
-                // サイズバリエーション
-                SectionCard(title: "サイズバリエーション") {
+                // Size variants
+                SectionCard(title: "Size Variants") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("3つのサイズが利用可能")
+                        Text("Three sizes are available.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -65,10 +65,10 @@ struct FloatingActionButtonCatalogView: View {
                     }
                 }
 
-                // アイコンバリエーション
-                SectionCard(title: "アイコンバリエーション") {
+                // Icon variants
+                SectionCard(title: "Icon Variants") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("SF Symbolsのアイコンが使用可能")
+                        Text("Supports SF Symbols icons.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -93,10 +93,10 @@ struct FloatingActionButtonCatalogView: View {
                     }
                 }
 
-                // 使用例
-                SectionCard(title: "使用例") {
+                // Usage
+                SectionCard(title: "Usage") {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("SwiftUI での使用方法")
+                        Text("How to use in SwiftUI")
                             .typography(.titleSmall)
 
                         Text("""
@@ -115,10 +115,10 @@ struct FloatingActionButtonCatalogView: View {
                     }
                 }
 
-                // レイアウト例
-                SectionCard(title: "レイアウト例") {
+                // Layout example
+                SectionCard(title: "Layout Example") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("画面右下に配置する典型的な使用パターン")
+                        Text("Typical pattern: placing the FAB at the bottom-right corner.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 

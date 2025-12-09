@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// カードコンポーネントのカタログビュー
+/// Card component catalog view
 struct CardCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -8,17 +8,17 @@ struct CardCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                // 概要
-                Text("カードは関連情報をグループ化する汎用コンテナです")
+                // Overview
+                Text("Cards are versatile containers for grouping related information.")
                     .typography(.bodyMedium)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
                     .padding(.horizontal, spacing.lg)
                     .padding(.top, spacing.lg)
 
-                // 基本カード
-                SectionCard(title: "基本カード") {
+                // Basic card
+                SectionCard(title: "Basic Card") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("デフォルトの設定（Elevation Level 1、パディング 16pt）")
+                        Text("Default configuration (Elevation Level 1, 16pt padding).")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -27,7 +27,7 @@ struct CardCatalogView: View {
                                 Text("カードタイトル")
                                     .typography(.titleMedium)
 
-                                Text("カードの本文テキストです。関連する情報をグループ化して表示します。")
+                                Text("Body text for the card. Use cards to group related information.")
                                     .typography(.bodyMedium)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -35,10 +35,10 @@ struct CardCatalogView: View {
                     }
                 }
 
-                // Elevation バリエーション
-                SectionCard(title: "Elevation バリエーション") {
+                // Elevation variants
+                SectionCard(title: "Elevation Variants") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("異なる深さで視覚的な階層を表現")
+                        Text("Express visual hierarchy using different elevation levels.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -59,10 +59,10 @@ struct CardCatalogView: View {
                     }
                 }
 
-                // パディングバリエーション
-                SectionCard(title: "パディングバリエーション") {
+                // Padding variants
+                SectionCard(title: "Padding Variants") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("内容に応じてパディングを調整")
+                        Text("Adjust padding based on the content.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -85,18 +85,18 @@ struct CardCatalogView: View {
                     }
                 }
 
-                // 使用例
-                SectionCard(title: "使用例") {
+                // Usage
+                SectionCard(title: "Usage") {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("SwiftUI での使用方法")
+                        Text("How to use in SwiftUI")
                             .typography(.titleSmall)
 
                         Text("""
                         Card(elevation: .level2) {
                             VStack(alignment: .leading) {
-                                Text("タイトル")
+                                Text("Title")
                                     .typography(.titleMedium)
-                                Text("本文")
+                                Text("Body")
                                     .typography(.bodyMedium)
                             }
                         }

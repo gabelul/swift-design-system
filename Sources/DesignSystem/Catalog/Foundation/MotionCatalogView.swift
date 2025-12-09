@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// モーションカタログビュー
+/// Motion catalog view
 ///
-/// アニメーションタイミングとモーションシステムの包括的なカタログ
+/// Comprehensive catalog of animation timing and the motion system
 struct MotionCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -11,81 +11,81 @@ struct MotionCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: spacing.xl) {
-                // 1. 概要セクション
+                // 1. Overview
                 overviewSection
 
-                // 2. インタラクティブデモセクション
+                // 2. Interactive demos
                 interactiveDemosSection
 
-                // 3. 仕様表セクション
+                // 3. Specifications
                 specificationsSection
 
-                // 4. 使用例セクション
+                // 4. Usage examples
                 usageExamplesSection
 
-                // 5. アクセシビリティセクション
+                // 5. Accessibility
                 accessibilitySection
 
-                // 6. ベストプラクティスセクション
+                // 6. Best practices
                 bestPracticesSection
             }
             .padding(.bottom, spacing.xl)
         }
         .background(colorPalette.background)
-        .navigationTitle("モーション")
+        .navigationTitle("Motion")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
     }
 
-    // MARK: - 1. 概要セクション
+    // MARK: - 1. Overview
 
     private var overviewSection: some View {
         VStack(alignment: .leading, spacing: spacing.lg) {
             VStack(alignment: .leading, spacing: spacing.sm) {
-                Text("Motionシステム")
+                Text("Motion system")
                     .typography(.headlineMedium)
                     .foregroundStyle(colorPalette.onSurface)
 
-                Text("デザインシステム全体で一貫したアニメーションタイミングを提供します。Material Design 3、IBM Carbon Design System、Apple Human Interface Guidelinesの業界標準に基づいた、最適化されたアニメーション値を提供します。")
+                Text("Provides consistent animation timing across the design system. Values are optimized based on industry standards such as Material Design 3, IBM Carbon Design System, and Apple Human Interface Guidelines.")
                     .typography(.bodyMedium)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
             }
             .padding(.horizontal, spacing.lg)
             .padding(.top, spacing.lg)
 
-            // 主な機能
+            // Key features
             VStack(alignment: .leading, spacing: spacing.md) {
-                Text("主な機能")
+                Text("Key features")
                     .typography(.titleMedium)
                     .foregroundStyle(colorPalette.onSurface)
 
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    FeatureRow(icon: "accessibility", title: "自動アクセシビリティ対応（WCAG 2.1準拠）")
-                    FeatureRow(icon: "chart.line.uptrend.xyaxis", title: "業界標準準拠（Material Design 3, IBM Carbon）")
-                    FeatureRow(icon: "swift", title: "SwiftUIネイティブAPI")
-                    FeatureRow(icon: "wand.and.stars", title: "10種類の最適化されたタイミング")
+                    FeatureRow(icon: "accessibility", title: "Automatic accessibility handling (WCAG 2.1 compliant)")
+                    FeatureRow(icon: "chart.line.uptrend.xyaxis", title: "Aligned with industry standards (Material Design 3, IBM Carbon)")
+                    FeatureRow(icon: "swift", title: "SwiftUI-native APIs")
+                    FeatureRow(icon: "wand.and.stars", title: "10 optimized timing presets")
                 }
             }
             .padding(.horizontal, spacing.lg)
         }
     }
 
-    // MARK: - 2. インタラクティブデモセクション
+    // MARK: - 2. Interactive demos
 
     private var interactiveDemosSection: some View {
         VStack(alignment: .leading, spacing: spacing.lg) {
-            Text("インタラクティブデモ")
+            Text("Interactive demos")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
                 .padding(.horizontal, spacing.lg)
 
-            Text("各モーションの動きを実際に体験できます。「アニメーション実行」ボタンをタップして違いを確認してください。")
+            Text("Try each motion preset in action. Tap the “Run animation” button to see the differences.")
                 .typography(.bodyMedium)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
                 .padding(.horizontal, spacing.lg)
 
-            // カテゴリ別デモ
+            // Demos by category
             ForEach(MotionSpec.MotionCategory.allCases, id: \.self) { category in
                 categoryDemoSection(category: category)
             }
@@ -143,11 +143,11 @@ struct MotionCatalogView: View {
                 .foregroundStyle(colorPalette.onSurfaceVariant)
                 .padding(.horizontal, spacing.lg)
 
-            SectionCard(title: "全モーション仕様") {
+            SectionCard(title: "All motion specifications") {
                 VStack(spacing: 0) {
-                    // ヘッダー
+                    // Header
                     HStack(spacing: spacing.sm) {
-                        Text("名前")
+                        Text("Name")
                             .frame(minWidth: 70, alignment: .leading)
                         Text("Duration")
                             .frame(minWidth: 80, alignment: .leading)
@@ -190,36 +190,36 @@ struct MotionCatalogView: View {
         }
     }
 
-    // MARK: - 4. 使用例セクション
+    // MARK: - 4. Usage examples
 
     private var usageExamplesSection: some View {
         VStack(alignment: .leading, spacing: spacing.lg) {
-            Text("使用例")
+            Text("Usage examples")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
                 .padding(.horizontal, spacing.lg)
 
-            // 基本的な使い方
-            SectionCard(title: "1. 基本的な使い方") {
+            // Basic usage
+            SectionCard(title: "1. Basic usage") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    Text("@Environment(\\.motion) でMotionにアクセスし、.animate() modifierで適用します。")
+                    Text("Access Motion via @Environment(\\.motion) and apply it with the .animate() modifier.")
                         .typography(.bodyMedium)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
 
                     codeBlock("""
                     @Environment(\\.motion) var motion
 
-                    Button("タップ") { }
+                    Button("Tap") { }
                         .scaleEffect(isPressed ? 0.98 : 1.0)
                         .animate(motion.tap, value: isPressed)
                     """)
                 }
             }
 
-            // 複数のアニメーション
-            SectionCard(title: "2. 複数のアニメーション") {
+            // Multiple animations
+            SectionCard(title: "2. Multiple animations") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    Text("一つのビューに複数の .animate() を適用できます。")
+                    Text("You can apply multiple .animate() modifiers to a single view.")
                         .typography(.bodyMedium)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -232,10 +232,10 @@ struct MotionCatalogView: View {
                 }
             }
 
-            // withAnimationでの使用
-            SectionCard(title: "3. withAnimationでの使用") {
+            // Using withAnimation
+            SectionCard(title: "3. Using withAnimation") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    Text("withAnimation内でMotionを使用することもできます。")
+                    Text("You can also use Motion together with withAnimation.")
                         .typography(.bodyMedium)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -249,62 +249,62 @@ struct MotionCatalogView: View {
         }
     }
 
-    // MARK: - 5. アクセシビリティセクション
+    // MARK: - 5. Accessibility
 
     private var accessibilitySection: some View {
         VStack(alignment: .leading, spacing: spacing.lg) {
-            Text("アクセシビリティ")
+            Text("Accessibility")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
                 .padding(.horizontal, spacing.lg)
 
-            SectionCard(title: "Reduce Motion自動対応") {
+            SectionCard(title: "Automatic Reduce Motion support") {
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("`.animate()` modifierは、システムの「視差効果を減らす」設定を自動的に検出し、有効時はアニメーションを最小化します（WCAG 2.1 Success Criterion 2.3.3準拠）。")
+                    Text("The `.animate()` modifier automatically respects the system “Reduce Motion” setting and minimizes animations when it is enabled (WCAG 2.1 Success Criterion 2.3.3 compliant).")
                         .typography(.bodyMedium)
                         .foregroundStyle(colorPalette.onSurface)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     VStack(alignment: .leading, spacing: spacing.sm) {
-                        FeatureRow(icon: "checkmark.circle.fill", title: "手動設定不要で自動対応")
-                        FeatureRow(icon: "checkmark.circle.fill", title: "WCAG 2.1完全準拠")
-                        FeatureRow(icon: "checkmark.circle.fill", title: "全モーションで一貫した動作")
+                        FeatureRow(icon: "checkmark.circle.fill", title: "No manual configuration required")
+                        FeatureRow(icon: "checkmark.circle.fill", title: "Fully compliant with WCAG 2.1")
+                        FeatureRow(icon: "checkmark.circle.fill", title: "Consistent behavior across all motion presets")
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                    Text("実装例：")
+                    Text("Implementation example:")
                         .typography(.labelLarge)
                         .foregroundStyle(colorPalette.onSurface)
                         .frame(maxWidth: .infinity, alignment: .leading)
 
                     codeBlock("""
-                    // 自動的にReduce Motionに対応
+                    // Automatically respects Reduce Motion
                     .animate(motion.tap, value: isPressed)
 
-                    // 通常モード: 指定されたアニメーション
-                    // Reduce Motion有効時: 10msの瞬時変化
+                    // Normal mode: uses the specified animation
+                    // Reduce Motion: performs an instant 10ms change
                     """)
                 }
             }
         }
     }
 
-    // MARK: - 6. ベストプラクティスセクション
+    // MARK: - 6. Best practices
 
     private var bestPracticesSection: some View {
         VStack(alignment: .leading, spacing: spacing.lg) {
-            Text("ベストプラクティス")
+            Text("Best practices")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
                 .padding(.horizontal, spacing.lg)
 
-            // 推奨パターン
-            SectionCard(title: "✓ 推奨パターン") {
+            // Recommended patterns
+            SectionCard(title: "✓ Recommended patterns") {
                 VStack(alignment: .leading, spacing: spacing.md) {
                     BestPracticeItem(
                         icon: "checkmark.circle.fill",
-                        title: "適切なモーションを選択",
-                        description: "タップには tap、状態変化には toggle を使用",
+                        title: "Choose appropriate motion",
+                        description: "Use tap for taps, toggle for state changes.",
                         isGood: true
                     )
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -313,8 +313,8 @@ struct MotionCatalogView: View {
 
                     BestPracticeItem(
                         icon: "checkmark.circle.fill",
-                        title: ".animate() modifierを使用",
-                        description: "Reduce Motion自動対応のため必ず使用",
+                        title: "Use the .animate() modifier",
+                        description: "Always use .animate() to get automatic Reduce Motion support.",
                         isGood: true
                     )
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -323,21 +323,21 @@ struct MotionCatalogView: View {
 
                     BestPracticeItem(
                         icon: "checkmark.circle.fill",
-                        title: "一貫性を保つ",
-                        description: "同じインタラクションには同じモーションを適用",
+                        title: "Maintain consistency",
+                        description: "Use the same motion preset for the same type of interaction.",
                         isGood: true
                     )
                     .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
 
-            // アンチパターン
-            SectionCard(title: "✗ 避けるべきパターン") {
+            // Anti-patterns
+            SectionCard(title: "✗ Anti-patterns") {
                 VStack(alignment: .leading, spacing: spacing.md) {
                     BestPracticeItem(
                         icon: "xmark.circle.fill",
-                        title: "ハードコード値の使用",
-                        description: ".animation(.easeInOut(duration: 0.15)) は避ける",
+                        title: "Hard-coded animation values",
+                        description: "Avoid using .animation(.easeInOut(duration: 0.15)) directly.",
                         isGood: false
                     )
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -346,8 +346,8 @@ struct MotionCatalogView: View {
 
                     BestPracticeItem(
                         icon: "xmark.circle.fill",
-                        title: "過度なアニメーション",
-                        description: "全ての要素にアニメーションは不要",
+                        title: "Excessive animations",
+                        description: "Not every element needs an animation.",
                         isGood: false
                     )
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -356,8 +356,8 @@ struct MotionCatalogView: View {
 
                     BestPracticeItem(
                         icon: "xmark.circle.fill",
-                        title: "不適切なモーション選択",
-                        description: "ボタンに slow や slower は遅すぎて不適切",
+                        title: "Inappropriate motion choice",
+                        description: "Avoid using slow or slower for buttons – they will feel sluggish.",
                         isGood: false
                     )
                     .frame(maxWidth: .infinity, alignment: .leading)

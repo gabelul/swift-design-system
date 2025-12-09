@@ -1,11 +1,11 @@
 import SwiftUI
 
-/// カタログのメインカテゴリ
+/// Main catalog categories
 enum CatalogCategory: String, CaseIterable, Identifiable {
-    case themes = "テーマ"
-    case foundations = "デザイントークン"
-    case components = "コンポーネント"
-    case patterns = "パターン"
+    case themes = "Themes"
+    case foundations = "Design Tokens"
+    case components = "Components"
+    case patterns = "Patterns"
 
     var id: String { rawValue }
 
@@ -20,10 +20,10 @@ enum CatalogCategory: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .themes: return "アプリ全体のテーマを選択・カスタマイズ"
-        case .foundations: return "Color, Spacing, Radiusなどの基本トークン"
-        case .components: return "Button, Card, TextFieldなどの再利用可能なUI"
-        case .patterns: return "レイアウトパターンやデザインパターン"
+        case .themes: return "Select and customize app-wide themes."
+        case .foundations: return "Core tokens such as Color, Spacing, and Radius."
+        case .components: return "Reusable UI elements such as Button, Card, and TextField."
+        case .patterns: return "Layout and design patterns."
         }
     }
 
@@ -31,23 +31,23 @@ enum CatalogCategory: String, CaseIterable, Identifiable {
         switch self {
         case .themes:
             return [
-                CatalogItem(name: "テーマギャラリー", icon: "paintpalette.fill", description: "全テーマを閲覧・切り替え")
+                CatalogItem(name: "Theme Gallery", icon: "paintpalette.fill", description: "Browse and switch between all themes.")
             ]
         case .foundations:
             return [
-                CatalogItem(name: "カラー", icon: "paintpalette.fill", description: "カラーパレットとセマンティックカラー"),
-                CatalogItem(name: "タイポグラフィ", icon: "textformat.size", description: "フォントサイズと行間のスケール"),
-                CatalogItem(name: "スペーシング", icon: "arrow.left.and.right", description: "レイアウト用のスペーシングスケール"),
-                CatalogItem(name: "角丸", icon: "square.fill", description: "コーナー半径のスケール"),
-                CatalogItem(name: "モーション", icon: "waveform.path", description: "アニメーションタイミングとモーション")
+                CatalogItem(name: "Colors", icon: "paintpalette.fill", description: "Color palettes and semantic colors."),
+                CatalogItem(name: "Typography", icon: "textformat.size", description: "Font size and line-height scale."),
+                CatalogItem(name: "Spacing", icon: "arrow.left.and.right", description: "Spacing scale for layout."),
+                CatalogItem(name: "Radius", icon: "square.fill", description: "Corner radius scale."),
+                CatalogItem(name: "Motion", icon: "waveform.path", description: "Animation timing and motion presets.")
             ]
         case .components:
             return [
-                CatalogItem(name: "コンポーネント一覧", icon: "square.stack.3d.up.fill", description: "全コンポーネントのカタログ")
+                CatalogItem(name: "Components List", icon: "square.stack.3d.up.fill", description: "Catalog of all components.")
             ]
         case .patterns:
             return [
-                CatalogItem(name: "パターン一覧", icon: "square.grid.3x3.fill", description: "レイアウトパターンなど")
+                CatalogItem(name: "Patterns List", icon: "square.grid.3x3.fill", description: "Layout and other patterns.")
             ]
         }
     }

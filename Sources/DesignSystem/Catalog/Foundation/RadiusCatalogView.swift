@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// 角丸カタログビュー
-/// 全角丸値をプレビュー表示
+/// Corner radius catalog view
+/// Previews all radius values
 struct RadiusCatalogView: View {
     @Environment(\.radiusScale) private var radiusScale
     @Environment(\.colorPalette) private var colorPalette
@@ -10,8 +10,8 @@ struct RadiusCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                // 概要
-                Text("角丸スケール（Material Design 3 ベース）")
+                // Overview
+                Text("Corner radius scale (based on Material Design 3)")
                     .typography(.bodyMedium)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
                     .padding(.horizontal, spacing.lg)
@@ -31,10 +31,10 @@ struct RadiusCatalogView: View {
                     }
                 }
 
-                // 使用例
-                SectionCard(title: "使用例") {
+                // Usage
+                SectionCard(title: "Usage") {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("SwiftUI での使用方法")
+                        Text("How to use in SwiftUI")
                             .typography(.titleSmall)
 
                         Text("""
@@ -55,7 +55,7 @@ struct RadiusCatalogView: View {
             .padding(.bottom, spacing.xl)
         }
         .background(colorPalette.background)
-        .navigationTitle("角丸")
+        .navigationTitle("Radius")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Snackbarコンポーネントのカタログビュー
+/// Snackbar component catalog view
 struct SnackbarCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -11,23 +11,23 @@ struct SnackbarCatalogView: View {
         ZStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
-                    // 概要
+                    // Overview
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Snackbarは画面下部から表示される一時的な通知UIです")
+                        Text("Snackbars are temporary notification UIs that appear from the bottom of the screen.")
                             .typography(.bodyMedium)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                        Text("ユーザーのアクションに対するフィードバックや簡単な通知を表示します")
+                        Text("They display feedback for user actions and brief messages.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
                     }
                     .padding(.horizontal, spacing.lg)
                     .padding(.top, spacing.lg)
 
-                    // 基本的な使い方
-                    SectionCard(title: "基本的な使い方") {
+                    // Basic usage
+                    SectionCard(title: "Basic Usage") {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("シンプルなメッセージのみ")
+                            Text("Simple message only")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -37,123 +37,123 @@ struct SnackbarCatalogView: View {
                                     duration: 3.0
                                 )
                             } label: {
-                                Text("シンプルなSnackbarを表示")
+                                Text("Show simple Snackbar")
                                     .typography(.labelLarge)
                             }
                             .buttonStyle(.primary)
                         }
                     }
 
-                    // アクション付き
-                    SectionCard(title: "アクション付き") {
+                    // With actions
+                    SectionCard(title: "With Action") {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("プライマリアクション付き")
+                            Text("With a primary action")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
                             Button {
                                 snackbarState.show(
                                     message: "削除しました",
-                                    primaryAction: SnackbarAction(title: "元に戻す") {
-                                        // 元に戻す処理のシミュレーション
-                                        print("元に戻す")
+                                    primaryAction: SnackbarAction(title: "Undo") {
+                                        // Simulate undo action
+                                        print("Undo")
                                     },
                                     duration: 5.0
                                 )
                             } label: {
-                                Text("アクション付きSnackbar")
+                                Text("Snackbar with action")
                                     .typography(.labelLarge)
                             }
                             .buttonStyle(.primary)
                         }
                     }
 
-                    // 複数アクション
-                    SectionCard(title: "複数アクション") {
+                    // Multiple actions
+                    SectionCard(title: "Multiple Actions") {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("プライマリとセカンダリアクション")
+                            Text("Primary and secondary actions")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
                             Button {
                                 snackbarState.show(
                                     message: "ファイルを削除しますか？",
-                                    primaryAction: SnackbarAction(title: "削除") {
-                                        print("削除実行")
+                                    primaryAction: SnackbarAction(title: "Delete") {
+                                        print("Delete")
                                     },
-                                    secondaryAction: SnackbarAction(title: "キャンセル") {
-                                        print("キャンセル")
+                                    secondaryAction: SnackbarAction(title: "Cancel") {
+                                        print("Cancel")
                                     },
                                     duration: 7.0
                                 )
                             } label: {
-                                Text("複数アクション付きSnackbar")
+                                Text("Snackbar with multiple actions")
                                     .typography(.labelLarge)
                             }
                             .buttonStyle(.primary)
                         }
                     }
 
-                    // 長いメッセージ
-                    SectionCard(title: "長いメッセージ") {
+                    // Long message
+                    SectionCard(title: "Long Messages") {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("複数行のメッセージ（最大2行）")
+                            Text("Multi-line messages (up to two lines).")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
                             Button {
                                 snackbarState.show(
-                                    message: "ネットワークエラーが発生しました。接続を確認してもう一度お試しください。",
-                                    primaryAction: SnackbarAction(title: "再試行") {
-                                        print("再試行")
+                                    message: "A network error occurred. Check your connection and try again.",
+                                    primaryAction: SnackbarAction(title: "Retry") {
+                                        print("Retry")
                                     },
                                     duration: 5.0
                                 )
                             } label: {
-                                Text("長いメッセージのSnackbar")
+                                Text("Snackbar with long message")
                                     .typography(.labelLarge)
                             }
                             .buttonStyle(.primary)
                         }
                     }
 
-                    // カスタム表示時間
-                    SectionCard(title: "カスタム表示時間") {
+                    // Custom display duration
+                    SectionCard(title: "Custom Duration") {
                         VStack(alignment: .leading, spacing: 12) {
-                            Text("表示時間をカスタマイズ")
+                            Text("Customize how long the Snackbar is shown.")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
                             HStack(spacing: spacing.md) {
                                 Button {
                                     snackbarState.show(
-                                        message: "3秒で消えます",
+                                        message: "Hides after 3 seconds.",
                                         duration: 3.0
                                     )
                                 } label: {
-                                    Text("3秒")
+                                    Text("3 seconds")
                                         .typography(.labelMedium)
                                 }
                                 .buttonStyle(.secondary)
 
                                 Button {
                                     snackbarState.show(
-                                        message: "5秒で消えます",
+                                        message: "Hides after 5 seconds.",
                                         duration: 5.0
                                     )
                                 } label: {
-                                    Text("5秒")
+                                    Text("5 seconds")
                                         .typography(.labelMedium)
                                 }
                                 .buttonStyle(.secondary)
 
                                 Button {
                                     snackbarState.show(
-                                        message: "10秒で消えます",
+                                        message: "Hides after 10 seconds.",
                                         duration: 10.0
                                     )
                                 } label: {
-                                    Text("10秒")
+                                    Text("10 seconds")
                                         .typography(.labelMedium)
                                 }
                                 .buttonStyle(.secondary)
@@ -161,22 +161,22 @@ struct SnackbarCatalogView: View {
                         }
                     }
 
-                    // 使用上の注意
-                    SectionCard(title: "使用上の注意") {
+                    // Usage notes
+                    SectionCard(title: "Usage Notes") {
                         VStack(alignment: .leading, spacing: 8) {
-                            Label("メッセージは簡潔に（1-2行）", systemImage: "checkmark.circle.fill")
+                            Label("Keep messages concise (1–2 lines).", systemImage: "checkmark.circle.fill")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.success)
 
-                            Label("アクションは最大2つまで", systemImage: "checkmark.circle.fill")
+                            Label("Limit to at most two actions.", systemImage: "checkmark.circle.fill")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.success)
 
-                            Label("自動消滅時間は3-7秒が推奨", systemImage: "checkmark.circle.fill")
+                            Label("Recommended auto-dismiss duration is 3–7 seconds.", systemImage: "checkmark.circle.fill")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.success)
 
-                            Label("重要な操作には十分な時間を確保", systemImage: "checkmark.circle.fill")
+                            Label("Ensure enough time for important actions.", systemImage: "checkmark.circle.fill")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.success)
                         }

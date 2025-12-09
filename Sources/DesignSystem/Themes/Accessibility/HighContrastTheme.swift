@@ -1,9 +1,9 @@
 import SwiftUI
 
-/// HighContrastテーマ - 高コントラスト・アクセシビリティ重視
+/// HighContrast theme – high contrast and accessibility focused.
 ///
-/// WCAG AAA準拠の高コントラスト配色テーマ。
-/// ロービジョンユーザーやアクセシビリティを重視するアプリに最適です。
+/// High‑contrast color theme oriented toward WCAG AAA compliance.
+/// Ideal for low‑vision users and apps that prioritize accessibility.
 public struct HighContrastTheme: Theme {
     public init() {}
 
@@ -11,7 +11,7 @@ public struct HighContrastTheme: Theme {
 
     public var name: String { "High Contrast" }
 
-    public var description: String { "WCAG AAA準拠。最大限の視認性とアクセシビリティ" }
+    public var description: String { "WCAG AAA‑oriented, with maximum visibility and accessibility." }
 
     public var category: ThemeCategory { .accessibility }
 

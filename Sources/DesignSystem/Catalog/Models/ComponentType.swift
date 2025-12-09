@@ -1,6 +1,6 @@
 import Foundation
 
-/// コンポーネントの種類
+/// Component types
 enum ComponentType: String, CaseIterable, Identifiable {
     case button = "Button"
     case card = "Card"
@@ -34,17 +34,17 @@ enum ComponentType: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .button: return "Primary, Secondary, Tertiaryの3種類"
-        case .card: return "関連情報をグループ化するコンテナ"
-        case .chip: return "ステータス、カテゴリ、フィルター用のコンパクトなラベル"
-        case .colorPicker: return "プリセットカラーから色を選択"
-        case .emojiPicker: return "カテゴリ別の絵文字を選択"
-        case .fab: return "画面上の主要アクションボタン"
-        case .iconButton: return "アイコンのみのコンパクトなボタン"
-        case .iconPicker: return "SF Symbolsアイコンを選択"
-        case .imagePicker: return "カメラと写真ライブラリから画像を選択"
-        case .snackbar: return "一時的な通知とフィードバックを表示"
-        case .textField: return "テキスト入力フィールド"
+        case .button: return "Three variants: Primary, Secondary, Tertiary."
+        case .card: return "Container for grouping related content."
+        case .chip: return "Compact label for statuses, categories, and filters."
+        case .colorPicker: return "Select colors from a preset palette."
+        case .emojiPicker: return "Select emojis grouped by category."
+        case .fab: return "Primary action button on the screen."
+        case .iconButton: return "Compact button containing only an icon."
+        case .iconPicker: return "Picker for SF Symbols icons."
+        case .imagePicker: return "Select images from the camera or photo library."
+        case .snackbar: return "Temporary notifications and feedback."
+        case .textField: return "Text input fields."
         }
     }
 }

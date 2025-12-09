@@ -1,13 +1,13 @@
 import SwiftUI
 
-/// カタログの情報セクションビュー
+/// Catalog info section view
 struct InfoSectionView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("情報")
+            Text("Info")
                 .typography(.titleMedium)
                 .foregroundStyle(colors.onSurface)
                 .padding(.horizontal, spacing.lg)
@@ -16,13 +16,13 @@ struct InfoSectionView: View {
                 InfoRow(label: "プラットフォーム", value: "iOS 17+, macOS 14+")
                 Divider().padding(.leading, 16)
                 InfoLinkRow(
-                    label: "リポジトリ",
+                    label: "Repository",
                     value: "GitHub",
                     url: "https://github.com/no-problem-dev/swift-design-system"
                 )
                 Divider().padding(.leading, 16)
                 InfoLinkRow(
-                    label: "ドキュメント",
+                    label: "Documentation",
                     value: "DocC",
                     url: "https://no-problem-dev.github.io/swift-design-system/documentation/designsystem/"
                 )

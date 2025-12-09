@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// SectionCardパターンのカタログビュー
-/// レイアウトパターンとしてのSectionCardの使い方を詳しく説明
+/// Catalog view for the SectionCard pattern
+/// Explains how to use SectionCard as a layout pattern
 struct SectionCardCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -9,26 +9,26 @@ struct SectionCardCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: spacing.xl) {
-                // 概要
+                // Overview
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("SectionCardは、タイトル付きのセクションを作成するレイアウトパターンです")
+                    Text("SectionCard is a layout pattern for creating sections with a title.")
                         .typography(.bodyMedium)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                    Text("Material Design 3のパターン概念に基づき、情報を階層的にグループ化します")
+                    Text("Based on Material Design 3 patterns, it groups information hierarchically.")
                         .typography(.bodySmall)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
                 }
                 .padding(.horizontal, spacing.lg)
                 .padding(.top, spacing.lg)
 
-                // 構成
-                SectionCard(title: "構成") {
+                // Structure
+                SectionCard(title: "Structure") {
                     VStack(alignment: .leading, spacing: spacing.md) {
                         SpecItem(
                             label: "タイトル",
                             value: "Typography.titleMedium",
-                            description: "セクションの見出し"
+                            description: "Section heading."
                         )
 
                         Divider()
@@ -36,7 +36,7 @@ struct SectionCardCatalogView: View {
                         SpecItem(
                             label: "コンテンツ",
                             value: "Cardコンポーネント",
-                            description: "内部でコンテンツをラップ"
+                            description: "Wraps content inside a Card."
                         )
 
                         Divider()
@@ -44,7 +44,7 @@ struct SectionCardCatalogView: View {
                         SpecItem(
                             label: "スペーシング",
                             value: "spacing.md (12pt)",
-                            description: "タイトルとコンテンツの間隔"
+                            description: "Spacing between title and content."
                         )
 
                         Divider()
@@ -52,25 +52,25 @@ struct SectionCardCatalogView: View {
                         SpecItem(
                             label: "パディング",
                             value: "spacing.lg (16pt)",
-                            description: "水平方向のパディング（自動）"
+                            description: "Horizontal padding (automatic)."
                         )
                     }
                 }
 
-                // 基本的な使用例
-                SectionCard(title: "基本的な使用例") {
+                // Basic usage
+                SectionCard(title: "Basic Usage") {
                     VStack(alignment: .leading, spacing: spacing.md) {
-                        Text("シンプルなテキストコンテンツ")
+                        Text("Simple text content.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                        // デモ
-                        SectionCard(title: "サンプルセクション") {
+                        // Demo
+                        SectionCard(title: "Sample Section") {
                             VStack(alignment: .leading, spacing: spacing.sm) {
-                                Text("ここにコンテンツが入ります")
+                                Text("Content goes here.")
                                     .typography(.bodyMedium)
 
-                                Text("SectionCardは自動的にCardコンポーネントでラップします")
+                                Text("SectionCard automatically wraps content in a Card.")
                                     .typography(.bodySmall)
                                     .foregroundStyle(colorPalette.onSurfaceVariant)
                             }
@@ -78,36 +78,36 @@ struct SectionCardCatalogView: View {
                     }
                 }
 
-                // 複雑なコンテンツの例
-                SectionCard(title: "複雑なコンテンツの例") {
+                // Complex content example
+                SectionCard(title: "Complex Content Example") {
                     VStack(alignment: .leading, spacing: spacing.md) {
-                        Text("リストやグリッドなど複雑なレイアウトも可能")
+                        Text("Complex layouts like lists and grids are also supported.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                        // デモ
-                        SectionCard(title: "機能リスト") {
+                        // Demo
+                        SectionCard(title: "Feature List") {
                             VStack(alignment: .leading, spacing: spacing.sm) {
-                                FeatureRow(icon: "checkmark.circle.fill", title: "自動パディング管理")
-                                FeatureRow(icon: "checkmark.circle.fill", title: "Cardコンポーネント統合")
-                                FeatureRow(icon: "checkmark.circle.fill", title: "Spacing tokens対応")
-                                FeatureRow(icon: "checkmark.circle.fill", title: "階層的な情報構造")
+                                FeatureRow(icon: "checkmark.circle.fill", title: "Automatic padding management")
+                                FeatureRow(icon: "checkmark.circle.fill", title: "Integrated with Card component")
+                                FeatureRow(icon: "checkmark.circle.fill", title: "Uses spacing tokens")
+                                FeatureRow(icon: "checkmark.circle.fill", title: "Supports hierarchical information structure")
                             }
                         }
                     }
                 }
 
-                // コード例
-                SectionCard(title: "コード例") {
+                // Code example
+                SectionCard(title: "Code Example") {
                     VStack(alignment: .leading, spacing: spacing.sm) {
-                        Text("SwiftUIでの使用方法")
+                        Text("How to use in SwiftUI")
                             .typography(.titleSmall)
 
                         Text("""
-                        SectionCard(title: "セクション名") {
+                        SectionCard(title: "Section Name") {
                             VStack(alignment: .leading, spacing: spacing.md) {
-                                Text("コンテンツ")
-                                Text("複数の要素を配置可能")
+                                Text("Content")
+                                Text("You can place multiple elements here.")
                             }
                         }
                         """)
@@ -119,16 +119,16 @@ struct SectionCardCatalogView: View {
                     }
                 }
 
-                // デザイン仕様
-                SectionCard(title: "デザイン仕様") {
+                // Design specs
+                SectionCard(title: "Design Specs") {
                     VStack(alignment: .leading, spacing: spacing.md) {
                         VStack(alignment: .leading, spacing: spacing.xs) {
                             Text("スペーシング")
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
 
-                            SpecItem(label: "タイトル-コンテンツ間", value: "spacing.md (12pt)")
-                            SpecItem(label: "水平パディング", value: "spacing.lg (16pt)")
+                            SpecItem(label: "Title–content spacing", value: "spacing.md (12pt)")
+                            SpecItem(label: "Horizontal padding", value: "spacing.lg (16pt)")
                         }
 
                         Divider()
@@ -138,7 +138,7 @@ struct SectionCardCatalogView: View {
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
 
-                            SpecItem(label: "Card elevation", value: "level1（デフォルト）")
+                            SpecItem(label: "Card elevation", value: "level1 (default)")
                         }
 
                         Divider()
@@ -148,39 +148,39 @@ struct SectionCardCatalogView: View {
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
 
-                            SpecItem(label: "タイトル", value: "Typography.titleMedium")
+                            SpecItem(label: "Title", value: "Typography.titleMedium")
                         }
                     }
                 }
 
-                // 使用ガイド
-                SectionCard(title: "使用ガイド") {
+                // Usage guide
+                SectionCard(title: "Usage Guide") {
                     VStack(alignment: .leading, spacing: spacing.md) {
                         BestPracticeItem(
                             icon: "checkmark.circle.fill",
-                            title: "関連情報のグループ化",
-                            description: "設定画面や詳細画面で、関連する項目をセクションごとにまとめる",
+                            title: "Group related information",
+                            description: "In settings or detail screens, group related items into sections.",
                             isGood: true
                         )
 
                         BestPracticeItem(
                             icon: "checkmark.circle.fill",
-                            title: "階層的な情報構造",
-                            description: "複数のSectionCardを使って情報を段階的に整理し、視認性を向上",
+                            title: "Hierarchical structure",
+                            description: "Use multiple SectionCards to structure information step by step and improve scanability.",
                             isGood: true
                         )
 
                         BestPracticeItem(
                             icon: "checkmark.circle.fill",
-                            title: "明確なタイトル",
-                            description: "各セクションの内容を端的に表すタイトルを設定",
+                            title: "Clear titles",
+                            description: "Give each section a concise title that reflects its content.",
                             isGood: true
                         )
 
                         BestPracticeItem(
                             icon: "xmark.circle.fill",
-                            title: "過度なネストは避ける",
-                            description: "SectionCard内にSectionCardを何重にもネストすると読みづらくなる",
+                            title: "Avoid deep nesting",
+                            description: "Too many nested SectionCards make content hard to read.",
                             isGood: false
                         )
                     }

@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// スペーシングカタログビュー
-/// 全スペーシング値を視覚的に表示
+/// Spacing catalog view
+/// Visually displays all spacing values
 struct SpacingCatalogView: View {
     @Environment(\.spacingScale) private var spacingScale
     @Environment(\.colorPalette) private var colorPalette
@@ -9,8 +9,8 @@ struct SpacingCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: spacingScale.xl) {
-                // 概要
-                Text("Tシャツサイズベースのスペーシングスケール")
+                // Overview
+                Text("T-shirt size–based spacing scale")
                     .typography(.bodyMedium)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
                     .padding(.horizontal, spacingScale.lg)
@@ -32,10 +32,10 @@ struct SpacingCatalogView: View {
                     }
                 }
 
-                // 使用例
-                SectionCard(title: "使用例") {
+                // Usage
+                SectionCard(title: "Usage") {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("SwiftUI での使用方法")
+                        Text("How to use in SwiftUI")
                             .typography(.titleSmall)
 
                         Text("""
@@ -58,7 +58,7 @@ struct SpacingCatalogView: View {
             .padding(.bottom, spacingScale.xl)
         }
         .background(colorPalette.background)
-        .navigationTitle("スペーシング")
+        .navigationTitle("Spacing")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// コンポーネントカタログのエントリポイント
+/// Entry point for the components catalog
 struct ComponentsCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -8,26 +8,26 @@ struct ComponentsCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: spacing.xl) {
-                // ヘッダー
+                // Header
                 VStack(spacing: spacing.sm) {
                     Image(systemName: "square.stack.3d.up.fill")
                         .font(.system(size: 48))
                         .foregroundStyle(colorPalette.primary)
 
-                    Text("コンポーネントカタログ")
+                    Text("Components Catalog")
                         .typography(.headlineLarge)
                         .foregroundStyle(colorPalette.onBackground)
 
-                    Text("再利用可能なUIコンポーネント")
+                    Text("Reusable UI components")
                         .typography(.bodySmall)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, spacing.xl)
 
-                // コンポーネントリスト
+                // Component list
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("コンポーネント")
+                    Text("Components")
                         .typography(.titleMedium)
                         .foregroundStyle(colorPalette.onSurface)
                         .padding(.horizontal, spacing.lg)
@@ -73,7 +73,7 @@ struct ComponentsCatalogView: View {
             .padding(.bottom, spacing.xl)
         }
         .background(colorPalette.background)
-        .navigationTitle("コンポーネント")
+        .navigationTitle("Components")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -98,16 +98,16 @@ struct ComponentsCatalogView: View {
             IconButtonCatalogView()
         case .iconPicker:
             IconPickerCatalogView()
-        case .imagePicker:
-            #if canImport(UIKit)
-            ImagePickerCatalogView()
-            #else
-            ContentUnavailableView {
-                Label("iOS Only", systemImage: "iphone")
-            } description: {
-                Text("画像ピッカーはiOSでのみ利用可能です")
-            }
-            #endif
+            case .imagePicker:
+                #if canImport(UIKit)
+                ImagePickerCatalogView()
+                #else
+                ContentUnavailableView {
+                    Label("iOS Only", systemImage: "iphone")
+                } description: {
+                    Text("The image picker is only available on iOS.")
+                }
+                #endif
         case .snackbar:
             SnackbarCatalogView()
         case .textField:

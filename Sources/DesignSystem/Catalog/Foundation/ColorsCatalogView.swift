@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// カラーカタログビュー
-/// 現在のテーマを表示し、リファレンスは折りたたみ式で提供
+/// Shows the current theme and provides collapsible color references
 struct ColorsCatalogView: View {
     @Environment(ThemeProvider.self) private var themeProvider
     @Environment(\.colorPalette) private var colorPalette
@@ -10,16 +10,16 @@ struct ColorsCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: spacing.xl) {
-                // 現在のテーマ
+                // Current theme
                 currentThemeSection
 
-                // リファレンス
+                // References
                 referenceSection
             }
             .padding(.bottom, spacing.xl)
         }
         .background(colorPalette.background)
-        .navigationTitle("カラー")
+        .navigationTitle("Colors")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -31,11 +31,11 @@ struct ColorsCatalogView: View {
     private var currentThemeSection: some View {
         VStack(alignment: .leading, spacing: spacing.lg) {
             VStack(alignment: .leading, spacing: spacing.sm) {
-                Text("現在適用されているテーマ")
+                Text("Currently applied theme")
                     .typography(.bodyMedium)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                Text("モード: \(themeProvider.themeMode == .light ? "ライト" : "ダーク")")
+                Text("Mode: \(themeProvider.themeMode == .light ? "Light" : "Dark")")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant.opacity(0.7))
             }
@@ -54,7 +54,7 @@ struct ColorsCatalogView: View {
     @ViewBuilder
     private var referenceSection: some View {
         VStack(alignment: .leading, spacing: spacing.lg) {
-            Text("リファレンス")
+            Text("Reference")
                 .typography(.titleMedium)
                 .foregroundStyle(colorPalette.onSurface)
                 .padding(.horizontal, spacing.lg)
@@ -64,7 +64,7 @@ struct ColorsCatalogView: View {
                     semanticColorsGrid(palette: LightColorPalette())
                         .padding(.top, spacing.sm)
                 } label: {
-                    Text("デフォルトライトテーマ")
+                    Text("Default Light Theme")
                         .typography(.bodyLarge)
                 }
                 .padding(spacing.lg)
@@ -75,7 +75,7 @@ struct ColorsCatalogView: View {
                     semanticColorsGrid(palette: DarkColorPalette())
                         .padding(.top, spacing.sm)
                 } label: {
-                    Text("デフォルトダークテーマ")
+                    Text("Default Dark Theme")
                         .typography(.bodyLarge)
                 }
                 .padding(spacing.lg)
@@ -86,7 +86,7 @@ struct ColorsCatalogView: View {
                     primitiveColorsContent
                         .padding(.top, spacing.sm)
                 } label: {
-                    Text("プリミティブカラー")
+                    Text("Primitive Colors")
                         .typography(.bodyLarge)
                 }
                 .padding(spacing.lg)
@@ -131,7 +131,7 @@ struct ColorsCatalogView: View {
     @ViewBuilder
     private var primitiveColorsContent: some View {
         VStack(alignment: .leading, spacing: spacing.lg) {
-            Text("参照用の基本カラーパレット（Tailwind CSS ベース）")
+            Text("Base color palette for reference (Tailwind CSS based)")
                 .typography(.bodySmall)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
 

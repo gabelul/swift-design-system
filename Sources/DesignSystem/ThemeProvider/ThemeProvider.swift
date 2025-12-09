@@ -1,11 +1,11 @@
 import SwiftUI
 
-/// テーマ管理クラス
+/// Theme management class.
 ///
-/// アプリケーション全体のテーマとモード（ライト/ダーク/システム）を管理します。
-/// `@Observable`により、テーマやモードの変更は自動的にUIに反映されます。
+/// Manages the current theme and mode (light/dark/system) for the entire application.
+/// Thanks to `@Observable`, changes are automatically reflected in the UI.
 ///
-/// ## 基本的な使い方
+/// ## Basic usage
 /// ```swift
 /// @main
 /// struct MyApp: App {
@@ -20,67 +20,67 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// ## モードの設定
+/// ## Configuring the mode
 /// ```swift
-/// // システム設定に従う（デフォルト）
+/// // Follow system (default)
 /// themeProvider.themeMode = .system
 ///
-/// // ライトモード固定
+/// // Force light mode
 /// themeProvider.themeMode = .light
 ///
-/// // ダークモード固定
+/// // Force dark mode
 /// themeProvider.themeMode = .dark
 /// ```
 ///
-/// ## テーマの切り替え
+/// ## Switching themes
 /// ```swift
 /// // テーマを切り替え
 /// themeProvider.switchToTheme(id: "ocean")
 /// ```
 @Observable
-@MainActor
+    @MainActor
 public final class ThemeProvider {
-    /// 現在選択されているテーマ
+    /// Currently selected theme.
     public var currentTheme: any Theme
 
-    /// 現在のモード（システム/ライト/ダーク）
+    /// Current theme mode (system/light/dark).
     ///
-    /// - `.system`: システム設定に従う（デフォルト）
-    /// - `.light`: 常にライトモード
-    /// - `.dark`: 常にダークモード
+    /// - `.system`: Follows system settings (default)
+    /// - `.light`: Always light mode
+    /// - `.dark`: Always dark mode
     public var themeMode: ThemeMode
 
-    /// 利用可能な全テーマ
+    /// All available themes.
     public private(set) var availableThemes: [any Theme]
 
-    /// 現在のテーマとモードに基づくカラーパレット
+    /// Color palette derived from the current theme and mode.
     public var colorPalette: any ColorPalette {
         currentTheme.colorPalette(for: themeMode)
     }
 
-    /// ThemeProviderを初期化
+    /// Initializes a new `ThemeProvider`.
     ///
     /// - Parameters:
-    ///   - initialTheme: 初期テーマ（デフォルト: DefaultTheme）
-    ///   - initialMode: 初期モード（デフォルト: .system - システム設定に従う）
-    ///   - additionalThemes: 追加で登録するカスタムテーマ
+    ///   - initialTheme: Initial theme (default: `DefaultTheme`).
+    ///   - initialMode: Initial mode (default: `.system` – follows system settings).
+    ///   - additionalThemes: Additional custom themes to register.
     public init(
         initialTheme: (any Theme)? = nil,
         initialMode: ThemeMode = .system,
         additionalThemes: [any Theme] = []
     ) {
-        // ビルトインテーマを基本リストとして開始
+        // Start from built‑in themes.
         var themes = ThemeRegistry.builtInThemes
         
-        // initialThemeが提供されている場合、利用可能テーマに追加
+        // If an initial theme is provided, add it to the list.
         if let initialTheme {
-            // 重複チェック: 同じIDのテーマが既に存在しない場合のみ追加
+            // Avoid duplicates by theme id.
             if !themes.contains(where: { $0.id == initialTheme.id }) {
                 themes.append(initialTheme)
             }
         }
         
-        // additionalThemesを追加（重複排除）
+        // Add additional themes, avoiding duplicates.
         for theme in additionalThemes {
             if !themes.contains(where: { $0.id == theme.id }) {
                 themes.append(theme)
@@ -89,7 +89,7 @@ public final class ThemeProvider {
         
         self.availableThemes = themes
 
-        // 初期テーマを設定
+        // Set initial theme.
         if let initialTheme {
             self.currentTheme = initialTheme
         } else if let defaultTheme = themes.first(where: { $0.id == "default" }) {
@@ -101,11 +101,11 @@ public final class ThemeProvider {
         self.themeMode = initialMode
     }
 
-    /// テーマIDでテーマを切り替え
+    /// Switches the theme using a theme ID.
     ///
-    /// - Parameter id: 切り替え先のテーマID
+    /// - Parameter id: ID of the theme to switch to.
     ///
-    /// ## 使用例
+    /// ## Example
     /// ```swift
     /// withAnimation {
     ///     themeProvider.switchToTheme(id: "ocean")
@@ -119,16 +119,16 @@ public final class ThemeProvider {
         currentTheme = theme
     }
 
-    /// テーマオブジェクトを直接適用
+    /// Applies a theme object directly.
     ///
-    /// - Parameter theme: 適用するテーマ
+    /// - Parameter theme: Theme to apply.
     public func applyTheme(_ theme: any Theme) {
         currentTheme = theme
     }
 
-    /// モードを切り替え
+    /// Toggles the mode.
     ///
-    /// システム → ライト → ダーク → システム の順で循環します。
+    /// Cycles through System → Light → Dark → System.
     public func toggleMode() {
         switch themeMode {
         case .system:
@@ -140,21 +140,21 @@ public final class ThemeProvider {
         }
     }
 
-    /// カスタムテーマを登録
+    /// Registers a custom theme.
     ///
-    /// - Parameter theme: 登録するテーマ
+    /// - Parameter theme: Theme to register.
     ///
-    /// ## 使用例
+    /// ## Example
     /// ```swift
     /// struct MyCustomTheme: Theme {
     ///     var id: String { "my-theme" }
-    ///     // ... その他の実装
+    ///     // ... other implementation
     /// }
     ///
     /// themeProvider.registerTheme(MyCustomTheme())
     /// ```
     public func registerTheme(_ theme: any Theme) {
-        // 既存のテーマを更新または追加
+        // Update an existing theme if it already exists, otherwise append.
         if let index = availableThemes.firstIndex(where: { $0.id == theme.id }) {
             availableThemes[index] = theme
         } else {
@@ -162,9 +162,9 @@ public final class ThemeProvider {
         }
     }
 
-    /// 複数のカスタムテーマを登録
+    /// Registers multiple custom themes.
     ///
-    /// - Parameter themes: 登録するテーマの配列
+    /// - Parameter themes: Array of themes to register.
     public func registerThemes(_ themes: [any Theme]) {
         themes.forEach { registerTheme($0) }
     }

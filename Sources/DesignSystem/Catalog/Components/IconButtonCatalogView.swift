@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// IconButtonコンポーネントのカタログビュー
+/// IconButton component catalog view
 struct IconButtonCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -10,9 +10,9 @@ struct IconButtonCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                // 概要
+                // Overview
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("アイコンボタンはアイコンのみで構成される、コンパクトなアクションボタンです")
+                    Text("Icon buttons are compact action buttons composed only of an icon.")
                         .typography(.bodyMedium)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -33,10 +33,10 @@ struct IconButtonCatalogView: View {
                 .padding(.horizontal, spacing.lg)
                 .padding(.top, spacing.lg)
 
-                // スタイルバリエーション
-                SectionCard(title: "スタイルバリエーション") {
+                // Style variants
+                SectionCard(title: "Style Variants") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("4つのスタイルが利用可能")
+                        Text("Four styles are available.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -100,10 +100,10 @@ struct IconButtonCatalogView: View {
                     }
                 }
 
-                // サイズバリエーション
-                SectionCard(title: "サイズバリエーション") {
+                // Size variants
+                SectionCard(title: "Size Variants") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("3つのサイズが利用可能")
+                        Text("Three sizes are available.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -141,10 +141,10 @@ struct IconButtonCatalogView: View {
                     }
                 }
 
-                // アイコンバリエーション
-                SectionCard(title: "アイコンバリエーション") {
+                // Icon variants
+                SectionCard(title: "Icon Variants") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("よく使われるアイコンの例")
+                        Text("Examples of frequently used icons.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -167,10 +167,10 @@ struct IconButtonCatalogView: View {
                     }
                 }
 
-                // 使用例
-                SectionCard(title: "使用例") {
+                // Usage
+                SectionCard(title: "Usage") {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("SwiftUI での使用方法")
+                        Text("How to use in SwiftUI")
                             .typography(.titleSmall)
 
                         Text("""
@@ -190,22 +190,22 @@ struct IconButtonCatalogView: View {
                     }
                 }
 
-                // 実用例
-                SectionCard(title: "実用例") {
+                // Practical example
+                SectionCard(title: "Practical Example") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("ツールバーでの使用例")
+                        Text("Example usage in a toolbar.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
                         Card {
                             VStack(spacing: spacing.md) {
                                 HStack {
-                                    Text("記事のタイトル")
+                                Text("記事のタイトル")
                                         .typography(.titleMedium)
                                     Spacer()
                                 }
 
-                                Text("本文のプレビューテキスト。アイコンボタンは省スペースで明確なアクションを提供します。")
+                                Text("Preview body text. Icon buttons provide clear actions in a compact space.")
                                     .typography(.bodySmall)
                                     .foregroundStyle(colorPalette.onSurfaceVariant)
 

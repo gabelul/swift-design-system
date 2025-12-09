@@ -1,13 +1,13 @@
 import Foundation
 
-/// アイコンアイテム（SF Symbols専用）
+/// Icon item (for SF Symbols).
 ///
-/// アイコンピッカーで表示される個々のSF Symbolsアイコンを表します。
+/// Represents an individual SF Symbols icon shown in the icon picker.
 ///
-/// `systemName` には SF Symbols の名前を指定します（例: "star.fill", "heart.circle"）。
+/// `systemName` should be an SF Symbols name (e.g. `"star.fill"`, `"heart.circle"`).
 ///
-/// ## 注意
-/// このピッカーはSF Symbols専用です。絵文字を使用する場合は `EmojiPicker` を使用してください。
+/// ## Note
+/// This picker is for SF Symbols only. For emojis, use `EmojiPicker`.
 public struct IconItem: Identifiable, Sendable, Hashable {
     public let id: String
     public let systemName: String
@@ -20,25 +20,25 @@ public struct IconItem: Identifiable, Sendable, Hashable {
     }
 }
 
-/// アイコンのカテゴリを表すプロトコル
+/// Protocol representing an icon category.
 ///
-/// アイコンをグループ化するためのプロトコルです。
+/// Used to group icons for the icon picker.
 public protocol IconCategoryProtocol: Identifiable, Sendable {
     var id: String { get }
     var displayName: String { get }
     var icons: [IconItem] { get }
 }
 
-/// 汎用的なアイコンカテゴリ実装（SF Symbols専用）
+/// Generic icon category implementation (for SF Symbols).
 ///
-/// ## 使用例
+/// ## Example
 /// ```swift
 /// let generalCategory = IconCategory(
 ///     id: "general",
-///     displayName: "一般",
+///     displayName: "General",
 ///     icons: [
-///         IconItem(id: "book", systemName: "book.fill", displayName: "本"),
-///         IconItem(id: "briefcase", systemName: "briefcase.fill", displayName: "ビジネス"),
+///         IconItem(id: "book", systemName: "book.fill", displayName: "Book"),
+///         IconItem(id: "briefcase", systemName: "briefcase.fill", displayName: "Business"),
 ///     ]
 /// )
 ///
@@ -48,7 +48,7 @@ public protocol IconCategoryProtocol: Identifiable, Sendable {
 ///     let categories = [generalCategory, /* ... */]
 ///
 ///     var body: some View {
-///         Button("SF Symbolsを選択") {
+///         Button("Select SF Symbol") {
 ///             showIconPicker = true
 ///         }
 ///         .iconPicker(

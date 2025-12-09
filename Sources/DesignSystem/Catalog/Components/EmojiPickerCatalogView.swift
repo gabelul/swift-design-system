@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// EmojiPickerのカタログビュー
+/// EmojiPicker catalog view
 struct EmojiPickerCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -11,13 +11,13 @@ struct EmojiPickerCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: spacing.xl) {
-                // ヘッダー
+                // Header
                 headerSection
 
-                // 基本的な使用例
+                // Basic usage
                 basicUsageSection
 
-                // 使用例コード
+                // Code example
                 codeExampleSection
             }
             .padding(spacing.lg)
@@ -39,7 +39,7 @@ struct EmojiPickerCatalogView: View {
                 .typography(.headlineLarge)
                 .foregroundStyle(colorPalette.onBackground)
 
-            Text("カテゴリ別の絵文字を選択")
+            Text("Select emojis by category.")
                 .typography(.bodyMedium)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
                 .multilineTextAlignment(.center)
@@ -49,11 +49,11 @@ struct EmojiPickerCatalogView: View {
 
     private var basicUsageSection: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("基本的な使用例")
+            Text("Basic usage")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
 
-            Text("カテゴリ別に整理された絵文字ピッカー")
+            Text("Emoji picker organized by category.")
                 .typography(.bodySmall)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -68,7 +68,7 @@ struct EmojiPickerCatalogView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("選択中の絵文字")
+                            Text("Selected emoji")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
                             Text(emoji)
@@ -76,7 +76,7 @@ struct EmojiPickerCatalogView: View {
                                 .foregroundStyle(colorPalette.onSurface)
                         }
                     } else {
-                        Text("絵文字を選択してください")
+                        Text("Select an emoji.")
                             .typography(.bodyMedium)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
                     }
@@ -87,8 +87,8 @@ struct EmojiPickerCatalogView: View {
                 .background(colorPalette.surfaceVariant.opacity(0.3))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
 
-                // 選択ボタン
-                Button(selectedEmoji == nil ? "絵文字を選択" : "絵文字を変更") {
+                // Select button
+                Button(selectedEmoji == nil ? "Select Emoji" : "Change Emoji") {
                     showEmojiPicker = true
                 }
                 .buttonStyle(.primary)
@@ -104,7 +104,7 @@ struct EmojiPickerCatalogView: View {
 
     private var codeExampleSection: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("使用例コード")
+            Text("Code example")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
 
@@ -116,7 +116,7 @@ struct EmojiPickerCatalogView: View {
                     let categories = [
                         EmojiCategory(
                             id: "smileys",
-                            displayName: "顔・感情",
+                            displayName: "Faces & Emotions",
                             emojis: [
                                 EmojiItem(id: "smile", emoji: "😊"),
                                 EmojiItem(id: "laugh", emoji: "😂")
@@ -124,7 +124,7 @@ struct EmojiPickerCatalogView: View {
                         )
                     ]
 
-                    Button("絵文字を選択") {
+                    Button("Select Emoji") {
                         showEmojiPicker = true
                     }
                     .emojiPicker(
@@ -134,20 +134,20 @@ struct EmojiPickerCatalogView: View {
                     )
                     """)
 
-                Text("カテゴリと絵文字:")
+                Text("Categories and emojis:")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
                     .padding(.top, spacing.sm)
 
-                Text("• EmojiCategory - カテゴリを定義")
+                Text("• EmojiCategory – defines a category.")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                Text("• EmojiItem - 個別の絵文字を定義")
+                Text("• EmojiItem – defines an individual emoji.")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                Text("• emoji - 絵文字文字列（例: \"😊\"）")
+                Text("• emoji – emoji string (e.g. \"😊\").")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
             }
@@ -165,55 +165,55 @@ struct EmojiPickerCatalogView: View {
             .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
-    // サンプルカテゴリ: 絵文字
+    // Sample emoji categories
     private var sampleEmojiCategories: [EmojiCategory] {
         [
             EmojiCategory(
                 id: "smileys",
-                displayName: "顔・感情",
+                displayName: "Faces & Emotions",
                 emojis: [
-                    EmojiItem(id: "smile", emoji: "😊", displayName: "笑顔"),
-                    EmojiItem(id: "laugh", emoji: "😂", displayName: "笑い"),
-                    EmojiItem(id: "love", emoji: "😍", displayName: "愛"),
-                    EmojiItem(id: "cool", emoji: "😎", displayName: "クール"),
-                    EmojiItem(id: "thinking", emoji: "🤔", displayName: "考え中"),
-                    EmojiItem(id: "party", emoji: "🥳", displayName: "パーティ")
+                    EmojiItem(id: "smile", emoji: "😊", displayName: "Smile"),
+                    EmojiItem(id: "laugh", emoji: "😂", displayName: "Laugh"),
+                    EmojiItem(id: "love", emoji: "😍", displayName: "Love"),
+                    EmojiItem(id: "cool", emoji: "😎", displayName: "Cool"),
+                    EmojiItem(id: "thinking", emoji: "🤔", displayName: "Thinking"),
+                    EmojiItem(id: "party", emoji: "🥳", displayName: "Party")
                 ]
             ),
             EmojiCategory(
                 id: "animals",
-                displayName: "動物・自然",
+                displayName: "Animals & Nature",
                 emojis: [
-                    EmojiItem(id: "dog", emoji: "🐕", displayName: "犬"),
-                    EmojiItem(id: "cat", emoji: "🐈", displayName: "猫"),
-                    EmojiItem(id: "bird", emoji: "🐦", displayName: "鳥"),
-                    EmojiItem(id: "tree", emoji: "🌳", displayName: "木"),
-                    EmojiItem(id: "flower", emoji: "🌸", displayName: "花"),
-                    EmojiItem(id: "sun", emoji: "☀️", displayName: "太陽")
+                    EmojiItem(id: "dog", emoji: "🐕", displayName: "Dog"),
+                    EmojiItem(id: "cat", emoji: "🐈", displayName: "Cat"),
+                    EmojiItem(id: "bird", emoji: "🐦", displayName: "Bird"),
+                    EmojiItem(id: "tree", emoji: "🌳", displayName: "Tree"),
+                    EmojiItem(id: "flower", emoji: "🌸", displayName: "Flower"),
+                    EmojiItem(id: "sun", emoji: "☀️", displayName: "Sun")
                 ]
             ),
             EmojiCategory(
                 id: "food",
-                displayName: "食べ物・飲み物",
+                displayName: "Food & Drink",
                 emojis: [
-                    EmojiItem(id: "apple", emoji: "🍎", displayName: "りんご"),
-                    EmojiItem(id: "pizza", emoji: "🍕", displayName: "ピザ"),
-                    EmojiItem(id: "sushi", emoji: "🍣", displayName: "寿司"),
-                    EmojiItem(id: "coffee", emoji: "☕", displayName: "コーヒー"),
-                    EmojiItem(id: "cake", emoji: "🍰", displayName: "ケーキ"),
-                    EmojiItem(id: "burger", emoji: "🍔", displayName: "ハンバーガー")
+                    EmojiItem(id: "apple", emoji: "🍎", displayName: "Apple"),
+                    EmojiItem(id: "pizza", emoji: "🍕", displayName: "Pizza"),
+                    EmojiItem(id: "sushi", emoji: "🍣", displayName: "Sushi"),
+                    EmojiItem(id: "coffee", emoji: "☕", displayName: "Coffee"),
+                    EmojiItem(id: "cake", emoji: "🍰", displayName: "Cake"),
+                    EmojiItem(id: "burger", emoji: "🍔", displayName: "Burger")
                 ]
             ),
             EmojiCategory(
                 id: "activities",
-                displayName: "活動・スポーツ",
+                displayName: "Activities & Sports",
                 emojis: [
-                    EmojiItem(id: "soccer", emoji: "⚽", displayName: "サッカー"),
-                    EmojiItem(id: "basketball", emoji: "🏀", displayName: "バスケ"),
-                    EmojiItem(id: "tennis", emoji: "🎾", displayName: "テニス"),
-                    EmojiItem(id: "running", emoji: "🏃", displayName: "ランニング"),
-                    EmojiItem(id: "music", emoji: "🎵", displayName: "音楽"),
-                    EmojiItem(id: "art", emoji: "🎨", displayName: "芸術")
+                    EmojiItem(id: "soccer", emoji: "⚽", displayName: "Soccer"),
+                    EmojiItem(id: "basketball", emoji: "🏀", displayName: "Basketball"),
+                    EmojiItem(id: "tennis", emoji: "🎾", displayName: "Tennis"),
+                    EmojiItem(id: "running", emoji: "🏃", displayName: "Running"),
+                    EmojiItem(id: "music", emoji: "🎵", displayName: "Music"),
+                    EmojiItem(id: "art", emoji: "🎨", displayName: "Art")
                 ]
             )
         ]

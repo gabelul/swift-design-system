@@ -1,29 +1,30 @@
 import SwiftUI
 
-/// プライマリボタンスタイル
+/// Primary button style.
 ///
-/// 最も強調されるボタンスタイル。画面内の主要なアクション（ログイン、送信、保存など）に使用します。
-/// Primary色の背景に白色のテキストを配置し、押下時にスケールアニメーションが適用されます。
+/// The most prominent button style, used for primary actions on a screen
+/// (log in, submit, save, etc.). Uses the primary color as the background with
+/// white text and applies a scale animation on press.
 ///
-/// ## 使用例
+/// ## Example
 /// ```swift
-/// Button("ログイン") {
+/// Button("Log in") {
 ///     login()
 /// }
 /// .buttonStyle(.primary)
-/// .buttonSize(.large)  // サイズ指定（オプション）
+/// .buttonSize(.large)  // Optional size
 ///
-/// Button("保存") {
+/// Button("Save") {
 ///     save()
 /// }
 /// .buttonStyle(.primary)
 /// .buttonSize(.medium)
 /// ```
 ///
-/// ## スタイルの使い分け
-/// - **Primary**: 最重要アクション（1画面に1つ推奨）
-/// - **Secondary**: 補助的なアクション
-/// - **Tertiary**: 控えめなアクション
+/// ## When to use each style
+/// - **Primary**: Most important action (recommended at most one per screen).
+/// - **Secondary**: Supporting actions.
+/// - **Tertiary**: Less prominent actions.
 public struct PrimaryButtonStyle: ButtonStyle {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.buttonSize) private var buttonSize
@@ -52,7 +53,7 @@ public struct PrimaryButtonStyle: ButtonStyle {
 }
 
 public extension ButtonStyle where Self == PrimaryButtonStyle {
-    /// プライマリボタンスタイル
+    /// Primary button style.
     static var primary: PrimaryButtonStyle {
         PrimaryButtonStyle()
     }

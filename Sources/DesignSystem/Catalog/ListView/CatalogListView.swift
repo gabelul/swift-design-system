@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// カタログのリストビュー
-/// iPhoneやiPad Split View時に表示される縦スクロールリスト
+/// Catalog list view
+/// Vertical scroll list shown on iPhone and in iPad Split View
 struct CatalogListView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -22,7 +22,7 @@ struct CatalogListView: View {
                 .padding(.bottom, spacing.xl)
             }
             .background(colors.background)
-            .navigationTitle("デザインシステムカタログ")
+            .navigationTitle("Design System Catalog")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.large)
             #endif

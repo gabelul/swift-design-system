@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// ボタンコンポーネントのカタログビュー
+/// Button component catalog view
 struct ButtonCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -9,26 +9,26 @@ struct ButtonCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                // 概要
+                // Overview
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("ボタンのバリエーションとサイズを確認できます")
+                    Text("Explore button styles and sizes.")
                         .typography(.bodyMedium)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
                         .padding(.horizontal, spacing.lg)
 
-                    Toggle("ボタンを有効化", isOn: $isButtonEnabled)
+                    Toggle("Enable buttons", isOn: $isButtonEnabled)
                         .padding(.horizontal, spacing.lg)
                 }
 
                 // Primary Button
                 SectionCard(title: "Primary Button") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("最も強調されるボタン。主要なアクションに使用。")
+                        Text("Most prominent button. Use for primary actions.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
                         VStack(spacing: spacing.md) {
-                            Button("Large (デフォルト)") { }
+                            Button("Large (default)") { }
                                 .buttonStyle(.primary)
                                 .buttonSize(.large)
 
@@ -47,12 +47,12 @@ struct ButtonCatalogView: View {
                 // Secondary Button
                 SectionCard(title: "Secondary Button") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("副次的なアクションに使用。プライマリより控えめな強調。")
+                        Text("Use for secondary actions with less emphasis than primary.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
                         VStack(spacing: spacing.md) {
-                            Button("Large (デフォルト)") { }
+                            Button("Large (default)") { }
                                 .buttonStyle(.secondary)
                                 .buttonSize(.large)
 
@@ -71,12 +71,12 @@ struct ButtonCatalogView: View {
                 // Tertiary Button
                 SectionCard(title: "Tertiary Button") {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("最も控えめなボタン。テキストのみのスタイル。")
+                        Text("Least prominent button. Text-only style.")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
                         VStack(spacing: spacing.md) {
-                            Button("Large (デフォルト)") { }
+                            Button("Large (default)") { }
                                 .buttonStyle(.tertiary)
                                 .buttonSize(.large)
 
@@ -92,14 +92,14 @@ struct ButtonCatalogView: View {
                     }
                 }
 
-                // 使用例
-                SectionCard(title: "使用例") {
+                // Usage
+                SectionCard(title: "Usage") {
                     VStack(alignment: .leading, spacing: 8) {
-                        Text("SwiftUI での使用方法")
+                        Text("How to use in SwiftUI")
                             .typography(.titleSmall)
 
                         Text("""
-                        Button("ログイン") {
+                        Button("Log in") {
                             login()
                         }
                         .buttonStyle(.primary)

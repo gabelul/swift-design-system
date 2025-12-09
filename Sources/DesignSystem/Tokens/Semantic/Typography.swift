@@ -1,102 +1,102 @@
 import SwiftUI
 
-/// タイポグラフィトークン
+/// Typography tokens.
 ///
-/// 一貫したテキストスタイリングを提供する定義済みのフォントスケール。
-/// フォントサイズ、ウェイト、行間が最適化されており、`.typography()` モディファイアで簡単に適用できます。
+/// Predefined font scales that provide consistent text styling.
+/// Font size, weight, and line height are optimized and easily applied with the `.typography()` modifier.
 ///
-/// ## 使用例
+/// ## Example
 /// ```swift
-/// Text("大きな見出し")
+/// Text("Large Headline")
 ///     .typography(.headlineLarge)
 ///
-/// Text("本文テキスト")
+/// Text("Body text")
 ///     .typography(.bodyMedium)
 ///
-/// Button("ボタンラベル") { }
+/// Button("Button label") { }
 ///     .typography(.labelLarge)
 /// ```
 ///
-/// ## カテゴリ
-/// - **Display**: 最大サイズ（57pt〜36pt）- ヒーロー、ランディングページ
-/// - **Headline**: 見出し（32pt〜24pt）- セクション見出し
-/// - **Title**: タイトル（22pt〜14pt）- カードタイトル、ダイアログ
-/// - **Body**: 本文（16pt〜12pt）- 段落、説明文
-/// - **Label**: ラベル（14pt〜11pt）- ボタン、タブ、フォーム
+/// ## Categories
+/// - **Display**: largest sizes (57–36pt) – hero sections, landing pages
+/// - **Headline**: headings (32–24pt) – section headers
+/// - **Title**: titles (22–14pt) – card titles, dialogs
+/// - **Body**: body text (16–12pt) – paragraphs, descriptions
+/// - **Label**: labels (14–11pt) – buttons, tabs, form labels
 public enum Typography {
     // MARK: - Display
 
-    /// Display Large - 最大かつ最も目立つテキスト
-    /// サイズ: 57pt, ウェイト: Bold
+    /// Display Large – largest and most prominent text.
+    /// Size: 57pt, Weight: Bold
     case displayLarge
 
-    /// Display Medium
-    /// サイズ: 45pt, ウェイト: Bold
+    /// Display Medium.
+    /// Size: 45pt, Weight: Bold
     case displayMedium
 
-    /// Display Small
-    /// サイズ: 36pt, ウェイト: Bold
+    /// Display Small.
+    /// Size: 36pt, Weight: Bold
     case displaySmall
 
     // MARK: - Headline
 
-    /// Headline Large - 大きな見出し
-    /// サイズ: 32pt, ウェイト: Semibold
+    /// Headline Large – large section heading.
+    /// Size: 32pt, Weight: Semibold
     case headlineLarge
 
-    /// Headline Medium - 中程度の見出し
-    /// サイズ: 28pt, ウェイト: Semibold
+    /// Headline Medium – medium section heading.
+    /// Size: 28pt, Weight: Semibold
     case headlineMedium
 
-    /// Headline Small - 小さな見出し
-    /// サイズ: 24pt, ウェイト: Semibold
+    /// Headline Small – smaller section heading.
+    /// Size: 24pt, Weight: Semibold
     case headlineSmall
 
     // MARK: - Title
 
-    /// Title Large - 大きなタイトル
-    /// サイズ: 22pt, ウェイト: Semibold
+    /// Title Large – large title text.
+    /// Size: 22pt, Weight: Semibold
     case titleLarge
 
-    /// Title Medium - 中程度のタイトル
-    /// サイズ: 16pt, ウェイト: Semibold
+    /// Title Medium – medium title text.
+    /// Size: 16pt, Weight: Semibold
     case titleMedium
 
-    /// Title Small - 小さなタイトル
-    /// サイズ: 14pt, ウェイト: Semibold
+    /// Title Small – small title text.
+    /// Size: 14pt, Weight: Semibold
     case titleSmall
 
     // MARK: - Body
 
-    /// Body Large - 大きな本文
-    /// サイズ: 16pt, ウェイト: Regular
+    /// Body Large – large body text.
+    /// Size: 16pt, Weight: Regular
     case bodyLarge
 
-    /// Body Medium - 標準的な本文
-    /// サイズ: 14pt, ウェイト: Regular
+    /// Body Medium – standard body text.
+    /// Size: 14pt, Weight: Regular
     case bodyMedium
 
-    /// Body Small - 小さな本文
-    /// サイズ: 12pt, ウェイト: Regular
+    /// Body Small – small body text.
+    /// Size: 12pt, Weight: Regular
     case bodySmall
 
     // MARK: - Label
 
-    /// Label Large - 大きなラベル（ボタン、タブなど）
-    /// サイズ: 14pt, ウェイト: Medium
+    /// Label Large – larger labels (buttons, tabs, etc.).
+    /// Size: 14pt, Weight: Medium
     case labelLarge
 
-    /// Label Medium - 標準的なラベル
-    /// サイズ: 12pt, ウェイト: Medium
+    /// Label Medium – standard labels.
+    /// Size: 12pt, Weight: Medium
     case labelMedium
 
-    /// Label Small - 小さなラベル
-    /// サイズ: 11pt, ウェイト: Medium
+    /// Label Small – small labels.
+    /// Size: 11pt, Weight: Medium
     case labelSmall
 
     // MARK: - Properties
 
-    /// フォントサイズ
+    /// Font size (pt).
     public var size: CGFloat {
         switch self {
         // Display
@@ -126,7 +126,7 @@ public enum Typography {
         }
     }
 
-    /// フォントウェイト
+    /// Font weight.
     public var weight: Font.Weight {
         switch self {
         // Display
@@ -151,21 +151,19 @@ public enum Typography {
         }
     }
 
-    /// SwiftUI Font
-    /// Dynamic Type自動対応
+    /// SwiftUI `Font`, compatible with Dynamic Type.
     public var font: Font {
         .system(size: size, weight: weight, design: .default)
     }
 
-    /// SwiftUI Font with custom design
-    /// - Parameter design: フォントデザイン（.default, .serif, .rounded, .monospaced）
-    /// - Returns: 指定されたデザインのフォント
+    /// SwiftUI `Font` with a custom design.
+    /// - Parameter design: Font design (.default, .serif, .rounded, .monospaced).
+    /// - Returns: Font with the specified design.
     public func font(design: Font.Design) -> Font {
         .system(size: size, weight: weight, design: design)
     }
 
-    /// 行の高さ（Line Height）
-    /// Material Design 3仕様に基づく
+    /// Line height, based on the Material Design 3 spec.
     public var lineHeight: CGFloat {
         switch self {
         // Display

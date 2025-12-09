@@ -1,115 +1,114 @@
 import SwiftUI
 
-/// モーションタイミング定義
+/// Motion timing definitions.
 ///
-/// デザインシステム全体で一貫したアニメーションを提供する、事前定義されたタイミング設定。
-/// Material Design 3、IBM Carbon Design System、Apple Human Interface Guidelinesの
-/// 業界標準に基づいた、最適化されたアニメーション値を提供します。
+/// Predefined animation timings that provide consistent motion across the design system.
+/// Values are based on industry standards such as Material Design 3, IBM Carbon Design System,
+/// and Apple Human Interface Guidelines.
 ///
-/// ## 使用例
+/// ## Example
 /// ```swift
 /// @Environment(\.motion) var motion
 ///
-/// Button("タップ") { }
+/// Button("Tap") { }
 ///     .scaleEffect(isPressed ? 0.98 : 1.0)
 ///     .animate(motion.tap, value: isPressed)
 /// ```
 ///
-/// ## カテゴリ
-/// - **マイクロインタラクション**: `quick`, `tap` - 瞬時のフィードバック（70-110ms）
-/// - **状態変化**: `toggle`, `fadeIn`, `fadeOut` - UI要素の切り替え（150ms）
-/// - **トランジション**: `slide`, `slow`, `slower` - コンテンツの移動（240-375ms）
-/// - **スプリング**: `spring`, `bounce` - 自然な物理ベースの動き
+/// ## Categories
+/// - **Micro Interactions**: `quick`, `tap` – instant feedback (70–110ms)
+/// - **State Changes**: `toggle`, `fadeIn`, `fadeOut` – UI state changes (~150ms)
+/// - **Transitions**: `slide`, `slow`, `slower` – content transitions (240–375ms)
+/// - **Springs**: `spring`, `bounce` – natural, physics‑based motion
 ///
-/// ## アクセシビリティ
-/// `.animate()` モディファイアを使用すると、視差効果を減らす設定が有効な場合に
-/// 自動的にアニメーションが最小化されます（WCAG 2.1準拠）。
+/// ## Accessibility
+/// When used via the `.animate()` modifier, animations are automatically minimized when
+/// “Reduce Motion” is enabled (WCAG 2.1 compliant).
 public protocol Motion: Sendable {
     // MARK: - Micro-interactions
 
-    /// 最速アニメーション - マイクロインタラクション用
+    /// Fastest animation – for micro interactions.
     ///
-    /// ホバー効果、カーソルフィードバックなど、瞬時の視覚的応答に最適。
+    /// Ideal for hover effects, cursor feedback, and other instant visual responses.
     /// - Duration: 70ms
-    /// - Easing: Ease-out
+    /// - Easing: Ease‑out
     var quick: Animation { get }
 
-    /// タップ/押下アニメーション
+    /// Tap/press animation.
     ///
-    /// ボタン押下、スイッチ切り替えなど、直接的なユーザー操作への即座のフィードバック。
+    /// Used for button presses, switch toggles, and other direct user interactions.
     /// - Duration: 110ms
-    /// - Easing: Ease-out
+    /// - Easing: Ease‑out
     var tap: Animation { get }
 
     // MARK: - State Changes
 
-    /// トグル/状態切り替えアニメーション
+    /// Toggle / state change animation.
     ///
-    /// チェックボックス、選択状態、アクティブ/非アクティブの切り替えに使用。
+    /// Used for checkboxes, selection changes, and active/inactive toggles.
     /// - Duration: 150ms
-    /// - Easing: Ease-in-out
+    /// - Easing: Ease‑in‑out
     var toggle: Animation { get }
 
-    /// フェードイン - 要素の出現
+    /// Fade‑in – element appearance.
     ///
-    /// 新しいコンテンツの表示、モーダルの出現、アラートの表示に使用。
+    /// Used for showing new content, presenting modals, and alerts.
     /// - Duration: 150ms
-    /// - Easing: Ease-out
+    /// - Easing: Ease‑out
     var fadeIn: Animation { get }
 
-    /// フェードアウト - 要素の消失
+    /// Fade‑out – element disappearance.
     ///
-    /// コンテンツの非表示、モーダルの閉じる、通知の消去に使用。
+    /// Used for hiding content, dismissing modals, and clearing notifications.
     /// - Duration: 150ms
-    /// - Easing: Ease-in
+    /// - Easing: Ease‑in
     var fadeOut: Animation { get }
 
     // MARK: - Transitions
 
-    /// スライド - 位置変更
+    /// Slide – position change.
     ///
-    /// タブ切り替え、ページネーション、カルーセルなど、コンテンツのスムーズな移動。
+    /// Used for tab switching, pagination, carousels, and smooth content movement.
     /// - Duration: 240ms
-    /// - Easing: Ease-in-out
+    /// - Easing: Ease‑in‑out
     var slide: Animation { get }
 
-    /// 遅いアニメーション - コンテキスト変更用
+    /// Slower animation – for context changes.
     ///
-    /// セクション展開、複雑なレイアウト変更、全画面トランジション。
+    /// Used for section expansion, complex layout changes, full‑screen transitions.
     /// - Duration: 300ms
-    /// - Easing: Ease-in-out
+    /// - Easing: Ease‑in‑out
     var slow: Animation { get }
 
-    /// より遅いアニメーション - 複雑なトランジション用
+    /// Slowest non‑spring animation – for complex transitions.
     ///
-    /// ナビゲーション遷移、大規模なレイアウトシフト、複数要素の協調動作。
+    /// Used for navigation transitions, large layout shifts, and coordinated motion.
     /// - Duration: 375ms
-    /// - Easing: Ease-in-out
+    /// - Easing: Ease‑in‑out
     var slower: Animation { get }
 
     // MARK: - Spring Animations
 
-    /// 自然なスプリングアニメーション
+    /// Natural spring animation.
     ///
-    /// ドラッグ＆ドロップのリリース、スクロール後の静止、弾性的な動き。
+    /// Used for drag‑and‑drop release, settling after scroll, and elastic motion.
     /// - Response: 0.3s
-    /// - Damping: 0.6 (適度な弾み)
+    /// - Damping: 0.6 (moderate bounce)
     var spring: Animation { get }
 
-    /// バウンスのあるスプリングアニメーション
+    /// Spring animation with bounce.
     ///
-    /// 楽しさを演出したい場面、成功フィードバック、注意を引く動作。
+    /// Used when you want playful motion, success feedback, or attention‑grabbing effects.
     /// - Response: 0.5s
-    /// - Damping: 0.5 (より大きな弾み)
+    /// - Damping: 0.5 (stronger bounce)
     var bounce: Animation { get }
 }
 
 // MARK: - Default Implementation
 
-/// デフォルトのモーション実装
+/// Default Motion implementation.
 ///
-/// Material Design 3とIBM Carbon Design Systemの推奨値に基づいた、
-/// プロダクション品質のアニメーションタイミング。
+/// Production‑ready animation timings based on Material Design 3 and IBM Carbon Design System.
 public struct DefaultMotion: Motion {
     public init() {}
 

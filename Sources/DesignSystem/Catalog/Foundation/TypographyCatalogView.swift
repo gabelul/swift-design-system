@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// タイポグラフィカタログビュー
-/// 全タイプスケールを視覚的に表示
+/// Typography catalog view
+/// Visually displays the full type scale
 struct TypographyCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -9,7 +9,7 @@ struct TypographyCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: spacing.xl) {
-                // 概要
+                // Overview
                 overviewSection
 
                 // Display
@@ -30,13 +30,13 @@ struct TypographyCatalogView: View {
                 // Font Design
                 fontDesignSection
 
-                // 使用例
+                // Usage examples
                 usageSection
             }
             .padding(.bottom, spacing.xl)
         }
         .background(colorPalette.background)
-        .navigationTitle("タイポグラフィ")
+        .navigationTitle("Typography")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -47,11 +47,11 @@ struct TypographyCatalogView: View {
     @ViewBuilder
     private var overviewSection: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("15種類の定義済みタイポグラフィトークンを提供します。")
+            Text("Provides 15 predefined typography tokens.")
                 .typography(.bodyMedium)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
-            Text("Material Design 3のタイプスケールに基づいており、Display、Headline、Title、Body、Labelの5つのカテゴリに分類されています。")
+            Text("Based on the Material Design 3 type scale, grouped into five categories: Display, Headline, Title, Body, and Label.")
                 .typography(.bodySmall)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
         }
@@ -65,7 +65,7 @@ struct TypographyCatalogView: View {
     private var displaySection: some View {
         SectionCard(title: "Display") {
             VStack(alignment: .leading, spacing: spacing.lg) {
-                Text("最も大きく目立つテキスト。ヒーローセクションやランディングページで使用。")
+                Text("Largest and most prominent text, used for hero sections and landing pages.")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -84,7 +84,7 @@ struct TypographyCatalogView: View {
     private var headlineSection: some View {
         SectionCard(title: "Headline") {
             VStack(alignment: .leading, spacing: spacing.lg) {
-                Text("セクション見出しや重要なタイトルに使用。")
+                Text("Used for section headings and important titles.")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -103,7 +103,7 @@ struct TypographyCatalogView: View {
     private var titleSection: some View {
         SectionCard(title: "Title") {
             VStack(alignment: .leading, spacing: spacing.lg) {
-                Text("カードタイトル、ダイアログタイトル、リスト項目の見出しに使用。")
+                Text("Used for card titles, dialog titles, and list item headings.")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -122,14 +122,14 @@ struct TypographyCatalogView: View {
     private var bodySection: some View {
         SectionCard(title: "Body") {
             VStack(alignment: .leading, spacing: spacing.lg) {
-                Text("本文テキスト、段落、説明文に使用。最も頻繁に使用されるスタイル。")
+                Text("Used for body text, paragraphs, and descriptions. The most frequently used styles.")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
                 VStack(spacing: spacing.lg) {
-                    TypographyDemoView(style: .bodyLarge, text: "Body Large - 標準的な本文テキストに使用します。読みやすさを重視したサイズです。")
-                    TypographyDemoView(style: .bodyMedium, text: "Body Medium - よりコンパクトな本文テキストに使用します。情報密度が高い場合に適しています。")
-                    TypographyDemoView(style: .bodySmall, text: "Body Small - 補足説明や注釈など、小さめの本文テキストに使用します。")
+                    TypographyDemoView(style: .bodyLarge, text: "Body Large – Use for standard body text where readability is prioritized.")
+                    TypographyDemoView(style: .bodyMedium, text: "Body Medium – Use for more compact body text and higher information density.")
+                    TypographyDemoView(style: .bodySmall, text: "Body Small – Use for supplementary descriptions, notes, and small body text.")
                 }
             }
         }
@@ -141,7 +141,7 @@ struct TypographyCatalogView: View {
     private var labelSection: some View {
         SectionCard(title: "Label") {
             VStack(alignment: .leading, spacing: spacing.lg) {
-                Text("ボタン、タブ、フォームのラベルなど、UIコンポーネントのテキストに使用。")
+                Text("Used for text on UI components such as buttons, tabs, and form labels.")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -158,17 +158,17 @@ struct TypographyCatalogView: View {
 
     @ViewBuilder
     private var fontDesignSection: some View {
-        SectionCard(title: "フォントデザイン") {
+        SectionCard(title: "Font Design") {
             VStack(alignment: .leading, spacing: spacing.lg) {
-                Text("4種類のフォントデザインが利用可能です。iOS/macOSのシステムフォントに対応しています。")
+                Text("Provides four font designs using the iOS/macOS system fonts.")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
                 VStack(spacing: spacing.lg) {
-                    FontDesignDemoView(design: .default, name: "Default (ゴシック)", sampleText: "こんにちは世界 Hello World 123")
-                    FontDesignDemoView(design: .serif, name: "Serif (明朝)", sampleText: "こんにちは世界 Hello World 123")
-                    FontDesignDemoView(design: .rounded, name: "Rounded (丸ゴシック)", sampleText: "こんにちは世界 Hello World 123")
-                    FontDesignDemoView(design: .monospaced, name: "Monospaced (等幅)", sampleText: "こんにちは世界 Hello World 123")
+                    FontDesignDemoView(design: .default, name: "Default (Sans)", sampleText: "Hello World こんにちは世界 123")
+                    FontDesignDemoView(design: .serif, name: "Serif", sampleText: "Hello World こんにちは世界 123")
+                    FontDesignDemoView(design: .rounded, name: "Rounded", sampleText: "Hello World こんにちは世界 123")
+                    FontDesignDemoView(design: .monospaced, name: "Monospaced", sampleText: "Hello World こんにちは世界 123")
                 }
             }
         }
@@ -178,22 +178,22 @@ struct TypographyCatalogView: View {
 
     @ViewBuilder
     private var usageSection: some View {
-        SectionCard(title: "使用例") {
+        SectionCard(title: "Usage") {
             VStack(alignment: .leading, spacing: spacing.md) {
-                Text("SwiftUIでの使用方法")
+                Text("How to use in SwiftUI")
                     .typography(.titleSmall)
 
                 Text("""
-                Text("見出し")
+                Text("Headline")
                     .typography(.headlineLarge)
 
-                Text("本文テキスト")
+                Text("Body text")
                     .typography(.bodyMedium)
 
-                Text("明朝体で表示")
+                Text("Serif body")
                     .typography(.bodyMedium, design: .serif)
 
-                Text("ラベル")
+                Text("Label")
                     .typography(.labelSmall)
                 """)
                 .typography(.bodySmall)

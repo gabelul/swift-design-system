@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// カタログの詳細ビュー
-/// NavigationSplitViewの最後のカラムで、選択されたアイテムの詳細を表示
+/// Catalog detail view
+/// Last column of NavigationSplitView that shows details for the selected item
 struct CatalogDetailView: View {
     let category: CatalogCategory?
     let foundationItem: FoundationItem?
@@ -88,7 +88,7 @@ struct CatalogDetailView: View {
                 ContentUnavailableView {
                     Label("iOS Only", systemImage: "iphone")
                 } description: {
-                    Text("画像ピッカーはiOSでのみ利用可能です")
+                    Text("The image picker is only available on iOS.")
                 }
                 #endif
             case .snackbar:
@@ -123,9 +123,9 @@ struct CatalogDetailView: View {
         ZStack {
             Color.clear
             ContentUnavailableView {
-                Label("アイテムを選択", systemImage: "doc.text.fill")
+                Label("Select an item", systemImage: "doc.text.fill")
             } description: {
-                Text("コンテンツリストからアイテムを選択してください")
+                Text("Select an item from the content list.")
             }
         }
     }
@@ -134,9 +134,9 @@ struct CatalogDetailView: View {
         ZStack {
             Color.clear
             ContentUnavailableView {
-                Label("カタログを探索", systemImage: "book.fill")
+                Label("Explore the catalog", systemImage: "book.fill")
             } description: {
-                Text("サイドバーからカテゴリを選択して開始してください")
+                Text("Select a category in the sidebar to get started.")
             }
         }
     }

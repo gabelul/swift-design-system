@@ -6,15 +6,15 @@ import AVFoundation
 import Photos
 import PhotosUI
 
-/// 画像ピッカーを表示するViewModifier
+/// ViewModifier that presents an image picker.
 ///
-/// カメラまたは写真ライブラリから画像を選択できるモディファイア。
-/// 適切な権限管理を行い、権限がない場合はアラートで通知します。
+/// Lets the user select an image from the camera or photo library.
+/// Handles permissions and shows an alert when access is unavailable.
 ///
-/// - Note: カメラとフォトライブラリの使用許可が必要です。
-///   Info.plistに以下のキーを追加してください：
-///   - `NSCameraUsageDescription`: カメラ使用の説明
-///   - `NSPhotoLibraryUsageDescription`: フォトライブラリアクセスの説明
+/// - Note: Camera and photo library usage descriptions are required.
+///   Add the following keys to your Info.plist:
+///   - `NSCameraUsageDescription`: explanation for camera usage.
+///   - `NSPhotoLibraryUsageDescription`: explanation for photo library usage.
 public struct ImagePickerModifier: ViewModifier {
     @Environment(\.colorPalette) private var colorPalette
 
@@ -43,24 +43,24 @@ public struct ImagePickerModifier: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .confirmationDialog(
-                "画像を選択",
+                "Select Image",
                 isPresented: $isPresented,
                 titleVisibility: .visible
             ) {
-                // カメラが利用可能な場合のみ表示
+                // Only show camera if available
                 if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                    Button("カメラで撮影") {
+                    Button("Take Photo") {
                         requestPermissionAndShowPicker(for: .camera)
                     }
                     .tint(Color(colorPalette.primary))
                 }
 
-                Button("写真ライブラリから選択") {
+                Button("Choose from Photo Library") {
                     requestPermissionAndShowPicker(for: .photoLibrary)
                 }
                 .tint(Color(colorPalette.primary))
 
-                Button("キャンセル", role: .cancel) {
+                Button("Cancel", role: .cancel) {
                     isPresented = false
                 }
             }
@@ -80,11 +80,11 @@ public struct ImagePickerModifier: ViewModifier {
                 presenting: permissionAlertConfig
             ) { config in
                 if config.canOpenSettings {
-                    Button("設定を開く") {
+                    Button("Open Settings") {
                         openSettings()
                     }
                 }
-                Button("キャンセル", role: .cancel) {
+                Button("Cancel", role: .cancel) {
                     isPresented = false
                 }
             } message: { config in
@@ -92,7 +92,7 @@ public struct ImagePickerModifier: ViewModifier {
             }
     }
 
-    /// 権限をリクエストしてピッカーを表示
+    /// Requests permission and shows the picker if allowed.
     private func requestPermissionAndShowPicker(for source: ImageSourceType) {
         Task { @MainActor in
             let hasPermission = await checkPermission(for: source)
@@ -100,7 +100,7 @@ public struct ImagePickerModifier: ViewModifier {
             if hasPermission {
                 sourceType = source
             } else {
-                // 権限がない場合はアラートを表示
+                // If permission is not granted, show an alert
                 permissionAlertConfig = PermissionAlertConfig(
                     sourceType: source,
                     status: await getPermissionStatus(for: source)
@@ -110,7 +110,7 @@ public struct ImagePickerModifier: ViewModifier {
         }
     }
 
-    /// 権限状態を確認してリクエスト
+    /// Checks and, if needed, requests permission.
     private func checkPermission(for source: ImageSourceType) async -> Bool {
         switch source {
         case .camera:
@@ -120,7 +120,7 @@ public struct ImagePickerModifier: ViewModifier {
         }
     }
 
-    /// カメラ権限の確認とリクエスト
+    /// Checks and requests camera permission.
     private func checkCameraPermission() async -> Bool {
         let status = AVCaptureDevice.authorizationStatus(for: .video)
 
@@ -138,7 +138,7 @@ public struct ImagePickerModifier: ViewModifier {
         }
     }
 
-    /// フォトライブラリ権限の確認とリクエスト
+    /// Checks and requests photo library permission.
     private func checkPhotoLibraryPermission() async -> Bool {
         let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
 
@@ -157,7 +157,7 @@ public struct ImagePickerModifier: ViewModifier {
         }
     }
 
-    /// 権限状態を取得
+    /// Returns current permission status.
     private func getPermissionStatus(for source: ImageSourceType) async -> PermissionStatus {
         switch source {
         case .camera:
@@ -183,7 +183,7 @@ public struct ImagePickerModifier: ViewModifier {
         }
     }
 
-    /// 設定画面を開く
+    /// Opens the Settings app.
     private func openSettings() {
         if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
             UIApplication.shared.open(settingsURL)
@@ -191,7 +191,7 @@ public struct ImagePickerModifier: ViewModifier {
     }
 }
 
-/// 画像ソースの種類
+/// Image source type
 enum ImageSourceType: Identifiable {
     case camera
     case photoLibrary
@@ -211,14 +211,14 @@ enum ImageSourceType: Identifiable {
     }
 }
 
-/// 権限の状態
+/// Permission state
 enum PermissionStatus {
     case notDetermined
     case denied
     case restricted
 }
 
-/// 権限アラートの設定
+/// Configuration for permission alerts.
 struct PermissionAlertConfig {
     let title: String
     let message: String
@@ -227,36 +227,36 @@ struct PermissionAlertConfig {
     init(sourceType: ImageSourceType, status: PermissionStatus) {
         switch sourceType {
         case .camera:
-            self.title = "カメラへのアクセス許可が必要です"
+            self.title = "Camera Access Required"
             switch status {
             case .denied:
-                self.message = "設定からカメラへのアクセスを許可してください。"
+                self.message = "Please allow camera access in Settings."
                 self.canOpenSettings = true
             case .restricted:
-                self.message = "カメラへのアクセスが制限されています。デバイスの設定またはペアレンタルコントロールを確認してください。"
+                self.message = "Camera access is restricted. Check device restrictions or parental controls."
                 self.canOpenSettings = false
             case .notDetermined:
-                self.message = "カメラを使用するには、アクセス許可が必要です。"
+                self.message = "Camera access is required to take photos."
                 self.canOpenSettings = false
             }
         case .photoLibrary:
-            self.title = "写真へのアクセス許可が必要です"
+            self.title = "Photo Access Required"
             switch status {
             case .denied:
-                self.message = "設定から写真へのアクセスを許可してください。"
+                self.message = "Please allow photo access in Settings."
                 self.canOpenSettings = true
             case .restricted:
-                self.message = "写真へのアクセスが制限されています。デバイスの設定またはペアレンタルコントロールを確認してください。"
+                self.message = "Photo access is restricted. Check device restrictions or parental controls."
                 self.canOpenSettings = false
             case .notDetermined:
-                self.message = "写真ライブラリを使用するには、アクセス許可が必要です。"
+                self.message = "Photo library access is required to pick images."
                 self.canOpenSettings = false
             }
         }
     }
 }
 
-/// UIImagePickerControllerのSwiftUIラッパー
+/// SwiftUI wrapper for `UIImagePickerController`.
 struct ImagePickerViewController: UIViewControllerRepresentable {
     let sourceType: UIImagePickerController.SourceType
     @Binding var selectedImageData: Data?
@@ -272,7 +272,7 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
-        // 更新不要
+        // No updates required.
     }
 
     func makeCoordinator() -> Coordinator {
@@ -291,21 +291,21 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
             didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
         ) {
             if let image = info[.originalImage] as? UIImage {
-                // 画像をJPEGデータに変換
+                // Convert image to JPEG data
                 if let maxSize = parent.maxSizeInBytes {
-                    // サイズ制限がある場合は再帰的に圧縮
+                    // If there is a size limit, compress recursively
                     parent.selectedImageData = compressImageData(image, maxSizeInBytes: maxSize)
                 } else {
-                    // サイズ制限がない場合はデフォルト品質で変換
+                    // If there is no size limit, convert with default quality
                     parent.selectedImageData = image.jpegData(compressionQuality: 0.8)
                 }
 
-                // エラーチェック
+                // Error handling
                 if parent.selectedImageData == nil {
                     let error = NSError(
                         domain: "ImagePickerError",
                         code: -1,
-                        userInfo: [NSLocalizedDescriptionKey: "画像の変換に失敗しました"]
+                        userInfo: [NSLocalizedDescriptionKey: "Failed to convert image."]
                     )
                     parent.onCompressionError?(error)
                 }
@@ -317,12 +317,12 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
             parent.isPresented = nil
         }
 
-        /// 画像を指定されたサイズ以下に再帰的に圧縮
+        /// Recursively compresses an image to be under the specified size.
         /// - Parameters:
-        ///   - image: 圧縮する画像
-        ///   - maxSizeInBytes: 最大サイズ（バイト）
-        ///   - currentQuality: 現在の圧縮品質（0.0〜1.0）
-        /// - Returns: 圧縮された画像データ、または変換に失敗した場合はnil
+        ///   - image: The image to compress.
+        ///   - maxSizeInBytes: Maximum allowed size in bytes.
+        ///   - currentQuality: Current JPEG quality (0.0–1.0).
+        /// - Returns: Compressed image data, or nil if conversion fails.
         private func compressImageData(
             _ image: UIImage,
             maxSizeInBytes: Int,
@@ -332,17 +332,17 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
                 return nil
             }
 
-            // 既に上限以下なら何もしない
+            // Already under the limit, return as is.
             if data.count <= maxSizeInBytes {
                 return data
             }
 
-            // 品質が下限に達したら現在のデータを返す
+            // If quality reached the lower bound, return current data.
             if currentQuality <= 0.1 {
                 return data
             }
 
-            // 品質を10%下げて再帰的に圧縮
+            // Lower quality by 10% and retry.
             return compressImageData(image, maxSizeInBytes: maxSizeInBytes, currentQuality: currentQuality - 0.1)
         }
     }
@@ -351,10 +351,10 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
 // MARK: - Public Extension
 
 public extension View {
-    /// 画像ピッカーモディファイアを適用
+    /// Applies the image picker modifier.
     ///
-    /// カメラまたは写真ライブラリから画像を選択できるモディファイア。
-    /// 選択された画像はJPEG形式のDataとして返されます。
+    /// Presents an image picker from the camera or photo library.
+    /// The selected image is returned as JPEG `Data`.
     ///
     /// ```swift
     /// struct ContentView: View {
@@ -370,7 +370,7 @@ public extension View {
     ///                     .frame(height: 200)
     ///             }
     ///
-    ///             Button("画像を選択") {
+    ///             Button("Select Image") {
     ///                 showPicker = true
     ///             }
     ///         }
@@ -384,11 +384,11 @@ public extension View {
     /// ```
     ///
     /// - Parameters:
-    ///   - isPresented: ピッカーの表示状態を制御するバインディング
-    ///   - selectedImageData: 選択された画像のデータを受け取るバインディング
-    ///   - maxSizeInBytes: 画像の最大サイズ（バイト単位）。指定された場合、画像は自動的に圧縮されます。
-    ///   - onCompressionError: 画像の圧縮または変換に失敗した場合に呼ばれるコールバック
-    /// - Returns: モディファイアが適用されたビュー
+    ///   - isPresented: Binding that controls whether the picker is shown.
+    ///   - selectedImageData: Binding that receives the selected image data.
+    ///   - maxSizeInBytes: Optional maximum size in bytes. When specified, the image is automatically compressed.
+    ///   - onCompressionError: Callback invoked when compression or conversion fails.
+    /// - Returns: A view with the modifier applied.
     func imagePicker(
         isPresented: Binding<Bool>,
         selectedImageData: Binding<Data?>,

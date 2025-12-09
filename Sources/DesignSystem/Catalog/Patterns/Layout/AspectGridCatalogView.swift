@@ -57,10 +57,10 @@ struct AspectGridCatalogView: View {
                     }
                 }
 
-                // 基本的な使用例
-                SectionCard(title: "基本的な使用例") {
+                // Basic usage
+                SectionCard(title: "Basic Usage") {
                     VStack(alignment: .leading, spacing: spacing.md) {
-                        Text("商品一覧グリッド（1:1アスペクト比）")
+                        Text("Product grid (1:1 aspect ratio).")
                             .typography(.bodySmall)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -83,15 +83,15 @@ struct AspectGridCatalogView: View {
                     }
                 }
 
-                // アスペクト比バリエーション
-                SectionCard(title: "アスペクト比バリエーション") {
+                // Aspect ratio variations
+                SectionCard(title: "Aspect Ratio Variations") {
                     VStack(alignment: .leading, spacing: spacing.lg) {
                         // 1:1 - Square
                         VStack(alignment: .leading, spacing: spacing.sm) {
                             Text("1:1 - Square")
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
-                            Text("商品サムネイル、プロフィール画像、アイコンに最適")
+                            Text("Best for product thumbnails, profile images, and icons.")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -120,7 +120,7 @@ struct AspectGridCatalogView: View {
                             Text("3:4 - Photos")
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
-                            Text("写真、ポートレートに最適")
+                            Text("Best for photos and portrait content.")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -149,7 +149,7 @@ struct AspectGridCatalogView: View {
                             Text("16:9 - Videos")
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
-                            Text("動画サムネイル、ワイドコンテンツに最適")
+                            Text("Best for video thumbnails and wide content.")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
@@ -173,15 +173,15 @@ struct AspectGridCatalogView: View {
                     }
                 }
 
-                // 間隔バリエーション
-                SectionCard(title: "間隔バリエーション") {
+                // Spacing variations
+                SectionCard(title: "Spacing Variations") {
                     VStack(alignment: .leading, spacing: spacing.lg) {
                         ForEach([
-                            (GridSpacing.xs, "Extra Small (8pt)", "密集したレイアウト"),
-                            (GridSpacing.sm, "Small (12pt)", "コンパクトなレイアウト"),
-                            (GridSpacing.md, "Medium (16pt)", "標準的なレイアウト（デフォルト）"),
-                            (GridSpacing.lg, "Large (20pt)", "ゆとりのあるレイアウト"),
-                            (GridSpacing.xl, "Extra Large (24pt)", "プレミアムなレイアウト")
+                            (GridSpacing.xs, "Extra Small (8pt)", "Dense layout."),
+                            (GridSpacing.sm, "Small (12pt)", "Compact layout."),
+                            (GridSpacing.md, "Medium (16pt)", "Standard layout (default)."),
+                            (GridSpacing.lg, "Large (20pt)", "Spacious layout."),
+                            (GridSpacing.xl, "Extra Large (24pt)", "Premium layout.")
                         ], id: \.0.rawValue) { item in
                             VStack(alignment: .leading, spacing: spacing.sm) {
                                 Text(item.1)
@@ -216,10 +216,10 @@ struct AspectGridCatalogView: View {
                     }
                 }
 
-                // コード例
-                SectionCard(title: "コード例") {
+                // Code example
+                SectionCard(title: "Code Example") {
                     VStack(alignment: .leading, spacing: spacing.sm) {
-                        Text("SwiftUIでの使用方法")
+                        Text("How to use in SwiftUI")
                             .typography(.titleSmall)
 
                         Text("""
@@ -242,68 +242,68 @@ struct AspectGridCatalogView: View {
                     }
                 }
 
-                // デザイン仕様
-                SectionCard(title: "デザイン仕様") {
+                // Design specs
+                SectionCard(title: "Design Specs") {
                     VStack(alignment: .leading, spacing: spacing.md) {
                         VStack(alignment: .leading, spacing: spacing.xs) {
-                            Text("パラメータ")
+                            Text("Parameters")
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
 
-                            SpecItem(label: "minItemWidth", value: "CGFloat", description: "アイテムの最小幅（通常80-160pt）")
-                            SpecItem(label: "maxItemWidth", value: "CGFloat", description: "アイテムの最大幅（通常200-300pt）")
-                            SpecItem(label: "itemAspectRatio", value: "CGFloat（必須）", description: "アイテムのアスペクト比（幅/高さ）")
-                            SpecItem(label: "spacing", value: "GridSpacing", description: "デフォルト: .md (16pt)")
-                            SpecItem(label: "alignment", value: "HorizontalAlignment", description: "デフォルト: .center")
+                            SpecItem(label: "minItemWidth", value: "CGFloat", description: "Minimum item width (typically 80–160pt).")
+                            SpecItem(label: "maxItemWidth", value: "CGFloat", description: "Maximum item width (typically 200–300pt).")
+                            SpecItem(label: "itemAspectRatio", value: "CGFloat (required)", description: "Item aspect ratio (width / height).")
+                            SpecItem(label: "spacing", value: "GridSpacing", description: "Default: .md (16pt).")
+                            SpecItem(label: "alignment", value: "HorizontalAlignment", description: "Default: .center.")
                         }
 
                         Divider()
 
                         VStack(alignment: .leading, spacing: spacing.xs) {
-                            Text("推奨アスペクト比")
+                            Text("Recommended aspect ratios")
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
 
-                            SpecItem(label: "1:1 (1.0)", value: "商品サムネイル、プロフィール画像、アイコン")
-                            SpecItem(label: "3:4 (0.75)", value: "写真、ポートレート")
-                            SpecItem(label: "16:9 (1.78)", value: "動画サムネイル、ワイドコンテンツ")
+                            SpecItem(label: "1:1 (1.0)", value: "Product thumbnails, profile images, icons.")
+                            SpecItem(label: "3:4 (0.75)", value: "Photos, portrait content.")
+                            SpecItem(label: "16:9 (1.78)", value: "Video thumbnails, wide content.")
                         }
 
                         Divider()
 
                         VStack(alignment: .leading, spacing: spacing.xs) {
-                            Text("デザインガイドライン")
+                            Text("Design guidelines")
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
 
-                            SpecItem(label: "Material Design 3", value: "16-24dp gutters")
-                            SpecItem(label: "Fluent 2", value: "8-16px gutters")
-                            SpecItem(label: "Apple HIG", value: "8-20pt spacing")
+                            SpecItem(label: "Material Design 3", value: "16–24dp gutters")
+                            SpecItem(label: "Fluent 2", value: "8–16px gutters")
+                            SpecItem(label: "Apple HIG", value: "8–20pt spacing")
                         }
                     }
                 }
 
-                // 使用ガイド
-                SectionCard(title: "使用ガイド") {
+                // Usage guide
+                SectionCard(title: "Usage Guide") {
                     VStack(alignment: .leading, spacing: spacing.md) {
                         BestPracticeItem(
                             icon: "checkmark.circle.fill",
-                            title: "統一されたアスペクト比",
-                            description: "すべてのアイテムに同じアスペクト比を適用することで、美しく整理されたグリッドを実現",
+                            title: "Use a unified aspect ratio",
+                            description: "Applying the same aspect ratio to all items keeps grids clean and orderly.",
                             isGood: true
                         )
 
                         BestPracticeItem(
                             icon: "checkmark.circle.fill",
-                            title: "大画面での最適化",
-                            description: "maxItemWidthを設定してiPad等の大画面でアイテムが不自然に大きくなるのを防ぐ",
+                            title: "Optimize for large screens",
+                            description: "Set maxItemWidth to prevent items from becoming too large on iPad and other big screens.",
                             isGood: true
                         )
 
                         BestPracticeItem(
                             icon: "checkmark.circle.fill",
-                            title: "適切な間隔の選択",
-                            description: "コンテンツの種類に応じてspacing(.xs〜.xl)を選択し、視認性を向上",
+                            title: "Choose appropriate spacing",
+                            description: "Select spacing (.xs to .xl) based on content density to improve readability.",
                             isGood: true
                         )
                     }

@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// テーマ詳細ビュー
+/// Theme detail view
 ///
-/// 選択したテーマの詳細情報を表示し、プレビューと適用が可能です。
+/// Shows detailed information about a selected theme, with previews and apply button.
 public struct ThemeDetailView: View {
     @Environment(ThemeProvider.self) private var themeProvider
     @Environment(\.colorPalette) private var colors
@@ -44,7 +44,7 @@ public struct ThemeDetailView: View {
 
                 // モード切り替え
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("モード")
+                    Text("Mode")
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onSurface)
                         .padding(.horizontal, spacing.lg)
@@ -76,16 +76,16 @@ public struct ThemeDetailView: View {
                 // カラーパレット
                 ThemeColorPreview(theme: theme)
 
-                // コンポーネントプレビュー
+                // Component preview
                 ComponentPreview()
 
-                // 適用ボタン
+                // Apply button
                 Button {
                     withAnimation(.easeInOut(duration: 0.3)) {
                         themeProvider.applyTheme(theme)
                     }
                 } label: {
-                    Text("このテーマを適用")
+                    Text("Apply this theme")
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onPrimary)
                         .frame(maxWidth: .infinity)
@@ -115,7 +115,7 @@ private struct ComponentPreview: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("コンポーネントプレビュー")
+            Text("Component Preview")
                 .typography(.titleMedium)
                 .foregroundStyle(colors.onSurface)
                 .padding(.horizontal, spacing.lg)
@@ -139,11 +139,11 @@ private struct ComponentPreview: View {
                 // カード
                 Card(elevation: .level2) {
                     VStack(alignment: .leading, spacing: spacing.sm) {
-                        Text("カードコンポーネント")
+                        Text("Card component")
                             .typography(.titleSmall)
                             .foregroundStyle(colors.onSurface)
 
-                        Text("このテーマが適用された場合のカードの見た目を確認できます。")
+                        Text("Preview how the card looks when this theme is applied.")
                             .typography(.bodySmall)
                             .foregroundStyle(colors.onSurfaceVariant)
                     }

@@ -2,17 +2,18 @@ import SwiftUI
 
 /// Floating Action Button (FAB)
 ///
-/// 画面の主要アクションを表す円形の浮遊ボタン。
-/// 通常、画面右下に配置され、最も重要な操作（作成、追加など）をトリガーします。
+/// Circular floating button that represents the primary action on a screen.
+/// Typically placed at the bottom‑right corner and used for important actions
+/// such as create/add.
 ///
-/// ## 使用例
+/// ## Example
 /// ```swift
-/// // 標準サイズ
+/// // Regular size
 /// FloatingActionButton(icon: "plus") {
 ///     createNewItem()
 /// }
 ///
-/// // サイズバリエーション
+/// // Size variations
 /// FloatingActionButton(icon: "pencil", size: .small) {
 ///     edit()
 /// }
@@ -22,7 +23,7 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// ## 配置例
+/// ## Layout example
 /// ```swift
 /// ZStack {
 ///     ContentView()
@@ -40,10 +41,10 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// ## サイズ
-/// - **Small**: 40pt直径 - コンパクトなレイアウト
-/// - **Regular**: 56pt直径 - 標準サイズ（推奨）
-/// - **Large**: 96pt直径 - 特に重要なアクション
+/// ## Sizes
+/// - **Small**: 40pt diameter – compact layouts
+/// - **Regular**: 56pt diameter – standard size (recommended)
+/// - **Large**: 96pt diameter – especially important actions
 public struct FloatingActionButton: View {
     @Environment(\.colorPalette) private var colorPalette
 
@@ -74,7 +75,7 @@ public struct FloatingActionButton: View {
     }
 }
 
-/// FABのサイズバリエーション
+/// FAB size variants.
 public enum FABSize {
     case small
     case regular
