@@ -132,9 +132,9 @@ struct ChipCatalogView: View {
                 }
 
                 // Input Chips (Deletable)
-                sectionCard(title: "Input Chip（削除可能）") {
+                sectionCard(title: "Input Chip (Deletable)") {
                     VStack(alignment: .leading, spacing: spacing.md) {
-                        Text("ユーザー入力されたタグやトークンの表示に使用")
+                        Text("Used to display user-entered tags or tokens")
                             .typography(.bodyMedium)
                             .foregroundColor(colors.onSurfaceVariant)
 
@@ -308,7 +308,7 @@ struct ChipCatalogView: View {
 
 // MARK: - Flow Layout
 
-/// チップを水平に並べ、スペースがなくなったら次の行に折り返すレイアウト
+/// Layout that arranges chips horizontally and wraps to the next line when space runs out
 private struct FlowLayout: Layout {
     var spacing: CGFloat = 8
 

@@ -209,7 +209,7 @@ struct TypographyCatalogView: View {
 
 // MARK: - Typography Demo View
 
-/// タイポグラフィスタイルのデモ表示コンポーネント
+/// Component that displays typography style demos
 private struct TypographyDemoView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing

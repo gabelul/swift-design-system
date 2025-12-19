@@ -224,7 +224,7 @@ struct MotionCatalogView: View {
                         .foregroundStyle(colorPalette.onSurfaceVariant)
 
                     codeBlock("""
-                    Chip("フィルター", isSelected: $selected)
+                    Chip("Filter", isSelected: $selected)
                         .scaleEffect(isPressed ? 0.96 : 1.0)
                         .animate(motion.tap, value: isPressed)
                         .animate(motion.toggle, value: selected)

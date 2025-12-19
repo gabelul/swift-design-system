@@ -10,12 +10,12 @@ struct CatalogListView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: spacing.xxl) {
-                    // カテゴリセクション
+                    // Category sections
                     ForEach(CatalogCategory.allCases) { category in
                         CategorySectionView(category: category)
                     }
 
-                    // 情報セクション
+                    // Info section
                     InfoSectionView()
                 }
                 .padding(.top, spacing.lg)

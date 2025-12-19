@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// リンク付き情報行を表示するビュー
+/// View that displays an information row with a link
 struct InfoLinkRow: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing

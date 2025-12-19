@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// カタログのルーティングロジック
+/// Catalog routing logic
 ///
-/// カテゴリとアイテムから適切な詳細ビューを返す
+/// Returns the appropriate detail view from category and item
 enum CatalogRouter {
     @ViewBuilder
     static func destination(for category: CatalogCategory, item: CatalogItem) -> some View {
@@ -27,7 +27,7 @@ enum CatalogRouter {
 
     @ViewBuilder
     private static func destinationForFoundation(item: CatalogItem) -> some View {
-        // 型安全な方法でFoundationItemに変換
+        // Convert to FoundationItem in a type-safe way
         if let foundationItem = FoundationItem.allCases.first(where: { $0.rawValue == item.name }) {
             switch foundationItem {
             case .colors:
@@ -42,7 +42,7 @@ enum CatalogRouter {
                 MotionCatalogView()
             }
         } else {
-            ContentUnavailableView("アイテムが見つかりません", systemImage: "exclamationmark.triangle")
+            ContentUnavailableView("Item not found", systemImage: "exclamationmark.triangle")
         }
     }
 

@@ -13,7 +13,7 @@ struct InfoSectionView: View {
                 .padding(.horizontal, spacing.lg)
 
             VStack(spacing: 0) {
-                InfoRow(label: "プラットフォーム", value: "iOS 17+, macOS 14+")
+                InfoRow(label: "Platform", value: "iOS 17+, macOS 14+")
                 Divider().padding(.leading, 16)
                 InfoLinkRow(
                     label: "Repository",

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// カテゴリアイテムの行ビュー
+/// Category item row view
 struct CategoryItemRow: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing

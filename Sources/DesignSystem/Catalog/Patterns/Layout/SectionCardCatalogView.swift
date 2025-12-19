@@ -26,7 +26,7 @@ struct SectionCardCatalogView: View {
                 SectionCard(title: "Structure") {
                     VStack(alignment: .leading, spacing: spacing.md) {
                         SpecItem(
-                            label: "タイトル",
+                            label: "Title",
                             value: "Typography.titleMedium",
                             description: "Section heading."
                         )
@@ -34,15 +34,15 @@ struct SectionCardCatalogView: View {
                         Divider()
 
                         SpecItem(
-                            label: "コンテンツ",
-                            value: "Cardコンポーネント",
+                            label: "Content",
+                            value: "Card component",
                             description: "Wraps content inside a Card."
                         )
 
                         Divider()
 
                         SpecItem(
-                            label: "スペーシング",
+                            label: "Spacing",
                             value: "spacing.md (12pt)",
                             description: "Spacing between title and content."
                         )
@@ -50,7 +50,7 @@ struct SectionCardCatalogView: View {
                         Divider()
 
                         SpecItem(
-                            label: "パディング",
+                            label: "Padding",
                             value: "spacing.lg (16pt)",
                             description: "Horizontal padding (automatic)."
                         )
@@ -123,7 +123,7 @@ struct SectionCardCatalogView: View {
                 SectionCard(title: "Design Specs") {
                     VStack(alignment: .leading, spacing: spacing.md) {
                         VStack(alignment: .leading, spacing: spacing.xs) {
-                            Text("スペーシング")
+                            Text("Spacing")
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
 
@@ -134,7 +134,7 @@ struct SectionCardCatalogView: View {
                         Divider()
 
                         VStack(alignment: .leading, spacing: spacing.xs) {
-                            Text("エレベーション")
+                            Text("Elevation")
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
 
@@ -144,7 +144,7 @@ struct SectionCardCatalogView: View {
                         Divider()
 
                         VStack(alignment: .leading, spacing: spacing.xs) {
-                            Text("タイポグラフィ")
+                            Text("Typography")
                                 .typography(.labelLarge)
                                 .foregroundStyle(colorPalette.primary)
 

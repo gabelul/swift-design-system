@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// IconPicker（SF Symbols）のカタログビュー
+/// IconPicker (SF Symbols) catalog view
 struct IconPickerCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -11,13 +11,13 @@ struct IconPickerCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: spacing.xl) {
-                // ヘッダー
+                // Header
                 headerSection
 
-                // 基本的な使用例
+                // Basic usage example
                 basicUsageSection
 
-                // 使用例コード
+                // Code example
                 codeExampleSection
             }
             .padding(spacing.lg)
@@ -39,7 +39,7 @@ struct IconPickerCatalogView: View {
                 .typography(.headlineLarge)
                 .foregroundStyle(colorPalette.onBackground)
 
-            Text("SF Symbolsアイコンを選択")
+            Text("Select SF Symbols icons")
                 .typography(.bodyMedium)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
                 .multilineTextAlignment(.center)
@@ -49,16 +49,16 @@ struct IconPickerCatalogView: View {
 
     private var basicUsageSection: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("基本的な使用例")
+            Text("Basic usage example")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
 
-            Text("カテゴリ別に整理されたSF Symbolsピッカー")
+            Text("SF Symbols picker organized by category")
                 .typography(.bodySmall)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
             VStack(spacing: spacing.md) {
-                // 選択されたアイコンのプレビュー
+                // Selected icon preview
                 HStack(spacing: spacing.md) {
                     if let icon = selectedIcon {
                         Image(systemName: icon)
@@ -69,7 +69,7 @@ struct IconPickerCatalogView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 8))
 
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("選択中のアイコン")
+                            Text("Selected icon")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colorPalette.onSurfaceVariant)
                             Text(icon)
@@ -78,7 +78,7 @@ struct IconPickerCatalogView: View {
                                 .fontDesign(.monospaced)
                         }
                     } else {
-                        Text("アイコンを選択してください")
+                        Text("Please select an icon")
                             .typography(.bodyMedium)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
                     }
@@ -89,8 +89,8 @@ struct IconPickerCatalogView: View {
                 .background(colorPalette.surfaceVariant.opacity(0.3))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
 
-                // 選択ボタン
-                Button(selectedIcon == nil ? "アイコンを選択" : "アイコンを変更") {
+                // Select button
+                Button(selectedIcon == nil ? "Select Icon" : "Change Icon") {
                     showIconPicker = true
                 }
                 .buttonStyle(.primary)
@@ -106,7 +106,7 @@ struct IconPickerCatalogView: View {
 
     private var codeExampleSection: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("使用例コード")
+            Text("Code example")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
 
@@ -118,7 +118,7 @@ struct IconPickerCatalogView: View {
                     let categories = [
                         IconCategory(
                             id: "general",
-                            displayName: "一般",
+                            displayName: "General",
                             icons: [
                                 IconItem(id: "book", systemName: "book.fill"),
                                 IconItem(id: "heart", systemName: "heart.fill")
@@ -126,7 +126,7 @@ struct IconPickerCatalogView: View {
                         )
                     ]
 
-                    Button("アイコンを選択") {
+                    Button("Select Icon") {
                         showIconPicker = true
                     }
                     .iconPicker(
@@ -136,20 +136,20 @@ struct IconPickerCatalogView: View {
                     )
                     """)
 
-                Text("カテゴリとアイコン:")
+                Text("Categories and icons:")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
                     .padding(.top, spacing.sm)
 
-                Text("• IconCategory - カテゴリを定義")
+                Text("• IconCategory - Defines a category")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                Text("• IconItem - 個別のSF Symbolsを定義")
+                Text("• IconItem - Defines individual SF Symbols")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                Text("• systemName - SF Symbols名（例: \"star.fill\"）")
+                Text("• systemName - SF Symbols name (e.g., \"star.fill\")")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
             }
@@ -167,43 +167,43 @@ struct IconPickerCatalogView: View {
             .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
-    // サンプルカテゴリ: SF Symbols
+    // Sample categories: SF Symbols
     private var sampleSFSymbolsCategories: [IconCategory] {
         [
             IconCategory(
                 id: "general",
-                displayName: "一般",
+                displayName: "General",
                 icons: [
-                    IconItem(id: "book", systemName: "book.fill", displayName: "本"),
-                    IconItem(id: "heart", systemName: "heart.fill", displayName: "ハート"),
-                    IconItem(id: "star", systemName: "star.fill", displayName: "星"),
-                    IconItem(id: "flag", systemName: "flag.fill", displayName: "旗"),
-                    IconItem(id: "tag", systemName: "tag.fill", displayName: "タグ"),
-                    IconItem(id: "bookmark", systemName: "bookmark.fill", displayName: "ブックマーク")
+                    IconItem(id: "book", systemName: "book.fill", displayName: "Book"),
+                    IconItem(id: "heart", systemName: "heart.fill", displayName: "Heart"),
+                    IconItem(id: "star", systemName: "star.fill", displayName: "Star"),
+                    IconItem(id: "flag", systemName: "flag.fill", displayName: "Flag"),
+                    IconItem(id: "tag", systemName: "tag.fill", displayName: "Tag"),
+                    IconItem(id: "bookmark", systemName: "bookmark.fill", displayName: "Bookmark")
                 ]
             ),
             IconCategory(
                 id: "business",
-                displayName: "ビジネス",
+                displayName: "Business",
                 icons: [
-                    IconItem(id: "briefcase", systemName: "briefcase.fill", displayName: "ビジネス"),
-                    IconItem(id: "folder", systemName: "folder.fill", displayName: "フォルダ"),
-                    IconItem(id: "doc", systemName: "doc.fill", displayName: "文書"),
-                    IconItem(id: "calendar", systemName: "calendar", displayName: "カレンダー"),
-                    IconItem(id: "clock", systemName: "clock.fill", displayName: "時計"),
-                    IconItem(id: "chart", systemName: "chart.bar.fill", displayName: "グラフ")
+                    IconItem(id: "briefcase", systemName: "briefcase.fill", displayName: "Briefcase"),
+                    IconItem(id: "folder", systemName: "folder.fill", displayName: "Folder"),
+                    IconItem(id: "doc", systemName: "doc.fill", displayName: "Document"),
+                    IconItem(id: "calendar", systemName: "calendar", displayName: "Calendar"),
+                    IconItem(id: "clock", systemName: "clock.fill", displayName: "Clock"),
+                    IconItem(id: "chart", systemName: "chart.bar.fill", displayName: "Chart")
                 ]
             ),
             IconCategory(
                 id: "communication",
-                displayName: "コミュニケーション",
+                displayName: "Communication",
                 icons: [
-                    IconItem(id: "message", systemName: "message.fill", displayName: "メッセージ"),
-                    IconItem(id: "phone", systemName: "phone.fill", displayName: "電話"),
-                    IconItem(id: "envelope", systemName: "envelope.fill", displayName: "メール"),
-                    IconItem(id: "bubble", systemName: "bubble.left.fill", displayName: "吹き出し"),
-                    IconItem(id: "bell", systemName: "bell.fill", displayName: "通知"),
-                    IconItem(id: "paperplane", systemName: "paperplane.fill", displayName: "送信")
+                    IconItem(id: "message", systemName: "message.fill", displayName: "Message"),
+                    IconItem(id: "phone", systemName: "phone.fill", displayName: "Phone"),
+                    IconItem(id: "envelope", systemName: "envelope.fill", displayName: "Mail"),
+                    IconItem(id: "bubble", systemName: "bubble.left.fill", displayName: "Bubble"),
+                    IconItem(id: "bell", systemName: "bell.fill", displayName: "Notification"),
+                    IconItem(id: "paperplane", systemName: "paperplane.fill", displayName: "Send")
                 ]
             )
         ]

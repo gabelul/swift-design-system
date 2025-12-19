@@ -94,7 +94,7 @@ private struct ThemeCategorySection: View {
             }
             .padding(.horizontal, spacing.lg)
 
-            // テーマカードグリッド
+            // Theme card grid
             LazyVGrid(
                 columns: [
                     GridItem(.flexible(), spacing: spacing.md),

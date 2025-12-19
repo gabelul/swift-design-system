@@ -1,8 +1,8 @@
 import Foundation
 
-/// パターンカテゴリの種類
+/// Pattern category types
 enum PatternType: String, CaseIterable, Identifiable {
-    case layout = "レイアウトパターン"
+    case layout = "Layout Patterns"
 
     var id: String { rawValue }
 
@@ -14,7 +14,7 @@ enum PatternType: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .layout: return "再利用可能なレイアウト構造"
+        case .layout: return "Reusable layout structures"
         }
     }
 }

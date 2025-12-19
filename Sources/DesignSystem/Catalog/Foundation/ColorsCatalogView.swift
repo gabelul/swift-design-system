@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// カラーカタログビュー
+/// Color catalog view
 /// Shows the current theme and provides collapsible color references
 struct ColorsCatalogView: View {
     @Environment(ThemeProvider.self) private var themeProvider

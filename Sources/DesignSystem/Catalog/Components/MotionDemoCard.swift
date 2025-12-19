@@ -94,7 +94,7 @@ struct MotionDemoCard: View {
         }
     }
 
-    // ボタン押下デモ
+    // Button press demo
     private var buttonPressDemo: some View {
         HStack {
             Spacer()

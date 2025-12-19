@@ -50,7 +50,7 @@ struct IconButtonCatalogView: View {
                                     favoriteCount += 1
                                 }
 
-                                Text("背景なし")
+                                Text("No background")
                                     .typography(.labelSmall)
                                     .foregroundStyle(colorPalette.onSurfaceVariant)
                             }
@@ -64,7 +64,7 @@ struct IconButtonCatalogView: View {
                                     favoriteCount += 1
                                 }
 
-                                Text("プライマリ背景")
+                                Text("Primary background")
                                     .typography(.labelSmall)
                                     .foregroundStyle(colorPalette.onSurfaceVariant)
                             }
@@ -200,7 +200,7 @@ struct IconButtonCatalogView: View {
                         Card {
                             VStack(spacing: spacing.md) {
                                 HStack {
-                                Text("記事のタイトル")
+                                Text("Article Title")
                                         .typography(.titleMedium)
                                     Spacer()
                                 }

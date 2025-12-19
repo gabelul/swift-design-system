@@ -26,7 +26,7 @@ public struct ThemeDetailView: View {
 
                         Spacer()
 
-                        // カテゴリバッジ
+                        // Category badge
                         Text(theme.category.rawValue)
                             .typography(.labelSmall)
                             .foregroundStyle(colors.onPrimaryContainer)
@@ -42,7 +42,7 @@ public struct ThemeDetailView: View {
                 }
                 .padding(.horizontal, spacing.lg)
 
-                // モード切り替え
+                // Mode switching
                 VStack(alignment: .leading, spacing: spacing.md) {
                     Text("Mode")
                         .typography(.titleMedium)
@@ -73,7 +73,7 @@ public struct ThemeDetailView: View {
                     .padding(.horizontal, spacing.lg)
                 }
 
-                // カラーパレット
+                // Color palette
                 ThemeColorPreview(theme: theme)
 
                 // Component preview
@@ -121,7 +121,7 @@ private struct ComponentPreview: View {
                 .padding(.horizontal, spacing.lg)
 
             VStack(spacing: spacing.md) {
-                // ボタン
+                // Buttons
                 HStack(spacing: spacing.sm) {
                     Button("Primary") {}
                         .buttonStyle(.primary)
@@ -136,7 +136,7 @@ private struct ComponentPreview: View {
                         .buttonSize(.medium)
                 }
 
-                // カード
+                // Card
                 Card(elevation: .level2) {
                     VStack(alignment: .leading, spacing: spacing.sm) {
                         Text("Card component")

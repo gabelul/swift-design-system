@@ -105,7 +105,7 @@ struct ImagePickerCatalogView: View {
                 // Usage
                 SectionCard(title: "Usage") {
                     VStack(alignment: .leading, spacing: spacing.md) {
-                        Text("基本的な使い方")
+                        Text("Basic usage")
                             .typography(.titleSmall)
 
                         Text("""

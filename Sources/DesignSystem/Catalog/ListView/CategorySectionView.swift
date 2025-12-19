@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// カタログのカテゴリセクションビュー
+/// Catalog category section view
 struct CategorySectionView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -9,7 +9,7 @@ struct CategorySectionView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            // カテゴリヘッダー
+            // Category header
             HStack(spacing: spacing.sm) {
                 Image(systemName: category.icon)
                     .font(.title3)
@@ -24,7 +24,7 @@ struct CategorySectionView: View {
                 .typography(.bodySmall)
                 .foregroundStyle(colors.onSurfaceVariant)
 
-            // アイテムリスト
+            // Item list
             VStack(spacing: spacing.sm) {
                 ForEach(category.items) { item in
                     CategoryItemRow(category: category, item: item)

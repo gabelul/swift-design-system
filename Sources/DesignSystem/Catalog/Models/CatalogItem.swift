@@ -1,6 +1,6 @@
 import Foundation
 
-/// カタログアイテム
+/// Catalog item
 struct CatalogItem: Identifiable {
     let id = UUID()
     let name: String

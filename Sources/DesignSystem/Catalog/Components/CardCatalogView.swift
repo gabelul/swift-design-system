@@ -24,7 +24,7 @@ struct CardCatalogView: View {
 
                         Card {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("カードタイトル")
+                                Text("Card Title")
                                     .typography(.titleMedium)
 
                                 Text("Body text for the card. Use cards to group related information.")

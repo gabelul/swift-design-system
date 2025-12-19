@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// 情報行を表示するビュー
+/// View that displays an information row
 struct InfoRow: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing

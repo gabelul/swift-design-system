@@ -1,9 +1,9 @@
 import SwiftUI
 
-/// テーマカードビュー
+/// Theme card view
 ///
-/// テーマギャラリーで表示される個別のテーマカード。
-/// テーマ名、説明、プレビューカラーを表示します。
+/// Individual theme card displayed in the theme gallery.
+/// Displays theme name, description, and preview colors.
 struct ThemeCardView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -15,7 +15,7 @@ struct ThemeCardView: View {
     var body: some View {
         Button(action: onTap) {
             VStack(alignment: .leading, spacing: spacing.sm) {
-                // ヘッダー（名前とアクティブマーク）
+                // Header (name and active mark)
                 HStack {
                     Text(theme.name)
                         .typography(.titleSmall)
@@ -30,7 +30,7 @@ struct ThemeCardView: View {
                     }
                 }
 
-                // プレビューカラードット
+                // Preview color dots
                 HStack(spacing: 6) {
                     ForEach(0 ..< min(theme.previewColors.count, 5), id: \.self) { index in
                         Circle()
@@ -43,7 +43,7 @@ struct ThemeCardView: View {
                     }
                 }
 
-                // 説明
+                // Description
                 Text(theme.description)
                     .typography(.bodySmall)
                     .foregroundStyle(colors.onSurfaceVariant)

@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// AspectGridパターンのカタログビュー
-/// レイアウトパターンとしてのAspectGridの使い方を詳しく説明
+/// AspectGrid pattern catalog view
+/// Detailed explanation of how to use AspectGrid as a layout pattern
 struct AspectGridCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -9,48 +9,48 @@ struct AspectGridCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: spacing.xl) {
-                // 概要
+                // Overview
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("AspectGridは、すべてのアイテムに統一されたアスペクト比を適用するグリッドレイアウトパターンです")
+                    Text("AspectGrid is a grid layout pattern that applies a unified aspect ratio to all items")
                         .typography(.bodyMedium)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
 
-                    Text("写真ギャラリー、商品一覧、メディアライブラリなど、一貫したアスペクト比が求められるコンテンツの表示に最適です")
+                    Text("Ideal for displaying content that requires consistent aspect ratios, such as photo galleries, product listings, and media libraries")
                         .typography(.bodySmall)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
                 }
                 .padding(.horizontal, spacing.lg)
                 .padding(.top, spacing.lg)
 
-                // 構成
-                SectionCard(title: "構成") {
+                // Structure
+                SectionCard(title: "Structure") {
                     VStack(alignment: .leading, spacing: spacing.md) {
                         SpecItem(
-                            label: "ベース",
+                            label: "Base",
                             value: "LazyVGrid",
-                            description: "遅延読み込みによる効率的なレンダリング"
+                            description: "Efficient rendering through lazy loading"
                         )
 
                         Divider()
 
                         SpecItem(
-                            label: "アスペクト比制御",
+                            label: "Aspect ratio control",
                             value: ".aspectRatio() modifier",
-                            description: "すべてのアイテムに統一された比率を適用"
+                            description: "Applies a unified ratio to all items"
                         )
 
                         Divider()
 
                         SpecItem(
-                            label: "幅制御",
+                            label: "Width control",
                             value: "GridItem.adaptive(minimum:maximum:)",
-                            description: "画面サイズに応じた自動調整"
+                            description: "Automatic adjustment based on screen size"
                         )
 
                         Divider()
 
                         SpecItem(
-                            label: "間隔",
+                            label: "Spacing",
                             value: "GridSpacing token",
                             description: "xs, sm, md, lg, xl (8-24pt)"
                         )
@@ -226,7 +226,7 @@ struct AspectGridCatalogView: View {
                         AspectGrid(
                             minItemWidth: 140,
                             maxItemWidth: 180,
-                            itemAspectRatio: 1,  // 正方形
+                            itemAspectRatio: 1,  // Square
                             spacing: .md
                         ) {
                             ForEach(products) { product in

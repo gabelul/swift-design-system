@@ -58,7 +58,7 @@ struct EmojiPickerCatalogView: View {
                 .foregroundStyle(colorPalette.onSurfaceVariant)
 
             VStack(spacing: spacing.md) {
-                // 選択された絵文字のプレビュー
+                // Selected emoji preview
                 HStack(spacing: spacing.md) {
                     if let emoji = selectedEmoji {
                         Text(emoji)

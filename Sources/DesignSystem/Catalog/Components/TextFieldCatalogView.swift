@@ -182,7 +182,7 @@ struct TextFieldCatalogView: View {
 
                         Card {
                             VStack(spacing: spacing.lg) {
-                                Text("アカウント登録")
+                                Text("Account Registration")
                                     .typography(.titleLarge)
                                     .frame(maxWidth: .infinity, alignment: .leading)
 
