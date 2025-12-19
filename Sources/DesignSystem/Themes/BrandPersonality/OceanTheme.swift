@@ -1,9 +1,9 @@
 import SwiftUI
 
-/// Oceanテーマ - プロフェッショナル・落ち着き
+/// Ocean theme - Professional and calm
 ///
-/// 深い海の青をベースとした、信頼感と落ち着きを表現するテーマ。
-/// 企業向けアプリや生産性ツールに最適です。
+/// A theme based on deep ocean blue that expresses trust and calm.
+/// Ideal for enterprise apps and productivity tools.
 public struct OceanTheme: Theme {
     public init() {}
 
@@ -11,7 +11,7 @@ public struct OceanTheme: Theme {
 
     public var name: String { "Ocean" }
 
-    public var description: String { "深い海の青。プロフェッショナルで落ち着いた雰囲気" }
+    public var description: String { "Deep ocean blue. Professional and calm atmosphere" }
 
     public var category: ThemeCategory { .brandPersonality }
 

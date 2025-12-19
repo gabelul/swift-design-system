@@ -1,43 +1,43 @@
 import Foundation
 
-/// テーマのカテゴリ分類
+/// Theme category classification
 ///
-/// テーマを用途や目的によってグループ化します。
+/// Groups themes by purpose and use case.
 ///
-/// ## カテゴリ
-/// - **standard**: デフォルトの基本テーマ
-/// - **brandPersonality**: ブランドの個性を表現する多彩なテーマ（Ocean, Forest, Sunsetなど）
-/// - **accessibility**: WCAG準拠の高コントラストテーマ
+/// ## Categories
+/// - **standard**: Default basic theme
+/// - **brandPersonality**: Diverse themes expressing brand personality (Ocean, Forest, Sunset, etc.)
+/// - **accessibility**: WCAG-compliant high contrast theme
 public enum ThemeCategory: String, Sendable, CaseIterable, Identifiable {
-    /// 標準テーマ（デフォルト）
-    case standard = "標準"
+    /// Standard theme (default)
+    case standard = "Standard"
 
-    /// カスタムテーマ（ユーザー定義）
-    case custom = "カスタム"
+    /// Custom theme (user-defined)
+    case custom = "Custom"
 
-    /// ブランドパーソナリティテーマ
-    case brandPersonality = "ブランドパーソナリティ"
+    /// Brand personality theme
+    case brandPersonality = "Brand Personality"
 
-    /// アクセシビリティテーマ
-    case accessibility = "アクセシビリティ"
+    /// Accessibility theme
+    case accessibility = "Accessibility"
 
     public var id: String { rawValue }
 
-    /// カテゴリの説明
+    /// Category description
     public var description: String {
         switch self {
         case .standard:
-            return "基本的なライトテーマとダークテーマ"
+            return "Basic light and dark themes"
         case .brandPersonality:
-            return "ブランドの個性を表現する多彩なテーマ"
+            return "Diverse themes expressing brand personality"
         case .accessibility:
-            return "アクセシビリティを重視した高コントラストテーマ"
+            return "High contrast theme focused on accessibility"
         case .custom:
-            return "アプリ固有のカスタムテーマ"
+            return "App-specific custom theme"
         }
     }
 
-    /// カテゴリのアイコン名
+    /// Icon name for the category
     public var icon: String {
         switch self {
         case .standard:

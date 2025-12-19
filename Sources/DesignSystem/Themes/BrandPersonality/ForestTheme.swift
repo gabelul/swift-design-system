@@ -1,9 +1,9 @@
 import SwiftUI
 
-/// Forestテーマ - ナチュラル・地に足がついた
+/// Forest theme - Natural and grounded
 ///
-/// 深い森の緑をベースとした、自然で落ち着きのあるテーマ。
-/// ヘルスケア、アウトドア、サステナビリティ関連アプリに最適です。
+/// A theme based on deep forest green that is natural and calming.
+/// Ideal for healthcare, outdoor, and sustainability apps.
 public struct ForestTheme: Theme {
     public init() {}
 
@@ -11,7 +11,7 @@ public struct ForestTheme: Theme {
 
     public var name: String { "Forest" }
 
-    public var description: String { "深い森の緑。自然で落ち着いた雰囲気" }
+    public var description: String { "Deep forest green. Natural and calm atmosphere" }
 
     public var category: ThemeCategory { .brandPersonality }
 

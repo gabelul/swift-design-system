@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Darkテーマのカラーパレット
+/// Dark theme color palette
 public struct DarkColorPalette: ColorPalette {
     public init() {}
 

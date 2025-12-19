@@ -1,16 +1,16 @@
 import SwiftUI
 
-/// デザインシステムのテーマを定義するプロトコル
+/// Protocol that defines a design system theme
 ///
-/// テーマは名前、説明、カテゴリなどのメタデータと、
-/// ライト/ダークモードそれぞれのカラーパレットを提供します。
+/// A theme provides metadata such as name, description, and category,
+/// as well as color palettes for light and dark modes.
 ///
-/// ## 使用例
+/// ## Usage Example
 /// ```swift
 /// struct CustomTheme: Theme {
 ///     let id = "custom"
-///     let name = "カスタム"
-///     let description = "独自のカラーテーマ"
+///     let name = "Custom"
+///     let description = "Custom color theme"
 ///     let category: ThemeCategory = .brandPersonality
 ///     let previewColors = [.blue, .cyan, .teal]
 ///
@@ -23,24 +23,24 @@ import SwiftUI
 /// }
 /// ```
 public protocol Theme: Sendable, Identifiable, Equatable {
-    /// テーマの一意な識別子
+    /// Unique identifier for the theme
     var id: String { get }
 
-    /// テーマの表示名
+    /// Display name of the theme
     var name: String { get }
 
-    /// テーマの説明
+    /// Description of the theme
     var description: String { get }
 
-    /// テーマのカテゴリ
+    /// Category of the theme
     var category: ThemeCategory { get }
 
-    /// プレビュー用の代表色（3-5色）
+    /// Representative colors for preview (3-5 colors)
     var previewColors: [Color] { get }
 
-    /// 指定されたモードに対応するカラーパレットを返す
-    /// - Parameter mode: ライトモードまたはダークモード
-    /// - Returns: 対応するカラーパレット
+    /// Returns the color palette corresponding to the specified mode
+    /// - Parameter mode: Light mode or dark mode
+    /// - Returns: Corresponding color palette
     func colorPalette(for mode: ThemeMode) -> any ColorPalette
 }
 

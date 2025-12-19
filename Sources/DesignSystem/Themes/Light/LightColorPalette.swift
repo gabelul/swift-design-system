@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Lightテーマのカラーパレット
+/// Light theme color palette
 public struct LightColorPalette: ColorPalette {
     public init() {}
 

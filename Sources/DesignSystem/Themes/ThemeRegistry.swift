@@ -1,29 +1,29 @@
 import Foundation
 
-/// ビルトインテーマのレジストリ
+/// Built-in theme registry
 ///
-/// システムに組み込まれている全てのテーマを管理します。
+/// Manages all themes built into the system.
 ///
-/// ## 利用可能なテーマ
-/// - **Standard**: デフォルトテーマ
+/// ## Available Themes
+/// - **Standard**: Default theme
 /// - **Brand Personality**: Ocean, Forest, Sunset, PurpleHaze, Monochrome
-/// - **Accessibility**: HighContrast (WCAG AAA準拠)
+/// - **Accessibility**: HighContrast (WCAG AAA compliant)
 ///
-/// ## 使用例
+/// ## Usage Example
 /// ```swift
-/// // 全テーマを取得
+/// // Get all themes
 /// let themes = ThemeRegistry.builtInThemes
 ///
-/// // カテゴリ別に取得
+/// // Get by category
 /// let brandThemes = ThemeRegistry.themesByCategory[.brandPersonality]
 ///
-/// // IDで検索
+/// // Search by ID
 /// if let ocean = ThemeRegistry.theme(withID: "ocean") {
 ///     themeProvider.applyTheme(ocean)
 /// }
 /// ```
 public enum ThemeRegistry {
-    /// 全てのビルトインテーマ（7種類）
+    /// All built-in themes (7 types)
     public static let builtInThemes: [any Theme] = [
         // Standard
         DefaultTheme(),
@@ -39,14 +39,14 @@ public enum ThemeRegistry {
         HighContrastTheme(),
     ]
 
-    /// カテゴリ別にグループ化されたテーマ
+    /// Themes grouped by category
     public static var themesByCategory: [ThemeCategory: [any Theme]] {
         Dictionary(grouping: builtInThemes) { $0.category }
     }
 
-    /// IDでテーマを検索
-    /// - Parameter id: テーマID
-    /// - Returns: 見つかったテーマ、またはnil
+    /// Search for a theme by ID
+    /// - Parameter id: Theme ID
+    /// - Returns: Found theme, or nil
     public static func theme(withID id: String) -> (any Theme)? {
         builtInThemes.first { $0.id == id }
     }

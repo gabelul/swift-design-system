@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// デフォルトテーマ
+/// Default theme
 ///
-/// システムの基本となる青ベースのテーマです。
+/// The system's basic blue-based theme.
 public struct DefaultTheme: Theme {
     public init() {}
 
@@ -10,7 +10,7 @@ public struct DefaultTheme: Theme {
 
     public var name: String { "Default" }
 
-    public var description: String { "システムの標準テーマ（ブルーベース）" }
+    public var description: String { "System standard theme (blue-based)" }
 
     public var category: ThemeCategory { .standard }
 
