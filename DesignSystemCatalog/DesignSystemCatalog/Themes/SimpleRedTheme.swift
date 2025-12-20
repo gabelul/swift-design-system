@@ -1,40 +1,40 @@
 import SwiftUI
 import DesignSystem
 
-// MARK: - テスト用カスタムテーマ: 赤テーマ
+// MARK: - Test Custom Theme: Red Theme
 
-/// カスタムテーマの実装例：赤を基調としたテーマ
+/// Custom theme implementation example: Red-based theme
 ///
-/// このテーマは、`SimpleBlueTheme`と対になるサンプル実装です。
-/// 同じパターンで異なる色を定義することで、複数のカスタムテーマを簡単に作成できます。
+/// This theme is a sample implementation paired with `SimpleBlueTheme`.
+/// By defining different colors using the same pattern, you can easily create multiple custom themes.
 ///
-/// ## 使い方
+/// ## Usage
 ///
-/// ### ThemeProviderへの登録例
+/// ### Registering with ThemeProvider
 /// ```swift
 /// @State private var themeProvider = ThemeProvider(
-///     initialTheme: SimpleRedTheme(),  // 赤テーマを初期テーマに
-///     additionalThemes: [SimpleBlueTheme()]  // 青テーマも選択可能に
+///     initialTheme: SimpleRedTheme(),  // Set red theme as initial theme
+///     additionalThemes: [SimpleBlueTheme()]  // Blue theme also available
 /// )
 /// ```
 ///
-/// ### 複数のカスタムテーマを登録
+/// ### Registering Multiple Custom Themes
 /// ```swift
 /// @State private var themeProvider = ThemeProvider(
 ///     additionalThemes: [
 ///         SimpleBlueTheme(),
 ///         SimpleRedTheme(),
-///         MyBrandTheme()  // さらに追加のカスタムテーマ
+///         MyBrandTheme()  // Additional custom theme
 ///     ]
 /// )
 /// ```
 ///
-/// ## 参考
-/// - SimpleBlueTheme: より詳細なドキュメントと実装例
+/// ## Reference
+/// - SimpleBlueTheme: More detailed documentation and implementation examples
 struct SimpleRedTheme: Theme {
     var id: String { "test-red" }
-    var name: String { "テストレッド" }
-    var description: String { "テスト用のシンプルな赤いテーマ" }
+    var name: String { "Test Red" }
+    var description: String { "Simple red theme for testing" }
     var category: ThemeCategory { .custom }
     var previewColors: [Color] { [.red, .pink, .orange] }
 

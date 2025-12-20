@@ -1,48 +1,48 @@
 import SwiftUI
 import DesignSystem
 
-// MARK: - アプリエントリーポイント
+// MARK: - App Entry Point
 
-/// デザインシステムカタログアプリのエントリーポイント
+/// Design system catalog app entry point
 ///
-/// ## ThemeProviderの初期化パターン
+/// ## ThemeProvider Initialization Patterns
 ///
-/// このアプリでは、カスタムテーマの使用例を示すために、
-/// `ThemeProvider`をカスタムテーマ付きで初期化しています。
+/// This app demonstrates custom theme usage by initializing
+/// `ThemeProvider` with custom themes.
 ///
-/// ### パターン1: カスタムテーマを初期テーマに設定（現在の実装）
+/// ### Pattern 1: Set Custom Theme as Initial Theme (Current Implementation)
 /// ```swift
 /// @State private var themeProvider = ThemeProvider(
-///     initialTheme: SimpleRedTheme(),      // 赤テーマを初期テーマに
-///     additionalThemes: [SimpleBlueTheme()] // 青テーマも選択可能
+///     initialTheme: SimpleRedTheme(),      // Set red theme as initial theme
+///     additionalThemes: [SimpleBlueTheme()] // Blue theme also available
 /// )
 /// ```
 ///
-/// ### パターン2: デフォルトテーマで開始、カスタムテーマを追加
+/// ### Pattern 2: Start with Default Theme, Add Custom Themes
 /// ```swift
 /// @State private var themeProvider = ThemeProvider(
 ///     additionalThemes: [SimpleBlueTheme(), SimpleRedTheme()]
 /// )
-/// // DefaultThemeが初期テーマ、カスタムテーマも選択可能
+/// // DefaultTheme is initial theme, custom themes also available
 /// ```
 ///
-/// ### パターン3: ビルトインテーマのみ使用（最もシンプル）
+/// ### Pattern 3: Use Only Built-in Themes (Simplest)
 /// ```swift
 /// @State private var themeProvider = ThemeProvider()
-/// // DefaultThemeで開始、7つのビルトインテーマから選択可能
+/// // Start with DefaultTheme, select from 7 built-in themes
 /// ```
 ///
-/// ## テーマの適用
+/// ## Applying Themes
 ///
-/// ThemeProviderをビュー階層に適用するには、`.theme()`モディファイアを使用：
+/// To apply ThemeProvider to the view hierarchy, use the `.theme()` modifier:
 /// ```swift
 /// ContentView()
 ///     .theme(themeProvider)
 /// ```
 ///
-/// ## 参考
-/// - カスタムテーマの実装例: `Themes/SimpleBlueTheme.swift`, `Themes/SimpleRedTheme.swift`
-/// - README.md: カスタムテーマ作成の詳細ガイド
+/// ## Reference
+/// - Custom theme implementation examples: `Themes/SimpleBlueTheme.swift`, `Themes/SimpleRedTheme.swift`
+/// - README.md: Detailed guide for creating custom themes
 @main
 struct DesignSystemCatalogApp: App {
     @State private var themeProvider = ThemeProvider(

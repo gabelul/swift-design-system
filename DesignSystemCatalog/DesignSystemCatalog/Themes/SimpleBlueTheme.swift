@@ -1,19 +1,19 @@
 import SwiftUI
 import DesignSystem
 
-// MARK: - テスト用カスタムテーマ: 青テーマ
+// MARK: - Test Custom Theme: Blue Theme
 
-/// カスタムテーマの実装例：青を基調としたテーマ
+/// Custom theme implementation example: Blue-based theme
 ///
-/// ## 使い方
+/// ## Usage
 ///
-/// ### 1. ThemeProviderに登録
+/// ### 1. Register with ThemeProvider
 /// ```swift
 /// @main
 /// struct MyApp: App {
 ///     @State private var themeProvider = ThemeProvider(
-///         initialTheme: SimpleBlueTheme(),  // 初期テーマとして設定
-///         additionalThemes: [SimpleRedTheme()]  // 追加テーマ
+///         initialTheme: SimpleBlueTheme(),  // Set as initial theme
+///         additionalThemes: [SimpleRedTheme()]  // Additional themes
 ///     )
 ///
 ///     var body: some Scene {
@@ -25,36 +25,36 @@ import DesignSystem
 /// }
 /// ```
 ///
-/// ### 2. テーマの切り替え
+/// ### 2. Switch Themes
 /// ```swift
-/// // テーマIDで切り替え
+/// // Switch by theme ID
 /// themeProvider.switchToTheme(id: "test-blue")
 ///
-/// // ライト/ダークモードの切り替え
+/// // Toggle light/dark mode
 /// themeProvider.toggleMode()
 /// ```
 ///
-/// ## カスタムテーマの作成ポイント
+/// ## Custom Theme Creation Points
 ///
-/// 1. **Themeプロトコルに準拠**
-///    - `id`: 一意な識別子（例: "myBrand"）
-///    - `name`: 表示名（例: "マイブランド"）
-///    - `description`: 説明文
-///    - `category`: テーマカテゴリ（.custom, .brandPersonality など）
-///    - `previewColors`: プレビュー用の色（3色程度）
+/// 1. **Conform to Theme Protocol**
+///    - `id`: Unique identifier (e.g., "myBrand")
+///    - `name`: Display name (e.g., "My Brand")
+///    - `description`: Description text
+///    - `category`: Theme category (.custom, .brandPersonality, etc.)
+///    - `previewColors`: Colors for preview (about 3 colors)
 ///
-/// 2. **ライト/ダークモード対応**
-///    - `colorPalette(for:)` メソッドで `.system`, `.light`, `.dark` の3ケースに対応
-///    - `.system` と `.light` は同じパレットを返すのが一般的
+/// 2. **Light/Dark Mode Support**
+///    - Handle `.system`, `.light`, `.dark` cases in `colorPalette(for:)` method
+///    - Generally, `.system` and `.light` return the same palette
 ///
-/// 3. **ColorPaletteの実装**
-///    - 全27色のプロパティを定義
-///    - ライトモード用とダークモード用で異なる色を設定
-///    - ダークモードでは、明るい色調に調整してコントラストを確保
+/// 3. **ColorPalette Implementation**
+///    - Define all 27 color properties
+///    - Set different colors for light and dark modes
+///    - In dark mode, adjust to lighter tones to ensure contrast
 struct SimpleBlueTheme: Theme {
     var id: String { "test-blue" }
-    var name: String { "テストブルー" }
-    var description: String { "テスト用のシンプルな青いテーマ" }
+    var name: String { "Test Blue" }
+    var description: String { "Simple blue theme for testing" }
     var category: ThemeCategory { .custom }
     var previewColors: [Color] { [.blue, .cyan, .indigo] }
 
