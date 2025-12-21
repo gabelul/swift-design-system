@@ -120,7 +120,7 @@ public struct VideoPlayerView: View {
     private var playerSection: some View {
         Group {
             if let player = player {
-                VideoPlayer(player: player)
+                AVPlayerViewControllerRepresentable(player: player)
                     .frame(minHeight: 200)
             } else if let error = loadError {
                 ContentUnavailableView(
@@ -386,6 +386,21 @@ private struct ShareSheet: UIViewControllerRepresentable {
     }
 
     func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+}
+
+private struct AVPlayerViewControllerRepresentable: UIViewControllerRepresentable {
+    let player: AVPlayer
+
+    func makeUIViewController(context: Context) -> AVPlayerViewController {
+        let controller = AVPlayerViewController()
+        controller.player = player
+        controller.allowsVideoFrameAnalysis = false
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: AVPlayerViewController, context: Context) {
+        uiViewController.player = player
+    }
 }
 
 #endif
