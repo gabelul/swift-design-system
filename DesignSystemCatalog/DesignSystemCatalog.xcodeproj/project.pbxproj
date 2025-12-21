@@ -274,8 +274,10 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_NSCameraUsageDescription = "デザインシステムカタログで画像ピッカーのデモを表示するために、カメラへのアクセスが必要です。";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "デザインシステムカタログで画像ピッカーのデモを表示するために、写真ライブラリへのアクセスが必要です。";
+				INFOPLIST_KEY_NSCameraUsageDescription = "デザインシステムカタログで画像・動画ピッカーのデモを表示するために、カメラへのアクセスが必要です。";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "デザインシステムカタログで動画ピッカーのデモを表示するために、マイクへのアクセスが必要です。";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "デザインシステムカタログで動画の保存デモを表示するために、写真ライブラリへの書き込みが必要です。";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "デザインシステムカタログで画像・動画ピッカーのデモを表示するために、写真ライブラリへのアクセスが必要です。";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
@@ -321,8 +323,10 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_NSCameraUsageDescription = "デザインシステムカタログで画像ピッカーのデモを表示するために、カメラへのアクセスが必要です。";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "デザインシステムカタログで画像ピッカーのデモを表示するために、写真ライブラリへのアクセスが必要です。";
+				INFOPLIST_KEY_NSCameraUsageDescription = "デザインシステムカタログで画像・動画ピッカーのデモを表示するために、カメラへのアクセスが必要です。";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "デザインシステムカタログで動画ピッカーのデモを表示するために、マイクへのアクセスが必要です。";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "デザインシステムカタログで動画の保存デモを表示するために、写真ライブラリへの書き込みが必要です。";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "デザインシステムカタログで画像・動画ピッカーのデモを表示するために、写真ライブラリへのアクセスが必要です。";
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
