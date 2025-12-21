@@ -139,21 +139,21 @@ struct ChipCatalogView: View {
                             .foregroundColor(colors.onSurfaceVariant)
 
                         FlowLayout(spacing: spacing.sm) {
-                            Chip("SwiftUI", systemImage: "tag.fill") {
+                            Chip("SwiftUI", systemImage: "tag.fill", onDelete: {
                                 print("Delete SwiftUI")
-                            }
+                            })
                             .chipStyle(.filled)
                             .foregroundColor(.blue)
 
-                            Chip("iOS Development") {
+                            Chip("iOS Development", onDelete: {
                                 print("Delete iOS Development")
-                            }
+                            })
                             .chipStyle(.filled)
                             .foregroundColor(.purple)
 
-                            Chip("Design System", systemImage: "paintbrush.fill") {
+                            Chip("Design System", systemImage: "paintbrush.fill", onDelete: {
                                 print("Delete Design System")
-                            }
+                            })
                             .chipStyle(.filled)
                             .foregroundColor(.pink)
                         }
