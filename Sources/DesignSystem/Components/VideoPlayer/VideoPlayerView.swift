@@ -96,6 +96,7 @@ public struct VideoPlayerView: View {
                 actionsSection
             }
         }
+        .padding(spacing.md)
         .onAppear {
             setupAudioSession()
             loadVideo()
