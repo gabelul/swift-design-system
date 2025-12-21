@@ -101,8 +101,10 @@ public struct VideoPlayerView: View {
             loadVideo()
         }
         .onDisappear {
-            cleanupTempFile()
             player?.pause()
+            if !isSaving {
+                cleanupTempFile()
+            }
         }
         .sheet(isPresented: $showingShareSheet) {
             if let url = tempFileURL ?? source.localURL {
@@ -297,13 +299,17 @@ public struct VideoPlayerView: View {
             return
         }
 
+        guard FileManager.default.fileExists(atPath: url.path) else {
+            snackbarState.show(message: "動画ファイルが見つかりません")
+            return
+        }
+
         isSaving = true
 
         Task { @MainActor in
             defer { isSaving = false }
 
             do {
-                // 権限を確認
                 let status = await PHPhotoLibrary.requestAuthorization(for: .addOnly)
 
                 guard status == .authorized || status == .limited else {
@@ -319,7 +325,6 @@ public struct VideoPlayerView: View {
                     return
                 }
 
-                // 動画を保存
                 try await PHPhotoLibrary.shared().performChanges {
                     PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
                 }
