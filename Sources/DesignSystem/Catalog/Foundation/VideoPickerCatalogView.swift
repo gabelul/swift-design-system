@@ -6,6 +6,7 @@ import SwiftUI
 struct VideoPickerCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
+    @Environment(\.radiusScale) private var radius
 
     @State private var showPicker = false
     @State private var selectedVideoData: Data?
@@ -13,9 +14,9 @@ struct VideoPickerCatalogView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: spacing.xl) {
                 // 概要
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: spacing.md) {
                     Text("カメラまたは動画ライブラリから動画を選択できるモディファイア")
                         .typography(.bodyMedium)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
@@ -34,10 +35,10 @@ struct VideoPickerCatalogView: View {
                         if let videoData = selectedVideoData {
                             VideoPlayerView(data: videoData)
                                 .showMetadata(true)
-                                .showActions([.play])
-                                .frame(height: 250)
+                                .showActions([.share, .saveToPhotos])
+                                .frame(height: 280)
                         } else {
-                            RoundedRectangle(cornerRadius: 12)
+                            RoundedRectangle(cornerRadius: radius.md)
                                 .fill(colorPalette.surfaceVariant)
                                 .frame(height: 200)
                                 .overlay {
@@ -56,10 +57,10 @@ struct VideoPickerCatalogView: View {
                         if let error = errorMessage {
                             Text(error)
                                 .typography(.bodySmall)
-                                .foregroundStyle(.red)
+                                .foregroundStyle(colorPalette.error)
                                 .padding(spacing.sm)
-                                .background(Color.red.opacity(0.1))
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                .background(colorPalette.errorContainer)
+                                .clipShape(RoundedRectangle(cornerRadius: radius.sm))
                         }
 
                         // 動画選択ボタン
@@ -154,7 +155,7 @@ struct VideoPickerCatalogView: View {
                         .foregroundStyle(colorPalette.onSurfaceVariant)
                         .padding(spacing.md)
                         .background(colorPalette.surfaceVariant)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .clipShape(RoundedRectangle(cornerRadius: radius.sm))
                     }
                 }
 
@@ -180,7 +181,7 @@ struct VideoPickerCatalogView: View {
                         }
                         .padding(spacing.md)
                         .background(colorPalette.surfaceVariant)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .clipShape(RoundedRectangle(cornerRadius: radius.sm))
                     }
                 }
 

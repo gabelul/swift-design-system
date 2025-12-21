@@ -47,6 +47,7 @@ public struct Chip: View {
     private let label: String
     private let systemImage: String?
     private let onDelete: (() -> Void)?
+    private let onAction: (() -> Void)?
     private let isSelectable: Bool
     @Binding private var isSelected: Bool
     @State private var isPressed: Bool = false
@@ -59,6 +60,7 @@ public struct Chip: View {
         self.label = label
         self.systemImage = nil
         self.onDelete = nil
+        self.onAction = nil
         self.isSelectable = false
         self._isSelected = .constant(false)
     }
@@ -71,6 +73,29 @@ public struct Chip: View {
         self.label = label
         self.systemImage = systemImage
         self.onDelete = nil
+        self.onAction = nil
+        self.isSelectable = false
+        self._isSelected = .constant(false)
+    }
+
+    /// アクションChipを作成（Action Chip）
+    ///
+    /// タップすると指定されたアクションを実行するChip。
+    /// 削除ボタンは表示されず、Chip全体がタップ領域になります。
+    ///
+    /// - Parameters:
+    ///   - label: 表示するテキスト
+    ///   - systemImage: SF Symbolsのアイコン名（オプション）
+    ///   - action: タップ時に実行されるアクション
+    public init(
+        _ label: String,
+        systemImage: String? = nil,
+        action: @escaping () -> Void
+    ) {
+        self.label = label
+        self.systemImage = systemImage
+        self.onDelete = nil
+        self.onAction = action
         self.isSelectable = false
         self._isSelected = .constant(false)
     }
@@ -88,6 +113,7 @@ public struct Chip: View {
         self.label = label
         self.systemImage = systemImage
         self.onDelete = onDelete
+        self.onAction = nil
         self.isSelectable = false
         self._isSelected = .constant(false)
     }
@@ -105,6 +131,7 @@ public struct Chip: View {
         self.label = label
         self.systemImage = systemImage
         self.onDelete = nil
+        self.onAction = nil
         self.isSelectable = true
         self._isSelected = isSelected
     }
@@ -126,8 +153,8 @@ public struct Chip: View {
         )
 
         Group {
-            if onDelete != nil || isSelectable {
-                // タップ可能なチップ（削除または選択）
+            if onDelete != nil || onAction != nil || isSelectable {
+                // タップ可能なチップ（削除、アクション、または選択）
                 Button(action: handleTap) {
                     chipStyle.makeBody(configuration: configuration)
                 }
@@ -145,6 +172,9 @@ public struct Chip: View {
         if let onDelete = onDelete {
             // 削除アクション
             onDelete()
+        } else if let onAction = onAction {
+            // アクション実行
+            onAction()
         } else {
             // 選択トグル
             withAnimation(motion.toggle) {
@@ -190,18 +220,38 @@ private struct ChipButtonStyle: ButtonStyle {
 
 #Preview("Deletable Chips") {
     VStack(spacing: 16) {
-        Chip("Swift", systemImage: "tag.fill") {
+        Chip("Swift", systemImage: "tag.fill", onDelete: {
             print("Delete Swift")
-        }
+        })
         .chipStyle(.filled)
         .foregroundColor(.blue)
 
-        Chip("SwiftUI") {
+        Chip("SwiftUI", onDelete: {
             print("Delete SwiftUI")
-        }
+        })
         .chipStyle(.filled)
         .chipSize(.small)
         .foregroundColor(.purple)
+    }
+    .padding()
+}
+
+#Preview("Action Chips") {
+    VStack(spacing: 16) {
+        Chip("再生", systemImage: "play.fill", action: {
+            print("Play tapped")
+        })
+        .chipStyle(.outlined)
+
+        Chip("共有", systemImage: "square.and.arrow.up", action: {
+            print("Share tapped")
+        })
+        .chipStyle(.outlined)
+
+        Chip("保存", systemImage: "square.and.arrow.down", action: {
+            print("Save tapped")
+        })
+        .chipStyle(.filled)
     }
     .padding()
 }

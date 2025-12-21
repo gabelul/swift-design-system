@@ -166,36 +166,36 @@ public struct VideoPlayerView: View {
     private var actionsSection: some View {
         HStack(spacing: spacing.sm) {
             if actions.contains(.play) {
-                Button {
-                    togglePlayback()
-                } label: {
-                    Label(isPlaying ? "一時停止" : "再生", systemImage: isPlaying ? "pause.fill" : "play.fill")
-                }
-                .buttonStyle(.bordered)
+                Chip(
+                    isPlaying ? "一時停止" : "再生",
+                    systemImage: isPlaying ? "pause.fill" : "play.fill",
+                    action: togglePlayback
+                )
+                .chipStyle(.outlined)
             }
 
             if actions.contains(.share) {
-                Button {
+                Chip("共有", systemImage: "square.and.arrow.up", action: {
                     showingShareSheet = true
-                } label: {
-                    Label("共有", systemImage: "square.and.arrow.up")
-                }
-                .buttonStyle(.bordered)
+                })
+                .chipStyle(.outlined)
             }
 
             if actions.contains(.saveToPhotos) {
-                Button {
-                    saveToPhotos()
-                } label: {
-                    if isSaving {
+                if isSaving {
+                    HStack(spacing: spacing.xs) {
                         ProgressView()
                             .controlSize(.small)
-                    } else {
-                        Label("保存", systemImage: "square.and.arrow.down")
+                        Text("保存中...")
+                            .typography(.labelMedium)
+                            .foregroundStyle(Color(colorPalette.onSurfaceVariant))
                     }
+                    .padding(.horizontal, spacing.md)
+                    .padding(.vertical, spacing.xs)
+                } else {
+                    Chip("保存", systemImage: "square.and.arrow.down", action: saveToPhotos)
+                        .chipStyle(.filled)
                 }
-                .buttonStyle(.bordered)
-                .disabled(isSaving)
             }
         }
     }

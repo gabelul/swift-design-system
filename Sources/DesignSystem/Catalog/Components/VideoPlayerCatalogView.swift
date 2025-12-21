@@ -6,15 +6,16 @@ import SwiftUI
 struct VideoPlayerCatalogView: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
+    @Environment(\.radiusScale) private var radius
 
     @State private var showPicker = false
     @State private var selectedVideoData: Data?
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: spacing.xl) {
                 // 概要
-                VStack(alignment: .leading, spacing: 12) {
+                VStack(alignment: .leading, spacing: spacing.md) {
                     Text("動画データまたはURLから動画を再生するコンポーネント")
                         .typography(.bodyMedium)
                         .foregroundStyle(colorPalette.onSurfaceVariant)
@@ -36,7 +37,7 @@ struct VideoPlayerCatalogView: View {
                                 .showActions([.play, .share, .saveToPhotos])
                         } else {
                             // プレースホルダー
-                            RoundedRectangle(cornerRadius: 12)
+                            RoundedRectangle(cornerRadius: radius.md)
                                 .fill(colorPalette.surfaceVariant)
                                 .frame(height: 200)
                                 .overlay {
@@ -128,7 +129,7 @@ struct VideoPlayerCatalogView: View {
                         .foregroundStyle(colorPalette.onSurfaceVariant)
                         .padding(spacing.md)
                         .background(colorPalette.surfaceVariant)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .clipShape(RoundedRectangle(cornerRadius: radius.sm))
 
                         Text("URLから再生")
                             .typography(.titleSmall)
@@ -146,7 +147,7 @@ struct VideoPlayerCatalogView: View {
                         .foregroundStyle(colorPalette.onSurfaceVariant)
                         .padding(spacing.md)
                         .background(colorPalette.surfaceVariant)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        .clipShape(RoundedRectangle(cornerRadius: radius.sm))
                     }
                 }
 
