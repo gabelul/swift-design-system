@@ -325,8 +325,9 @@ public struct VideoPlayerView: View {
                     return
                 }
 
-                try await PHPhotoLibrary.shared().performChanges {
-                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: url)
+                let fileURL = url
+                try await PHPhotoLibrary.shared().performChanges { @Sendable in
+                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
                 }
 
                 snackbarState.show(message: "カメラロールに保存しました ✓", duration: 3.0)
