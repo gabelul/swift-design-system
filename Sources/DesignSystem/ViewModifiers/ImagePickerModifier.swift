@@ -21,22 +21,22 @@ public struct ImagePickerModifier: ViewModifier {
     @Binding var isPresented: Bool
     @Binding var selectedImageData: Data?
 
-    @State private var sourceType: ImageSourceType?
+    @State private var sourceType: MediaSourceType?
     @State private var showPermissionAlert = false
     @State private var permissionAlertConfig: PermissionAlertConfig?
 
-    let maxSizeInBytes: Int?
+    let maxSize: ByteSize?
     let onCompressionError: ((Error) -> Void)?
 
     public init(
         isPresented: Binding<Bool>,
         selectedImageData: Binding<Data?>,
-        maxSizeInBytes: Int? = nil,
+        maxSize: ByteSize? = nil,
         onCompressionError: ((Error) -> Void)? = nil
     ) {
         self._isPresented = isPresented
         self._selectedImageData = selectedImageData
-        self.maxSizeInBytes = maxSizeInBytes
+        self.maxSize = maxSize
         self.onCompressionError = onCompressionError
     }
 
@@ -69,7 +69,7 @@ public struct ImagePickerModifier: ViewModifier {
                     sourceType: source.uiImagePickerSourceType,
                     selectedImageData: $selectedImageData,
                     isPresented: $sourceType,
-                    maxSizeInBytes: maxSizeInBytes,
+                    maxSize: maxSize,
                     onCompressionError: onCompressionError
                 )
                 .ignoresSafeArea()
@@ -93,7 +93,7 @@ public struct ImagePickerModifier: ViewModifier {
     }
 
     /// 権限をリクエストしてピッカーを表示
-    private func requestPermissionAndShowPicker(for source: ImageSourceType) {
+    private func requestPermissionAndShowPicker(for source: MediaSourceType) {
         Task { @MainActor in
             let hasPermission = await checkPermission(for: source)
 
@@ -111,7 +111,7 @@ public struct ImagePickerModifier: ViewModifier {
     }
 
     /// 権限状態を確認してリクエスト
-    private func checkPermission(for source: ImageSourceType) async -> Bool {
+    private func checkPermission(for source: MediaSourceType) async -> Bool {
         switch source {
         case .camera:
             return await checkCameraPermission()
@@ -140,13 +140,13 @@ public struct ImagePickerModifier: ViewModifier {
 
     /// フォトライブラリ権限の確認とリクエスト
     private func checkPhotoLibraryPermission() async -> Bool {
-        let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
 
         switch status {
         case .authorized, .limited:
             return true
         case .notDetermined:
-            let newStatus = await PHPhotoLibrary.requestAuthorization(for: .addOnly)
+            let newStatus = await PHPhotoLibrary.requestAuthorization(for: .readWrite)
             return newStatus == .authorized || newStatus == .limited
         case .denied:
             return false
@@ -158,7 +158,7 @@ public struct ImagePickerModifier: ViewModifier {
     }
 
     /// 権限状態を取得
-    private func getPermissionStatus(for source: ImageSourceType) async -> PermissionStatus {
+    private func getPermissionStatus(for source: MediaSourceType) async -> PermissionStatus {
         switch source {
         case .camera:
             let status = AVCaptureDevice.authorizationStatus(for: .video)
@@ -171,7 +171,7 @@ public struct ImagePickerModifier: ViewModifier {
                 return .notDetermined
             }
         case .photoLibrary:
-            let status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+            let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
             switch status {
             case .denied:
                 return .denied
@@ -191,8 +191,10 @@ public struct ImagePickerModifier: ViewModifier {
     }
 }
 
-/// 画像ソースの種類
-enum ImageSourceType: Identifiable {
+// MARK: - Shared Types
+
+/// メディアソースの種類
+enum MediaSourceType: Identifiable {
     case camera
     case photoLibrary
 
@@ -224,7 +226,7 @@ struct PermissionAlertConfig {
     let message: String
     let canOpenSettings: Bool
 
-    init(sourceType: ImageSourceType, status: PermissionStatus) {
+    init(sourceType: MediaSourceType, status: PermissionStatus) {
         switch sourceType {
         case .camera:
             self.title = "カメラへのアクセス許可が必要です"
@@ -260,8 +262,8 @@ struct PermissionAlertConfig {
 struct ImagePickerViewController: UIViewControllerRepresentable {
     let sourceType: UIImagePickerController.SourceType
     @Binding var selectedImageData: Data?
-    @Binding var isPresented: ImageSourceType?
-    let maxSizeInBytes: Int?
+    @Binding var isPresented: MediaSourceType?
+    let maxSize: ByteSize?
     let onCompressionError: ((Error) -> Void)?
 
     func makeUIViewController(context: Context) -> UIImagePickerController {
@@ -292,9 +294,9 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
         ) {
             if let image = info[.originalImage] as? UIImage {
                 // 画像をJPEGデータに変換
-                if let maxSize = parent.maxSizeInBytes {
+                if let maxSize = parent.maxSize {
                     // サイズ制限がある場合は再帰的に圧縮
-                    parent.selectedImageData = compressImageData(image, maxSizeInBytes: maxSize)
+                    parent.selectedImageData = compressImageData(image, maxSize: maxSize)
                 } else {
                     // サイズ制限がない場合はデフォルト品質で変換
                     parent.selectedImageData = image.jpegData(compressionQuality: 0.8)
@@ -320,12 +322,12 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
         /// 画像を指定されたサイズ以下に再帰的に圧縮
         /// - Parameters:
         ///   - image: 圧縮する画像
-        ///   - maxSizeInBytes: 最大サイズ（バイト）
+        ///   - maxSize: 最大サイズ
         ///   - currentQuality: 現在の圧縮品質（0.0〜1.0）
         /// - Returns: 圧縮された画像データ、または変換に失敗した場合はnil
         private func compressImageData(
             _ image: UIImage,
-            maxSizeInBytes: Int,
+            maxSize: ByteSize,
             currentQuality: CGFloat = 0.8
         ) -> Data? {
             guard let data = image.jpegData(compressionQuality: currentQuality) else {
@@ -333,7 +335,7 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
             }
 
             // 既に上限以下なら何もしない
-            if data.count <= maxSizeInBytes {
+            if data.count <= maxSize.bytes {
                 return data
             }
 
@@ -343,7 +345,7 @@ struct ImagePickerViewController: UIViewControllerRepresentable {
             }
 
             // 品質を10%下げて再帰的に圧縮
-            return compressImageData(image, maxSizeInBytes: maxSizeInBytes, currentQuality: currentQuality - 0.1)
+            return compressImageData(image, maxSize: maxSize, currentQuality: currentQuality - 0.1)
         }
     }
 }
@@ -377,7 +379,7 @@ public extension View {
     ///         .imagePicker(
     ///             isPresented: $showPicker,
     ///             selectedImageData: $imageData,
-    ///             maxSizeInBytes: 1_000_000  // 1MB
+    ///             maxSize: 1.mb  // 1MB
     ///         )
     ///     }
     /// }
@@ -386,19 +388,19 @@ public extension View {
     /// - Parameters:
     ///   - isPresented: ピッカーの表示状態を制御するバインディング
     ///   - selectedImageData: 選択された画像のデータを受け取るバインディング
-    ///   - maxSizeInBytes: 画像の最大サイズ（バイト単位）。指定された場合、画像は自動的に圧縮されます。
+    ///   - maxSize: 画像の最大サイズ。指定された場合、画像は自動的に圧縮されます。
     ///   - onCompressionError: 画像の圧縮または変換に失敗した場合に呼ばれるコールバック
     /// - Returns: モディファイアが適用されたビュー
     func imagePicker(
         isPresented: Binding<Bool>,
         selectedImageData: Binding<Data?>,
-        maxSizeInBytes: Int? = nil,
+        maxSize: ByteSize? = nil,
         onCompressionError: ((Error) -> Void)? = nil
     ) -> some View {
         modifier(ImagePickerModifier(
             isPresented: isPresented,
             selectedImageData: selectedImageData,
-            maxSizeInBytes: maxSizeInBytes,
+            maxSize: maxSize,
             onCompressionError: onCompressionError
         ))
     }
