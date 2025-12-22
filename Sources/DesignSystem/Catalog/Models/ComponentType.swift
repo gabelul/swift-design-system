@@ -13,6 +13,8 @@ enum ComponentType: String, CaseIterable, Identifiable {
     case imagePicker = "ImagePicker"
     case snackbar = "Snackbar"
     case textField = "TextField"
+    case videoPicker = "VideoPicker"
+    case videoPlayer = "VideoPlayer"
 
     var id: String { rawValue }
 
@@ -29,6 +31,8 @@ enum ComponentType: String, CaseIterable, Identifiable {
         case .imagePicker: return "photo.on.rectangle.angled"
         case .snackbar: return "message.fill"
         case .textField: return "textformat.abc"
+        case .videoPicker: return "video.badge.plus"
+        case .videoPlayer: return "play.rectangle.fill"
         }
     }
 
@@ -45,6 +49,8 @@ enum ComponentType: String, CaseIterable, Identifiable {
         case .imagePicker: return "Select images from the camera or photo library."
         case .snackbar: return "Temporary notifications and feedback."
         case .textField: return "Text input fields."
+        case .videoPicker: return "Select videos from the camera or video library."
+        case .videoPlayer: return "Play videos from data or URL."
         }
     }
 }

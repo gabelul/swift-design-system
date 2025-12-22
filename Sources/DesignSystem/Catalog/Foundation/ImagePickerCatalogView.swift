@@ -129,7 +129,8 @@ struct ImagePickerCatalogView: View {
                                 }
                                 .imagePicker(
                                     isPresented: $showPicker,
-                                    selectedImageData: $imageData
+                                    selectedImageData: $imageData,
+                                    maxSize: 1.mb  // 1MB
                                 )
                             }
                         }
