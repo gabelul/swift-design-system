@@ -94,6 +94,8 @@ struct ComponentsCatalogView: View {
             EmojiPickerCatalogView()
         case .fab:
             FloatingActionButtonCatalogView()
+        case .iconBadge:
+            IconBadgeCatalogView()
         case .iconButton:
             IconButtonCatalogView()
         case .iconPicker:
@@ -108,8 +110,12 @@ struct ComponentsCatalogView: View {
                 Text("画像ピッカーはiOSでのみ利用可能です")
             }
             #endif
+        case .progressBar:
+            ProgressBarCatalogView()
         case .snackbar:
             SnackbarCatalogView()
+        case .statDisplay:
+            StatDisplayCatalogView()
         case .textField:
             TextFieldCatalogView()
         case .videoPicker:
