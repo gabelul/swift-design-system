@@ -11,7 +11,7 @@ enum CatalogRouter {
         case .themes:
             destinationForTheme()
         case .foundations:
-            destinationForFoundation(item: item)
+            destinationForFoundation()
         case .components:
             destinationForComponent()
         case .patterns:
@@ -27,24 +27,8 @@ enum CatalogRouter {
     }
 
     @ViewBuilder
-    private static func destinationForFoundation(item: CatalogItem) -> some View {
-        // 型安全な方法でFoundationItemに変換
-        if let foundationItem = FoundationItem.allCases.first(where: { $0.rawValue == item.name }) {
-            switch foundationItem {
-            case .colors:
-                ColorsCatalogView()
-            case .typography:
-                TypographyCatalogView()
-            case .spacing:
-                SpacingCatalogView()
-            case .radius:
-                RadiusCatalogView()
-            case .motion:
-                MotionCatalogView()
-            }
-        } else {
-            ContentUnavailableView("アイテムが見つかりません", systemImage: "exclamationmark.triangle")
-        }
+    private static func destinationForFoundation() -> some View {
+        FoundationCatalogView()
     }
 
     @ViewBuilder

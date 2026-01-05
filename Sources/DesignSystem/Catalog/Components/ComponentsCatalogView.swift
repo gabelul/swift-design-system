@@ -4,7 +4,6 @@ import SwiftUI
 struct ComponentsCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
-    @Environment(\.radiusScale) private var radius
 
     var body: some View {
         ScrollView {
@@ -38,32 +37,11 @@ struct ComponentsCatalogView: View {
                             NavigationLink {
                                 destinationView(for: component)
                             } label: {
-                                HStack(spacing: spacing.md) {
-                                    Image(systemName: component.icon)
-                                        .typography(.titleSmall)
-                                        .foregroundStyle(colors.primary)
-                                        .frame(width: 32)
-
-                                    VStack(alignment: .leading, spacing: spacing.xs) {
-                                        Text(component.rawValue)
-                                            .typography(.bodyLarge)
-                                            .foregroundStyle(colors.onSurface)
-
-                                        Text(component.description)
-                                            .typography(.bodySmall)
-                                            .foregroundStyle(colors.onSurfaceVariant)
-                                    }
-
-                                    Spacer()
-
-                                    Image(systemName: "chevron.right")
-                                        .typography(.labelSmall)
-                                        .foregroundStyle(colors.onSurfaceVariant)
-                                }
-                                .padding(.horizontal, spacing.lg)
-                                .padding(.vertical, spacing.md)
-                                .background(colors.surface)
-                                .clipShape(RoundedRectangle(cornerRadius: radius.md))
+                                CatalogItemRowContent(
+                                    icon: component.icon,
+                                    title: component.rawValue,
+                                    description: component.description
+                                )
                             }
                             .buttonStyle(.plain)
                         }
