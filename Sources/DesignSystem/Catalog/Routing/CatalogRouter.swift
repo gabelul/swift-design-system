@@ -2,11 +2,11 @@ import SwiftUI
 
 /// カタログのルーティングロジック
 ///
-/// カテゴリとアイテムから適切な詳細ビューを返す
+/// カテゴリから適切な詳細ビューを返す
 @MainActor
 enum CatalogRouter {
     @ViewBuilder
-    static func destination(for category: CatalogCategory, item: CatalogItem) -> some View {
+    static func destination(for category: CatalogCategory) -> some View {
         switch category {
         case .themes:
             destinationForTheme()

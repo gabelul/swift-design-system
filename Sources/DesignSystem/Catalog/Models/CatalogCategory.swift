@@ -20,31 +20,10 @@ enum CatalogCategory: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .themes: return "アプリ全体のテーマを選択・カスタマイズ"
-        case .foundations: return "Color, Spacing, Radiusなどの基本トークン"
-        case .components: return "Button, Card, TextFieldなどの再利用可能なUI"
-        case .patterns: return "レイアウトパターンやデザインパターン"
-        }
-    }
-
-    var items: [CatalogItem] {
-        switch self {
-        case .themes:
-            return [
-                CatalogItem(name: "テーマギャラリー", icon: "paintpalette.fill", description: "全テーマを閲覧・切り替え")
-            ]
-        case .foundations:
-            return [
-                CatalogItem(name: "デザイントークン一覧", icon: "slider.horizontal.3", description: "Color, Typography, Spacingなど")
-            ]
-        case .components:
-            return [
-                CatalogItem(name: "コンポーネント一覧", icon: "square.stack.3d.up.fill", description: "全コンポーネントのカタログ")
-            ]
-        case .patterns:
-            return [
-                CatalogItem(name: "パターン一覧", icon: "square.grid.3x3.fill", description: "レイアウトパターンなど")
-            ]
+        case .themes: return "全テーマを閲覧・切り替え"
+        case .foundations: return "Color, Typography, Spacingなど"
+        case .components: return "全コンポーネントのカタログ"
+        case .patterns: return "レイアウトパターンなど"
         }
     }
 }
