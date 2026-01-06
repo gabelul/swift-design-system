@@ -5,7 +5,6 @@ import SwiftUI
 struct CatalogContentView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
-    @Environment(\.radiusScale) private var radius
 
     let category: CatalogCategory?
     @Binding var selectedFoundationItem: FoundationItem?
@@ -51,38 +50,13 @@ struct CatalogContentView: View {
                     Button {
                         selectedFoundationItem = item
                     } label: {
-                        HStack(spacing: spacing.md) {
-                            Image(systemName: item.icon)
-                                .font(.title3)
-                                .foregroundStyle(colors.primary)
-                                .frame(width: 32)
-
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(item.rawValue)
-                                    .typography(.bodyLarge)
-                                    .foregroundStyle(colors.onSurface)
-
-                                Text(item.description)
-                                    .typography(.bodySmall)
-                                    .foregroundStyle(colors.onSurfaceVariant)
-                            }
-
-                            Spacer()
-
-                            if selectedFoundationItem == item {
-                                Image(systemName: "checkmark")
-                                    .typography(.labelMedium)
-                                    .foregroundStyle(colors.primary)
-                            } else {
-                                Image(systemName: "chevron.right")
-                                    .typography(.labelMedium)
-                                    .foregroundStyle(colors.onSurfaceVariant)
-                            }
-                        }
-                        .padding(.horizontal, spacing.md)
-                        .padding(.vertical, spacing.md)
-                        .background(selectedFoundationItem == item ? colors.primaryContainer : colors.surface)
-                        .clipShape(RoundedRectangle(cornerRadius: radius.md))
+                        CatalogItemRowContent(
+                            icon: item.icon,
+                            title: item.rawValue,
+                            description: item.description,
+                            isSelected: selectedFoundationItem == item,
+                            showChevron: true
+                        )
                     }
                     .buttonStyle(.plain)
                 }
@@ -99,38 +73,13 @@ struct CatalogContentView: View {
                     Button {
                         selectedComponentItem = component
                     } label: {
-                        HStack(spacing: spacing.md) {
-                            Image(systemName: component.icon)
-                                .font(.title3)
-                                .foregroundStyle(colors.primary)
-                                .frame(width: 32)
-
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(component.rawValue)
-                                    .typography(.bodyLarge)
-                                    .foregroundStyle(colors.onSurface)
-
-                                Text(component.description)
-                                    .typography(.bodySmall)
-                                    .foregroundStyle(colors.onSurfaceVariant)
-                            }
-
-                            Spacer()
-
-                            if selectedComponentItem == component {
-                                Image(systemName: "checkmark")
-                                    .typography(.labelMedium)
-                                    .foregroundStyle(colors.primary)
-                            } else {
-                                Image(systemName: "chevron.right")
-                                    .typography(.labelMedium)
-                                    .foregroundStyle(colors.onSurfaceVariant)
-                            }
-                        }
-                        .padding(.horizontal, spacing.md)
-                        .padding(.vertical, spacing.md)
-                        .background(selectedComponentItem == component ? colors.primaryContainer : colors.surface)
-                        .clipShape(RoundedRectangle(cornerRadius: radius.md))
+                        CatalogItemRowContent(
+                            icon: component.icon,
+                            title: component.rawValue,
+                            description: component.description,
+                            isSelected: selectedComponentItem == component,
+                            showChevron: true
+                        )
                     }
                     .buttonStyle(.plain)
                 }
@@ -147,38 +96,13 @@ struct CatalogContentView: View {
                     Button {
                         selectedPatternItem = pattern
                     } label: {
-                        HStack(spacing: spacing.md) {
-                            Image(systemName: pattern.icon)
-                                .font(.title3)
-                                .foregroundStyle(colors.primary)
-                                .frame(width: 32)
-
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(pattern.rawValue)
-                                    .typography(.bodyLarge)
-                                    .foregroundStyle(colors.onSurface)
-
-                                Text(pattern.description)
-                                    .typography(.bodySmall)
-                                    .foregroundStyle(colors.onSurfaceVariant)
-                            }
-
-                            Spacer()
-
-                            if selectedPatternItem == pattern {
-                                Image(systemName: "checkmark")
-                                    .typography(.labelMedium)
-                                    .foregroundStyle(colors.primary)
-                            } else {
-                                Image(systemName: "chevron.right")
-                                    .typography(.labelMedium)
-                                    .foregroundStyle(colors.onSurfaceVariant)
-                            }
-                        }
-                        .padding(.horizontal, spacing.md)
-                        .padding(.vertical, spacing.md)
-                        .background(selectedPatternItem == pattern ? colors.primaryContainer : colors.surface)
-                        .clipShape(RoundedRectangle(cornerRadius: radius.md))
+                        CatalogItemRowContent(
+                            icon: pattern.icon,
+                            title: pattern.rawValue,
+                            description: pattern.description,
+                            isSelected: selectedPatternItem == pattern,
+                            showChevron: true
+                        )
                     }
                     .buttonStyle(.plain)
                 }

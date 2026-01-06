@@ -1,8 +1,7 @@
 import SwiftUI
 
-/// パターンカタログのエントリポイント
-/// レイアウトパターンやデザインパターンを表示
-struct PatternsCatalogView: View {
+/// デザイントークンカタログのエントリポイント
+struct FoundationCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
 
@@ -11,37 +10,37 @@ struct PatternsCatalogView: View {
             VStack(spacing: spacing.xl) {
                 // ヘッダー
                 VStack(spacing: spacing.sm) {
-                    Image(systemName: "square.grid.3x3.fill")
+                    Image(systemName: "slider.horizontal.3")
                         .font(.system(size: 48))
                         .foregroundStyle(colors.primary)
 
-                    Text("パターンカタログ")
+                    Text("デザイントークン")
                         .typography(.headlineLarge)
                         .foregroundStyle(colors.onBackground)
 
-                    Text("レイアウトパターンやデザインパターン")
+                    Text("Color, Typography, Spacing, Radius, Motion")
                         .typography(.bodySmall)
                         .foregroundStyle(colors.onSurfaceVariant)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, spacing.xl)
 
-                // パターンリスト
+                // トークンリスト
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("レイアウトパターン")
+                    Text("トークン")
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onSurface)
                         .padding(.horizontal, spacing.lg)
 
                     VStack(spacing: spacing.sm) {
-                        ForEach(PatternItem.allCases) { pattern in
+                        ForEach(FoundationItem.allCases) { item in
                             NavigationLink {
-                                destinationView(for: pattern)
+                                destinationView(for: item)
                             } label: {
                                 CatalogItemRowContent(
-                                    icon: pattern.icon,
-                                    title: pattern.rawValue,
-                                    description: pattern.description
+                                    icon: item.icon,
+                                    title: item.rawValue,
+                                    description: item.description
                                 )
                             }
                             .buttonStyle(.plain)
@@ -53,26 +52,32 @@ struct PatternsCatalogView: View {
             .padding(.bottom, spacing.xl)
         }
         .background(colors.background)
-        .navigationTitle("パターン")
+        .navigationTitle("デザイントークン")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
     }
 
     @ViewBuilder
-    private func destinationView(for pattern: PatternItem) -> some View {
-        switch pattern {
-        case .aspectGrid:
-            AspectGridCatalogView()
-        case .sectionCard:
-            SectionCardCatalogView()
+    private func destinationView(for item: FoundationItem) -> some View {
+        switch item {
+        case .colors:
+            ColorsCatalogView()
+        case .typography:
+            TypographyCatalogView()
+        case .spacing:
+            SpacingCatalogView()
+        case .radius:
+            RadiusCatalogView()
+        case .motion:
+            MotionCatalogView()
         }
     }
 }
 
 #Preview {
     NavigationStack {
-        PatternsCatalogView()
+        FoundationCatalogView()
             .theme(ThemeProvider())
     }
 }
