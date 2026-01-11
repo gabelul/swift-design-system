@@ -82,7 +82,7 @@ private struct ThemeCategorySection: View {
                     .font(.title3)
                     .foregroundStyle(colors.primary)
 
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: spacing.xxs) {
                     Text(category.rawValue)
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onSurface)
@@ -133,22 +133,33 @@ private struct AppearanceModeSection: View {
     @Environment(ThemeProvider.self) private var themeProvider
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
+    @Environment(\.radiusScale) private var radius
     @Environment(\.motion) private var motion
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
             HStack(spacing: spacing.sm) {
                 Image(systemName: "circle.lefthalf.filled")
                     .font(.title3)
                     .foregroundStyle(colors.primary)
+<<<<<<< HEAD
                 
                 Text("Appearance")
+=======
+
+                Text("外観モード")
+>>>>>>> upstream/main
                     .typography(.titleMedium)
                     .foregroundStyle(colors.onSurface)
             }
             .padding(.horizontal, spacing.lg)
+<<<<<<< HEAD
             
             Picker("Appearance", selection: Binding(
+=======
+
+            Picker("外観モード", selection: Binding(
+>>>>>>> upstream/main
                 get: { themeProvider.themeMode },
                 set: { newMode in
                     withAnimation(motion.slow) {
@@ -162,7 +173,7 @@ private struct AppearanceModeSection: View {
             }
             .pickerStyle(.segmented)
             .padding(.horizontal, spacing.lg)
-            
+
             Text(modeDescription(for: themeProvider.themeMode))
                 .typography(.bodySmall)
                 .foregroundStyle(colors.onSurfaceVariant)
@@ -170,7 +181,7 @@ private struct AppearanceModeSection: View {
         }
         .padding(.vertical, spacing.md)
         .background(colors.surface)
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .clipShape(RoundedRectangle(cornerRadius: radius.lg))
         .padding(.horizontal, spacing.lg)
     }
     
@@ -195,6 +206,7 @@ private struct InfoSection: View {
     @Environment(ThemeProvider.self) private var themeProvider
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
+    @Environment(\.radiusScale) private var radius
 
     var body: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
@@ -203,8 +215,13 @@ private struct InfoSection: View {
                 .foregroundStyle(colors.onSurface)
                 .padding(.horizontal, spacing.lg)
 
+<<<<<<< HEAD
             VStack(spacing: 0) {
                 InfoRow(label: "Theme", value: themeProvider.currentTheme.name)
+=======
+            VStack {
+                InfoRow(label: "テーマ", value: themeProvider.currentTheme.name)
+>>>>>>> upstream/main
                 Divider().padding(.leading, spacing.lg)
                 InfoRow(label: "Mode", value: themeProvider.themeMode.rawValue)
                 Divider().padding(.leading, spacing.lg)
@@ -214,7 +231,7 @@ private struct InfoSection: View {
                 )
             }
             .background(colors.surface)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .clipShape(RoundedRectangle(cornerRadius: radius.lg))
             .padding(.horizontal, spacing.lg)
         }
     }

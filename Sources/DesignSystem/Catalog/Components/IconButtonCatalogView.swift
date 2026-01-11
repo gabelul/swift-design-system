@@ -2,12 +2,12 @@ import SwiftUI
 
 /// IconButton component catalog view
 struct IconButtonCatalogView: View {
-    @Environment(\.colorPalette) private var colorPalette
+    @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
-    @State private var favoriteCount = 0
-    @State private var likeCount = 0
+    @State private var tapCount = 0
 
     var body: some View {
+<<<<<<< HEAD
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
                 // Overview
@@ -182,14 +182,46 @@ struct IconButtonCatalogView: View {
                             // アクション
                         }
                         """)
+=======
+        CatalogPageContainer(title: "IconButton") {
+            VStack(alignment: .leading, spacing: spacing.sm) {
+                CatalogOverview(description: "アイコンのみで構成される、コンパクトなアクションボタン")
+
+                if tapCount > 0 {
+                    Text("タップ: \(tapCount)")
+>>>>>>> upstream/main
                         .typography(.bodySmall)
-                        .fontDesign(.monospaced)
-                        .padding()
-                        .background(colorPalette.surfaceVariant.opacity(0.5))
-                        .cornerRadius(8)
+                        .foregroundStyle(colors.primary)
+                        .padding(.horizontal, spacing.lg)
+                }
+            }
+
+            SectionCard(title: "スタイル") {
+                VStack(spacing: spacing.lg) {
+                    HStack {
+                        Text("Standard").typography(.bodyMedium).frame(width: 100, alignment: .leading)
+                        IconButton(icon: "heart", style: .standard) { tapCount += 1 }
+                        Text("背景なし").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
+                    }
+                    HStack {
+                        Text("Filled").typography(.bodyMedium).frame(width: 100, alignment: .leading)
+                        IconButton(icon: "heart.fill", style: .filled) { tapCount += 1 }
+                        Text("プライマリ背景").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
+                    }
+                    HStack {
+                        Text("Tonal").typography(.bodyMedium).frame(width: 100, alignment: .leading)
+                        IconButton(icon: "heart.fill", style: .tonal) { tapCount += 1 }
+                        Text("トーン背景").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
+                    }
+                    HStack {
+                        Text("Outlined").typography(.bodyMedium).frame(width: 100, alignment: .leading)
+                        IconButton(icon: "heart", style: .outlined) { tapCount += 1 }
+                        Text("枠線のみ").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
                     }
                 }
+            }
 
+<<<<<<< HEAD
                 // Practical example
                 SectionCard(title: "Practical Example") {
                     VStack(alignment: .leading, spacing: 12) {
@@ -208,32 +240,70 @@ struct IconButtonCatalogView: View {
                                 Text("Preview body text. Icon buttons provide clear actions in a compact space.")
                                     .typography(.bodySmall)
                                     .foregroundStyle(colorPalette.onSurfaceVariant)
+=======
+            SectionCard(title: "サイズ") {
+                VStack(spacing: spacing.lg) {
+                    HStack {
+                        Text("Small (32pt)").typography(.bodyMedium).frame(maxWidth: .infinity, alignment: .leading)
+                        IconButton(icon: "star.fill", style: .filled, size: .small) { tapCount += 1 }
+                    }
+                    HStack {
+                        Text("Medium (40pt)").typography(.bodyMedium).frame(maxWidth: .infinity, alignment: .leading)
+                        IconButton(icon: "star.fill", style: .filled, size: .medium) { tapCount += 1 }
+                    }
+                    HStack {
+                        Text("Large (48pt)").typography(.bodyMedium).frame(maxWidth: .infinity, alignment: .leading)
+                        IconButton(icon: "star.fill", style: .filled, size: .large) { tapCount += 1 }
+                    }
+                }
+            }
 
-                                HStack {
-                                    IconButton(icon: "heart", style: .tonal) {
-                                        favoriteCount += 1
-                                    }
+            SectionCard(title: "アイコン例") {
+                HStack(spacing: spacing.lg) {
+                    IconButton(icon: "heart", style: .tonal) { tapCount += 1 }
+                    IconButton(icon: "star", style: .tonal) { tapCount += 1 }
+                    IconButton(icon: "bookmark", style: .tonal) { tapCount += 1 }
+                    IconButton(icon: "square.and.arrow.up", style: .tonal) { tapCount += 1 }
+                    IconButton(icon: "ellipsis", style: .tonal) { tapCount += 1 }
+                }
+            }
 
-                                    IconButton(icon: "bookmark", style: .tonal) {}
+            SectionCard(title: "使用例") {
+                CodeExample(code: """
+                    IconButton(
+                        icon: "heart",
+                        style: .filled,
+                        size: .medium
+                    ) {
+                        // アクション
+                    }
+                    """)
+            }
+>>>>>>> upstream/main
 
-                                    IconButton(icon: "square.and.arrow.up", style: .tonal) {}
-
-                                    Spacer()
-
-                                    IconButton(icon: "ellipsis", style: .tonal) {}
-                                }
+            SectionCard(title: "実用例") {
+                VariantShowcase(title: "ツールバー") {
+                    Card {
+                        VStack(spacing: spacing.md) {
+                            HStack {
+                                Text("記事のタイトル").typography(.titleMedium)
+                                Spacer()
+                            }
+                            Text("本文のプレビューテキスト。")
+                                .typography(.bodySmall)
+                                .foregroundStyle(colors.onSurfaceVariant)
+                            HStack {
+                                IconButton(icon: "heart", style: .tonal) { tapCount += 1 }
+                                IconButton(icon: "bookmark", style: .tonal) {}
+                                IconButton(icon: "square.and.arrow.up", style: .tonal) {}
+                                Spacer()
+                                IconButton(icon: "ellipsis", style: .tonal) {}
                             }
                         }
                     }
                 }
             }
-            .padding(.bottom, spacing.xl)
         }
-        .background(colorPalette.background)
-        .navigationTitle("IconButton")
-        #if os(iOS)
-        .navigationBarTitleDisplayMode(.inline)
-        #endif
     }
 }
 

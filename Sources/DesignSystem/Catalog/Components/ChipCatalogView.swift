@@ -1,9 +1,13 @@
 import SwiftUI
 
+<<<<<<< HEAD
 /// Chip component catalog view
 ///
 /// Shows all Chip variations (style, size, state)
 /// with live examples and code snippets.
+=======
+/// Chipコンポーネントのカタログビュー
+>>>>>>> upstream/main
 struct ChipCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -13,14 +17,10 @@ struct ChipCatalogView: View {
     @State private var isFilter3Selected = false
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: spacing.xxl) {
-                // Header
-                VStack(alignment: .leading, spacing: spacing.sm) {
-                    Text("Chip")
-                        .typography(.displaySmall)
-                        .foregroundColor(colors.onBackground)
+        CatalogPageContainer(title: "Chip") {
+            CatalogOverview(description: "コンパクトなラベルコンポーネント。ステータス、カテゴリ、フィルターなど様々な用途に使用。")
 
+<<<<<<< HEAD
                     Text("Compact label component. Useful for statuses, categories, filters, and user input chips.")
                         .typography(.bodyLarge)
                         .foregroundColor(colors.onSurfaceVariant)
@@ -34,58 +34,70 @@ struct ChipCatalogView: View {
                             title: "Filled",
                             description: "Filled background. Best for statuses and category labels."
                         ) {
+=======
+            SectionCard(title: "スタイル") {
+                VStack(alignment: .leading, spacing: spacing.lg) {
+                    VariantShowcase(title: "Filled", description: "ステータス、カテゴリラベルに最適") {
+                        HStack(spacing: spacing.sm) {
+>>>>>>> upstream/main
                             Chip("Active", systemImage: "circle.fill")
                                 .chipStyle(.filled)
                                 .foregroundColor(.green)
-
                             Chip("Pending", systemImage: "clock.fill")
                                 .chipStyle(.filled)
                                 .foregroundColor(.orange)
-
                             Chip("Error", systemImage: "exclamationmark.triangle.fill")
                                 .chipStyle(.filled)
                                 .foregroundColor(.red)
                         }
+                    }
 
-                        Divider()
+                    Divider()
 
+<<<<<<< HEAD
                         styleVariantRow(
                             title: "Outlined",
                             description: "Outlined only. Great for filters and secondary categories."
                         ) {
+=======
+                    VariantShowcase(title: "Outlined", description: "フィルター選択、セカンダリカテゴリに最適") {
+                        HStack(spacing: spacing.sm) {
+>>>>>>> upstream/main
                             Chip("Filter 1", systemImage: "line.3.horizontal.decrease", isSelected: $isFilter1Selected)
                                 .chipStyle(.outlined)
-
                             Chip("Filter 2", systemImage: "tag", isSelected: $isFilter2Selected)
                                 .chipStyle(.outlined)
-
                             Chip("Filter 3", systemImage: "star", isSelected: $isFilter3Selected)
                                 .chipStyle(.outlined)
                         }
+                    }
 
+                    if #available(iOS 26.0, macOS 26.0, *) {
                         Divider()
 
+<<<<<<< HEAD
                         if #available(iOS 26.0, macOS 26.0, *) {
                             styleVariantRow(
                                 title: "Liquid Glass",
                                 description: "Translucent glass effect. Ideal for premium-feeling surfaces (iOS 26+)."
                             ) {
+=======
+                        VariantShowcase(title: "Liquid Glass", description: "プレミアム感のある表現（iOS 26+）") {
+                            HStack(spacing: spacing.sm) {
+>>>>>>> upstream/main
                                 Chip("Premium", systemImage: "star.fill")
                                     .chipStyle(.liquidGlass)
                                     .foregroundColor(.yellow)
-
                                 Chip("Featured", systemImage: "sparkles")
                                     .chipStyle(.liquidGlass)
                                     .foregroundColor(.purple)
-
-                                Chip("New", systemImage: "bell.fill")
-                                    .chipStyle(.liquidGlass)
-                                    .foregroundColor(.blue)
                             }
                         }
                     }
                 }
+            }
 
+<<<<<<< HEAD
                 // Size variants
                 sectionCard(title: "Size Variants") {
                     VStack(alignment: .leading, spacing: spacing.md) {
@@ -99,38 +111,29 @@ struct ChipCatalogView: View {
                                     .typography(.bodySmall)
                                     .foregroundColor(colors.onSurfaceVariant.opacity(0.7))
                             }
+=======
+            SectionCard(title: "サイズ") {
+                VStack(alignment: .leading, spacing: spacing.md) {
+                    VariantShowcase(title: "Medium", description: "32pt高さ、標準的な用途") {
+                        Chip("Medium", systemImage: "tag.fill")
+                            .chipStyle(.filled)
+                            .chipSize(.medium)
+                            .foregroundColor(.blue)
+                    }
 
-                            Spacer()
+                    Divider()
+>>>>>>> upstream/main
 
-                            Chip("Medium", systemImage: "tag.fill")
-                                .chipStyle(.filled)
-                                .chipSize(.medium)
-                                .foregroundColor(.blue)
-                        }
-
-                        Divider()
-
-                        HStack(spacing: spacing.md) {
-                            VStack(alignment: .leading, spacing: spacing.xs) {
-                                Text("Small")
-                                    .typography(.labelMedium)
-                                    .foregroundColor(colors.onSurfaceVariant)
-
-                                Text("24pt高さ、密集レイアウト向け")
-                                    .typography(.bodySmall)
-                                    .foregroundColor(colors.onSurfaceVariant.opacity(0.7))
-                            }
-
-                            Spacer()
-
-                            Chip("Small", systemImage: "tag.fill")
-                                .chipStyle(.filled)
-                                .chipSize(.small)
-                                .foregroundColor(.blue)
-                        }
+                    VariantShowcase(title: "Small", description: "24pt高さ、密集レイアウト向け") {
+                        Chip("Small", systemImage: "tag.fill")
+                            .chipStyle(.filled)
+                            .chipSize(.small)
+                            .foregroundColor(.blue)
                     }
                 }
+            }
 
+<<<<<<< HEAD
                 // Input Chips (Deletable)
                 sectionCard(title: "Input Chip (Deletable)") {
                     VStack(alignment: .leading, spacing: spacing.md) {
@@ -142,20 +145,21 @@ struct ChipCatalogView: View {
                             Chip("SwiftUI", systemImage: "tag.fill", onDelete: {
                                 print("Delete SwiftUI")
                             })
+=======
+            SectionCard(title: "削除可能") {
+                VariantShowcase(title: "Input Chip", description: "ユーザー入力されたタグの表示") {
+                    FlowLayout(spacing: spacing.sm) {
+                        Chip("SwiftUI", systemImage: "tag.fill", onDelete: {})
+>>>>>>> upstream/main
                             .chipStyle(.filled)
                             .foregroundColor(.blue)
-
-                            Chip("iOS Development", onDelete: {
-                                print("Delete iOS Development")
-                            })
+                        Chip("iOS Development", onDelete: {})
                             .chipStyle(.filled)
                             .foregroundColor(.purple)
-
-                            Chip("Design System", systemImage: "paintbrush.fill", onDelete: {
-                                print("Delete Design System")
-                            })
+                        Chip("Design System", systemImage: "paintbrush.fill", onDelete: {})
                             .chipStyle(.filled)
                             .foregroundColor(.pink)
+<<<<<<< HEAD
                         }
                     }
                 }
@@ -251,84 +255,95 @@ struct ChipCatalogView: View {
                             description: "Use a consistent style within the same context. Avoid mixing Filled and Outlined.",
                             isGood: true
                         )
+=======
+>>>>>>> upstream/main
                     }
                 }
             }
-            .padding(.vertical, spacing.xl)
-        }
-    }
 
-    // MARK: - Helper Views
+            SectionCard(title: "ユースケース") {
+                VStack(alignment: .leading, spacing: spacing.lg) {
+                    VariantShowcase(title: "ステータス表示") {
+                        HStack(spacing: spacing.sm) {
+                            Chip("Active", systemImage: "circle.fill")
+                                .chipStyle(.filled).chipSize(.small).foregroundColor(.green)
+                            Chip("In Progress", systemImage: "arrow.circlepath")
+                                .chipStyle(.filled).chipSize(.small).foregroundColor(.blue)
+                            Chip("Completed", systemImage: "checkmark.circle.fill")
+                                .chipStyle(.filled).chipSize(.small).foregroundColor(.gray)
+                        }
+                    }
 
-    private func sectionCard<Content: View>(
-        title: String,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        SectionCard(title: title, elevation: .level1) {
-            content()
-        }
-        .padding(.horizontal, spacing.lg)
-    }
+                    Divider()
 
-    private func styleVariantRow<Content: View>(
-        title: String,
-        description: String,
-        @ViewBuilder chips: () -> Content
-    ) -> some View {
-        VStack(alignment: .leading, spacing: spacing.sm) {
-            VStack(alignment: .leading, spacing: spacing.xs) {
-                Text(title)
-                    .typography(.titleMedium)
-                    .foregroundColor(colors.onSurface)
+                    VariantShowcase(title: "カテゴリタグ") {
+                        FlowLayout(spacing: spacing.xs) {
+                            Chip("Technology", systemImage: "laptopcomputer").chipStyle(.outlined).chipSize(.small)
+                            Chip("Design", systemImage: "paintpalette").chipStyle(.outlined).chipSize(.small)
+                            Chip("Business", systemImage: "briefcase").chipStyle(.outlined).chipSize(.small)
+                        }
+                    }
 
-                Text(description)
-                    .typography(.bodyMedium)
-                    .foregroundColor(colors.onSurfaceVariant)
+                    Divider()
+
+                    VariantShowcase(title: "フィルター") {
+                        FlowLayout(spacing: spacing.sm) {
+                            Chip("All Items", systemImage: "square.grid.2x2", isSelected: .constant(true)).chipStyle(.outlined)
+                            Chip("Favorites", systemImage: "star", isSelected: .constant(false)).chipStyle(.outlined)
+                            Chip("Recent", systemImage: "clock", isSelected: .constant(false)).chipStyle(.outlined)
+                        }
+                    }
+                }
             }
 
-            HStack(spacing: spacing.sm) {
-                chips()
+            SectionCard(title: "ベストプラクティス") {
+                VStack(alignment: .leading, spacing: spacing.md) {
+                    BestPracticeItem(
+                        icon: "checkmark.circle.fill",
+                        title: "簡潔なラベル",
+                        description: "1-2語の短く明確なラベルを使用",
+                        isGood: true
+                    )
+                    BestPracticeItem(
+                        icon: "checkmark.circle.fill",
+                        title: "スタイルの一貫性",
+                        description: "同じコンテキストでは同じスタイルを使用",
+                        isGood: true
+                    )
+                    BestPracticeItem(
+                        icon: "xmark.circle.fill",
+                        title: "過度な使用を避ける",
+                        description: "画面内のChipが多すぎると視覚的ノイズに",
+                        isGood: false
+                    )
+                }
             }
-        }
-    }
-
-    private func useCaseRow<Content: View>(
-        title: String,
-        @ViewBuilder content: () -> Content
-    ) -> some View {
-        VStack(alignment: .leading, spacing: spacing.sm) {
-            Text(title)
-                .typography(.labelLarge)
-                .foregroundColor(colors.onSurface)
-
-            content()
         }
     }
 }
 
+<<<<<<< HEAD
 // MARK: - Flow Layout
 
 /// Layout that arranges chips horizontally and wraps to the next line when space runs out
+=======
+/// チップを水平に並べ、折り返すレイアウト
+>>>>>>> upstream/main
 private struct FlowLayout: Layout {
     var spacing: CGFloat = 8
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        let result = FlowResult(
-            in: proposal.replacingUnspecifiedDimensions().width,
-            subviews: subviews,
-            spacing: spacing
-        )
+        let result = FlowResult(in: proposal.replacingUnspecifiedDimensions().width, subviews: subviews, spacing: spacing)
         return result.size
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-        let result = FlowResult(
-            in: bounds.width,
-            subviews: subviews,
-            spacing: spacing
-        )
+        let result = FlowResult(in: bounds.width, subviews: subviews, spacing: spacing)
         for (index, subview) in subviews.enumerated() {
-            subview.place(at: CGPoint(x: bounds.minX + result.frames[index].minX, y: bounds.minY + result.frames[index].minY), proposal: .unspecified)
+            subview.place(
+                at: CGPoint(x: bounds.minX + result.frames[index].minX, y: bounds.minY + result.frames[index].minY),
+                proposal: .unspecified
+            )
         }
     }
 
@@ -343,26 +358,21 @@ private struct FlowLayout: Layout {
 
             for subview in subviews {
                 let size = subview.sizeThatFits(.unspecified)
-
                 if x + size.width > maxWidth && x > 0 {
-                    // New line
                     x = 0
                     y += lineHeight + spacing
                     lineHeight = 0
                 }
-
                 frames.append(CGRect(origin: CGPoint(x: x, y: y), size: size))
                 lineHeight = max(lineHeight, size.height)
                 x += size.width + spacing
             }
-
             self.size = CGSize(width: maxWidth, height: y + lineHeight)
         }
     }
 }
 
-// MARK: - Previews
-
 #Preview {
     ChipCatalogView()
+        .theme(ThemeProvider())
 }

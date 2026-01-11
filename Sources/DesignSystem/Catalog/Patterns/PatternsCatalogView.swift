@@ -3,7 +3,7 @@ import SwiftUI
 /// Entry point for the patterns catalog
 /// Shows layout and design patterns
 struct PatternsCatalogView: View {
-    @Environment(\.colorPalette) private var colorPalette
+    @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
 
     var body: some View {
@@ -13,15 +13,15 @@ struct PatternsCatalogView: View {
                 VStack(spacing: spacing.sm) {
                     Image(systemName: "square.grid.3x3.fill")
                         .font(.system(size: 48))
-                        .foregroundStyle(colorPalette.primary)
+                        .foregroundStyle(colors.primary)
 
                     Text("Patterns Catalog")
                         .typography(.headlineLarge)
-                        .foregroundStyle(colorPalette.onBackground)
+                        .foregroundStyle(colors.onBackground)
 
                     Text("Layout and design patterns")
                         .typography(.bodySmall)
-                        .foregroundStyle(colorPalette.onSurfaceVariant)
+                        .foregroundStyle(colors.onSurfaceVariant)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, spacing.xl)
@@ -30,10 +30,11 @@ struct PatternsCatalogView: View {
                 VStack(alignment: .leading, spacing: spacing.md) {
                     Text("Layout Patterns")
                         .typography(.titleMedium)
-                        .foregroundStyle(colorPalette.onSurface)
+                        .foregroundStyle(colors.onSurface)
                         .padding(.horizontal, spacing.lg)
 
                     VStack(spacing: spacing.sm) {
+<<<<<<< HEAD
                         NavigationLink {
                             AspectGridCatalogView()
                         } label: {
@@ -58,12 +59,21 @@ struct PatternsCatalogView: View {
                                 Image(systemName: "chevron.right")
                                     .font(.caption)
                                     .foregroundStyle(colorPalette.onSurfaceVariant)
+=======
+                        ForEach(PatternItem.allCases) { pattern in
+                            NavigationLink {
+                                destinationView(for: pattern)
+                            } label: {
+                                CatalogItemRowContent(
+                                    icon: pattern.icon,
+                                    title: pattern.rawValue,
+                                    description: pattern.description
+                                )
+>>>>>>> upstream/main
                             }
-                            .padding(.horizontal, spacing.lg)
-                            .padding(.vertical, spacing.md)
-                            .background(colorPalette.surface)
-                            .clipShape(RoundedRectangle(cornerRadius: 12))
+                            .buttonStyle(.plain)
                         }
+<<<<<<< HEAD
                         .buttonStyle(.plain)
 
                         NavigationLink {
@@ -97,17 +107,34 @@ struct PatternsCatalogView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                         }
                         .buttonStyle(.plain)
+=======
+>>>>>>> upstream/main
                     }
                     .padding(.horizontal, spacing.lg)
                 }
             }
             .padding(.bottom, spacing.xl)
         }
+<<<<<<< HEAD
         .background(colorPalette.background)
         .navigationTitle("Patterns")
+=======
+        .background(colors.background)
+        .navigationTitle("パターン")
+>>>>>>> upstream/main
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
+    }
+
+    @ViewBuilder
+    private func destinationView(for pattern: PatternItem) -> some View {
+        switch pattern {
+        case .aspectGrid:
+            AspectGridCatalogView()
+        case .sectionCard:
+            SectionCardCatalogView()
+        }
     }
 }
 

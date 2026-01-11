@@ -74,6 +74,9 @@ struct CatalogDetailView: View {
             case .fab:
                 FloatingActionButtonCatalogView()
                     .id(component)
+            case .iconBadge:
+                IconBadgeCatalogView()
+                    .id(component)
             case .iconButton:
                 IconButtonCatalogView()
                     .id(component)
@@ -91,8 +94,14 @@ struct CatalogDetailView: View {
                     Text("The image picker is only available on iOS.")
                 }
                 #endif
+            case .progressBar:
+                ProgressBarCatalogView()
+                    .id(component)
             case .snackbar:
                 SnackbarCatalogView()
+                    .id(component)
+            case .statDisplay:
+                StatDisplayCatalogView()
                     .id(component)
             case .textField:
                 TextFieldCatalogView()

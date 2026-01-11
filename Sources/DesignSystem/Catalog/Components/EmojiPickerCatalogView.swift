@@ -2,13 +2,15 @@ import SwiftUI
 
 /// EmojiPicker catalog view
 struct EmojiPickerCatalogView: View {
-    @Environment(\.colorPalette) private var colorPalette
+    @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
+    @Environment(\.radiusScale) private var radius
 
     @State private var selectedEmoji: String?
     @State private var showEmojiPicker = false
 
     var body: some View {
+<<<<<<< HEAD
         ScrollView {
             VStack(spacing: spacing.xl) {
                 // Header
@@ -79,10 +81,27 @@ struct EmojiPickerCatalogView: View {
                         Text("Select an emoji.")
                             .typography(.bodyMedium)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
-                    }
+=======
+        CatalogPageContainer(title: "EmojiPicker") {
+            CatalogOverview(description: "カテゴリ別の絵文字を選択")
 
-                    Spacer()
+            SectionCard(title: "デモ") {
+                VStack(spacing: spacing.md) {
+                    emojiPreview
+
+                    Button(selectedEmoji == nil ? "絵文字を選択" : "絵文字を変更") {
+                        showEmojiPicker = true
+>>>>>>> upstream/main
+                    }
+                    .buttonStyle(.primary)
+                    .buttonSize(.medium)
+                    .emojiPicker(
+                        categories: sampleEmojiCategories,
+                        selectedEmoji: $selectedEmoji,
+                        isPresented: $showEmojiPicker
+                    )
                 }
+<<<<<<< HEAD
                 .padding(spacing.md)
                 .background(colorPalette.surfaceVariant.opacity(0.3))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -98,10 +117,11 @@ struct EmojiPickerCatalogView: View {
                     selectedEmoji: $selectedEmoji,
                     isPresented: $showEmojiPicker
                 )
+=======
+>>>>>>> upstream/main
             }
-        }
-    }
 
+<<<<<<< HEAD
     private var codeExampleSection: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
             Text("Code example")
@@ -110,6 +130,10 @@ struct EmojiPickerCatalogView: View {
 
             VStack(alignment: .leading, spacing: spacing.sm) {
                 codeBlock("""
+=======
+            SectionCard(title: "使用例") {
+                CodeExample(code: """
+>>>>>>> upstream/main
                     @State private var selectedEmoji: String?
                     @State private var showEmojiPicker = false
 
@@ -133,6 +157,7 @@ struct EmojiPickerCatalogView: View {
                         isPresented: $showEmojiPicker
                     )
                     """)
+<<<<<<< HEAD
 
                 Text("Categories and emojis:")
                     .typography(.bodySmall)
@@ -150,22 +175,42 @@ struct EmojiPickerCatalogView: View {
                 Text("• emoji – emoji string (e.g. \"😊\").")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
+=======
+>>>>>>> upstream/main
             }
         }
     }
 
-    private func codeBlock(_ code: String) -> some View {
-        Text(code)
-            .typography(.bodySmall)
-            .fontDesign(.monospaced)
-            .foregroundStyle(colorPalette.onSurface)
-            .padding(spacing.md)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(colorPalette.surfaceVariant.opacity(0.5))
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+    @ViewBuilder
+    private var emojiPreview: some View {
+        HStack(spacing: spacing.md) {
+            if let emoji = selectedEmoji {
+                Text(emoji)
+                    .font(.system(size: 48))
+                    .frame(width: 60, height: 60)
+                    .background(colors.primaryContainer)
+                    .clipShape(RoundedRectangle(cornerRadius: radius.lg))
+
+                Text(emoji)
+                    .typography(.headlineMedium)
+                    .foregroundStyle(colors.onSurface)
+            } else {
+                Text("絵文字を選択してください")
+                    .typography(.bodyMedium)
+                    .foregroundStyle(colors.onSurfaceVariant)
+            }
+
+            Spacer()
+        }
+        .padding(spacing.md)
+        .background(colors.surfaceVariant.opacity(0.3))
+        .clipShape(RoundedRectangle(cornerRadius: radius.lg))
     }
 
+<<<<<<< HEAD
     // Sample emoji categories
+=======
+>>>>>>> upstream/main
     private var sampleEmojiCategories: [EmojiCategory] {
         [
             EmojiCategory(

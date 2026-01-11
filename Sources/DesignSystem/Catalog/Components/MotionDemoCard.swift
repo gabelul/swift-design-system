@@ -4,8 +4,9 @@ import SwiftUI
 ///
 /// Interactive card that lets you experience each motion preset.
 struct MotionDemoCard: View {
-    @Environment(\.colorPalette) private var colorPalette
+    @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
+    @Environment(\.radiusScale) private var radius
 
     let spec: MotionSpec
     @State private var isAnimating = false
@@ -18,26 +19,31 @@ struct MotionDemoCard: View {
                     VStack(alignment: .leading, spacing: spacing.xs) {
                         Text(spec.name)
                             .typography(.titleSmall)
-                            .foregroundStyle(colorPalette.onSurface)
+                            .foregroundStyle(colors.onSurface)
 
                         Text(spec.usage)
                             .typography(.bodySmall)
-                            .foregroundStyle(colorPalette.onSurfaceVariant)
+                            .foregroundStyle(colors.onSurfaceVariant)
                             .lineLimit(2)
                             .minimumScaleFactor(0.9)
                     }
 
                     Spacer()
 
+<<<<<<< HEAD
                     // Spec display
                     VStack(alignment: .trailing, spacing: 2) {
+=======
+                    // 仕様表示
+                    VStack(alignment: .trailing, spacing: spacing.xs) {
+>>>>>>> upstream/main
                         Text(spec.duration)
                             .typography(.labelSmall)
-                            .foregroundStyle(colorPalette.primary)
+                            .foregroundStyle(colors.primary)
 
                         Text(spec.easing)
                             .typography(.labelSmall)
-                            .foregroundStyle(colorPalette.onSurfaceVariant)
+                            .foregroundStyle(colors.onSurfaceVariant)
                     }
                 }
                 .padding(spacing.md)
@@ -50,8 +56,8 @@ struct MotionDemoCard: View {
 
                 demoArea
                     .frame(height: max(availableHeight, 60))
-                    .background(colorPalette.surfaceVariant.opacity(0.5))
-                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                    .background(colors.surfaceVariant.opacity(0.5))
+                    .clipShape(RoundedRectangle(cornerRadius: radius.md))
                     .padding(.horizontal, spacing.md)
 
                 Spacer(minLength: 0)
@@ -67,15 +73,15 @@ struct MotionDemoCard: View {
                     .typography(.labelMedium)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, spacing.sm)
-                    .background(colorPalette.primary)
-                    .foregroundStyle(colorPalette.onPrimary)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .background(colors.primary)
+                    .foregroundStyle(colors.onPrimary)
+                    .clipShape(RoundedRectangle(cornerRadius: radius.sm))
                 }
                 .buttonStyle(.plain)
                 .padding(spacing.md)
             }
-            .background(colorPalette.surface)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
+            .background(colors.surface)
+            .clipShape(RoundedRectangle(cornerRadius: radius.lg))
             .elevation(.level1)
         }
     }
@@ -99,7 +105,7 @@ struct MotionDemoCard: View {
         HStack {
             Spacer()
             Circle()
-                .fill(colorPalette.primary)
+                .fill(colors.primary)
                 .frame(width: 60, height: 60)
                 .scaleEffect(isAnimating ? 0.85 : 1.0)
                 .opacity(isAnimating ? 0.7 : 1.0)
@@ -114,18 +120,18 @@ struct MotionDemoCard: View {
             let cardWidth: CGFloat = 60
             let cardHeight: CGFloat = 80
             let totalCards = 3
-            let spacing = spacing.md
-            let totalWidth = CGFloat(totalCards) * cardWidth + CGFloat(totalCards - 1) * spacing
+            let cardSpacing = spacing.md
+            let totalWidth = CGFloat(totalCards) * cardWidth + CGFloat(totalCards - 1) * cardSpacing
             let centerOffsetX = (geometry.size.width - totalWidth) / 2
             let centerOffsetY = (geometry.size.height - cardHeight) / 2
 
             ZStack(alignment: .topLeading) {
                 ForEach(0..<totalCards, id: \.self) { index in
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(colorPalette.primary.opacity(isAnimating && index == 1 ? 1.0 : 0.3))
+                    RoundedRectangle(cornerRadius: radius.sm)
+                        .fill(colors.primary.opacity(isAnimating && index == 1 ? 1.0 : 0.3))
                         .frame(width: cardWidth, height: cardHeight)
                         .offset(
-                            x: centerOffsetX + CGFloat(index) * (cardWidth + spacing) + (isAnimating ? CGFloat(index - 1) * 20 : 0),
+                            x: centerOffsetX + CGFloat(index) * (cardWidth + cardSpacing) + (isAnimating ? CGFloat(index - 1) * 20 : 0),
                             y: centerOffsetY
                         )
                         .animate(spec.animation(DefaultMotion()), value: isAnimating)
@@ -138,7 +144,7 @@ struct MotionDemoCard: View {
     private var springDemo: some View {
         VStack {
             Circle()
-                .fill(colorPalette.primary)
+                .fill(colors.primary)
                 .frame(width: 50, height: 50)
                 .offset(y: isAnimating ? 30 : -30)
                 .animate(spec.animation(DefaultMotion()), value: isAnimating)

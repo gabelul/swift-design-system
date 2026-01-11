@@ -8,6 +8,7 @@ struct CategorySectionView: View {
     let category: CatalogCategory
 
     var body: some View {
+<<<<<<< HEAD
         VStack(alignment: .leading, spacing: spacing.md) {
             // Category header
             HStack(spacing: spacing.sm) {
@@ -34,5 +35,11 @@ struct CategorySectionView: View {
         .padding(spacing.lg)
         .background(colors.surface)
         .shadow(color: .black.opacity(0.03), radius: 4, y: 2)
+=======
+        CategoryItemRow(category: category)
+            .padding(spacing.lg)
+            .background(colors.surface)
+            .elevation(.level1)
+>>>>>>> upstream/main
     }
 }

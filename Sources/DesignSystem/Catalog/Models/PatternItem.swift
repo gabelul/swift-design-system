@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 /// Pattern items
 enum PatternItem: String, CaseIterable, Identifiable {

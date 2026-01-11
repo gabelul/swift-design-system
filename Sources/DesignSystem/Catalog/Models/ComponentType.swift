@@ -1,4 +1,4 @@
-import Foundation
+import SwiftUI
 
 /// Component types
 enum ComponentType: String, CaseIterable, Identifiable {
@@ -8,10 +8,13 @@ enum ComponentType: String, CaseIterable, Identifiable {
     case colorPicker = "ColorPicker"
     case emojiPicker = "EmojiPicker"
     case fab = "FloatingActionButton"
+    case iconBadge = "IconBadge"
     case iconButton = "IconButton"
     case iconPicker = "IconPicker"
     case imagePicker = "ImagePicker"
+    case progressBar = "ProgressBar"
     case snackbar = "Snackbar"
+    case statDisplay = "StatDisplay"
     case textField = "TextField"
     case videoPicker = "VideoPicker"
     case videoPlayer = "VideoPlayer"
@@ -26,10 +29,13 @@ enum ComponentType: String, CaseIterable, Identifiable {
         case .colorPicker: return "paintpalette.fill"
         case .emojiPicker: return "face.smiling"
         case .fab: return "plus.circle.fill"
+        case .iconBadge: return "circle.fill"
         case .iconButton: return "heart.circle.fill"
         case .iconPicker: return "square.grid.3x3"
         case .imagePicker: return "photo.on.rectangle.angled"
+        case .progressBar: return "chart.bar.fill"
         case .snackbar: return "message.fill"
+        case .statDisplay: return "number.circle.fill"
         case .textField: return "textformat.abc"
         case .videoPicker: return "video.badge.plus"
         case .videoPlayer: return "play.rectangle.fill"
@@ -38,6 +44,7 @@ enum ComponentType: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
+<<<<<<< HEAD
         case .button: return "Three variants: Primary, Secondary, Tertiary."
         case .card: return "Container for grouping related content."
         case .chip: return "Compact label for statuses, categories, and filters."
@@ -51,6 +58,24 @@ enum ComponentType: String, CaseIterable, Identifiable {
         case .textField: return "Text input fields."
         case .videoPicker: return "Select videos from the camera or video library."
         case .videoPlayer: return "Play videos from data or URL."
+=======
+        case .button: return "Primary, Secondary, Tertiaryの3種類"
+        case .card: return "関連情報をグループ化するコンテナ"
+        case .chip: return "ステータス、カテゴリ、フィルター用のコンパクトなラベル"
+        case .colorPicker: return "プリセットカラーから色を選択"
+        case .emojiPicker: return "カテゴリ別の絵文字を選択"
+        case .fab: return "画面上の主要アクションボタン"
+        case .iconBadge: return "円形背景にアイコンを表示するバッジ"
+        case .iconButton: return "アイコンのみのコンパクトなボタン"
+        case .iconPicker: return "SF Symbolsアイコンを選択"
+        case .imagePicker: return "カメラと写真ライブラリから画像を選択"
+        case .progressBar: return "進捗状況を視覚的に表示するバー"
+        case .snackbar: return "一時的な通知とフィードバックを表示"
+        case .statDisplay: return "数値と単位を表示する統計コンポーネント"
+        case .textField: return "テキスト入力フィールド"
+        case .videoPicker: return "カメラと動画ライブラリから動画を選択"
+        case .videoPlayer: return "動画データやURLから動画を再生"
+>>>>>>> upstream/main
         }
     }
 }

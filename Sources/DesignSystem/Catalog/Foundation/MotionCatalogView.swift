@@ -1,14 +1,19 @@
 import SwiftUI
 
+<<<<<<< HEAD
 /// Motion catalog view
 ///
 /// Comprehensive catalog of animation timing and the motion system
+=======
+/// モーションカタログビュー
+>>>>>>> upstream/main
 struct MotionCatalogView: View {
-    @Environment(\.colorPalette) private var colorPalette
+    @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
     @Environment(\.motion) private var motion
 
     var body: some View {
+<<<<<<< HEAD
         ScrollView {
             VStack(alignment: .leading, spacing: spacing.xl) {
                 // 1. Overview
@@ -59,7 +64,12 @@ struct MotionCatalogView: View {
                 Text("Key features")
                     .typography(.titleMedium)
                     .foregroundStyle(colorPalette.onSurface)
+=======
+        CatalogPageContainer(title: "モーション") {
+            CatalogOverview(description: "デザインシステム全体で一貫したアニメーションタイミングを提供")
+>>>>>>> upstream/main
 
+            SectionCard(title: "主な機能") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
                     FeatureRow(icon: "accessibility", title: "Automatic accessibility handling (WCAG 2.1 compliant)")
                     FeatureRow(icon: "chart.line.uptrend.xyaxis", title: "Aligned with industry standards (Material Design 3, IBM Carbon)")
@@ -67,6 +77,7 @@ struct MotionCatalogView: View {
                     FeatureRow(icon: "wand.and.stars", title: "10 optimized timing presets")
                 }
             }
+<<<<<<< HEAD
             .padding(.horizontal, spacing.lg)
         }
     }
@@ -84,14 +95,15 @@ struct MotionCatalogView: View {
                 .typography(.bodyMedium)
                 .foregroundStyle(colorPalette.onSurfaceVariant)
                 .padding(.horizontal, spacing.lg)
+=======
+>>>>>>> upstream/main
 
             // Demos by category
             ForEach(MotionSpec.MotionCategory.allCases, id: \.self) { category in
                 categoryDemoSection(category: category)
             }
-        }
-    }
 
+<<<<<<< HEAD
     private func categoryDemoSection(category: MotionSpec.MotionCategory) -> some View {
         let specs = MotionSpec.all.filter { $0.category == category }
 
@@ -153,29 +165,36 @@ struct MotionCatalogView: View {
                             .frame(minWidth: 80, alignment: .leading)
                         Text("Easing")
                             .frame(maxWidth: .infinity, alignment: .leading)
+=======
+            SectionCard(title: "仕様表") {
+                VStack(spacing: 0) {
+                    HStack(spacing: spacing.sm) {
+                        Text("名前").frame(minWidth: 70, alignment: .leading)
+                        Text("Duration").frame(minWidth: 80, alignment: .leading)
+                        Text("Easing").frame(maxWidth: .infinity, alignment: .leading)
+>>>>>>> upstream/main
                     }
                     .typography(.labelMedium)
-                    .foregroundStyle(colorPalette.onSurfaceVariant)
+                    .foregroundStyle(colors.onSurfaceVariant)
                     .padding(spacing.sm)
-                    .background(colorPalette.surfaceVariant.opacity(0.5))
+                    .background(colors.surfaceVariant.opacity(0.5))
 
-                    // 各行
                     ForEach(MotionSpec.all) { spec in
                         VStack(spacing: 0) {
                             HStack(spacing: spacing.sm) {
                                 Text(spec.name)
                                     .typography(.bodyMedium)
-                                    .foregroundStyle(colorPalette.primary)
+                                    .foregroundStyle(colors.primary)
                                     .frame(minWidth: 70, alignment: .leading)
 
                                 Text(spec.duration)
                                     .typography(.bodySmall)
-                                    .foregroundStyle(colorPalette.onSurface)
+                                    .foregroundStyle(colors.onSurface)
                                     .frame(minWidth: 80, alignment: .leading)
 
                                 Text(spec.easing)
                                     .typography(.bodySmall)
-                                    .foregroundStyle(colorPalette.onSurfaceVariant)
+                                    .foregroundStyle(colors.onSurfaceVariant)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                             }
                             .padding(spacing.sm)
@@ -187,9 +206,8 @@ struct MotionCatalogView: View {
                     }
                 }
             }
-        }
-    }
 
+<<<<<<< HEAD
     // MARK: - 4. Usage examples
 
     private var usageExamplesSection: some View {
@@ -207,15 +225,17 @@ struct MotionCatalogView: View {
                         .foregroundStyle(colorPalette.onSurfaceVariant)
 
                     codeBlock("""
+=======
+            SectionCard(title: "使用例") {
+                CodeExample(code: """
+>>>>>>> upstream/main
                     @Environment(\\.motion) var motion
 
                     Button("Tap") { }
                         .scaleEffect(isPressed ? 0.98 : 1.0)
                         .animate(motion.tap, value: isPressed)
-                    """)
-                }
-            }
 
+<<<<<<< HEAD
             // Multiple animations
             SectionCard(title: "2. Multiple animations") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
@@ -227,11 +247,13 @@ struct MotionCatalogView: View {
                     Chip("Filter", isSelected: $selected)
                         .scaleEffect(isPressed ? 0.96 : 1.0)
                         .animate(motion.tap, value: isPressed)
+=======
+                    // 複数のアニメーション
+                    Chip("フィルター", isSelected: $selected)
+>>>>>>> upstream/main
                         .animate(motion.toggle, value: selected)
-                    """)
-                }
-            }
 
+<<<<<<< HEAD
             // Using withAnimation
             SectionCard(title: "3. Using withAnimation") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
@@ -240,15 +262,16 @@ struct MotionCatalogView: View {
                         .foregroundStyle(colorPalette.onSurfaceVariant)
 
                     codeBlock("""
+=======
+                    // withAnimationでの使用
+>>>>>>> upstream/main
                     withAnimation(motion.slow) {
                         themeProvider.applyTheme(newTheme)
                     }
                     """)
-                }
             }
-        }
-    }
 
+<<<<<<< HEAD
     // MARK: - 5. Accessibility
 
     private var accessibilitySection: some View {
@@ -300,6 +323,9 @@ struct MotionCatalogView: View {
 
             // Recommended patterns
             SectionCard(title: "✓ Recommended patterns") {
+=======
+            SectionCard(title: "ベストプラクティス") {
+>>>>>>> upstream/main
                 VStack(alignment: .leading, spacing: spacing.md) {
                     BestPracticeItem(
                         icon: "checkmark.circle.fill",
@@ -307,19 +333,15 @@ struct MotionCatalogView: View {
                         description: "Use tap for taps, toggle for state changes.",
                         isGood: true
                     )
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
                     Divider()
-
                     BestPracticeItem(
                         icon: "checkmark.circle.fill",
                         title: "Use the .animate() modifier",
                         description: "Always use .animate() to get automatic Reduce Motion support.",
                         isGood: true
                     )
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
                     Divider()
+<<<<<<< HEAD
 
                     BestPracticeItem(
                         icon: "checkmark.circle.fill",
@@ -334,12 +356,15 @@ struct MotionCatalogView: View {
             // Anti-patterns
             SectionCard(title: "✗ Anti-patterns") {
                 VStack(alignment: .leading, spacing: spacing.md) {
+=======
+>>>>>>> upstream/main
                     BestPracticeItem(
                         icon: "xmark.circle.fill",
                         title: "Hard-coded animation values",
                         description: "Avoid using .animation(.easeInOut(duration: 0.15)) directly.",
                         isGood: false
                     )
+<<<<<<< HEAD
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                     Divider()
@@ -361,23 +386,34 @@ struct MotionCatalogView: View {
                         isGood: false
                     )
                     .frame(maxWidth: .infinity, alignment: .leading)
+=======
+>>>>>>> upstream/main
                 }
             }
         }
     }
 
-    // MARK: - Helper Views
+    private func categoryDemoSection(category: MotionSpec.MotionCategory) -> some View {
+        let specs = MotionSpec.all.filter { $0.category == category }
 
-    private func codeBlock(_ code: String) -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            Text(code)
-                .typography(.bodySmall)
-                .fontDesign(.monospaced)
-                .padding(spacing.md)
+        return SectionCard(title: category.rawValue) {
+            VStack(alignment: .leading, spacing: spacing.md) {
+                Text(category.description)
+                    .typography(.bodySmall)
+                    .foregroundStyle(colors.onSurfaceVariant)
+
+                AspectGrid(
+                    minItemWidth: 160,
+                    maxItemWidth: 240,
+                    itemAspectRatio: 0.85,
+                    spacing: .md
+                ) {
+                    ForEach(specs) { spec in
+                        MotionDemoCard(spec: spec)
+                    }
+                }
+            }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(colorPalette.surfaceVariant)
-        .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 }
 

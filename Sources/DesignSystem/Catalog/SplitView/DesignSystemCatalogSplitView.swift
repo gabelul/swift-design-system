@@ -4,8 +4,6 @@ import SwiftUI
 /// Displays all elements of the design system hierarchically in a 3-column layout optimized for iPad
 public struct DesignSystemCatalogSplitView: View {
     @Environment(ThemeProvider.self) private var themeProvider
-    @Environment(\.colorPalette) private var colorPalette
-    @Environment(\.spacingScale) private var spacing
 
     // Column visibility
     @State private var columnVisibility: NavigationSplitViewVisibility = .all

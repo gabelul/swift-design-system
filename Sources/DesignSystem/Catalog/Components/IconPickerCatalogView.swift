@@ -2,13 +2,15 @@ import SwiftUI
 
 /// IconPicker (SF Symbols) catalog view
 struct IconPickerCatalogView: View {
-    @Environment(\.colorPalette) private var colorPalette
+    @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
+    @Environment(\.radiusScale) private var radius
 
     @State private var selectedIcon: String?
     @State private var showIconPicker = false
 
     var body: some View {
+<<<<<<< HEAD
         ScrollView {
             VStack(spacing: spacing.xl) {
                 // Header
@@ -81,10 +83,27 @@ struct IconPickerCatalogView: View {
                         Text("Please select an icon")
                             .typography(.bodyMedium)
                             .foregroundStyle(colorPalette.onSurfaceVariant)
-                    }
+=======
+        CatalogPageContainer(title: "IconPicker") {
+            CatalogOverview(description: "SF Symbolsアイコンを選択")
 
-                    Spacer()
+            SectionCard(title: "デモ") {
+                VStack(spacing: spacing.md) {
+                    iconPreview
+
+                    Button(selectedIcon == nil ? "アイコンを選択" : "アイコンを変更") {
+                        showIconPicker = true
+>>>>>>> upstream/main
+                    }
+                    .buttonStyle(.primary)
+                    .buttonSize(.medium)
+                    .iconPicker(
+                        categories: sampleSFSymbolsCategories,
+                        selectedIcon: $selectedIcon,
+                        isPresented: $showIconPicker
+                    )
                 }
+<<<<<<< HEAD
                 .padding(spacing.md)
                 .background(colorPalette.surfaceVariant.opacity(0.3))
                 .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -100,10 +119,11 @@ struct IconPickerCatalogView: View {
                     selectedIcon: $selectedIcon,
                     isPresented: $showIconPicker
                 )
+=======
+>>>>>>> upstream/main
             }
-        }
-    }
 
+<<<<<<< HEAD
     private var codeExampleSection: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
             Text("Code example")
@@ -112,6 +132,10 @@ struct IconPickerCatalogView: View {
 
             VStack(alignment: .leading, spacing: spacing.sm) {
                 codeBlock("""
+=======
+            SectionCard(title: "使用例") {
+                CodeExample(code: """
+>>>>>>> upstream/main
                     @State private var selectedIcon: String?
                     @State private var showIconPicker = false
 
@@ -135,6 +159,7 @@ struct IconPickerCatalogView: View {
                         isPresented: $showIconPicker
                     )
                     """)
+<<<<<<< HEAD
 
                 Text("Categories and icons:")
                     .typography(.bodySmall)
@@ -152,22 +177,44 @@ struct IconPickerCatalogView: View {
                 Text("• systemName - SF Symbols name (e.g., \"star.fill\")")
                     .typography(.bodySmall)
                     .foregroundStyle(colorPalette.onSurfaceVariant)
+=======
+>>>>>>> upstream/main
             }
         }
     }
 
-    private func codeBlock(_ code: String) -> some View {
-        Text(code)
-            .typography(.bodySmall)
-            .fontDesign(.monospaced)
-            .foregroundStyle(colorPalette.onSurface)
-            .padding(spacing.md)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(colorPalette.surfaceVariant.opacity(0.5))
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+    @ViewBuilder
+    private var iconPreview: some View {
+        HStack(spacing: spacing.md) {
+            if let icon = selectedIcon {
+                Image(systemName: icon)
+                    .font(.system(size: 32))
+                    .foregroundStyle(colors.primary)
+                    .frame(width: 50, height: 50)
+                    .background(colors.primaryContainer)
+                    .clipShape(RoundedRectangle(cornerRadius: radius.md))
+
+                Text(icon)
+                    .typography(.bodyMedium)
+                    .foregroundStyle(colors.onSurface)
+                    .fontDesign(.monospaced)
+            } else {
+                Text("アイコンを選択してください")
+                    .typography(.bodyMedium)
+                    .foregroundStyle(colors.onSurfaceVariant)
+            }
+
+            Spacer()
+        }
+        .padding(spacing.md)
+        .background(colors.surfaceVariant.opacity(0.3))
+        .clipShape(RoundedRectangle(cornerRadius: radius.lg))
     }
 
+<<<<<<< HEAD
     // Sample categories: SF Symbols
+=======
+>>>>>>> upstream/main
     private var sampleSFSymbolsCategories: [IconCategory] {
         [
             IconCategory(
