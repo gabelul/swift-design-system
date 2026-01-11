@@ -114,7 +114,7 @@ struct CatalogDetailView: View {
                 ContentUnavailableView {
                     Label("iOS Only", systemImage: "iphone")
                 } description: {
-                    Text("動画ピッカーはiOSでのみ利用可能です")
+                    Text("The video picker is only available on iOS.")
                 }
                 #endif
             case .videoPlayer:
@@ -125,7 +125,7 @@ struct CatalogDetailView: View {
                 ContentUnavailableView {
                     Label("iOS Only", systemImage: "iphone")
                 } description: {
-                    Text("動画プレイヤーはiOSでのみ利用可能です")
+                    Text("The video player is only available on iOS.")
                 }
                 #endif
             }

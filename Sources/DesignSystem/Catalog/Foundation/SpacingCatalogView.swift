@@ -4,7 +4,7 @@ import SwiftUI
 /// Spacing catalog view
 /// Visually displays all spacing values
 =======
-/// スペーシングカタログビュー
+/// Spacing catalog view
 >>>>>>> upstream/main
 struct SpacingCatalogView: View {
     @Environment(\.spacingScale) private var spacing

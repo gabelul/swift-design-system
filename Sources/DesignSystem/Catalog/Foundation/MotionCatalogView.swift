@@ -5,7 +5,7 @@ import SwiftUI
 ///
 /// Comprehensive catalog of animation timing and the motion system
 =======
-/// モーションカタログビュー
+/// Motion catalog view
 >>>>>>> upstream/main
 struct MotionCatalogView: View {
     @Environment(\.colorPalette) private var colors
@@ -69,7 +69,7 @@ struct MotionCatalogView: View {
             CatalogOverview(description: "デザインシステム全体で一貫したアニメーションタイミングを提供")
 >>>>>>> upstream/main
 
-            SectionCard(title: "主な機能") {
+            SectionCard(title: "Key features") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
                     FeatureRow(icon: "accessibility", title: "Automatic accessibility handling (WCAG 2.1 compliant)")
                     FeatureRow(icon: "chart.line.uptrend.xyaxis", title: "Aligned with industry standards (Material Design 3, IBM Carbon)")
@@ -141,11 +141,11 @@ struct MotionCatalogView: View {
         }
     }
 
-    // MARK: - 3. 仕様表セクション
+    // MARK: - 3. Specificationsセクション
 
     private var specificationsSection: some View {
         VStack(alignment: .leading, spacing: spacing.lg) {
-            Text("仕様表")
+            Text("Specifications")
                 .typography(.titleLarge)
                 .foregroundStyle(colorPalette.onSurface)
                 .padding(.horizontal, spacing.lg)
@@ -166,7 +166,7 @@ struct MotionCatalogView: View {
                         Text("Easing")
                             .frame(maxWidth: .infinity, alignment: .leading)
 =======
-            SectionCard(title: "仕様表") {
+            SectionCard(title: "Specifications") {
                 VStack(spacing: 0) {
                     HStack(spacing: spacing.sm) {
                         Text("名前").frame(minWidth: 70, alignment: .leading)
@@ -226,7 +226,7 @@ struct MotionCatalogView: View {
 
                     codeBlock("""
 =======
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage examples") {
                 CodeExample(code: """
 >>>>>>> upstream/main
                     @Environment(\\.motion) var motion
@@ -324,7 +324,7 @@ struct MotionCatalogView: View {
             // Recommended patterns
             SectionCard(title: "✓ Recommended patterns") {
 =======
-            SectionCard(title: "ベストプラクティス") {
+            SectionCard(title: "Best practices") {
 >>>>>>> upstream/main
                 VStack(alignment: .leading, spacing: spacing.md) {
                     BestPracticeItem(
