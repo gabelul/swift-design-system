@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// カタログの詳細ビュー
-/// NavigationSplitViewの最後のカラムで、選択されたアイテムの詳細を表示
+/// Detail view for the catalog
+/// Displays details of selected items in the last column of NavigationSplitView
 struct CatalogDetailView: View {
     let category: CatalogCategory?
     let foundationItem: FoundationItem?
@@ -91,7 +91,7 @@ struct CatalogDetailView: View {
                 ContentUnavailableView {
                     Label("iOS Only", systemImage: "iphone")
                 } description: {
-                    Text("画像ピッカーはiOSでのみ利用可能です")
+                    Text("Image picker is only available on iOS")
                 }
                 #endif
             case .progressBar:
@@ -114,7 +114,7 @@ struct CatalogDetailView: View {
                 ContentUnavailableView {
                     Label("iOS Only", systemImage: "iphone")
                 } description: {
-                    Text("動画ピッカーはiOSでのみ利用可能です")
+                    Text("Video picker is only available on iOS")
                 }
                 #endif
             case .videoPlayer:
@@ -125,7 +125,7 @@ struct CatalogDetailView: View {
                 ContentUnavailableView {
                     Label("iOS Only", systemImage: "iphone")
                 } description: {
-                    Text("動画プレイヤーはiOSでのみ利用可能です")
+                    Text("Video player is only available on iOS")
                 }
                 #endif
             }
@@ -154,9 +154,9 @@ struct CatalogDetailView: View {
         ZStack {
             Color.clear
             ContentUnavailableView {
-                Label("アイテムを選択", systemImage: "doc.text.fill")
+                Label("Select Item", systemImage: "doc.text.fill")
             } description: {
-                Text("コンテンツリストからアイテムを選択してください")
+                Text("Please select an item from the content list")
             }
         }
     }
@@ -165,9 +165,9 @@ struct CatalogDetailView: View {
         ZStack {
             Color.clear
             ContentUnavailableView {
-                Label("カタログを探索", systemImage: "book.fill")
+                Label("Explore Catalog", systemImage: "book.fill")
             } description: {
-                Text("サイドバーからカテゴリを選択して開始してください")
+                Text("Select a category from the sidebar to get started")
             }
         }
     }
