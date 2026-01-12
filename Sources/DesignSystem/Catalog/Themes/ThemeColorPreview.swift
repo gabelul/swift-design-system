@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// Theme color preview
+/// テーマカラープレビュー
 ///
-/// Visually displays all color palettes of a theme.
+/// テーマの全カラーパレットを視覚的に表示します。
 struct ThemeColorPreview: View {
     @Environment(ThemeProvider.self) private var themeProvider
     @Environment(\.colorPalette) private var colors
@@ -16,7 +16,7 @@ struct ThemeColorPreview: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("Color Palette")
+            Text("カラーパレット")
                 .typography(.titleMedium)
                 .foregroundStyle(colors.onSurface)
                 .padding(.horizontal, spacing.lg)
@@ -76,7 +76,6 @@ struct ThemeColorPreview: View {
 private struct ColorSection: View {
     @Environment(\.colorPalette) private var palette
     @Environment(\.spacingScale) private var spacing
-    @Environment(\.radiusScale) private var radius
 
     let title: String
     let colors: [(String, Color)]
@@ -87,13 +86,13 @@ private struct ColorSection: View {
                 .typography(.labelMedium)
                 .foregroundStyle(palette.onSurfaceVariant)
 
-            VStack(spacing: spacing.xxs) {
+            VStack(spacing: 1) {
                 ForEach(colors, id: \.0) { name, color in
                     ColorRow(name: name, color: color)
                 }
             }
             .background(palette.surface)
-            .clipShape(RoundedRectangle(cornerRadius: radius.md))
+            .clipShape(RoundedRectangle(cornerRadius: 8))
         }
     }
 }
@@ -103,12 +102,70 @@ private struct ColorSection: View {
 private struct ColorRow: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
-    @Environment(\.radiusScale) private var radius
 
     let name: String
     let color: Color
 
     var body: some View {
         HStack(spacing: spacing.md) {
-            // カラースウォッチ
-            RoundedRectangle(cornerRadius: radius.sm)
+            // Color swatch
+            RoundedRectangle(cornerRadius: 6)
+                .fill(color)
+                .frame(width: 40, height: 40)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 6)
+                        .strokeBorder(colors.outline, lineWidth: 1)
+                )
+
+            // カラー名
+            Text(name)
+                .typography(.bodyMedium)
+                .foregroundStyle(colors.onSurface)
+
+            Spacer()
+
+            // HEX値
+            if let hex = color.hexString {
+                Text(hex)
+                    .typography(.bodySmall)
+                    .foregroundStyle(colors.onSurfaceVariant)
+                    .font(.system(.caption, design: .monospaced))
+            }
+        }
+        .padding(.horizontal, spacing.sm)
+        .padding(.vertical, spacing.xs)
+        .background(colors.surface)
+    }
+}
+
+// MARK: - Color Extension for Hex String
+
+private extension Color {
+    var hexString: String? {
+        #if canImport(UIKit)
+            guard let components = UIColor(self).cgColor.components else { return nil }
+            let r = Int(components[0] * 255)
+            let g = Int(components[1] * 255)
+            let b = Int(components[2] * 255)
+            return String(format: "#%02X%02X%02X", r, g, b)
+        #elseif canImport(AppKit)
+            guard let color = NSColor(self).usingColorSpace(.sRGB) else { return nil }
+            let r = Int(color.redComponent * 255)
+            let g = Int(color.greenComponent * 255)
+            let b = Int(color.blueComponent * 255)
+            return String(format: "#%02X%02X%02X", r, g, b)
+        #else
+            return nil
+        #endif
+    }
+}
+
+#Preview {
+    @Previewable @State var themeProvider = ThemeProvider()
+
+    ScrollView {
+        ThemeColorPreview(theme: OceanTheme())
+            .environment(themeProvider)
+    }
+    .theme(themeProvider)
+}

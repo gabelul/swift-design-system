@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// タイポグラフィを適用するViewModifier
+/// ViewModifier that applies typography
 struct TypographyModifier: ViewModifier {
     let token: Typography
     let design: Font.Design?
@@ -13,13 +13,13 @@ struct TypographyModifier: ViewModifier {
 }
 
 public extension View {
-    /// タイポグラフィトークンを適用
+    /// Applies a typography token
     ///
     /// ```swift
-    /// Text("見出し")
+    /// Text("Headline")
     ///     .typography(.headlineLarge)
     ///
-    /// Text("見出し")
+    /// Text("Headline")
     ///     .typography(.headlineLarge, design: .serif)
     /// ```
     func typography(_ token: Typography, design: Font.Design? = nil) -> some View {

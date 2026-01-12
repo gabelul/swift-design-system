@@ -1,14 +1,12 @@
 import SwiftUI
 
-/// Theme detail view
+/// テーマ詳細ビュー
 ///
-/// Shows detailed information about a selected theme, with previews and apply button.
+/// 選択したテーマの詳細情報を表示し、プレビューと適用が可能です。
 public struct ThemeDetailView: View {
     @Environment(ThemeProvider.self) private var themeProvider
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
-    @Environment(\.radiusScale) private var radius
-    @Environment(\.motion) private var motion
 
     let theme: any Theme
 
@@ -28,7 +26,7 @@ public struct ThemeDetailView: View {
 
                         Spacer()
 
-                        // Category badge
+                        // カテゴリバッジ
                         Text(theme.category.rawValue)
                             .typography(.labelSmall)
                             .foregroundStyle(colors.onPrimaryContainer)
@@ -44,9 +42,9 @@ public struct ThemeDetailView: View {
                 }
                 .padding(.horizontal, spacing.lg)
 
-                // Mode switching
+                // モード切り替え
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("Mode")
+                    Text("モード")
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onSurface)
                         .padding(.horizontal, spacing.lg)
@@ -54,7 +52,7 @@ public struct ThemeDetailView: View {
                     HStack(spacing: spacing.md) {
                         ForEach(ThemeMode.allCases, id: \.self) { mode in
                             Button {
-                                withAnimation(motion.slow) {
+                                withAnimation(.easeInOut(duration: 0.3)) {
                                     themeProvider.themeMode = mode
                                 }
                             } label: {
@@ -75,25 +73,25 @@ public struct ThemeDetailView: View {
                     .padding(.horizontal, spacing.lg)
                 }
 
-                // Color palette
+                // カラーパレット
                 ThemeColorPreview(theme: theme)
 
-                // Component preview
+                // コンポーネントプレビュー
                 ComponentPreview()
 
-                // Apply button
+                // 適用ボタン
                 Button {
-                    withAnimation(motion.slow) {
+                    withAnimation(.easeInOut(duration: 0.3)) {
                         themeProvider.applyTheme(theme)
                     }
                 } label: {
-                    Text("Apply this theme")
+                    Text("このテーマを適用")
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onPrimary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, spacing.md)
                         .background(colors.primary)
-                        .clipShape(RoundedRectangle(cornerRadius: radius.lg))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
                 .disabled(themeProvider.currentTheme.id == theme.id)
                 .opacity(themeProvider.currentTheme.id == theme.id ? 0.5 : 1.0)
@@ -117,13 +115,13 @@ private struct ComponentPreview: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("Component Preview")
+            Text("コンポーネントプレビュー")
                 .typography(.titleMedium)
                 .foregroundStyle(colors.onSurface)
                 .padding(.horizontal, spacing.lg)
 
             VStack(spacing: spacing.md) {
-                // Buttons
+                // ボタン
                 HStack(spacing: spacing.sm) {
                     Button("Primary") {}
                         .buttonStyle(.primary)
@@ -138,14 +136,14 @@ private struct ComponentPreview: View {
                         .buttonSize(.medium)
                 }
 
-                // Card
+                // カード
                 Card(elevation: .level2) {
                     VStack(alignment: .leading, spacing: spacing.sm) {
-                        Text("Card component")
+                        Text("カードコンポーネント")
                             .typography(.titleSmall)
                             .foregroundStyle(colors.onSurface)
 
-                        Text("Preview how the card looks when this theme is applied.")
+                        Text("このテーマが適用された場合のカードの見た目を確認できます。")
                             .typography(.bodySmall)
                             .foregroundStyle(colors.onSurfaceVariant)
                     }

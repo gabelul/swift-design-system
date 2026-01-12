@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// Catalog content view
-/// Middle column of NavigationSplitView that shows the items for the selected category
+/// カタログのコンテンツビュー
+/// NavigationSplitViewの中央カラムで、選択されたカテゴリのアイテム一覧を表示
 struct CatalogContentView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -36,9 +36,9 @@ struct CatalogContentView: View {
 
     private var themeContentView: some View {
         ContentUnavailableView {
-            Label("Theme Gallery", systemImage: "paintpalette.fill")
+            Label("テーマギャラリー", systemImage: "paintpalette.fill")
         } description: {
-            Text("The theme gallery is shown in the detail area.")
+            Text("詳細エリアにテーマギャラリーが表示されます")
         }
         .background(colors.background)
     }
@@ -114,9 +114,9 @@ struct CatalogContentView: View {
 
     private var emptyStateView: some View {
         ContentUnavailableView {
-            Label("Select a category", systemImage: "sidebar.left")
+            Label("カテゴリを選択", systemImage: "sidebar.left")
         } description: {
-            Text("Select a category from the sidebar.")
+            Text("サイドバーからカテゴリを選択してください")
         }
         .background(colors.background)
     }

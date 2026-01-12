@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// Entry point for the patterns catalog
-/// Shows layout and design patterns
+/// パターンカタログのエントリポイント
+/// レイアウトパターンやデザインパターンを表示
 struct PatternsCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -9,26 +9,26 @@ struct PatternsCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: spacing.xl) {
-                // Header
+                // ヘッダー
                 VStack(spacing: spacing.sm) {
                     Image(systemName: "square.grid.3x3.fill")
                         .font(.system(size: 48))
                         .foregroundStyle(colors.primary)
 
-                    Text("Patterns Catalog")
+                    Text("パターンカタログ")
                         .typography(.headlineLarge)
                         .foregroundStyle(colors.onBackground)
 
-                    Text("Layout and design patterns")
+                    Text("レイアウトパターンやデザインパターン")
                         .typography(.bodySmall)
                         .foregroundStyle(colors.onSurfaceVariant)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, spacing.xl)
 
-                // Pattern list
+                // パターンリスト
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("Layout Patterns")
+                    Text("レイアウトパターン")
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onSurface)
                         .padding(.horizontal, spacing.lg)
@@ -43,3 +43,36 @@ struct PatternsCatalogView: View {
                                     title: pattern.rawValue,
                                     description: pattern.description
                                 )
+                            }
+                            .buttonStyle(.plain)
+                        }
+                    }
+                    .padding(.horizontal, spacing.lg)
+                }
+            }
+            .padding(.bottom, spacing.xl)
+        }
+        .background(colors.background)
+        .navigationTitle("パターン")
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
+    }
+
+    @ViewBuilder
+    private func destinationView(for pattern: PatternItem) -> some View {
+        switch pattern {
+        case .aspectGrid:
+            AspectGridCatalogView()
+        case .sectionCard:
+            SectionCardCatalogView()
+        }
+    }
+}
+
+#Preview {
+    NavigationStack {
+        PatternsCatalogView()
+            .theme(ThemeProvider())
+    }
+}

@@ -1,14 +1,14 @@
 import SwiftUI
 
-/// Design system catalog split view
-/// Displays all elements of the design system hierarchically in a 3-column layout optimized for iPad
+/// デザインシステムカタログのスプリットビュー
+/// iPadに最適化された3カラムレイアウトで、デザインシステムの全要素を階層的に表示
 public struct DesignSystemCatalogSplitView: View {
     @Environment(ThemeProvider.self) private var themeProvider
 
-    // Column visibility
+    // カラム可視性
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
 
-    // Selection state
+    // 選択状態
     @State private var selectedCategory: CatalogCategory? = .themes
     @State private var selectedFoundationItem: FoundationItem?
     @State private var selectedComponentItem: ComponentType?
@@ -18,10 +18,10 @@ public struct DesignSystemCatalogSplitView: View {
 
     public var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
-            // Sidebar: Category list
+            // Sidebar: カテゴリ一覧
             CatalogSidebarView(selectedCategory: $selectedCategory)
         } content: {
-            // Content: Item list for selected category
+            // Content: 選択されたカテゴリのアイテムリスト
             CatalogContentView(
                 category: selectedCategory,
                 selectedFoundationItem: $selectedFoundationItem,
@@ -29,7 +29,7 @@ public struct DesignSystemCatalogSplitView: View {
                 selectedPatternItem: $selectedPatternItem
             )
         } detail: {
-            // Detail: Details for selected item
+            // Detail: 選択されたアイテムの詳細
             CatalogDetailView(
                 category: selectedCategory,
                 foundationItem: selectedFoundationItem,
@@ -39,7 +39,7 @@ public struct DesignSystemCatalogSplitView: View {
         }
         .navigationSplitViewStyle(.balanced)
         .onChange(of: selectedCategory) { _, newCategory in
-            // Reset selection when category changes
+            // カテゴリが変わったら選択をリセット
             selectedFoundationItem = nil
             selectedComponentItem = nil
             selectedPatternItem = nil

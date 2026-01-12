@@ -1,43 +1,43 @@
 import SwiftUI
 
-/// タイトル付きカードセクション
+/// Card Section with Title
 ///
-/// タイトルとカード化されたコンテンツを組み合わせたレイアウトパターン。
-/// 設定画面、カタログビュー、ダッシュボードなど、情報をグループ化して表示する場面で使用します。
+/// A layout pattern combining a title with card-styled content.
+/// Used in settings screens, catalog views, dashboards, and other scenarios where information needs to be grouped and displayed.
 ///
-/// ## 使用例
+/// ## Usage Example
 /// ```swift
 /// @Environment(\.spacingScale) var spacing
 ///
 /// ScrollView {
-///     VStack(spacing: spacing.xl) {  // セクション間隔: 24pt
-///         SectionCard(title: "基本設定") {
+///     VStack(spacing: spacing.xl) {  // Section spacing: 24pt
+///         SectionCard(title: "Basic Settings") {
 ///             VStack(spacing: spacing.md) {
-///                 Toggle("通知を有効化", isOn: $isNotificationEnabled)
-///                 Toggle("ダークモード", isOn: $isDarkMode)
+///                 Toggle("Enable Notifications", isOn: $isNotificationEnabled)
+///                 Toggle("Dark Mode", isOn: $isDarkMode)
 ///             }
 ///         }
 ///
-///         SectionCard(title: "プロフィール", elevation: .level2) {
+///         SectionCard(title: "Profile", elevation: .level2) {
 ///             VStack(alignment: .leading) {
-///                 Text("名前: 山田太郎")
-///                 Text("メール: yamada@example.com")
+///                 Text("Name: John Doe")
+///                 Text("Email: john@example.com")
 ///             }
 ///         }
 ///     }
-///     // .padding(.horizontal) は不要 - SectionCardが管理
+///     // .padding(.horizontal) not needed - SectionCard manages it
 /// }
 /// ```
 ///
-/// ## スペーシング
-/// - タイトル-コンテンツ間: `spacing.md` (12pt)
-/// - 左右パディング: `spacing.lg` (16pt) - 自動適用
+/// ## Spacing
+/// - Title-Content spacing: `spacing.md` (12pt)
+/// - Horizontal padding: `spacing.lg` (16pt) - automatically applied
 ///
-/// ## 使用シーン
-/// - 設定画面のセクション分け
-/// - ダッシュボードのウィジェット配置
-/// - フォームのグループ化
-/// - カタログビューの項目表示
+/// ## Use Cases
+/// - Sectioning in settings screens
+/// - Dashboard widget placement
+/// - Form grouping
+/// - Item display in catalog views
 public struct SectionCard<Content: View>: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -46,11 +46,11 @@ public struct SectionCard<Content: View>: View {
     private let content: Content
     private let elevation: Elevation
 
-    /// タイトル付きカードセクションを作成
+    /// Creates a card section with title
     /// - Parameters:
-    ///   - title: セクションタイトル
-    ///   - elevation: カードの elevation レベル（デフォルト: .level1）
-    ///   - content: カード内に表示するコンテンツ
+    ///   - title: Section title
+    ///   - elevation: Card elevation level (default: .level1)
+    ///   - content: Content to display inside the card
     public init(
         title: String,
         elevation: Elevation = .level1,
@@ -80,19 +80,19 @@ public struct SectionCard<Content: View>: View {
 
     ScrollView {
         VStack(spacing: spacing.xl) {
-            SectionCard(title: "基本情報") {
+            SectionCard(title: "Basic Information") {
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("名前: 山田太郎")
+                    Text("Name: John Doe")
                         .typography(.bodyMedium)
-                    Text("メール: yamada@example.com")
+                    Text("Email: john@example.com")
                         .typography(.bodyMedium)
                 }
             }
 
-            SectionCard(title: "設定", elevation: .level2) {
+            SectionCard(title: "Settings", elevation: .level2) {
                 VStack(spacing: spacing.lg) {
                     HStack {
-                        Text("通知")
+                        Text("Notifications")
                         Spacer()
                         Text("ON")
                             .foregroundStyle(.secondary)
@@ -100,7 +100,7 @@ public struct SectionCard<Content: View>: View {
                     .typography(.bodyMedium)
 
                     HStack {
-                        Text("ダークモード")
+                        Text("Dark Mode")
                         Spacer()
                         Text("OFF")
                             .foregroundStyle(.secondary)

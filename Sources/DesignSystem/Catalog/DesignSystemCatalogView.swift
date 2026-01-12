@@ -1,13 +1,13 @@
 import SwiftUI
 
-/// Design system catalog entry point
-/// Displays all elements of the design system hierarchically
+/// デザインシステムカタログのエントリポイント
+/// デザインシステムの全要素を階層的に表示
 ///
-/// Automatically selects the optimal layout based on screen size:
-/// - Regular horizontal size class: 3-column NavigationSplitView
-/// - Compact horizontal size class: NavigationStack-based list display
+/// 画面サイズに応じて最適なレイアウトを自動選択：
+/// - Regular horizontal size class: 3カラムのNavigationSplitView
+/// - Compact horizontal size class: NavigationStackベースのリスト表示
 ///
-/// This ensures proper support for iPad Split View and Slide Over.
+/// これにより、iPad Split ViewやSlide Overでも適切に対応します。
 public struct DesignSystemCatalogView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// デザイントークンカタログのエントリポイント
+/// Entry point for design token catalog
 struct FoundationCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -14,7 +14,7 @@ struct FoundationCatalogView: View {
                         .font(.system(size: 48))
                         .foregroundStyle(colors.primary)
 
-                    Text("デザイントークン")
+                    Text("Design Tokens")
                         .typography(.headlineLarge)
                         .foregroundStyle(colors.onBackground)
 
@@ -25,9 +25,9 @@ struct FoundationCatalogView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.top, spacing.xl)
 
-                // トークンリスト
+                // Tokensリスト
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("トークン")
+                    Text("Tokens")
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onSurface)
                         .padding(.horizontal, spacing.lg)
@@ -52,7 +52,7 @@ struct FoundationCatalogView: View {
             .padding(.bottom, spacing.xl)
         }
         .background(colors.background)
-        .navigationTitle("デザイントークン")
+        .navigationTitle("Design Tokens")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

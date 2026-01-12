@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Elevationを適用するViewModifier
+/// ViewModifier that applies elevation
 struct ElevationModifier: ViewModifier {
     let level: Elevation
     @Environment(\.colorScheme) private var colorScheme
@@ -16,7 +16,7 @@ struct ElevationModifier: ViewModifier {
 }
 
 public extension View {
-    /// Elevationレベルを適用
+    /// Applies an elevation level
     ///
     /// ```swift
     /// RoundedRectangle(cornerRadius: 8)

@@ -1,6 +1,6 @@
-import SwiftUI
+import Foundation
 
-/// Component types
+/// コンポーネントの種類
 enum ComponentType: String, CaseIterable, Identifiable {
     case button = "Button"
     case card = "Card"
@@ -44,19 +44,22 @@ enum ComponentType: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .button: return "Three variants: Primary, Secondary, Tertiary"
-        case .card: return "Container for grouping related content"
-        case .chip: return "Compact label for statuses, categories, and filters"
-        case .colorPicker: return "Select colors from a preset palette"
-        case .emojiPicker: return "Select emojis grouped by category"
-        case .fab: return "Primary action button on the screen"
-        case .iconBadge: return "Badge displaying icon with circular background"
-        case .iconButton: return "Compact button containing only an icon"
-        case .iconPicker: return "Picker for SF Symbols icons"
-        case .imagePicker: return "Select images from camera or photo library"
-        case .progressBar: return "Bar that visually displays progress status"
-        case .snackbar: return "Shows temporary notifications and feedback"
-        case .statDisplay: return "Statistics display component showing values and units"
-        case .textField: return "Text input field"
-        case .videoPicker: return "Select videos from camera or video library"
-        case .videoPlayer: return "Play videos from data or URL"
+        case .button: return "Primary, Secondary, Tertiaryの3種類"
+        case .card: return "関連情報をグループ化するコンテナ"
+        case .chip: return "ステータス、カテゴリ、フィルター用のコンパクトなラベル"
+        case .colorPicker: return "プリセットカラーから色を選択"
+        case .emojiPicker: return "カテゴリ別の絵文字を選択"
+        case .fab: return "画面上の主要アクションボタン"
+        case .iconBadge: return "円形背景にアイコンを表示するバッジ"
+        case .iconButton: return "アイコンのみのコンパクトなボタン"
+        case .iconPicker: return "SF Symbolsアイコンを選択"
+        case .imagePicker: return "カメラと写真ライブラリから画像を選択"
+        case .progressBar: return "進捗状況を視覚的に表示するバー"
+        case .snackbar: return "一時的な通知とフィードバックを表示"
+        case .statDisplay: return "数値と単位を表示する統計コンポーネント"
+        case .textField: return "テキスト入力フィールド"
+        case .videoPicker: return "カメラと動画ライブラリから動画を選択"
+        case .videoPlayer: return "動画データやURLから動画を再生"
+        }
+    }
+}

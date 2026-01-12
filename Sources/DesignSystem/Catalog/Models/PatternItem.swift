@@ -1,6 +1,6 @@
-import SwiftUI
+import Foundation
 
-/// Pattern items
+/// パターンのアイテム
 enum PatternItem: String, CaseIterable, Identifiable {
     case aspectGrid = "AspectGrid"
     case sectionCard = "SectionCard"
@@ -16,8 +16,8 @@ enum PatternItem: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .aspectGrid: return "Grid layout with fixed aspect ratio."
-        case .sectionCard: return "Section container with a title."
+        case .aspectGrid: return "アスペクト比固定グリッドレイアウト"
+        case .sectionCard: return "タイトル付きセクションコンテナ"
         }
     }
 }

@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// Catalog sidebar view
-/// First column of NavigationSplitView that shows the category list
+/// カタログのサイドバービュー
+/// NavigationSplitViewの最初のカラムで、カテゴリ一覧を表示
 struct CatalogSidebarView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -12,24 +12,24 @@ struct CatalogSidebarView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: spacing.xl) {
-                // Header
+                // ヘッダー
                 VStack(spacing: spacing.sm) {
                     Image(systemName: "book.fill")
                         .font(.system(size: 32))
                         .foregroundStyle(colors.primary)
 
-                    Text("Design System")
+                    Text("デザインシステム")
                         .typography(.titleLarge)
                         .foregroundStyle(colors.onSurface)
 
-                    Text("Catalog")
+                    Text("カタログ")
                         .typography(.bodySmall)
                         .foregroundStyle(colors.onSurfaceVariant)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, spacing.lg)
 
-                // Category list
+                // カテゴリリスト
                 VStack(spacing: spacing.sm) {
                     ForEach(CatalogCategory.allCases) { category in
                         Button {
@@ -37,11 +37,11 @@ struct CatalogSidebarView: View {
                         } label: {
                             HStack(spacing: spacing.md) {
                                 Image(systemName: category.icon)
-                                    .typography(.titleSmall)
+                                    .font(.title3)
                                     .foregroundStyle(colors.primary)
                                     .frame(width: 32)
 
-                                VStack(alignment: .leading, spacing: spacing.xxs) {
+                                VStack(alignment: .leading, spacing: 2) {
                                     Text(category.rawValue)
                                         .typography(.bodyLarge)
                                         .foregroundStyle(colors.onSurface)
@@ -72,7 +72,7 @@ struct CatalogSidebarView: View {
             .padding(.bottom, spacing.xl)
         }
         .background(colors.background)
-        .navigationTitle("Categories")
+        .navigationTitle("カテゴリ")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

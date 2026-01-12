@@ -1,24 +1,24 @@
 import Foundation
 
-/// テーマのカラースキーム
+/// Theme color scheme
 ///
-/// アプリで使用可能なテーマの種類を定義します。
+/// Defines the types of themes available in the application.
 ///
-/// ## 使用例
+/// ## Usage Example
 /// ```swift
 /// @State private var selectedScheme: ThemeColorScheme = .light
 ///
-/// Picker("テーマ", selection: $selectedScheme) {
+/// Picker("Theme", selection: $selectedScheme) {
 ///     ForEach(ThemeColorScheme.allCases) { scheme in
 ///         Text(scheme.rawValue.capitalized).tag(scheme)
 ///     }
 /// }
 /// ```
 public enum ThemeColorScheme: String, CaseIterable, Identifiable {
-    /// ライトテーマ
+    /// Light theme
     case light
 
-    /// ダークテーマ
+    /// Dark theme
     case dark
 
     public var id: String { rawValue }

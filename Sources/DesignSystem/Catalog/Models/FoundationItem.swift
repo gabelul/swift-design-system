@@ -1,12 +1,12 @@
-import SwiftUI
+import Foundation
 
-/// Design token (Foundation) items
+/// デザイントークン（Foundation）のアイテム
 enum FoundationItem: String, CaseIterable, Identifiable {
-    case colors = "Colors"
-    case typography = "Typography"
-    case spacing = "Spacing"
-    case radius = "Radius"
-    case motion = "Motion"
+    case colors = "カラー"
+    case typography = "タイポグラフィ"
+    case spacing = "スペーシング"
+    case radius = "角丸"
+    case motion = "モーション"
 
     var id: String { rawValue }
 
@@ -22,11 +22,11 @@ enum FoundationItem: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .colors: return "Color palettes and semantic colors."
-        case .typography: return "Font size and line-height scale."
-        case .spacing: return "Spacing scale for layout."
-        case .radius: return "Corner radius scale."
-        case .motion: return "Animation timing and motion presets."
+        case .colors: return "カラーパレットとセマンティックカラー"
+        case .typography: return "フォントサイズと行間のスケール"
+        case .spacing: return "レイアウト用のスペーシングスケール"
+        case .radius: return "コーナー半径のスケール"
+        case .motion: return "アニメーションタイミングとモーション"
         }
     }
 }

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Button component catalog view
+/// ボタンコンポーネントのカタログビュー
 struct ButtonCatalogView: View {
     @Environment(\.spacingScale) private var spacing
     @State private var isButtonEnabled = true
@@ -29,3 +29,69 @@ struct ButtonCatalogView: View {
                         Button("Small") { }
                             .buttonStyle(.primary)
                             .buttonSize(.small)
+                    }
+                    .disabled(!isButtonEnabled)
+                }
+            }
+
+            SectionCard(title: "Secondary") {
+                VariantShowcase(
+                    title: "Secondary Button",
+                    description: "副次的なアクションに使用"
+                ) {
+                    VStack(spacing: spacing.md) {
+                        Button("Large") { }
+                            .buttonStyle(.secondary)
+                            .buttonSize(.large)
+
+                        Button("Medium") { }
+                            .buttonStyle(.secondary)
+                            .buttonSize(.medium)
+
+                        Button("Small") { }
+                            .buttonStyle(.secondary)
+                            .buttonSize(.small)
+                    }
+                    .disabled(!isButtonEnabled)
+                }
+            }
+
+            SectionCard(title: "Tertiary") {
+                VariantShowcase(
+                    title: "Tertiary Button",
+                    description: "最も控えめなテキストスタイル"
+                ) {
+                    VStack(spacing: spacing.md) {
+                        Button("Large") { }
+                            .buttonStyle(.tertiary)
+                            .buttonSize(.large)
+
+                        Button("Medium") { }
+                            .buttonStyle(.tertiary)
+                            .buttonSize(.medium)
+
+                        Button("Small") { }
+                            .buttonStyle(.tertiary)
+                            .buttonSize(.small)
+                    }
+                    .disabled(!isButtonEnabled)
+                }
+            }
+
+            SectionCard(title: "使用例") {
+                CodeExample(code: """
+                    Button("ログイン") { login() }
+                        .buttonStyle(.primary)
+                        .buttonSize(.large)
+                    """)
+            }
+        }
+    }
+}
+
+#Preview {
+    NavigationStack {
+        ButtonCatalogView()
+            .theme(ThemeProvider())
+    }
+}

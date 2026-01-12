@@ -34,7 +34,7 @@ import SwiftUI
 ///
 /// ## Switching themes
 /// ```swift
-/// // テーマを切り替え
+/// // Switch theme
 /// themeProvider.switchToTheme(id: "ocean")
 /// ```
 @Observable
@@ -71,7 +71,7 @@ public final class ThemeProvider {
     ) {
         // Start from built‑in themes.
         var themes = ThemeRegistry.builtInThemes
-        
+
         // If an initial theme is provided, add it to the list.
         if let initialTheme {
             // Avoid duplicates by theme id.
@@ -79,14 +79,14 @@ public final class ThemeProvider {
                 themes.append(initialTheme)
             }
         }
-        
+
         // Add additional themes, avoiding duplicates.
         for theme in additionalThemes {
             if !themes.contains(where: { $0.id == theme.id }) {
                 themes.append(theme)
             }
         }
-        
+
         self.availableThemes = themes
 
         // Set initial theme.

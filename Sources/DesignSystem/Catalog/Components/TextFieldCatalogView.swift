@@ -1,10 +1,9 @@
 import SwiftUI
 
-/// TextField component catalog view
+/// TextFieldコンポーネントのカタログビュー
 struct TextFieldCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
-    @Environment(\.radiusScale) private var radius
     @State private var email = ""
     @State private var password = ""
     @State private var username = ""
@@ -55,8 +54,8 @@ struct TextFieldCatalogView: View {
                         .padding(.horizontal, spacing.md)
                         .padding(.vertical, spacing.sm)
                         .background(colors.surfaceVariant.opacity(0.5))
-                        .clipShape(RoundedRectangle(cornerRadius: radius.xs))
-                        .overlay(RoundedRectangle(cornerRadius: radius.xs).stroke(colors.outline, lineWidth: 1))
+                        .clipShape(RoundedRectangle(cornerRadius: 4))
+                        .overlay(RoundedRectangle(cornerRadius: 4).stroke(colors.outline, lineWidth: 1))
                 }
             }
 
@@ -86,3 +85,16 @@ struct TextFieldCatalogView: View {
                         Button("登録") {}
                             .buttonStyle(.primary)
                             .buttonSize(.large)
+                    }
+                }
+            }
+        }
+    }
+}
+
+#Preview {
+    NavigationStack {
+        TextFieldCatalogView()
+            .theme(ThemeProvider())
+    }
+}
