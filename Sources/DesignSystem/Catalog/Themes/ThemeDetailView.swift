@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// テーマ詳細ビュー
+/// Theme detail view
 ///
-/// 選択したテーマの詳細情報を表示し、プレビューと適用が可能です。
+/// Displays detailed information about the selected theme, with preview and application capabilities.
 public struct ThemeDetailView: View {
     @Environment(ThemeProvider.self) private var themeProvider
     @Environment(\.colorPalette) private var colors
@@ -17,7 +17,7 @@ public struct ThemeDetailView: View {
     public var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: spacing.xl) {
-                // ヘッダー
+                // Header
                 VStack(alignment: .leading, spacing: spacing.sm) {
                     HStack {
                         Text(theme.name)
@@ -26,7 +26,7 @@ public struct ThemeDetailView: View {
 
                         Spacer()
 
-                        // カテゴリバッジ
+                        // Category badge
                         Text(theme.category.rawValue)
                             .typography(.labelSmall)
                             .foregroundStyle(colors.onPrimaryContainer)
@@ -42,9 +42,9 @@ public struct ThemeDetailView: View {
                 }
                 .padding(.horizontal, spacing.lg)
 
-                // モード切り替え
+                // Mode toggle
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("モード")
+                    Text("Mode")
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onSurface)
                         .padding(.horizontal, spacing.lg)
@@ -73,19 +73,19 @@ public struct ThemeDetailView: View {
                     .padding(.horizontal, spacing.lg)
                 }
 
-                // カラーパレット
+                // Color palette
                 ThemeColorPreview(theme: theme)
 
-                // コンポーネントプレビュー
+                // Component preview
                 ComponentPreview()
 
-                // 適用ボタン
+                // Apply button
                 Button {
                     withAnimation(.easeInOut(duration: 0.3)) {
                         themeProvider.applyTheme(theme)
                     }
                 } label: {
-                    Text("このテーマを適用")
+                    Text("Apply This Theme")
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onPrimary)
                         .frame(maxWidth: .infinity)
@@ -115,13 +115,13 @@ private struct ComponentPreview: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("コンポーネントプレビュー")
+            Text("Component Preview")
                 .typography(.titleMedium)
                 .foregroundStyle(colors.onSurface)
                 .padding(.horizontal, spacing.lg)
 
             VStack(spacing: spacing.md) {
-                // ボタン
+                // Buttons
                 HStack(spacing: spacing.sm) {
                     Button("Primary") {}
                         .buttonStyle(.primary)
@@ -136,14 +136,14 @@ private struct ComponentPreview: View {
                         .buttonSize(.medium)
                 }
 
-                // カード
+                // Card
                 Card(elevation: .level2) {
                     VStack(alignment: .leading, spacing: spacing.sm) {
-                        Text("カードコンポーネント")
+                        Text("Card Component")
                             .typography(.titleSmall)
                             .foregroundStyle(colors.onSurface)
 
-                        Text("このテーマが適用された場合のカードの見た目を確認できます。")
+                        Text("You can preview how the card looks when this theme is applied.")
                             .typography(.bodySmall)
                             .foregroundStyle(colors.onSurfaceVariant)
                     }

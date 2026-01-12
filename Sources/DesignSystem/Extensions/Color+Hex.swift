@@ -1,29 +1,29 @@
 import SwiftUI
 
 public extension Color {
-    /// HEX文字列からColorを作成
+    /// Creates a Color from a HEX string
     ///
-    /// カスタムブランドカラーやデザイナーから提供された色をHEX形式で定義できます。
-    /// `#`の有無、3桁/6桁/8桁のHEX形式に対応しています。
+    /// Allows defining custom brand colors or designer-provided colors in HEX format.
+    /// Supports HEX formats with or without `#`, in 3/6/8 digit formats.
     ///
-    /// - Parameter hex: HEX文字列（例: `"#FF5733"`, `"FF5733"`, `"#F57"`, `"AAFF5733"`）
+    /// - Parameter hex: HEX string (examples: `"#FF5733"`, `"FF5733"`, `"#F57"`, `"AAFF5733"`)
     ///
-    /// ## 使用例
+    /// ## Usage Examples
     /// ```swift
-    /// // 6桁HEX（最も一般的）
+    /// // 6-digit HEX (most common)
     /// let brandColor = Color(hex: "#FF5733")
     ///
-    /// // #なしでも可
+    /// // Also works without #
     /// let accentColor = Color(hex: "3B82F6")
     ///
-    /// // 3桁短縮形式
-    /// let redColor = Color(hex: "#F00")  // #FF0000と同じ
+    /// // 3-digit shorthand format
+    /// let redColor = Color(hex: "#F00")  // Same as #FF0000
     ///
-    /// // 8桁HEX（アルファチャンネル付き）
-    /// let semiTransparent = Color(hex: "80FF5733")  // 50%透明度
+    /// // 8-digit HEX (with alpha channel)
+    /// let semiTransparent = Color(hex: "80FF5733")  // 50% opacity
     /// ```
     ///
-    /// ## カスタムパレットでの使用
+    /// ## Usage in Custom Palettes
     /// ```swift
     /// struct MyBrandPalette: ColorPalette {
     ///     var primary: Color { Color(hex: "#007AFF") }
@@ -33,10 +33,10 @@ public extension Color {
     /// }
     /// ```
     ///
-    /// ## フォーマット
-    /// - **3桁**: RGB（各チャンネル4bit）- 例: `"F00"` → `"FF0000"`
-    /// - **6桁**: RGB（各チャンネル8bit）- 例: `"FF5733"`
-    /// - **8桁**: ARGB（アルファ+RGB）- 例: `"80FF5733"`
+    /// ## Formats
+    /// - **3 digits**: RGB (4-bit per channel) - example: `"F00"` → `"FF0000"`
+    /// - **6 digits**: RGB (8-bit per channel) - example: `"FF5733"`
+    /// - **8 digits**: ARGB (alpha + RGB) - example: `"80FF5733"`
     init(hex: String) {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         var int: UInt64 = 0

@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Snackbarコンポーネントのカタログビュー
+/// Snackbar component catalog view
 struct SnackbarCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -10,24 +10,24 @@ struct SnackbarCatalogView: View {
         ZStack {
             ScrollView {
                 VStack(spacing: spacing.xl) {
-                    CatalogOverview(description: "画面下部から表示される一時的な通知UI")
+                    CatalogOverview(description: "Temporary notification UI displayed from the bottom of the screen")
 
-                    SectionCard(title: "基本") {
-                        VariantShowcase(title: "シンプル", description: "メッセージのみ") {
-                            Button("表示") {
-                                snackbarState.show(message: "保存しました", duration: 3.0)
+                    SectionCard(title: "Basic") {
+                        VariantShowcase(title: "Simple", description: "Message only") {
+                            Button("Show") {
+                                snackbarState.show(message: "Saved", duration: 3.0)
                             }
                             .buttonStyle(.primary)
                         }
                     }
 
-                    SectionCard(title: "アクション付き") {
+                    SectionCard(title: "With Actions") {
                         VStack(alignment: .leading, spacing: spacing.md) {
-                            VariantShowcase(title: "単一アクション") {
-                                Button("表示") {
+                            VariantShowcase(title: "Single Action") {
+                                Button("Show") {
                                     snackbarState.show(
-                                        message: "削除しました",
-                                        primaryAction: SnackbarAction(title: "元に戻す") {},
+                                        message: "Deleted",
+                                        primaryAction: SnackbarAction(title: "Undo") {},
                                         duration: 5.0
                                     )
                                 }
@@ -36,12 +36,12 @@ struct SnackbarCatalogView: View {
 
                             Divider()
 
-                            VariantShowcase(title: "複数アクション") {
-                                Button("表示") {
+                            VariantShowcase(title: "Multiple Actions") {
+                                Button("Show") {
                                     snackbarState.show(
-                                        message: "ファイルを削除しますか？",
-                                        primaryAction: SnackbarAction(title: "削除") {},
-                                        secondaryAction: SnackbarAction(title: "キャンセル") {},
+                                        message: "Delete the file?",
+                                        primaryAction: SnackbarAction(title: "Delete") {},
+                                        secondaryAction: SnackbarAction(title: "Cancel") {},
                                         duration: 7.0
                                     )
                                 }
@@ -50,30 +50,30 @@ struct SnackbarCatalogView: View {
                         }
                     }
 
-                    SectionCard(title: "表示時間") {
+                    SectionCard(title: "Duration") {
                         HStack(spacing: spacing.md) {
-                            Button("3秒") {
-                                snackbarState.show(message: "3秒で消えます", duration: 3.0)
+                            Button("3 sec") {
+                                snackbarState.show(message: "Disappears in 3 seconds", duration: 3.0)
                             }
                             .buttonStyle(.secondary)
 
-                            Button("5秒") {
-                                snackbarState.show(message: "5秒で消えます", duration: 5.0)
+                            Button("5 sec") {
+                                snackbarState.show(message: "Disappears in 5 seconds", duration: 5.0)
                             }
                             .buttonStyle(.secondary)
 
-                            Button("10秒") {
-                                snackbarState.show(message: "10秒で消えます", duration: 10.0)
+                            Button("10 sec") {
+                                snackbarState.show(message: "Disappears in 10 seconds", duration: 10.0)
                             }
                             .buttonStyle(.secondary)
                         }
                     }
 
-                    SectionCard(title: "ベストプラクティス") {
+                    SectionCard(title: "Best Practices") {
                         VStack(alignment: .leading, spacing: spacing.md) {
-                            BestPracticeItem(icon: "checkmark.circle.fill", title: "簡潔なメッセージ", description: "1-2行で収まるように", isGood: true)
-                            BestPracticeItem(icon: "checkmark.circle.fill", title: "アクションは最大2つ", description: "多すぎると判断が難しくなる", isGood: true)
-                            BestPracticeItem(icon: "checkmark.circle.fill", title: "表示時間3-7秒", description: "重要な操作には十分な時間を確保", isGood: true)
+                            BestPracticeItem(icon: "checkmark.circle.fill", title: "Concise Messages", description: "Keep to 1-2 lines", isGood: true)
+                            BestPracticeItem(icon: "checkmark.circle.fill", title: "Max 2 Actions", description: "Too many makes decision difficult", isGood: true)
+                            BestPracticeItem(icon: "checkmark.circle.fill", title: "3-7 Second Duration", description: "Allow sufficient time for important actions", isGood: true)
                         }
                     }
                 }

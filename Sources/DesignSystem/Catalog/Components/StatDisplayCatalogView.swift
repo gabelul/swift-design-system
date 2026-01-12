@@ -1,15 +1,15 @@
 import SwiftUI
 
-/// StatDisplayコンポーネントのカタログビュー
+/// StatDisplay component catalog view
 struct StatDisplayCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
 
     var body: some View {
         CatalogPageContainer(title: "StatDisplay") {
-            CatalogOverview(description: "数値と単位を表示する統計表示コンポーネント")
+            CatalogOverview(description: "Statistics display component for showing values and units")
 
-            SectionCard(title: "サイズ") {
+            SectionCard(title: "Sizes") {
                 VStack(alignment: .leading, spacing: spacing.lg) {
                     LabeledVariant(label: "Small") { StatDisplay(value: "42.5", unit: "kg", size: .small) }
                     LabeledVariant(label: "Medium") { StatDisplay(value: "42.5", unit: "kg", size: .medium) }
@@ -18,7 +18,7 @@ struct StatDisplayCatalogView: View {
                 }
             }
 
-            SectionCard(title: "カラー") {
+            SectionCard(title: "Colors") {
                 VStack(alignment: .leading, spacing: spacing.md) {
                     StatDisplay(value: "5.43", unit: "kg", size: .large, valueColor: colors.primary)
                     StatDisplay(value: "1,234", unit: "kcal", size: .large, valueColor: colors.secondary)
@@ -26,14 +26,14 @@ struct StatDisplayCatalogView: View {
                 }
             }
 
-            SectionCard(title: "単位なし") {
+            SectionCard(title: "Without Unit") {
                 VStack(alignment: .leading, spacing: spacing.md) {
                     StatDisplay(value: "42", size: .medium)
                     StatDisplay(value: "1,234,567", size: .large)
                 }
             }
 
-            SectionCard(title: "配置") {
+            SectionCard(title: "Alignment") {
                 VStack(spacing: spacing.md) {
                     LabeledVariant(label: "Leading") {
                         StatDisplay(value: "100", unit: "pts", alignment: .leading)
@@ -49,22 +49,22 @@ struct StatDisplayCatalogView: View {
                 }
             }
 
-            SectionCard(title: "実用例") {
-                VariantShowcase(title: "ダッシュボード") {
+            SectionCard(title: "Practical Example") {
+                VariantShowcase(title: "Dashboard") {
                     HStack(spacing: spacing.xl) {
                         VStack(alignment: .leading, spacing: spacing.xs) {
-                            Text("筋肉量").typography(.labelMedium).foregroundStyle(colors.onSurfaceVariant)
+                            Text("Muscle Mass").typography(.labelMedium).foregroundStyle(colors.onSurfaceVariant)
                             StatDisplay(value: "5.43", unit: "kg", valueColor: colors.secondary)
                         }
                         VStack(alignment: .leading, spacing: spacing.xs) {
-                            Text("消費カロリー").typography(.labelMedium).foregroundStyle(colors.onSurfaceVariant)
+                            Text("Calories Burned").typography(.labelMedium).foregroundStyle(colors.onSurfaceVariant)
                             StatDisplay(value: "1,234", unit: "kcal", valueColor: colors.tertiary)
                         }
                     }
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Example") {
                 CodeExample(code: """
                     StatDisplay(
                         value: "1,234",
