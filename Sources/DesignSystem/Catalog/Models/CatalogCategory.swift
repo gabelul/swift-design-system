@@ -51,10 +51,10 @@ enum CatalogCategory: String, CaseIterable, Identifiable {
                 CatalogItem(name: "Patterns List", icon: "square.grid.3x3.fill", description: "Layout and other patterns.")
             ]
 =======
-        case .themes: return "全テーマを閲覧・切り替え"
-        case .foundations: return "Color, Typography, Spacingなど"
-        case .components: return "全コンポーネントのカタログ"
-        case .patterns: return "レイアウトパターンなど"
+        case .themes: return "Browse and switch themes"
+        case .foundations: return "Colors, Typography, Spacing, and more"
+        case .components: return "All component catalogs"
+        case .patterns: return "Layout patterns and more"
 >>>>>>> upstream/main
         }
     }
