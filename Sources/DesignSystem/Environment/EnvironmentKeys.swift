@@ -46,16 +46,16 @@ private struct MotionKey: EnvironmentKey {
 }
 
 extension EnvironmentValues {
-    /// モーションタイミング設定
+    /// Motion timing settings
     ///
-    /// 一貫したアニメーションタイミングを提供します。
-    /// `.animate()` モディファイアと組み合わせて使用します。
+    /// Provides consistent animation timing.
+    /// Use with `.animate()` modifier.
     ///
-    /// ## 使用例
+    /// ## Usage Examples
     /// ```swift
     /// @Environment(\.motion) var motion
     ///
-    /// Button("タップ") { }
+    /// Button("Tap") { }
     ///     .scaleEffect(isPressed ? 0.98 : 1.0)
     ///     .animate(motion.tap, value: isPressed)
     /// ```

@@ -1,30 +1,30 @@
 import SwiftUI
 
-/// Chipコンポーネントのサイズバリアント
+/// Chip Component Size Variants
 ///
-/// Chipのサイズを定義するトークンです。ステータス表示、カテゴリタグ、フィルターなど
-/// 用途に応じて適切なサイズを選択できます。
+/// Tokens that define the size of Chips. You can select the appropriate size
+/// for your use case, such as status displays, category tags, and filters.
 ///
-/// ## 使用例
+/// ## Usage Example
 /// ```swift
 /// Chip("Active", systemImage: "circle.fill")
-///     .chipSize(.medium)  // デフォルト
+///     .chipSize(.medium)  // Default
 ///
 /// Chip("New", systemImage: "bell.fill")
-///     .chipSize(.small)   // コンパクトな表示
+///     .chipSize(.small)   // Compact display
 /// ```
 ///
-/// ## サイズの使い分け
-/// - **Small**: 密集したレイアウト、補助的な情報（24pt）
-/// - **Medium**: 標準的な用途、読みやすさ重視（32pt）
+/// ## Size Guidelines
+/// - **Small**: For dense layouts, auxiliary information (24pt)
+/// - **Medium**: For standard use, prioritizing readability (32pt)
 public enum ChipSize: Sendable {
-    /// 小さいサイズ（24pt）- コンパクトなレイアウト
+    /// Small size (24pt) - For compact layouts
     case small
 
-    /// 中程度のサイズ（32pt）- 標準的なチップ
+    /// Medium size (32pt) - Standard chips
     case medium
 
-    /// Chipの高さ
+    /// Chip height
     var height: CGFloat {
         switch self {
         case .small: return 24
@@ -32,7 +32,7 @@ public enum ChipSize: Sendable {
         }
     }
 
-    /// 水平パディング
+    /// Horizontal padding
     var horizontalPadding: CGFloat {
         switch self {
         case .small: return 6
@@ -40,7 +40,7 @@ public enum ChipSize: Sendable {
         }
     }
 
-    /// 垂直パディング
+    /// Vertical padding
     var verticalPadding: CGFloat {
         switch self {
         case .small: return 2
@@ -48,7 +48,7 @@ public enum ChipSize: Sendable {
         }
     }
 
-    /// アイコンサイズ
+    /// Icon size
     var iconSize: CGFloat {
         switch self {
         case .small: return 14
@@ -56,7 +56,7 @@ public enum ChipSize: Sendable {
         }
     }
 
-    /// タイポグラフィトークン
+    /// Typography token
     var typography: Typography {
         switch self {
         case .small: return .labelSmall
@@ -65,13 +65,13 @@ public enum ChipSize: Sendable {
     }
 }
 
-/// ChipSize用のEnvironmentKey
+/// EnvironmentKey for ChipSize
 private struct ChipSizeKey: EnvironmentKey {
     static let defaultValue: ChipSize = .medium
 }
 
 public extension EnvironmentValues {
-    /// 環境から取得するChipSize
+    /// ChipSize retrieved from the environment
     var chipSize: ChipSize {
         get { self[ChipSizeKey.self] }
         set { self[ChipSizeKey.self] = newValue }

@@ -1,11 +1,11 @@
 import SwiftUI
 
-/// Snackbar（一時的な通知UI）
+/// Snackbar (Temporary Notification UI)
 ///
-/// 画面下部から表示される一時的な通知UI。
-/// ユーザーのアクションに対するフィードバックや、簡単な通知を表示します。
+/// A temporary notification UI that appears from the bottom of the screen.
+/// Displays feedback for user actions or simple notifications.
 ///
-/// ## 基本的な使い方
+/// ## Basic Usage
 /// ```swift
 /// @State private var snackbarState = SnackbarState()
 ///
@@ -16,29 +16,29 @@ import SwiftUI
 ///         Snackbar(state: snackbarState)
 ///     }
 ///     .onAppear {
-///         snackbarState.show(message: "保存しました")
+///         snackbarState.show(message: "Saved successfully")
 ///     }
 /// }
 /// ```
 ///
-/// ## アクション付きSnackbar
+/// ## Snackbar with Actions
 /// ```swift
 /// snackbarState.show(
-///     message: "削除しました",
-///     primaryAction: SnackbarAction(title: "元に戻す") {
-///         // 元に戻す処理
+///     message: "Deleted successfully",
+///     primaryAction: SnackbarAction(title: "Undo") {
+///         // Undo processing
 ///     },
-///     secondaryAction: SnackbarAction(title: "閉じる") {
+///     secondaryAction: SnackbarAction(title: "Close") {
 ///         snackbarState.dismiss()
 ///     }
 /// )
 /// ```
 ///
-/// ## デザインガイドライン
-/// - メッセージは簡潔に（1-2行）
-/// - アクションは最大2つまで
-/// - 自動消滅時間は3-7秒が推奨
-/// - 重要な操作には十分な時間を確保
+/// ## Design Guidelines
+/// - Keep messages concise (1-2 lines)
+/// - Maximum of 2 actions
+/// - Recommended auto-dismiss time is 3-7 seconds
+/// - Allow sufficient time for important operations
 public struct Snackbar: View {
     @Bindable public var state: SnackbarState
     @Environment(\.colorPalette) private var colors
@@ -55,7 +55,7 @@ public struct Snackbar: View {
 
             if state.isVisible {
                 HStack(spacing: spacing.md) {
-                    // メッセージ
+                    // Message
                     Text(state.message)
                         .typography(.bodyLarge)
                         .foregroundStyle(colors.onSurface)
@@ -64,7 +64,7 @@ public struct Snackbar: View {
 
                     Spacer(minLength: spacing.sm)
 
-                    // アクションボタン
+                    // Action buttons
                     HStack(spacing: spacing.sm) {
                         if let primary = state.primaryAction {
                             Button {

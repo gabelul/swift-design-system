@@ -1,39 +1,39 @@
 import SwiftUI
 
-/// ボタンのサイズバリアント
+/// Button size variants
 ///
-/// ボタンの高さ、パディング、フォントサイズを統一的に管理します。
+/// Uniformly manages button height, padding, and font size.
 ///
-/// ## 使用例
+/// ## Usage Examples
 /// ```swift
-/// Button("ログイン") {
+/// Button("Login") {
 ///     login()
 /// }
 /// .buttonStyle(.primary)
-/// .buttonSize(.large)  // 56pt高さ（デフォルト）
+/// .buttonSize(.large)  // 56pt height (default)
 ///
-/// Button("キャンセル") {
+/// Button("Cancel") {
 ///     cancel()
 /// }
 /// .buttonStyle(.secondary)
-/// .buttonSize(.small)  // 40pt高さ
+/// .buttonSize(.small)  // 40pt height
 /// ```
 ///
-/// ## サイズ一覧
-/// - **Large**: 56pt高さ - 主要なアクション（デフォルト）
-/// - **Medium**: 48pt高さ - 標準的なボタン
-/// - **Small**: 40pt高さ - コンパクトなレイアウト
+/// ## Size List
+/// - **Large**: 56pt height - Primary actions (default)
+/// - **Medium**: 48pt height - Standard buttons
+/// - **Small**: 40pt height - Compact layouts
 public enum ButtonSize: Sendable {
-    /// 大きいサイズ（56pt）- 主要なアクション
+    /// Large size (56pt) - Primary actions
     case large
 
-    /// 中程度のサイズ（48pt）- 標準的なボタン
+    /// Medium size (48pt) - Standard buttons
     case medium
 
-    /// 小さいサイズ（40pt）- コンパクトなレイアウト
+    /// Small size (40pt) - Compact layouts
     case small
 
-    /// ボタンの高さ
+    /// Button height
     var height: CGFloat {
         switch self {
         case .large: return 56
@@ -42,7 +42,7 @@ public enum ButtonSize: Sendable {
         }
     }
 
-    /// 水平パディング
+    /// Horizontal padding
     var horizontalPadding: CGFloat {
         switch self {
         case .large: return 24
@@ -51,7 +51,7 @@ public enum ButtonSize: Sendable {
         }
     }
 
-    /// タイポグラフィトークン
+    /// Typography token
     var typography: Typography {
         switch self {
         case .large: return .labelLarge
@@ -75,19 +75,19 @@ public extension EnvironmentValues {
 }
 
 public extension View {
-    /// ボタンのサイズを設定
+    /// Set button size
     ///
-    /// ボタンの高さ、パディング、テキストサイズを一括で変更します。
+    /// Changes button height, padding, and text size all at once.
     ///
-    /// - Parameter size: ボタンサイズ（`.large`, `.medium`, `.small`）
+    /// - Parameter size: Button size (`.large`, `.medium`, `.small`)
     ///
-    /// ## 使用例
+    /// ## Usage Examples
     /// ```swift
-    /// Button("ログイン") { }
+    /// Button("Login") { }
     ///     .buttonStyle(.primary)
     ///     .buttonSize(.medium)
     ///
-    /// Button("小さいボタン") { }
+    /// Button("Small Button") { }
     ///     .buttonStyle(.secondary)
     ///     .buttonSize(.small)
     /// ```

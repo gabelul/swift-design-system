@@ -1,11 +1,11 @@
 import SwiftUI
 
-/// Chipコンポーネントのスタイルプロトコル
+/// Chip Component Style Protocol
 ///
-/// ChipStyleプロトコルは、Chipの視覚的なバリエーションを定義します。
-/// SwiftUIのButtonStyleと同様のパターンで、再利用可能なスタイルを作成できます。
+/// The ChipStyle protocol defines visual variations for Chips.
+/// You can create reusable styles similar to SwiftUI's ButtonStyle pattern.
 ///
-/// ## カスタムスタイルの作成
+/// ## Creating Custom Styles
 /// ```swift
 /// struct CustomChipStyle: ChipStyle {
 ///     func makeBody(configuration: ChipStyleConfiguration) -> some View {
@@ -28,66 +28,66 @@ import SwiftUI
 /// }
 /// ```
 public protocol ChipStyle: Sendable {
-    /// スタイルが生成するViewの型
+    /// The View type produced by the style
     associatedtype Body: View
 
-    /// Chipの外観を構築します
-    /// - Parameter configuration: Chipの設定情報
-    /// - Returns: スタイル適用後のView
+    /// Builds the appearance of the Chip
+    /// - Parameter configuration: Chip configuration information
+    /// - Returns: View with the style applied
     @MainActor
     func makeBody(configuration: ChipStyleConfiguration) -> Body
 }
 
-/// ChipStyleに渡される設定情報
+/// Configuration information passed to ChipStyle
 ///
-/// Chipのラベル、アイコン、削除ハンドラ、選択状態などの情報を含みます。
+/// Contains information such as the Chip's label, icon, delete handler, selection state, etc.
 public struct ChipStyleConfiguration {
-    /// Chipのラベルテキスト
+    /// The Chip's label text
     public let label: AnyView
 
-    /// 先頭に表示するアイコン（オプション）
+    /// Icon to display at the beginning (optional)
     public let icon: AnyView?
 
-    /// 削除ボタンのハンドラ（オプション）
-    /// 設定されている場合、削除可能なInput Chipとして動作
+    /// Delete button handler (optional)
+    /// When set, operates as a deletable Input Chip
     public let onDelete: (() -> Void)?
 
-    /// 選択状態（フィルターチップなど）
+    /// Selection state (for filter chips, etc.)
     public let isSelected: Bool
 
-    /// 押下状態（タップ時のフィードバック用）
+    /// Pressed state (for tap feedback)
     public let isPressed: Bool
 
-    /// 現在のChipサイズ
+    /// Current Chip size
     public let size: ChipSize
 
-    /// カラーパレット
+    /// Color palette
     public let colorPalette: any ColorPalette
 
-    /// スペーシングスケール
+    /// Spacing scale
     public let spacingScale: any SpacingScale
 
-    /// 角丸スケール
+    /// Corner radius scale
     public let radiusScale: any RadiusScale
 
-    /// モーションタイミング
+    /// Motion timing
     public let motion: any Motion
 }
 
-/// ChipStyle用のEnvironmentKey
+/// EnvironmentKey for ChipStyle
 private struct ChipStyleKey: EnvironmentKey {
     static let defaultValue: AnyChipStyle = AnyChipStyle(FilledChipStyle())
 }
 
 public extension EnvironmentValues {
-    /// 環境から取得するChipStyle
+    /// ChipStyle retrieved from the environment
     var chipStyle: AnyChipStyle {
         get { self[ChipStyleKey.self] }
         set { self[ChipStyleKey.self] = newValue }
     }
 }
 
-/// 型消去されたChipStyle
+/// Type-erased ChipStyle
 public struct AnyChipStyle: ChipStyle {
     private let _makeBody: @MainActor @Sendable (ChipStyleConfiguration) -> AnyView
 

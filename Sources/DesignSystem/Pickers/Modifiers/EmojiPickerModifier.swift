@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// 絵文字ピッカーを表示するViewModifier
+/// ViewModifier for displaying emoji picker
 ///
-/// ## 使用例
+/// ## Usage Examples
 /// ```swift
 /// struct MyView: View {
 ///     @State private var selectedEmoji: String?
@@ -11,16 +11,16 @@ import SwiftUI
 ///     let categories = [
 ///         EmojiCategory(
 ///             id: "smileys",
-///             displayName: "顔・感情",
+///             displayName: "Faces & Emotions",
 ///             emojis: [
-///                 EmojiItem(id: "smile", emoji: "😊", displayName: "笑顔"),
-///                 EmojiItem(id: "laugh", emoji: "😂", displayName: "笑い"),
+///                 EmojiItem(id: "smile", emoji: "😊", displayName: "Smile"),
+///                 EmojiItem(id: "laugh", emoji: "😂", displayName: "Laugh"),
 ///             ]
 ///         )
 ///     ]
 ///
 ///     var body: some View {
-///         Button("絵文字を選択") {
+///         Button("Select Emoji") {
 ///             showEmojiPicker = true
 ///         }
 ///         .emojiPicker(
@@ -32,8 +32,8 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// ## 注意
-/// このピッカーは絵文字専用です。SF Symbolsを使用する場合は `.iconPicker()` を使用してください。
+/// ## Note
+/// This picker is for emojis only. Use `.iconPicker()` for SF Symbols.
 public struct EmojiPickerModifier: ViewModifier {
     let categories: [any EmojiCategoryProtocol]
     @Binding var selectedEmoji: String?
@@ -56,13 +56,13 @@ public struct EmojiPickerModifier: ViewModifier {
 // MARK: - View Extension
 
 public extension View {
-    /// 絵文字ピッカーを表示します
+    /// Displays emoji picker
     ///
     /// - Parameters:
-    ///   - categories: 表示する絵文字カテゴリのリスト
-    ///   - selectedEmoji: 選択された絵文字の値
-    ///   - isPresented: ピッカーの表示状態
-    /// - Returns: 絵文字ピッカーが追加されたView
+    ///   - categories: List of emoji categories to display
+    ///   - selectedEmoji: Value of selected emoji
+    ///   - isPresented: Picker display state
+    /// - Returns: View with emoji picker added
     func emojiPicker(
         categories: [any EmojiCategoryProtocol],
         selectedEmoji: Binding<String?>,
@@ -78,7 +78,7 @@ public extension View {
 
 // MARK: - Internal View
 
-/// 絵文字ピッカーの内部実装View（非公開）
+/// Internal implementation view of emoji picker (private)
 struct DSEmojiPickerView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -94,12 +94,12 @@ struct DSEmojiPickerView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // 検索バー
+                // Search bar
                 searchBar
                     .padding(.horizontal, spacing.md)
                     .padding(.vertical, spacing.sm)
 
-                // カテゴリごとの絵文字表示
+                // Emoji display by category
                 ScrollView {
                     VStack(alignment: .leading, spacing: spacing.lg) {
                         ForEach(Array(filteredCategories.enumerated()), id: \.offset) { index, category in
@@ -115,13 +115,13 @@ struct DSEmojiPickerView: View {
                 }
             }
             .background(colors.background)
-            .navigationTitle("絵文字を選択")
+            .navigationTitle("Select Emoji")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("キャンセル") {
+                    Button("Cancel") {
                         dismiss()
                     }
                     .foregroundColor(colors.onSurfaceVariant)
@@ -129,7 +129,7 @@ struct DSEmojiPickerView: View {
 
                 ToolbarItem(placement: .confirmationAction) {
                     if selectedEmoji != nil {
-                        Button("クリア") {
+                        Button("Clear") {
                             selectedEmoji = nil
                             dismiss()
                         }
@@ -146,7 +146,7 @@ struct DSEmojiPickerView: View {
                 .font(.system(size: 16))
                 .foregroundColor(colors.onSurfaceVariant)
 
-            TextField("絵文字を検索...", text: $searchText)
+            TextField("Search emojis...", text: $searchText)
                 .autocorrectionDisabled()
 
             if !searchText.isEmpty {

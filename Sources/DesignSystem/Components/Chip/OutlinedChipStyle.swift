@@ -1,11 +1,11 @@
 import SwiftUI
 
-/// Outlined Chipスタイル
+/// Outlined Chip Style
 ///
-/// 境界線のみを持つChipスタイルです。フィルター選択、セカンダリカテゴリ、
-/// 控えめな情報表示に適しています。
+/// A Chip style with only a border. Suitable for filter selection,
+/// secondary categories, and subtle information display.
 ///
-/// ## 使用例
+/// ## Usage Example
 /// ```swift
 /// Chip("Filter", systemImage: "line.3.horizontal.decrease", isSelected: $isFiltered)
 ///     .chipStyle(.outlined)
@@ -15,12 +15,12 @@ import SwiftUI
 ///     .foregroundColor(.blue)
 /// ```
 ///
-/// ## 視覚的特徴
-/// - 背景: 透明（選択時は10%不透明度）
-/// - 境界線: 1.5pt、outline color
-/// - テキスト: セマンティックカラー
-/// - 角丸: デザインシステムのradiusScale.xs
-/// - 選択時: 背景と境界線の色が強調される
+/// ## Visual Characteristics
+/// - Background: Transparent (10% opacity when selected)
+/// - Border: 1.5pt, outline color
+/// - Text: Semantic color
+/// - Corner radius: Design system's radiusScale.xs
+/// - When selected: Background and border colors are emphasized
 public struct OutlinedChipStyle: ChipStyle, Sendable {
     public init() {}
 
@@ -71,7 +71,7 @@ public struct OutlinedChipStyle: ChipStyle, Sendable {
 }
 
 public extension ChipStyle where Self == OutlinedChipStyle {
-    /// Outlined Chipスタイル
+    /// Outlined Chip style
     static var outlined: OutlinedChipStyle {
         OutlinedChipStyle()
     }

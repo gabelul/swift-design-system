@@ -1,15 +1,15 @@
 import SwiftUI
 
 extension View {
-    /// デザインシステムのテーマを適用
+    /// Applies design system theme
     ///
-    /// ThemeProviderを使用してView階層全体にテーマを適用します。
-    /// アプリのルートビューに適用することで、全ての子ビューでデザイントークンが利用可能になります。
+    /// Applies a theme to the entire View hierarchy using ThemeProvider.
+    /// By applying to the app's root view, design tokens become available in all child views.
     ///
-    /// - Parameter provider: ThemeProvider インスタンス
-    /// - Returns: テーマが適用されたView
+    /// - Parameter provider: ThemeProvider instance
+    /// - Returns: View with theme applied
     ///
-    /// ## 使用例
+    /// ## Usage Example
     /// ```swift
     /// @main
     /// struct MyApp: App {
@@ -18,13 +18,13 @@ extension View {
     ///     var body: some Scene {
     ///         WindowGroup {
     ///             ContentView()
-    ///                 .theme(themeProvider)  // ここで適用
+    ///                 .theme(themeProvider)  // Apply here
     ///         }
     ///     }
     /// }
     /// ```
     ///
-    /// テーマ適用後、子ビューでデザイントークンが使用可能：
+    /// After applying theme, design tokens can be used in child views:
     /// ```swift
     /// struct ContentView: View {
     ///     @Environment(\.colorPalette) var colors

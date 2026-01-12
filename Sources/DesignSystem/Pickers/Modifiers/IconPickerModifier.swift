@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// アイコンピッカーを表示するViewModifier（SF Symbols専用）
+/// ViewModifier for displaying icon picker (SF Symbols only)
 ///
-/// ## 使用例
+/// ## Usage Examples
 /// ```swift
 /// struct MyView: View {
 ///     @State private var selectedIcon: String?
@@ -11,16 +11,16 @@ import SwiftUI
 ///     let categories = [
 ///         IconCategory(
 ///             id: "general",
-///             displayName: "一般",
+///             displayName: "General",
 ///             icons: [
-///                 IconItem(id: "book", systemName: "book.fill", displayName: "本"),
-///                 IconItem(id: "briefcase", systemName: "briefcase.fill", displayName: "ビジネス"),
+///                 IconItem(id: "book", systemName: "book.fill", displayName: "Book"),
+///                 IconItem(id: "briefcase", systemName: "briefcase.fill", displayName: "Business"),
 ///             ]
 ///         )
 ///     ]
 ///
 ///     var body: some View {
-///         Button("SF Symbolsを選択") {
+///         Button("Select SF Symbols") {
 ///             showIconPicker = true
 ///         }
 ///         .iconPicker(
@@ -32,8 +32,8 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// ## 注意
-/// このピッカーはSF Symbols専用です。絵文字を使用する場合は `.emojiPicker()` を使用してください。
+/// ## Note
+/// This picker is for SF Symbols only. Use `.emojiPicker()` for emojis.
 public struct IconPickerModifier: ViewModifier {
     let categories: [any IconCategoryProtocol]
     @Binding var selectedIcon: String?
@@ -56,13 +56,13 @@ public struct IconPickerModifier: ViewModifier {
 // MARK: - View Extension
 
 public extension View {
-    /// アイコンピッカーを表示します
+    /// Displays icon picker
     ///
     /// - Parameters:
-///   - categories: 表示するアイコンカテゴリのリスト
-    ///   - selectedIcon: 選択されたアイコンの値
-    ///   - isPresented: ピッカーの表示状態
-    /// - Returns: アイコンピッカーが追加されたView
+    ///   - categories: List of icon categories to display
+    ///   - selectedIcon: Value of selected icon
+    ///   - isPresented: Picker display state
+    /// - Returns: View with icon picker added
     func iconPicker(
         categories: [any IconCategoryProtocol],
         selectedIcon: Binding<String?>,
@@ -78,7 +78,7 @@ public extension View {
 
 // MARK: - Internal View
 
-/// アイコンピッカーの内部実装View（非公開）
+/// Internal implementation view of icon picker (private)
 struct DSIconPickerView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -94,12 +94,12 @@ struct DSIconPickerView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // 検索バー
+                // Search bar
                 searchBar
                     .padding(.horizontal, spacing.md)
                     .padding(.vertical, spacing.sm)
 
-                // カテゴリごとのアイコン表示
+                // Icon display by category
                 ScrollView {
                     VStack(alignment: .leading, spacing: spacing.lg) {
                         ForEach(Array(filteredCategories.enumerated()), id: \.offset) { index, category in
@@ -115,13 +115,13 @@ struct DSIconPickerView: View {
                 }
             }
             .background(colors.background)
-            .navigationTitle("アイコンを選択")
+            .navigationTitle("Select Icon")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("キャンセル") {
+                    Button("Cancel") {
                         dismiss()
                     }
                     .foregroundColor(colors.onSurfaceVariant)
@@ -129,7 +129,7 @@ struct DSIconPickerView: View {
 
                 ToolbarItem(placement: .confirmationAction) {
                     if selectedIcon != nil {
-                        Button("クリア") {
+                        Button("Clear") {
                             selectedIcon = nil
                             dismiss()
                         }
@@ -146,7 +146,7 @@ struct DSIconPickerView: View {
                 .font(.system(size: 16))
                 .foregroundColor(colors.onSurfaceVariant)
 
-            TextField("アイコンを検索...", text: $searchText)
+            TextField("Search icons...", text: $searchText)
                 .autocorrectionDisabled()
 
             if !searchText.isEmpty {

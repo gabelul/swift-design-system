@@ -1,47 +1,47 @@
 import SwiftUI
 
-/// テキストフィールドコンポーネント
+/// Text field component
 ///
-/// ラベル、プレースホルダー、アイコン、補助テキスト、エラー表示を備えた高機能な入力フィールド。
-/// Outlined/Filledの2つのスタイルから選択できます。
+/// A high-functionality input field with label, placeholder, icon, supporting text, and error display.
+/// Choose between two styles: Outlined/Filled.
 ///
-/// ## 使用例
+/// ## Usage Examples
 /// ```swift
 /// @State private var email = ""
 /// @State private var password = ""
 /// @State private var errorMessage: String?
 ///
 /// VStack {
-///     // 基本的な使い方
+///     // Basic usage
 ///     DSTextField(
-///         "メールアドレス",
+///         "Email",
 ///         text: $email,
 ///         placeholder: "example@email.com",
 ///         leadingIcon: "envelope"
 ///     )
 ///
-///     // エラー表示
+///     // With error display
 ///     DSTextField(
-///         "パスワード",
+///         "Password",
 ///         text: $password,
-///         placeholder: "8文字以上",
+///         placeholder: "8 characters or more",
 ///         style: .filled,
 ///         error: errorMessage,
 ///         leadingIcon: "lock"
 ///     )
 ///
-///     // サポートテキスト付き
+///     // With supporting text
 ///     DSTextField(
-///         "ユーザー名",
+///         "Username",
 ///         text: $username,
-///         supportingText: "英数字のみ使用可能"
+///         supportingText: "Alphanumeric characters only"
 ///     )
 /// }
 /// ```
 ///
-/// ## スタイル
-/// - **Outlined**: 枠線のみ（デフォルト）- クリーンな印象
-/// - **Filled**: 背景色あり - 入力欄が明確
+/// ## Styles
+/// - **Outlined**: Border only (default) - Clean impression
+/// - **Filled**: With background color - Clear input field
 public struct DSTextField: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
@@ -176,11 +176,11 @@ public struct DSTextField: View {
     }
 }
 
-/// TextFieldのスタイル
+/// TextField style
 public enum TextFieldStyle {
-    /// 塗りつぶしスタイル
+    /// Filled style
     case filled
-    /// アウトラインスタイル
+    /// Outlined style
     case outlined
 }
 
@@ -190,7 +190,7 @@ struct DSTextFieldPreview: View {
     var body: some View {
         VStack(spacing: spacing.xl) {
             DSTextField(
-                "メールアドレス",
+                "Email",
                 text: .constant(""),
                 placeholder: "example@email.com",
                 style: .outlined,
@@ -198,20 +198,20 @@ struct DSTextFieldPreview: View {
             )
 
             DSTextField(
-                "パスワード",
+                "Password",
                 text: .constant(""),
-                placeholder: "パスワードを入力",
+                placeholder: "Enter password",
                 style: .filled,
-                supportingText: "8文字以上で入力してください",
+                supportingText: "Please enter at least 8 characters",
                 leadingIcon: "lock"
             )
 
             DSTextField(
-                "ユーザー名",
+                "Username",
                 text: .constant("invalid"),
-                placeholder: "ユーザー名",
+                placeholder: "Username",
                 style: .outlined,
-                error: "このユーザー名は既に使用されています"
+                error: "This username is already taken"
             )
         }
         .padding()

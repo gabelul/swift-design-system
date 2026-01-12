@@ -1,30 +1,29 @@
 import SwiftUI
 
-/// カテゴリアイテムの行ビュー
+/// Category item row view
 struct CategoryItemRow: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
     @Environment(\.radiusScale) private var radius
 
     let category: CatalogCategory
-    let item: CatalogItem
 
     var body: some View {
         NavigationLink {
-            CatalogRouter.destination(for: category, item: item)
+            CatalogRouter.destination(for: category)
         } label: {
             HStack(spacing: spacing.md) {
-                Image(systemName: item.icon)
+                Image(systemName: category.icon)
                     .font(.title3)
                     .foregroundStyle(colors.primary)
                     .frame(width: 32)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(item.name)
+                    Text(category.rawValue)
                         .typography(.bodyLarge)
                         .foregroundStyle(colors.onSurface)
 
-                    Text(item.description)
+                    Text(category.description)
                         .typography(.bodySmall)
                         .foregroundStyle(colors.onSurfaceVariant)
                 }

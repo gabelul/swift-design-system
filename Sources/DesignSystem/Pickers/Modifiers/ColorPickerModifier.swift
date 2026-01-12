@@ -1,15 +1,15 @@
 import SwiftUI
 
-/// カラーピッカーを表示するViewModifier
+/// ViewModifier for displaying color picker
 ///
-/// ## 使用例
+/// ## Usage Examples
 /// ```swift
 /// struct MyView: View {
 ///     @State private var selectedColor: String?
 ///     @State private var showColorPicker = false
 ///
 ///     var body: some View {
-///         Button("色を選択") {
+///         Button("Select Color") {
 ///             showColorPicker = true
 ///         }
 ///         .colorPicker(
@@ -42,13 +42,13 @@ public struct ColorPickerModifier: ViewModifier {
 // MARK: - View Extension
 
 public extension View {
-    /// カラーピッカーを表示します
+    /// Displays color picker
     ///
     /// - Parameters:
-    ///   - preset: 表示するカラープリセット（デフォルト: `.tagFriendly`）
-    ///   - selectedColor: 選択された色のHexコード
-    ///   - isPresented: ピッカーの表示状態
-    /// - Returns: カラーピッカーが追加されたView
+    ///   - preset: Color preset to display (default: `.tagFriendly`)
+    ///   - selectedColor: Hex code of selected color
+    ///   - isPresented: Picker display state
+    /// - Returns: View with color picker added
     func colorPicker(
         preset: ColorPreset = .tagFriendly,
         selectedColor: Binding<String?>,
@@ -64,7 +64,7 @@ public extension View {
 
 // MARK: - Internal View
 
-/// カラーピッカーの内部実装View（非公開）
+/// Internal implementation view of color picker (private)
 struct DSColorPickerView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -79,24 +79,24 @@ struct DSColorPickerView: View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: spacing.lg) {
-                    // プレビューセクション
+                    // Preview section
                     if let selectedHex = selectedColor {
                         previewSection(hex: selectedHex)
                     }
 
-                    // カラーグリッド
+                    // Color grid
                     colorGridSection
                 }
                 .padding(spacing.md)
             }
             .background(colors.background)
-            .navigationTitle("カラーを選択")
+            .navigationTitle("Select Color")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("キャンセル") {
+                    Button("Cancel") {
                         dismiss()
                     }
                     .foregroundColor(colors.onSurfaceVariant)
@@ -104,7 +104,7 @@ struct DSColorPickerView: View {
 
                 ToolbarItem(placement: .confirmationAction) {
                     if selectedColor != nil {
-                        Button("クリア") {
+                        Button("Clear") {
                             selectedColor = nil
                         }
                         .foregroundColor(colors.primary)
@@ -125,7 +125,7 @@ struct DSColorPickerView: View {
                 )
 
             VStack(alignment: .leading, spacing: spacing.xs) {
-                Text("選択中の色")
+                Text("Selected Color")
                     .font(.caption)
                     .foregroundColor(colors.onSurfaceVariant)
                 Text(hex.uppercased())

@@ -1,29 +1,29 @@
 import SwiftUI
 
-/// セカンダリボタンスタイル
+/// Secondary button style
 ///
-/// 補助的なアクションに使用するボタンスタイル。
-/// SecondaryContainer色の背景でPrimaryより控えめに強調し、画面内に複数配置できます。
+/// Button style for auxiliary actions.
+/// Uses SecondaryContainer color background for less emphasis than Primary, allowing multiple buttons on screen.
 ///
-/// ## 使用例
+/// ## Usage Examples
 /// ```swift
 /// HStack {
-///     Button("キャンセル") {
+///     Button("Cancel") {
 ///         cancel()
 ///     }
 ///     .buttonStyle(.secondary)
 ///
-///     Button("保存") {
+///     Button("Save") {
 ///         save()
 ///     }
 ///     .buttonStyle(.primary)
 /// }
 /// ```
 ///
-/// ## 使用シーン
-/// - キャンセルボタン
-/// - 代替アクション
-/// - フォームのリセットボタン
+/// ## Use Cases
+/// - Cancel buttons
+/// - Alternative actions
+/// - Form reset buttons
 public struct SecondaryButtonStyle: ButtonStyle {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.buttonSize) private var buttonSize
@@ -52,7 +52,7 @@ public struct SecondaryButtonStyle: ButtonStyle {
 }
 
 public extension ButtonStyle where Self == SecondaryButtonStyle {
-    /// セカンダリボタンスタイル
+    /// Secondary button style
     static var secondary: SecondaryButtonStyle {
         SecondaryButtonStyle()
     }

@@ -1,23 +1,23 @@
 import SwiftUI
 
-/// アイコンボタン
+/// Icon button
 ///
-/// SF Symbolsアイコンを使用した円形のボタンコンポーネント。
-/// コンパクトで、ツールバーやナビゲーションバーに最適です。
+/// Circular button component using SF Symbols icons.
+/// Compact and ideal for toolbars and navigation bars.
 ///
-/// ## 使用例
+/// ## Usage Examples
 /// ```swift
-/// // 標準スタイル
+/// // Standard style
 /// IconButton(icon: "heart") {
 ///     toggleFavorite()
 /// }
 ///
-/// // 塗りつぶしスタイル
+/// // Filled style
 /// IconButton(icon: "star.fill", style: .filled) {
 ///     addToFavorites()
 /// }
 ///
-/// // サイズ指定
+/// // Size specification
 /// HStack {
 ///     IconButton(icon: "gear", size: .small) { }
 ///     IconButton(icon: "gear", size: .medium) { }
@@ -25,11 +25,11 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// ## スタイルバリエーション
-/// - **Standard**: 背景なし、アイコンのみ
-/// - **Filled**: Primary色の背景
-/// - **Tonal**: SecondaryContainer色の背景
-/// - **Outlined**: アウトラインのみ（背景なし）
+/// ## Style Variations
+/// - **Standard**: No background, icon only
+/// - **Filled**: Primary color background
+/// - **Tonal**: SecondaryContainer color background
+/// - **Outlined**: Outline only (no background)
 public struct IconButton: View {
     @Environment(\.colorPalette) private var colorPalette
 
@@ -88,19 +88,19 @@ public struct IconButton: View {
     }
 }
 
-/// IconButtonのスタイル
+/// IconButton style
 public enum IconButtonStyle {
-    /// 標準（背景なし）
+    /// Standard (no background)
     case standard
-    /// 塗りつぶし（プライマリカラー背景）
+    /// Filled (primary color background)
     case filled
-    /// トーン（セカンダリコンテナ背景）
+    /// Tonal (secondary container background)
     case tonal
-    /// アウトライン（枠線のみ）
+    /// Outlined (border only)
     case outlined
 }
 
-/// IconButtonのサイズ
+/// IconButton size
 public enum IconButtonSize {
     case small
     case medium
