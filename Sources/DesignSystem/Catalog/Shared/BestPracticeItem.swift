@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// ベストプラクティス項目を表示するビュー
+/// View for displaying best practice items
 struct BestPracticeItem: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing

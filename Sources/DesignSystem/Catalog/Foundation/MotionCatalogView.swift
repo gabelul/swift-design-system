@@ -1,33 +1,33 @@
 import SwiftUI
 
-/// モーションカタログビュー
+/// Motion catalog view
 struct MotionCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
     @Environment(\.motion) private var motion
 
     var body: some View {
-        CatalogPageContainer(title: "モーション") {
-            CatalogOverview(description: "デザインシステム全体で一貫したアニメーションタイミングを提供")
+        CatalogPageContainer(title: "Motion") {
+            CatalogOverview(description: "Consistent animation timing throughout the design system")
 
-            SectionCard(title: "主な機能") {
+            SectionCard(title: "Key Features") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    FeatureRow(icon: "accessibility", title: "自動アクセシビリティ対応（WCAG 2.1準拠）")
-                    FeatureRow(icon: "chart.line.uptrend.xyaxis", title: "業界標準準拠（Material Design 3, IBM Carbon）")
-                    FeatureRow(icon: "swift", title: "SwiftUIネイティブAPI")
-                    FeatureRow(icon: "wand.and.stars", title: "10種類の最適化されたタイミング")
+                    FeatureRow(icon: "accessibility", title: "Automatic accessibility support (WCAG 2.1 compliant)")
+                    FeatureRow(icon: "chart.line.uptrend.xyaxis", title: "Industry standard compliance (Material Design 3, IBM Carbon)")
+                    FeatureRow(icon: "swift", title: "SwiftUI native API")
+                    FeatureRow(icon: "wand.and.stars", title: "10 optimized timing presets")
                 }
             }
 
-            // カテゴリ別デモ
+            // Demo by category
             ForEach(MotionSpec.MotionCategory.allCases, id: \.self) { category in
                 categoryDemoSection(category: category)
             }
 
-            SectionCard(title: "仕様表") {
+            SectionCard(title: "Specification Table") {
                 VStack(spacing: 0) {
                     HStack(spacing: spacing.sm) {
-                        Text("名前").frame(minWidth: 70, alignment: .leading)
+                        Text("Name").frame(minWidth: 70, alignment: .leading)
                         Text("Duration").frame(minWidth: 80, alignment: .leading)
                         Text("Easing").frame(maxWidth: .infinity, alignment: .leading)
                     }
@@ -64,45 +64,45 @@ struct MotionCatalogView: View {
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Example") {
                 CodeExample(code: """
                     @Environment(\\.motion) var motion
 
-                    Button("タップ") { }
+                    Button("Tap") { }
                         .scaleEffect(isPressed ? 0.98 : 1.0)
                         .animate(motion.tap, value: isPressed)
 
-                    // 複数のアニメーション
-                    Chip("フィルター", isSelected: $selected)
+                    // Multiple animations
+                    Chip("Filter", isSelected: $selected)
                         .animate(motion.toggle, value: selected)
 
-                    // withAnimationでの使用
+                    // Using with withAnimation
                     withAnimation(motion.slow) {
                         themeProvider.applyTheme(newTheme)
                     }
                     """)
             }
 
-            SectionCard(title: "ベストプラクティス") {
+            SectionCard(title: "Best Practices") {
                 VStack(alignment: .leading, spacing: spacing.md) {
                     BestPracticeItem(
                         icon: "checkmark.circle.fill",
-                        title: "適切なモーションを選択",
-                        description: "タップには tap、状態変化には toggle を使用",
+                        title: "Choose appropriate motion",
+                        description: "Use tap for taps, toggle for state changes",
                         isGood: true
                     )
                     Divider()
                     BestPracticeItem(
                         icon: "checkmark.circle.fill",
-                        title: ".animate() modifierを使用",
-                        description: "Reduce Motion自動対応のため必ず使用",
+                        title: "Use .animate() modifier",
+                        description: "Always use for automatic Reduce Motion support",
                         isGood: true
                     )
                     Divider()
                     BestPracticeItem(
                         icon: "xmark.circle.fill",
-                        title: "ハードコード値の使用",
-                        description: ".animation(.easeInOut(duration: 0.15)) は避ける",
+                        title: "Avoid hardcoded values",
+                        description: "Avoid .animation(.easeInOut(duration: 0.15))",
                         isGood: false
                     )
                 }

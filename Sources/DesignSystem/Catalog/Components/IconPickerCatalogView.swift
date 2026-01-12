@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// IconPicker（SF Symbols）のカタログビュー
+/// Catalog view for IconPicker (SF Symbols) component
 struct IconPickerCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -10,13 +10,13 @@ struct IconPickerCatalogView: View {
 
     var body: some View {
         CatalogPageContainer(title: "IconPicker") {
-            CatalogOverview(description: "SF Symbolsアイコンを選択")
+            CatalogOverview(description: "Select SF Symbols icon")
 
-            SectionCard(title: "デモ") {
+            SectionCard(title: "Demo") {
                 VStack(spacing: spacing.md) {
                     iconPreview
 
-                    Button(selectedIcon == nil ? "アイコンを選択" : "アイコンを変更") {
+                    Button(selectedIcon == nil ? "Select Icon" : "Change Icon") {
                         showIconPicker = true
                     }
                     .buttonStyle(.primary)
@@ -29,7 +29,7 @@ struct IconPickerCatalogView: View {
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Examples") {
                 CodeExample(code: """
                     @State private var selectedIcon: String?
                     @State private var showIconPicker = false
@@ -37,7 +37,7 @@ struct IconPickerCatalogView: View {
                     let categories = [
                         IconCategory(
                             id: "general",
-                            displayName: "一般",
+                            displayName: "General",
                             icons: [
                                 IconItem(id: "book", systemName: "book.fill"),
                                 IconItem(id: "heart", systemName: "heart.fill")
@@ -45,7 +45,7 @@ struct IconPickerCatalogView: View {
                         )
                     ]
 
-                    Button("アイコンを選択") {
+                    Button("Select Icon") {
                         showIconPicker = true
                     }
                     .iconPicker(
@@ -74,7 +74,7 @@ struct IconPickerCatalogView: View {
                     .foregroundStyle(colors.onSurface)
                     .fontDesign(.monospaced)
             } else {
-                Text("アイコンを選択してください")
+                Text("Please select an icon")
                     .typography(.bodyMedium)
                     .foregroundStyle(colors.onSurfaceVariant)
             }
@@ -90,38 +90,38 @@ struct IconPickerCatalogView: View {
         [
             IconCategory(
                 id: "general",
-                displayName: "一般",
+                displayName: "General",
                 icons: [
-                    IconItem(id: "book", systemName: "book.fill", displayName: "本"),
-                    IconItem(id: "heart", systemName: "heart.fill", displayName: "ハート"),
-                    IconItem(id: "star", systemName: "star.fill", displayName: "星"),
-                    IconItem(id: "flag", systemName: "flag.fill", displayName: "旗"),
-                    IconItem(id: "tag", systemName: "tag.fill", displayName: "タグ"),
-                    IconItem(id: "bookmark", systemName: "bookmark.fill", displayName: "ブックマーク")
+                    IconItem(id: "book", systemName: "book.fill", displayName: "Book"),
+                    IconItem(id: "heart", systemName: "heart.fill", displayName: "Heart"),
+                    IconItem(id: "star", systemName: "star.fill", displayName: "Star"),
+                    IconItem(id: "flag", systemName: "flag.fill", displayName: "Flag"),
+                    IconItem(id: "tag", systemName: "tag.fill", displayName: "Tag"),
+                    IconItem(id: "bookmark", systemName: "bookmark.fill", displayName: "Bookmark")
                 ]
             ),
             IconCategory(
                 id: "business",
-                displayName: "ビジネス",
+                displayName: "Business",
                 icons: [
-                    IconItem(id: "briefcase", systemName: "briefcase.fill", displayName: "ビジネス"),
-                    IconItem(id: "folder", systemName: "folder.fill", displayName: "フォルダ"),
-                    IconItem(id: "doc", systemName: "doc.fill", displayName: "文書"),
-                    IconItem(id: "calendar", systemName: "calendar", displayName: "カレンダー"),
-                    IconItem(id: "clock", systemName: "clock.fill", displayName: "時計"),
-                    IconItem(id: "chart", systemName: "chart.bar.fill", displayName: "グラフ")
+                    IconItem(id: "briefcase", systemName: "briefcase.fill", displayName: "Business"),
+                    IconItem(id: "folder", systemName: "folder.fill", displayName: "Folder"),
+                    IconItem(id: "doc", systemName: "doc.fill", displayName: "Document"),
+                    IconItem(id: "calendar", systemName: "calendar", displayName: "Calendar"),
+                    IconItem(id: "clock", systemName: "clock.fill", displayName: "Clock"),
+                    IconItem(id: "chart", systemName: "chart.bar.fill", displayName: "Chart")
                 ]
             ),
             IconCategory(
                 id: "communication",
-                displayName: "コミュニケーション",
+                displayName: "Communication",
                 icons: [
-                    IconItem(id: "message", systemName: "message.fill", displayName: "メッセージ"),
-                    IconItem(id: "phone", systemName: "phone.fill", displayName: "電話"),
-                    IconItem(id: "envelope", systemName: "envelope.fill", displayName: "メール"),
-                    IconItem(id: "bubble", systemName: "bubble.left.fill", displayName: "吹き出し"),
-                    IconItem(id: "bell", systemName: "bell.fill", displayName: "通知"),
-                    IconItem(id: "paperplane", systemName: "paperplane.fill", displayName: "送信")
+                    IconItem(id: "message", systemName: "message.fill", displayName: "Message"),
+                    IconItem(id: "phone", systemName: "phone.fill", displayName: "Phone"),
+                    IconItem(id: "envelope", systemName: "envelope.fill", displayName: "Email"),
+                    IconItem(id: "bubble", systemName: "bubble.left.fill", displayName: "Bubble"),
+                    IconItem(id: "bell", systemName: "bell.fill", displayName: "Notification"),
+                    IconItem(id: "paperplane", systemName: "paperplane.fill", displayName: "Send")
                 ]
             )
         ]

@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// ラベル付きバリアント表示ヘルパー
-/// サイズやスタイルのバリエーション展示で使用
+/// Helper for displaying labeled variants
+/// Used in size and style variation showcases
 struct LabeledVariant<Content: View>: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing

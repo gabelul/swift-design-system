@@ -2,7 +2,7 @@ import SwiftUI
 
 #if canImport(UIKit)
 
-/// VideoPlayerViewのカタログビュー
+/// Catalog view for VideoPlayerView
 struct VideoPlayerCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -30,7 +30,7 @@ struct VideoPlayerCatalogView: View {
                                     Image(systemName: "play.rectangle")
                                         .font(.system(size: 48))
                                         .foregroundStyle(colors.onSurfaceVariant)
-                                    Text("動画を選択してください")
+                                    Text("Please select a video")
                                         .typography(.bodySmall)
                                         .foregroundStyle(colors.onSurfaceVariant)
                                 }
@@ -41,7 +41,7 @@ struct VideoPlayerCatalogView: View {
                         showPicker = true
                     } label: {
                         Label(
-                            selectedVideoData == nil ? "動画を選択" : "動画を変更",
+                            selectedVideoData == nil ? "Select Video" : "Change Video",
                             systemImage: "video.badge.plus"
                         )
                     }
@@ -51,7 +51,7 @@ struct VideoPlayerCatalogView: View {
                         Button {
                             selectedVideoData = nil
                         } label: {
-                            Label("クリア", systemImage: "trash")
+                            Label("Clear", systemImage: "trash")
                         }
                         .buttonStyle(.secondary)
                     }
@@ -63,30 +63,30 @@ struct VideoPlayerCatalogView: View {
                 )
             }
 
-            SectionCard(title: "機能") {
+            SectionCard(title: "Features") {
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    FeatureRow(icon: "play.fill", title: "AVPlayerによる高品質な動画再生")
-                    FeatureRow(icon: "info.circle", title: "メタデータ表示（長さ、解像度、サイズ）")
-                    FeatureRow(icon: "square.and.arrow.up", title: "共有機能")
-                    FeatureRow(icon: "square.and.arrow.down", title: "カメラロールへの保存")
-                    FeatureRow(icon: "doc", title: "DataまたはURLから初期化可能")
+                    FeatureRow(icon: "play.fill", title: "High-quality video playback with AVPlayer")
+                    FeatureRow(icon: "info.circle", title: "Metadata display (duration, resolution, size)")
+                    FeatureRow(icon: "square.and.arrow.up", title: "Share functionality")
+                    FeatureRow(icon: "square.and.arrow.down", title: "Save to camera roll")
+                    FeatureRow(icon: "doc", title: "Can be initialized from Data or URL")
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Example") {
                 CodeExample(code: """
-                    // 基本的な使い方
+                    // Basic usage
                     VideoPlayerView(data: videoData)
 
-                    // メタデータ表示付き
+                    // With metadata display
                     VideoPlayerView(data: videoData)
                         .showMetadata(true)
 
-                    // アクションボタン付き
+                    // With action buttons
                     VideoPlayerView(data: videoData)
                         .showActions([.play, .share, .saveToPhotos])
 
-                    // URLから再生
+                    // Play from URL
                     VideoPlayerView(url: fileURL)
                     """)
             }

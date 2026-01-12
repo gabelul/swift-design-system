@@ -1,13 +1,13 @@
 import SwiftUI
 
-/// スペーシングカタログビュー
+/// Spacing catalog view
 struct SpacingCatalogView: View {
     @Environment(\.spacingScale) private var spacing
     @Environment(\.colorPalette) private var colors
 
     var body: some View {
-        CatalogPageContainer(title: "スペーシング") {
-            CatalogOverview(description: "Tシャツサイズベースのスペーシングスケール")
+        CatalogPageContainer(title: "Spacing") {
+            CatalogOverview(description: "T-shirt size based spacing scale")
 
             SectionCard(title: "Spacing Scale") {
                 VStack(spacing: spacing.md) {
@@ -24,7 +24,7 @@ struct SpacingCatalogView: View {
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Example") {
                 CodeExample(code: """
                     @Environment(\\.spacingScale) var spacing
 

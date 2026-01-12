@@ -1,17 +1,17 @@
 import SwiftUI
 
-/// AspectGridパターンのカタログビュー
+/// Catalog view for AspectGrid pattern
 struct AspectGridCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
 
     var body: some View {
         CatalogPageContainer(title: "AspectGrid") {
-            CatalogOverview(description: "統一されたアスペクト比を適用するグリッドレイアウトパターン")
+            CatalogOverview(description: "A grid layout pattern that applies a unified aspect ratio")
 
             SectionCard(title: "1:1 - Square") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    Text("商品サムネイル、プロフィール画像に最適")
+                    Text("Ideal for product thumbnails, profile images")
                         .typography(.bodySmall)
                         .foregroundStyle(colors.onSurfaceVariant)
 
@@ -36,7 +36,7 @@ struct AspectGridCatalogView: View {
 
             SectionCard(title: "3:4 - Photos") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    Text("写真、ポートレートに最適")
+                    Text("Ideal for photos, portraits")
                         .typography(.bodySmall)
                         .foregroundStyle(colors.onSurfaceVariant)
 
@@ -61,7 +61,7 @@ struct AspectGridCatalogView: View {
 
             SectionCard(title: "16:9 - Videos") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    Text("動画サムネイル、ワイドコンテンツに最適")
+                    Text("Ideal for video thumbnails, wide content")
                         .typography(.bodySmall)
                         .foregroundStyle(colors.onSurfaceVariant)
 
@@ -84,7 +84,7 @@ struct AspectGridCatalogView: View {
                 }
             }
 
-            SectionCard(title: "間隔バリエーション") {
+            SectionCard(title: "Spacing Variations") {
                 VStack(alignment: .leading, spacing: spacing.lg) {
                     ForEach([
                         (GridSpacing.xs, "Extra Small (8pt)"),
@@ -117,12 +117,12 @@ struct AspectGridCatalogView: View {
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Example") {
                 CodeExample(code: """
                     AspectGrid(
                         minItemWidth: 140,
                         maxItemWidth: 180,
-                        itemAspectRatio: 1,  // 正方形
+                        itemAspectRatio: 1,  // Square
                         spacing: .md
                     ) {
                         ForEach(products) { product in
@@ -132,26 +132,26 @@ struct AspectGridCatalogView: View {
                     """)
             }
 
-            SectionCard(title: "ベストプラクティス") {
+            SectionCard(title: "Best Practices") {
                 VStack(alignment: .leading, spacing: spacing.md) {
                     BestPracticeItem(
                         icon: "checkmark.circle.fill",
-                        title: "統一されたアスペクト比",
-                        description: "すべてのアイテムに同じアスペクト比を適用",
+                        title: "Unified aspect ratio",
+                        description: "Apply the same aspect ratio to all items",
                         isGood: true
                     )
                     Divider()
                     BestPracticeItem(
                         icon: "checkmark.circle.fill",
-                        title: "maxItemWidthを設定",
-                        description: "大画面でアイテムが不自然に大きくなるのを防ぐ",
+                        title: "Set maxItemWidth",
+                        description: "Prevents items from becoming unnaturally large on big screens",
                         isGood: true
                     )
                     Divider()
                     BestPracticeItem(
                         icon: "checkmark.circle.fill",
-                        title: "適切な間隔の選択",
-                        description: "コンテンツに応じてspacing(.xs〜.xl)を選択",
+                        title: "Choose appropriate spacing",
+                        description: "Select spacing (.xs to .xl) according to content",
                         isGood: true
                     )
                 }

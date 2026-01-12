@@ -1,6 +1,6 @@
 import Foundation
 
-/// パターンのアイテム
+/// Pattern items
 enum PatternItem: String, CaseIterable, Identifiable {
     case aspectGrid = "AspectGrid"
     case sectionCard = "SectionCard"
@@ -16,8 +16,8 @@ enum PatternItem: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .aspectGrid: return "アスペクト比固定グリッドレイアウト"
-        case .sectionCard: return "タイトル付きセクションコンテナ"
+        case .aspectGrid: return "Fixed aspect ratio grid layout"
+        case .sectionCard: return "Section container with title"
         }
     }
 }

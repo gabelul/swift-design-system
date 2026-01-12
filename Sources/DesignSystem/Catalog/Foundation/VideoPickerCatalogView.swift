@@ -2,7 +2,7 @@ import SwiftUI
 
 #if canImport(UIKit)
 
-/// 動画ピッカーモディファイアのカタログビュー
+/// Catalog view for video picker modifier
 struct VideoPickerCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -14,9 +14,9 @@ struct VideoPickerCatalogView: View {
 
     var body: some View {
         CatalogPageContainer(title: "VideoPicker") {
-            CatalogOverview(description: "カメラまたは動画ライブラリから動画を選択するモディファイア")
+            CatalogOverview(description: "A modifier for selecting videos from camera or video library")
 
-            SectionCard(title: "デモ") {
+            SectionCard(title: "Demo") {
                 VStack(spacing: spacing.lg) {
                     if let videoData = selectedVideoData {
                         VideoPlayerView(data: videoData)
@@ -32,7 +32,7 @@ struct VideoPickerCatalogView: View {
                                     Image(systemName: "video")
                                         .font(.system(size: 48))
                                         .foregroundStyle(colors.onSurfaceVariant)
-                                    Text("動画を選択してください")
+                                    Text("Please select a video")
                                         .typography(.bodySmall)
                                         .foregroundStyle(colors.onSurfaceVariant)
                                 }
@@ -53,7 +53,7 @@ struct VideoPickerCatalogView: View {
                         errorMessage = nil
                     } label: {
                         Label(
-                            selectedVideoData == nil ? "動画を選択" : "動画を変更",
+                            selectedVideoData == nil ? "Select Video" : "Change Video",
                             systemImage: "video"
                         )
                     }
@@ -63,7 +63,7 @@ struct VideoPickerCatalogView: View {
                         Button {
                             selectedVideoData = nil
                         } label: {
-                            Label("クリア", systemImage: "trash")
+                            Label("Clear", systemImage: "trash")
                         }
                         .buttonStyle(.secondary)
                     }
@@ -78,22 +78,22 @@ struct VideoPickerCatalogView: View {
                 }
             }
 
-            SectionCard(title: "機能") {
+            SectionCard(title: "Features") {
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    FeatureRow(icon: "video.fill", title: "カメラで新しい動画を撮影")
-                    FeatureRow(icon: "photo.on.rectangle", title: "既存の動画から選択")
-                    FeatureRow(icon: "timer", title: "最大録画時間の制限")
-                    FeatureRow(icon: "doc.fill", title: "ファイルサイズの制限")
-                    FeatureRow(icon: "lock.shield.fill", title: "適切な権限リクエスト")
+                    FeatureRow(icon: "video.fill", title: "Capture new video with camera")
+                    FeatureRow(icon: "photo.on.rectangle", title: "Select from existing videos")
+                    FeatureRow(icon: "timer", title: "Maximum recording duration limit")
+                    FeatureRow(icon: "doc.fill", title: "File size limit")
+                    FeatureRow(icon: "lock.shield.fill", title: "Appropriate permission requests")
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Example") {
                 CodeExample(code: """
                     @State private var showPicker = false
                     @State private var videoData: Data?
 
-                    Button("動画を選択") {
+                    Button("Select Video") {
                         showPicker = true
                     }
                     .videoPicker(
@@ -105,21 +105,21 @@ struct VideoPickerCatalogView: View {
                     """)
             }
 
-            SectionCard(title: "Info.plist設定") {
+            SectionCard(title: "Info.plist Settings") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    InfoRow(label: "NSCameraUsageDescription", value: "カメラへのアクセス理由")
-                    InfoRow(label: "NSPhotoLibraryUsageDescription", value: "写真ライブラリへのアクセス理由")
-                    InfoRow(label: "NSMicrophoneUsageDescription", value: "マイクへのアクセス理由")
+                    InfoRow(label: "NSCameraUsageDescription", value: "Reason for camera access")
+                    InfoRow(label: "NSPhotoLibraryUsageDescription", value: "Reason for photo library access")
+                    InfoRow(label: "NSMicrophoneUsageDescription", value: "Reason for microphone access")
                 }
             }
 
-            SectionCard(title: "仕様") {
+            SectionCard(title: "Specifications") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    SpecItem(label: "戻り値", value: "Data?")
-                    SpecItem(label: "必要な権限", value: "カメラ、マイク、写真ライブラリ")
-                    SpecItem(label: "対応プラットフォーム", value: "iOS 17.0+")
-                    SpecItem(label: "サイズ制限", value: "ByteSize型で指定")
-                    SpecItem(label: "時間制限", value: "TimeInterval（秒）")
+                    SpecItem(label: "Return Value", value: "Data?")
+                    SpecItem(label: "Required Permissions", value: "Camera, Microphone, Photo Library")
+                    SpecItem(label: "Supported Platforms", value: "iOS 17.0+")
+                    SpecItem(label: "Size Limit", value: "Specified with ByteSize type")
+                    SpecItem(label: "Time Limit", value: "TimeInterval (seconds)")
                 }
             }
         }

@@ -1,21 +1,21 @@
 import SwiftUI
 
-/// ボタンコンポーネントのカタログビュー
+/// Catalog view for button component
 struct ButtonCatalogView: View {
     @Environment(\.spacingScale) private var spacing
     @State private var isButtonEnabled = true
 
     var body: some View {
         CatalogPageContainer(title: "Button") {
-            CatalogOverview(description: "ボタンのバリエーションとサイズを確認できます")
+            CatalogOverview(description: "View button variations and sizes")
 
-            Toggle("ボタンを有効化", isOn: $isButtonEnabled)
+            Toggle("Enable buttons", isOn: $isButtonEnabled)
                 .padding(.horizontal, spacing.lg)
 
             SectionCard(title: "Primary") {
                 VariantShowcase(
                     title: "Primary Button",
-                    description: "主要なアクションに使用"
+                    description: "Used for primary actions"
                 ) {
                     VStack(spacing: spacing.md) {
                         Button("Large") { }
@@ -37,7 +37,7 @@ struct ButtonCatalogView: View {
             SectionCard(title: "Secondary") {
                 VariantShowcase(
                     title: "Secondary Button",
-                    description: "副次的なアクションに使用"
+                    description: "Used for secondary actions"
                 ) {
                     VStack(spacing: spacing.md) {
                         Button("Large") { }
@@ -59,7 +59,7 @@ struct ButtonCatalogView: View {
             SectionCard(title: "Tertiary") {
                 VariantShowcase(
                     title: "Tertiary Button",
-                    description: "最も控えめなテキストスタイル"
+                    description: "Most subtle text style"
                 ) {
                     VStack(spacing: spacing.md) {
                         Button("Large") { }
@@ -78,9 +78,9 @@ struct ButtonCatalogView: View {
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Examples") {
                 CodeExample(code: """
-                    Button("ログイン") { login() }
+                    Button("Login") { login() }
                         .buttonStyle(.primary)
                         .buttonSize(.large)
                     """)

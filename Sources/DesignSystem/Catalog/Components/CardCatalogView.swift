@@ -1,24 +1,24 @@
 import SwiftUI
 
-/// カードコンポーネントのカタログビュー
+/// Catalog view for card component
 struct CardCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
 
     var body: some View {
         CatalogPageContainer(title: "Card") {
-            CatalogOverview(description: "関連情報をグループ化する汎用コンテナ")
+            CatalogOverview(description: "Versatile container for grouping related information")
 
-            SectionCard(title: "基本") {
+            SectionCard(title: "Basic") {
                 VariantShowcase(
-                    title: "デフォルト設定",
-                    description: "Elevation Level 1、パディング 16pt"
+                    title: "Default Settings",
+                    description: "Elevation Level 1, 16pt padding"
                 ) {
                     Card {
                         VStack(alignment: .leading, spacing: spacing.sm) {
-                            Text("カードタイトル")
+                            Text("Card Title")
                                 .typography(.titleMedium)
-                            Text("カードの本文テキスト")
+                            Text("Card body text")
                                 .typography(.bodyMedium)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -28,8 +28,8 @@ struct CardCatalogView: View {
 
             SectionCard(title: "Elevation") {
                 VariantShowcase(
-                    title: "深さバリエーション",
-                    description: "視覚的な階層を表現"
+                    title: "Depth Variations",
+                    description: "Express visual hierarchy"
                 ) {
                     VStack(spacing: spacing.md) {
                         ForEach([Elevation.level0, .level1, .level2, .level3, .level4, .level5], id: \.self) { elevation in
@@ -48,10 +48,10 @@ struct CardCatalogView: View {
                 }
             }
 
-            SectionCard(title: "パディング") {
+            SectionCard(title: "Padding") {
                 VariantShowcase(
-                    title: "パディングバリエーション",
-                    description: "内容に応じて調整"
+                    title: "Padding Variations",
+                    description: "Adjust based on content"
                 ) {
                     VStack(spacing: spacing.md) {
                         Card(allSides: 8) {
@@ -70,12 +70,12 @@ struct CardCatalogView: View {
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Examples") {
                 CodeExample(code: """
                     Card(elevation: .level2) {
                         VStack(alignment: .leading) {
-                            Text("タイトル")
-                            Text("本文")
+                            Text("Title")
+                            Text("Body")
                         }
                     }
                     """)

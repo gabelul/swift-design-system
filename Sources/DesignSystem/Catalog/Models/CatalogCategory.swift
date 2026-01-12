@@ -1,11 +1,11 @@
 import SwiftUI
 
-/// カタログのメインカテゴリ
+/// Main categories for the catalog
 enum CatalogCategory: String, CaseIterable, Identifiable {
-    case themes = "テーマ"
-    case foundations = "デザイントークン"
-    case components = "コンポーネント"
-    case patterns = "パターン"
+    case themes = "Themes"
+    case foundations = "Design Tokens"
+    case components = "Components"
+    case patterns = "Patterns"
 
     var id: String { rawValue }
 
@@ -20,10 +20,10 @@ enum CatalogCategory: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .themes: return "アプリ全体のテーマを選択・カスタマイズ"
-        case .foundations: return "Color, Spacing, Radiusなどの基本トークン"
-        case .components: return "Button, Card, TextFieldなどの再利用可能なUI"
-        case .patterns: return "レイアウトパターンやデザインパターン"
+        case .themes: return "Select and customize app-wide themes"
+        case .foundations: return "Basic tokens like Color, Spacing, Radius"
+        case .components: return "Reusable UI elements like Button, Card, TextField"
+        case .patterns: return "Layout patterns and design patterns"
         }
     }
 
@@ -31,19 +31,19 @@ enum CatalogCategory: String, CaseIterable, Identifiable {
         switch self {
         case .themes:
             return [
-                CatalogItem(name: "テーマギャラリー", icon: "paintpalette.fill", description: "全テーマを閲覧・切り替え")
+                CatalogItem(name: "Theme Gallery", icon: "paintpalette.fill", description: "Browse and switch all themes")
             ]
         case .foundations:
             return [
-                CatalogItem(name: "デザイントークン一覧", icon: "slider.horizontal.3", description: "Color, Typography, Spacingなど")
+                CatalogItem(name: "Design Token List", icon: "slider.horizontal.3", description: "Color, Typography, Spacing, etc.")
             ]
         case .components:
             return [
-                CatalogItem(name: "コンポーネント一覧", icon: "square.stack.3d.up.fill", description: "全コンポーネントのカタログ")
+                CatalogItem(name: "Component List", icon: "square.stack.3d.up.fill", description: "Catalog of all components")
             ]
         case .patterns:
             return [
-                CatalogItem(name: "パターン一覧", icon: "square.grid.3x3.fill", description: "レイアウトパターンなど")
+                CatalogItem(name: "Pattern List", icon: "square.grid.3x3.fill", description: "Layout patterns, etc.")
             ]
         }
     }

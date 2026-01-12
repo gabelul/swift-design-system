@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// モーションデモカード
+/// Motion demo card
 ///
-/// 各モーションの動きを実際に体験できるインタラクティブなカード
+/// Interactive card to experience each motion animation
 struct MotionDemoCard: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -14,7 +14,7 @@ struct MotionDemoCard: View {
     var body: some View {
         GeometryReader { geometry in
             VStack(alignment: .leading, spacing: 0) {
-                // ヘッダー
+                // Header
                 HStack {
                     VStack(alignment: .leading, spacing: spacing.xs) {
                         Text(spec.name)
@@ -30,7 +30,7 @@ struct MotionDemoCard: View {
 
                     Spacer()
 
-                    // 仕様表示
+                    // Spec display
                     VStack(alignment: .trailing, spacing: spacing.xs) {
                         Text(spec.duration)
                             .typography(.labelSmall)
@@ -43,7 +43,7 @@ struct MotionDemoCard: View {
                 }
                 .padding(spacing.md)
 
-                // デモエリア - 利用可能な空間を計算
+                // Demo area - calculate available space
                 let buttonHeight: CGFloat = 40
                 let headerHeight: CGFloat = 60
                 let totalPadding: CGFloat = spacing.md * 2
@@ -57,13 +57,13 @@ struct MotionDemoCard: View {
 
                 Spacer(minLength: 0)
 
-                // トリガーボタン
+                // Trigger button
                 Button(action: {
                     isAnimating.toggle()
                 }) {
                     HStack {
                         Image(systemName: "play.fill")
-                        Text("アニメーション実行")
+                        Text("Run Animation")
                     }
                     .typography(.labelMedium)
                     .frame(maxWidth: .infinity)
@@ -95,7 +95,7 @@ struct MotionDemoCard: View {
         }
     }
 
-    // ボタン押下デモ
+    // Button press demo
     private var buttonPressDemo: some View {
         HStack {
             Spacer()
@@ -109,7 +109,7 @@ struct MotionDemoCard: View {
         }
     }
 
-    // スライドデモ
+    // Slide demo
     private var slideDemo: some View {
         GeometryReader { geometry in
             let cardWidth: CGFloat = 60
@@ -135,7 +135,7 @@ struct MotionDemoCard: View {
         }
     }
 
-    // スプリングデモ
+    // Spring demo
     private var springDemo: some View {
         VStack {
             Circle()

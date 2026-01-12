@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// ColorPickerのカタログビュー
+/// Catalog view for ColorPicker component
 struct ColorPickerCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -12,13 +12,13 @@ struct ColorPickerCatalogView: View {
 
     var body: some View {
         CatalogPageContainer(title: "ColorPicker") {
-            CatalogOverview(description: "プリセットカラーから色を選択")
+            CatalogOverview(description: "Select color from preset colors")
 
             SectionCard(title: "tagFriendly") {
                 VStack(spacing: spacing.md) {
                     colorPreview(selectedColor: selectedColor1)
 
-                    Button(selectedColor1 == nil ? "色を選択" : "色を変更") {
+                    Button(selectedColor1 == nil ? "Select Color" : "Change Color") {
                         showColorPicker1 = true
                     }
                     .buttonStyle(.primary)
@@ -35,7 +35,7 @@ struct ColorPickerCatalogView: View {
                 VStack(spacing: spacing.md) {
                     colorPreview(selectedColor: selectedColor2)
 
-                    Button(selectedColor2 == nil ? "色を選択" : "色を変更") {
+                    Button(selectedColor2 == nil ? "Select Color" : "Change Color") {
                         showColorPicker2 = true
                     }
                     .buttonStyle(.secondary)
@@ -48,12 +48,12 @@ struct ColorPickerCatalogView: View {
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Examples") {
                 CodeExample(code: """
                     @State private var selectedColor: String?
                     @State private var showColorPicker = false
 
-                    Button("色を選択") {
+                    Button("Select Color") {
                         showColorPicker = true
                     }
                     .colorPicker(
@@ -83,7 +83,7 @@ struct ColorPickerCatalogView: View {
                     .foregroundStyle(colors.onSurface)
                     .fontDesign(.monospaced)
             } else {
-                Text("色を選択してください")
+                Text("Please select a color")
                     .typography(.bodyMedium)
                     .foregroundStyle(colors.onSurfaceVariant)
             }

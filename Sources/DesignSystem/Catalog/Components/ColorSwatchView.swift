@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// 色見本コンポーネント
-/// 色 + HEXコード + トークン名を表示し、タップでHEXコードをコピー
+/// Color swatch component
+/// Displays color + HEX code + token name, tap to copy HEX code
 struct ColorSwatchView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -26,7 +26,7 @@ struct ColorSwatchView: View {
             copyToClipboard()
         } label: {
             HStack(spacing: spacing.md) {
-                // 色見本
+                // Color swatch
                 RoundedRectangle(cornerRadius: radius.sm)
                     .fill(color)
                     .frame(width: 48, height: 48)

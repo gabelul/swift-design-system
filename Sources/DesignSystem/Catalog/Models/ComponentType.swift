@@ -1,6 +1,6 @@
 import Foundation
 
-/// コンポーネントの種類
+/// Component types
 enum ComponentType: String, CaseIterable, Identifiable {
     case button = "Button"
     case card = "Card"
@@ -44,22 +44,22 @@ enum ComponentType: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .button: return "Primary, Secondary, Tertiaryの3種類"
-        case .card: return "関連情報をグループ化するコンテナ"
-        case .chip: return "ステータス、カテゴリ、フィルター用のコンパクトなラベル"
-        case .colorPicker: return "プリセットカラーから色を選択"
-        case .emojiPicker: return "カテゴリ別の絵文字を選択"
-        case .fab: return "画面上の主要アクションボタン"
-        case .iconBadge: return "円形背景にアイコンを表示するバッジ"
-        case .iconButton: return "アイコンのみのコンパクトなボタン"
-        case .iconPicker: return "SF Symbolsアイコンを選択"
-        case .imagePicker: return "カメラと写真ライブラリから画像を選択"
-        case .progressBar: return "進捗状況を視覚的に表示するバー"
-        case .snackbar: return "一時的な通知とフィードバックを表示"
-        case .statDisplay: return "数値と単位を表示する統計コンポーネント"
-        case .textField: return "テキスト入力フィールド"
-        case .videoPicker: return "カメラと動画ライブラリから動画を選択"
-        case .videoPlayer: return "動画データやURLから動画を再生"
+        case .button: return "3 types: Primary, Secondary, Tertiary"
+        case .card: return "Container for grouping related information"
+        case .chip: return "Compact labels for status, categories, filters"
+        case .colorPicker: return "Select colors from preset palette"
+        case .emojiPicker: return "Select emojis by category"
+        case .fab: return "Primary action button on screen"
+        case .iconBadge: return "Badge displaying icon on circular background"
+        case .iconButton: return "Compact button with icon only"
+        case .iconPicker: return "Select SF Symbols icons"
+        case .imagePicker: return "Select images from camera and photo library"
+        case .progressBar: return "Bar for visualizing progress"
+        case .snackbar: return "Display temporary notifications and feedback"
+        case .statDisplay: return "Statistics component displaying numbers and units"
+        case .textField: return "Text input field"
+        case .videoPicker: return "Select videos from camera and video library"
+        case .videoPlayer: return "Play videos from data or URL"
         }
     }
 }

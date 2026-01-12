@@ -1,26 +1,26 @@
 import SwiftUI
 
-/// カラーカタログビュー
+/// Colors catalog view
 struct ColorsCatalogView: View {
     @Environment(ThemeProvider.self) private var themeProvider
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
 
     var body: some View {
-        CatalogPageContainer(title: "カラー") {
-            CatalogOverview(description: "現在のテーマ: \(themeProvider.themeMode == .light ? "ライト" : "ダーク")")
+        CatalogPageContainer(title: "Colors") {
+            CatalogOverview(description: "Current theme: \(themeProvider.themeMode == .light ? "Light" : "Dark")")
 
-            SectionCard(title: "セマンティックカラー") {
+            SectionCard(title: "Semantic Colors") {
                 semanticColorsGrid(palette: colors)
             }
 
-            SectionCard(title: "リファレンス") {
+            SectionCard(title: "Reference") {
                 VStack(spacing: spacing.md) {
                     DisclosureGroup {
                         semanticColorsGrid(palette: LightColorPalette())
                             .padding(.top, spacing.sm)
                     } label: {
-                        Text("デフォルトライトテーマ")
+                        Text("Default Light Theme")
                             .typography(.bodyLarge)
                     }
 
@@ -28,7 +28,7 @@ struct ColorsCatalogView: View {
                         semanticColorsGrid(palette: DarkColorPalette())
                             .padding(.top, spacing.sm)
                     } label: {
-                        Text("デフォルトダークテーマ")
+                        Text("Default Dark Theme")
                             .typography(.bodyLarge)
                     }
 
@@ -36,7 +36,7 @@ struct ColorsCatalogView: View {
                         primitiveColorsContent
                             .padding(.top, spacing.sm)
                     } label: {
-                        Text("プリミティブカラー")
+                        Text("Primitive Colors")
                             .typography(.bodyLarge)
                     }
                 }
@@ -74,7 +74,7 @@ struct ColorsCatalogView: View {
     @ViewBuilder
     private var primitiveColorsContent: some View {
         VStack(alignment: .leading, spacing: spacing.lg) {
-            Text("参照用の基本カラーパレット（Tailwind CSS ベース）")
+            Text("Basic color palette for reference (Tailwind CSS based)")
                 .typography(.bodySmall)
                 .foregroundStyle(colors.onSurfaceVariant)
 

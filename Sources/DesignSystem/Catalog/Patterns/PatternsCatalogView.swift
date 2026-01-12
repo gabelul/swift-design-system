@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// パターンカタログのエントリポイント
-/// レイアウトパターンやデザインパターンを表示
+/// Entry point for the pattern catalog
+/// Displays layout patterns and design patterns
 struct PatternsCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -9,26 +9,26 @@ struct PatternsCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: spacing.xl) {
-                // ヘッダー
+                // Header
                 VStack(spacing: spacing.sm) {
                     Image(systemName: "square.grid.3x3.fill")
                         .font(.system(size: 48))
                         .foregroundStyle(colors.primary)
 
-                    Text("パターンカタログ")
+                    Text("Pattern Catalog")
                         .typography(.headlineLarge)
                         .foregroundStyle(colors.onBackground)
 
-                    Text("レイアウトパターンやデザインパターン")
+                    Text("Layout patterns and design patterns")
                         .typography(.bodySmall)
                         .foregroundStyle(colors.onSurfaceVariant)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, spacing.xl)
 
-                // パターンリスト
+                // Pattern list
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("レイアウトパターン")
+                    Text("Layout Patterns")
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onSurface)
                         .padding(.horizontal, spacing.lg)
@@ -53,7 +53,7 @@ struct PatternsCatalogView: View {
             .padding(.bottom, spacing.xl)
         }
         .background(colors.background)
-        .navigationTitle("パターン")
+        .navigationTitle("Patterns")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

@@ -1,14 +1,14 @@
 import SwiftUI
 
-/// 角丸カタログビュー
+/// Radius catalog view
 struct RadiusCatalogView: View {
     @Environment(\.radiusScale) private var radius
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
 
     var body: some View {
-        CatalogPageContainer(title: "角丸") {
-            CatalogOverview(description: "Material Design 3ベースの角丸スケール")
+        CatalogPageContainer(title: "Radius") {
+            CatalogOverview(description: "Corner radius scale based on Material Design 3")
 
             SectionCard(title: "Radius Scale") {
                 VStack(spacing: spacing.md) {
@@ -23,7 +23,7 @@ struct RadiusCatalogView: View {
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Example") {
                 CodeExample(code: """
                     @Environment(\\.radiusScale) var radius
 

@@ -1,15 +1,15 @@
 import SwiftUI
 
-/// IconBadgeコンポーネントのカタログビュー
+/// Catalog view for IconBadge component
 struct IconBadgeCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
 
     var body: some View {
         CatalogPageContainer(title: "IconBadge") {
-            CatalogOverview(description: "SF Symbolアイコンを円形背景で表示するバッジ")
+            CatalogOverview(description: "Badge displaying SF Symbol icon on circular background")
 
-            SectionCard(title: "サイズ") {
+            SectionCard(title: "Sizes") {
                 HStack(spacing: spacing.xl) {
                     VStack(spacing: spacing.sm) {
                         IconBadge(systemName: "star.fill", size: .small)
@@ -31,7 +31,7 @@ struct IconBadgeCatalogView: View {
                 .frame(maxWidth: .infinity)
             }
 
-            SectionCard(title: "テーマカラー") {
+            SectionCard(title: "Theme Colors") {
                 HStack(spacing: spacing.lg) {
                     VStack(spacing: spacing.xs) {
                         IconBadge(systemName: "bolt.fill")
@@ -53,7 +53,7 @@ struct IconBadgeCatalogView: View {
                 .foregroundStyle(colors.onSurfaceVariant)
             }
 
-            SectionCard(title: "カスタムカラー") {
+            SectionCard(title: "Custom Colors") {
                 HStack(spacing: spacing.lg) {
                     IconBadge(systemName: "flame.fill", size: .large, foregroundColor: .orange, backgroundColor: .orange.opacity(0.15))
                     IconBadge(systemName: "heart.fill", size: .large, foregroundColor: .red, backgroundColor: .red.opacity(0.15))
@@ -62,18 +62,18 @@ struct IconBadgeCatalogView: View {
                 }
             }
 
-            SectionCard(title: "アイコンギャラリー") {
+            SectionCard(title: "Icon Gallery") {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))], spacing: spacing.lg) {
-                    iconWithLabel("bell.fill", "通知")
-                    iconWithLabel("gear", "設定")
-                    iconWithLabel("person.fill", "ユーザー")
-                    iconWithLabel("chart.bar.fill", "統計")
-                    iconWithLabel("calendar", "カレンダー")
-                    iconWithLabel("clock.fill", "時計")
+                    iconWithLabel("bell.fill", "Notifications")
+                    iconWithLabel("gear", "Settings")
+                    iconWithLabel("person.fill", "User")
+                    iconWithLabel("chart.bar.fill", "Statistics")
+                    iconWithLabel("calendar", "Calendar")
+                    iconWithLabel("clock.fill", "Clock")
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Examples") {
                 CodeExample(code: """
                     IconBadge(
                         systemName: "heart.fill",

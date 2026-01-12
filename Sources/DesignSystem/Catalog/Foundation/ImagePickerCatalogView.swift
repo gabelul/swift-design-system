@@ -2,7 +2,7 @@ import SwiftUI
 
 #if canImport(UIKit)
 
-/// 画像ピッカーモディファイアのカタログビュー
+/// Catalog view for image picker modifier
 struct ImagePickerCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -13,9 +13,9 @@ struct ImagePickerCatalogView: View {
 
     var body: some View {
         CatalogPageContainer(title: "ImagePicker") {
-            CatalogOverview(description: "カメラまたは写真ライブラリから画像を選択するモディファイア")
+            CatalogOverview(description: "A modifier for selecting images from camera or photo library")
 
-            SectionCard(title: "デモ") {
+            SectionCard(title: "Demo") {
                 VStack(spacing: spacing.lg) {
                     if let imageData = selectedImageData,
                        let uiImage = UIImage(data: imageData) {
@@ -33,7 +33,7 @@ struct ImagePickerCatalogView: View {
                                     Image(systemName: "photo")
                                         .font(.system(size: 48))
                                         .foregroundStyle(colors.onSurfaceVariant)
-                                    Text("画像を選択してください")
+                                    Text("Please select an image")
                                         .typography(.bodySmall)
                                         .foregroundStyle(colors.onSurfaceVariant)
                                 }
@@ -44,7 +44,7 @@ struct ImagePickerCatalogView: View {
                         showPicker = true
                     } label: {
                         Label(
-                            selectedImageData == nil ? "画像を選択" : "画像を変更",
+                            selectedImageData == nil ? "Select Image" : "Change Image",
                             systemImage: "photo"
                         )
                     }
@@ -54,7 +54,7 @@ struct ImagePickerCatalogView: View {
                         Button {
                             selectedImageData = nil
                         } label: {
-                            Label("クリア", systemImage: "trash")
+                            Label("Clear", systemImage: "trash")
                         }
                         .buttonStyle(.secondary)
                     }
@@ -65,21 +65,21 @@ struct ImagePickerCatalogView: View {
                 )
             }
 
-            SectionCard(title: "機能") {
+            SectionCard(title: "Features") {
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    FeatureRow(icon: "camera.fill", title: "カメラで新しい写真を撮影")
-                    FeatureRow(icon: "photo.fill", title: "既存の写真から選択")
-                    FeatureRow(icon: "lock.shield.fill", title: "適切な権限リクエストとエラーハンドリング")
-                    FeatureRow(icon: "gearshape.fill", title: "権限拒否時は設定画面へ誘導")
+                    FeatureRow(icon: "camera.fill", title: "Capture new photo with camera")
+                    FeatureRow(icon: "photo.fill", title: "Select from existing photos")
+                    FeatureRow(icon: "lock.shield.fill", title: "Appropriate permission requests and error handling")
+                    FeatureRow(icon: "gearshape.fill", title: "Guide to settings when permission denied")
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Example") {
                 CodeExample(code: """
                     @State private var showPicker = false
                     @State private var imageData: Data?
 
-                    Button("画像を選択") {
+                    Button("Select Image") {
                         showPicker = true
                     }
                     .imagePicker(
@@ -90,19 +90,19 @@ struct ImagePickerCatalogView: View {
                     """)
             }
 
-            SectionCard(title: "Info.plist設定") {
+            SectionCard(title: "Info.plist Settings") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    InfoRow(label: "NSCameraUsageDescription", value: "カメラへのアクセス理由")
-                    InfoRow(label: "NSPhotoLibraryUsageDescription", value: "写真ライブラリへのアクセス理由")
+                    InfoRow(label: "NSCameraUsageDescription", value: "Reason for camera access")
+                    InfoRow(label: "NSPhotoLibraryUsageDescription", value: "Reason for photo library access")
                 }
             }
 
-            SectionCard(title: "仕様") {
+            SectionCard(title: "Specifications") {
                 VStack(alignment: .leading, spacing: spacing.sm) {
-                    SpecItem(label: "戻り値", value: "Data? (JPEG形式)")
-                    SpecItem(label: "JPEG品質", value: "80%")
-                    SpecItem(label: "必要な権限", value: "カメラ、写真ライブラリ")
-                    SpecItem(label: "対応プラットフォーム", value: "iOS 17.0+")
+                    SpecItem(label: "Return Value", value: "Data? (JPEG format)")
+                    SpecItem(label: "JPEG Quality", value: "80%")
+                    SpecItem(label: "Required Permissions", value: "Camera, Photo Library")
+                    SpecItem(label: "Supported Platforms", value: "iOS 17.0+")
                 }
             }
         }

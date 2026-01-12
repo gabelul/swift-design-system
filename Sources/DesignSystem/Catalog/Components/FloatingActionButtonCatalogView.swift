@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// FABコンポーネントのカタログビュー
+/// Catalog view for FAB component
 struct FloatingActionButtonCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -9,17 +9,17 @@ struct FloatingActionButtonCatalogView: View {
     var body: some View {
         CatalogPageContainer(title: "FAB") {
             VStack(alignment: .leading, spacing: spacing.sm) {
-                CatalogOverview(description: "画面上で最も重要なアクションを表すボタン")
+                CatalogOverview(description: "Button representing the most important action on screen")
 
                 if tapCount > 0 {
-                    Text("タップ回数: \(tapCount)")
+                    Text("Tap count: \(tapCount)")
                         .typography(.bodySmall)
                         .foregroundStyle(colors.primary)
                         .padding(.horizontal, spacing.lg)
                 }
             }
 
-            SectionCard(title: "サイズ") {
+            SectionCard(title: "Sizes") {
                 VStack(spacing: spacing.lg) {
                     HStack {
                         Text("Small (40pt)")
@@ -42,8 +42,8 @@ struct FloatingActionButtonCatalogView: View {
                 }
             }
 
-            SectionCard(title: "アイコン") {
-                VariantShowcase(title: "SF Symbols", description: "任意のアイコンが使用可能") {
+            SectionCard(title: "Icons") {
+                VariantShowcase(title: "SF Symbols", description: "Any icon can be used") {
                     HStack(spacing: spacing.lg) {
                         FloatingActionButton(icon: "plus") { tapCount += 1 }
                         FloatingActionButton(icon: "pencil") { tapCount += 1 }
@@ -53,19 +53,19 @@ struct FloatingActionButtonCatalogView: View {
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Examples") {
                 CodeExample(code: """
                     FloatingActionButton(
                         icon: "plus",
                         size: .regular
                     ) {
-                        // アクション
+                        // Action
                     }
                     """)
             }
 
-            SectionCard(title: "レイアウト例") {
-                VariantShowcase(title: "右下配置", description: "典型的な使用パターン") {
+            SectionCard(title: "Layout Example") {
+                VariantShowcase(title: "Bottom Right Placement", description: "Typical usage pattern") {
                     ZStack(alignment: .bottomTrailing) {
                         RoundedRectangle(cornerRadius: 12)
                             .fill(colors.surfaceVariant.opacity(0.3))

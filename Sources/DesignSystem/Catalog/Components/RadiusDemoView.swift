@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// 角丸値のデモコンポーネント
-/// 実際の角丸を視覚的にプレビュー
+/// Demo component for radius values
+/// Visually preview actual corner radius
 struct RadiusDemoView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -24,7 +24,7 @@ struct RadiusDemoView: View {
                     .foregroundStyle(colors.onSurfaceVariant)
             }
 
-            // 視覚的表現
+            // Visual representation
             RoundedRectangle(cornerRadius: value.isInfinite ? 32 : value)
                 .fill(colors.primary.opacity(0.2))
                 .stroke(colors.primary, lineWidth: 2)

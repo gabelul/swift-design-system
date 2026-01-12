@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// テーマギャラリービュー
+/// Theme gallery view
 ///
-/// 全テーマをカテゴリ別に表示し、テーマの選択と切り替えを可能にします。
+/// Displays all themes by category and allows theme selection and switching.
 public struct ThemeGalleryView: View {
     @Environment(ThemeProvider.self) private var themeProvider
     @Environment(\.colorPalette) private var colors
@@ -13,7 +13,7 @@ public struct ThemeGalleryView: View {
     public var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: spacing.xl) {
-                // ヘッダー
+                // Header
                 VStack(alignment: .leading, spacing: spacing.sm) {
                     HStack(spacing: spacing.sm) {
                         Image(systemName: "paintpalette.fill")
@@ -24,22 +24,22 @@ public struct ThemeGalleryView: View {
                     }
                     .padding(.horizontal, spacing.lg)
 
-                    Text("テーマギャラリー")
+                    Text("Theme Gallery")
                         .typography(.headlineLarge)
                         .foregroundStyle(colors.onBackground)
                         .padding(.horizontal, spacing.lg)
 
-                    Text("お好みのテーマを選んで、デザインシステムの外観をカスタマイズできます")
+                    Text("Choose your preferred theme to customize the design system appearance")
                         .typography(.bodyMedium)
                         .foregroundStyle(colors.onSurfaceVariant)
                         .padding(.horizontal, spacing.lg)
                 }
                 .padding(.top, spacing.lg)
 
-                // 外観モード設定
+                // Appearance mode settings
                 AppearanceModeSection()
 
-                // カテゴリ別テーマリスト
+                // Theme list by category
                 ForEach(ThemeCategory.allCases) { category in
                     let categoryThemes = themeProvider.availableThemes.filter { $0.category == category }
                     if !categoryThemes.isEmpty {
@@ -50,13 +50,13 @@ public struct ThemeGalleryView: View {
                     }
                 }
 
-                // 情報セクション
+                // Information section
                 InfoSection()
             }
             .padding(.bottom, spacing.xl)
         }
         .background(colors.background)
-        .navigationTitle("テーマ")
+        .navigationTitle("Themes")
         #if os(iOS)
             .navigationBarTitleDisplayMode(.large)
         #endif
@@ -76,7 +76,7 @@ private struct ThemeCategorySection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            // カテゴリヘッダー
+            // Category header
             HStack(spacing: spacing.sm) {
                 Image(systemName: category.icon)
                     .font(.title3)
@@ -94,7 +94,7 @@ private struct ThemeCategorySection: View {
             }
             .padding(.horizontal, spacing.lg)
 
-            // テーマカードグリッド
+            // Theme card grid
             LazyVGrid(
                 columns: [
                     GridItem(.flexible(), spacing: spacing.md),
@@ -134,21 +134,21 @@ private struct AppearanceModeSection: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
     @Environment(\.motion) private var motion
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
             HStack(spacing: spacing.sm) {
                 Image(systemName: "circle.lefthalf.filled")
                     .font(.title3)
                     .foregroundStyle(colors.primary)
-                
-                Text("外観モード")
+
+                Text("Appearance Mode")
                     .typography(.titleMedium)
                     .foregroundStyle(colors.onSurface)
             }
             .padding(.horizontal, spacing.lg)
-            
-            Picker("外観モード", selection: Binding(
+
+            Picker("Appearance Mode", selection: Binding(
                 get: { themeProvider.themeMode },
                 set: { newMode in
                     withAnimation(motion.slow) {
@@ -162,7 +162,7 @@ private struct AppearanceModeSection: View {
             }
             .pickerStyle(.segmented)
             .padding(.horizontal, spacing.lg)
-            
+
             Text(modeDescription(for: themeProvider.themeMode))
                 .typography(.bodySmall)
                 .foregroundStyle(colors.onSurfaceVariant)
@@ -173,20 +173,20 @@ private struct AppearanceModeSection: View {
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .padding(.horizontal, spacing.lg)
     }
-    
+
     private func modeLabel(for mode: ThemeMode) -> String {
         switch mode {
-        case .system: return "システム"
-        case .light: return "ライト"
-        case .dark: return "ダーク"
+        case .system: return "System"
+        case .light: return "Light"
+        case .dark: return "Dark"
         }
     }
-    
+
     private func modeDescription(for mode: ThemeMode) -> String {
         switch mode {
-        case .system: return "デバイスの設定に従って外観を自動的に切り替えます"
-        case .light: return "常にライトモードで表示します"
-        case .dark: return "常にダークモードで表示します"
+        case .system: return "Automatically switches appearance based on device settings"
+        case .light: return "Always display in light mode"
+        case .dark: return "Always display in dark mode"
         }
     }
 }
@@ -198,19 +198,19 @@ private struct InfoSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: spacing.md) {
-            Text("現在の設定")
+            Text("Current Settings")
                 .typography(.titleMedium)
                 .foregroundStyle(colors.onSurface)
                 .padding(.horizontal, spacing.lg)
 
             VStack(spacing: 0) {
-                InfoRow(label: "テーマ", value: themeProvider.currentTheme.name)
+                InfoRow(label: "Theme", value: themeProvider.currentTheme.name)
                 Divider().padding(.leading, spacing.lg)
-                InfoRow(label: "モード", value: themeProvider.themeMode.rawValue)
+                InfoRow(label: "Mode", value: themeProvider.themeMode.rawValue)
                 Divider().padding(.leading, spacing.lg)
                 InfoRow(
-                    label: "利用可能なテーマ",
-                    value: "\(themeProvider.availableThemes.count)個"
+                    label: "Available Themes",
+                    value: "\(themeProvider.availableThemes.count)"
                 )
             }
             .background(colors.surface)

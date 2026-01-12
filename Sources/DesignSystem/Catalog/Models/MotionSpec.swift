@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// モーション仕様データモデル
+/// Motion specification data model
 struct MotionSpec: Identifiable, Sendable {
     let id: String
     let name: String
@@ -11,12 +11,12 @@ struct MotionSpec: Identifiable, Sendable {
     let description: String
     let animation: @Sendable (Motion) -> Animation
 
-    /// モーションカテゴリ
+    /// Motion category
     enum MotionCategory: String, CaseIterable {
-        case microInteraction = "マイクロインタラクション"
-        case stateChange = "状態変化"
-        case transition = "トランジション"
-        case spring = "スプリング"
+        case microInteraction = "Micro-interaction"
+        case stateChange = "State Change"
+        case transition = "Transition"
+        case spring = "Spring"
 
         var icon: String {
             switch self {
@@ -29,25 +29,25 @@ struct MotionSpec: Identifiable, Sendable {
 
         var description: String {
             switch self {
-            case .microInteraction: return "瞬時のフィードバック用（70-110ms）"
-            case .stateChange: return "UI要素の状態切り替え（150ms）"
-            case .transition: return "コンテンツの移動と変化（240-375ms）"
-            case .spring: return "自然な物理ベースの動き"
+            case .microInteraction: return "For instant feedback (70-110ms)"
+            case .stateChange: return "UI element state switching (150ms)"
+            case .transition: return "Content movement and transformation (240-375ms)"
+            case .spring: return "Natural physics-based motion"
             }
         }
     }
 
-    /// 全モーション仕様
+    /// All motion specifications
     static let all: [MotionSpec] = [
-        // マイクロインタラクション
+        // Micro-interactions
         MotionSpec(
             id: "quick",
             name: "quick",
             duration: "70ms",
             easing: "Ease-out",
             category: .microInteraction,
-            usage: "ホバー、カーソルフィードバック",
-            description: "最速のアニメーション。マイクロインタラクション用。",
+            usage: "Hover, cursor feedback",
+            description: "Fastest animation. For micro-interactions.",
             animation: { $0.quick }
         ),
         MotionSpec(
@@ -56,20 +56,20 @@ struct MotionSpec: Identifiable, Sendable {
             duration: "110ms",
             easing: "Ease-out",
             category: .microInteraction,
-            usage: "ボタン押下、タップフィードバック",
-            description: "タップやボタン押下への即座のフィードバック。",
+            usage: "Button press, tap feedback",
+            description: "Immediate feedback for taps and button presses.",
             animation: { $0.tap }
         ),
 
-        // 状態変化
+        // State changes
         MotionSpec(
             id: "toggle",
             name: "toggle",
             duration: "150ms",
             easing: "Ease-in-out",
             category: .stateChange,
-            usage: "チェックボックス、選択状態",
-            description: "トグルや状態切り替えに使用。",
+            usage: "Checkbox, selection state",
+            description: "Used for toggles and state switching.",
             animation: { $0.toggle }
         ),
         MotionSpec(
@@ -78,8 +78,8 @@ struct MotionSpec: Identifiable, Sendable {
             duration: "150ms",
             easing: "Ease-out",
             category: .stateChange,
-            usage: "新しいコンテンツの表示",
-            description: "要素の出現、モーダルの表示。",
+            usage: "Displaying new content",
+            description: "Element appearance, modal display.",
             animation: { $0.fadeIn }
         ),
         MotionSpec(
@@ -88,20 +88,20 @@ struct MotionSpec: Identifiable, Sendable {
             duration: "150ms",
             easing: "Ease-in",
             category: .stateChange,
-            usage: "コンテンツの非表示",
-            description: "要素の消失、モーダルの閉じる。",
+            usage: "Hiding content",
+            description: "Element disappearance, modal closing.",
             animation: { $0.fadeOut }
         ),
 
-        // トランジション
+        // Transitions
         MotionSpec(
             id: "slide",
             name: "slide",
             duration: "240ms",
             easing: "Ease-in-out",
             category: .transition,
-            usage: "タブ切り替え、ページネーション",
-            description: "コンテンツのスムーズな移動。",
+            usage: "Tab switching, pagination",
+            description: "Smooth content movement.",
             animation: { $0.slide }
         ),
         MotionSpec(
@@ -110,8 +110,8 @@ struct MotionSpec: Identifiable, Sendable {
             duration: "300ms",
             easing: "Ease-in-out",
             category: .transition,
-            usage: "セクション展開、テーマ切り替え",
-            description: "コンテキスト変更用の遅いアニメーション。",
+            usage: "Section expansion, theme switching",
+            description: "Slow animation for context changes.",
             animation: { $0.slow }
         ),
         MotionSpec(
@@ -120,20 +120,20 @@ struct MotionSpec: Identifiable, Sendable {
             duration: "375ms",
             easing: "Ease-in-out",
             category: .transition,
-            usage: "ナビゲーション遷移",
-            description: "複雑なトランジション用のより遅いアニメーション。",
+            usage: "Navigation transitions",
+            description: "Slower animation for complex transitions.",
             animation: { $0.slower }
         ),
 
-        // スプリング
+        // Springs
         MotionSpec(
             id: "spring",
             name: "spring",
             duration: "Response: 0.3s",
             easing: "Damping: 0.6",
             category: .spring,
-            usage: "ドラッグ&ドロップ、スクロール",
-            description: "自然なスプリングアニメーション。",
+            usage: "Drag & drop, scrolling",
+            description: "Natural spring animation.",
             animation: { $0.spring }
         ),
         MotionSpec(
@@ -142,13 +142,13 @@ struct MotionSpec: Identifiable, Sendable {
             duration: "Response: 0.5s",
             easing: "Damping: 0.5",
             category: .spring,
-            usage: "楽しさの演出、成功フィードバック",
-            description: "バウンスのあるスプリングアニメーション。",
+            usage: "Playful effects, success feedback",
+            description: "Spring animation with bounce.",
             animation: { $0.bounce }
         )
     ]
 
-    /// カテゴリ別にグループ化
+    /// Group by category
     static func grouped() -> [MotionCategory: [MotionSpec]] {
         Dictionary(grouping: all, by: { $0.category })
     }

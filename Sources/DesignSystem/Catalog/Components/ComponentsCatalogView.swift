@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// コンポーネントカタログのエントリポイント
+/// Entry point for component catalog
 struct ComponentsCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -8,26 +8,26 @@ struct ComponentsCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: spacing.xl) {
-                // ヘッダー
+                // Header
                 VStack(spacing: spacing.sm) {
                     Image(systemName: "square.stack.3d.up.fill")
                         .font(.system(size: 48))
                         .foregroundStyle(colors.primary)
 
-                    Text("コンポーネントカタログ")
+                    Text("Component Catalog")
                         .typography(.headlineLarge)
                         .foregroundStyle(colors.onBackground)
 
-                    Text("再利用可能なUIコンポーネント")
+                    Text("Reusable UI components")
                         .typography(.bodySmall)
                         .foregroundStyle(colors.onSurfaceVariant)
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.top, spacing.xl)
 
-                // コンポーネントリスト
+                // Component list
                 VStack(alignment: .leading, spacing: spacing.md) {
-                    Text("コンポーネント")
+                    Text("Components")
                         .typography(.titleMedium)
                         .foregroundStyle(colors.onSurface)
                         .padding(.horizontal, spacing.lg)
@@ -52,7 +52,7 @@ struct ComponentsCatalogView: View {
             .padding(.bottom, spacing.xl)
         }
         .background(colors.background)
-        .navigationTitle("コンポーネント")
+        .navigationTitle("Components")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -86,7 +86,7 @@ struct ComponentsCatalogView: View {
             ContentUnavailableView {
                 Label("iOS Only", systemImage: "iphone")
             } description: {
-                Text("画像ピッカーはiOSでのみ利用可能です")
+                Text("Image picker is only available on iOS")
             }
             #endif
         case .progressBar:
@@ -104,7 +104,7 @@ struct ComponentsCatalogView: View {
             ContentUnavailableView {
                 Label("iOS Only", systemImage: "iphone")
             } description: {
-                Text("動画ピッカーはiOSでのみ利用可能です")
+                Text("Video picker is only available on iOS")
             }
             #endif
         case .videoPlayer:
@@ -114,7 +114,7 @@ struct ComponentsCatalogView: View {
             ContentUnavailableView {
                 Label("iOS Only", systemImage: "iphone")
             } description: {
-                Text("動画プレイヤーはiOSでのみ利用可能です")
+                Text("Video player is only available on iOS")
             }
             #endif
         }

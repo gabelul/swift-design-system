@@ -1,7 +1,7 @@
 import SwiftUI
 
-/// カタログアイテム行の共通コンテンツ
-/// iPhone用リストビューとiPad用コンテンツビューで共有
+/// Common content for catalog item rows
+/// Shared between iPhone list view and iPad content view
 struct CatalogItemRowContent: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing

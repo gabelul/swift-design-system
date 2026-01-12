@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// IconButtonコンポーネントのカタログビュー
+/// Catalog view for IconButton component
 struct IconButtonCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
@@ -9,42 +9,42 @@ struct IconButtonCatalogView: View {
     var body: some View {
         CatalogPageContainer(title: "IconButton") {
             VStack(alignment: .leading, spacing: spacing.sm) {
-                CatalogOverview(description: "アイコンのみで構成される、コンパクトなアクションボタン")
+                CatalogOverview(description: "Compact action button composed only of icon")
 
                 if tapCount > 0 {
-                    Text("タップ: \(tapCount)")
+                    Text("Taps: \(tapCount)")
                         .typography(.bodySmall)
                         .foregroundStyle(colors.primary)
                         .padding(.horizontal, spacing.lg)
                 }
             }
 
-            SectionCard(title: "スタイル") {
+            SectionCard(title: "Styles") {
                 VStack(spacing: spacing.lg) {
                     HStack {
                         Text("Standard").typography(.bodyMedium).frame(width: 100, alignment: .leading)
                         IconButton(icon: "heart", style: .standard) { tapCount += 1 }
-                        Text("背景なし").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
+                        Text("No background").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
                     }
                     HStack {
                         Text("Filled").typography(.bodyMedium).frame(width: 100, alignment: .leading)
                         IconButton(icon: "heart.fill", style: .filled) { tapCount += 1 }
-                        Text("プライマリ背景").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
+                        Text("Primary background").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
                     }
                     HStack {
                         Text("Tonal").typography(.bodyMedium).frame(width: 100, alignment: .leading)
                         IconButton(icon: "heart.fill", style: .tonal) { tapCount += 1 }
-                        Text("トーン背景").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
+                        Text("Tonal background").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
                     }
                     HStack {
                         Text("Outlined").typography(.bodyMedium).frame(width: 100, alignment: .leading)
                         IconButton(icon: "heart", style: .outlined) { tapCount += 1 }
-                        Text("枠線のみ").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
+                        Text("Border only").typography(.labelSmall).foregroundStyle(colors.onSurfaceVariant)
                     }
                 }
             }
 
-            SectionCard(title: "サイズ") {
+            SectionCard(title: "Sizes") {
                 VStack(spacing: spacing.lg) {
                     HStack {
                         Text("Small (32pt)").typography(.bodyMedium).frame(maxWidth: .infinity, alignment: .leading)
@@ -61,7 +61,7 @@ struct IconButtonCatalogView: View {
                 }
             }
 
-            SectionCard(title: "アイコン例") {
+            SectionCard(title: "Icon Examples") {
                 HStack(spacing: spacing.lg) {
                     IconButton(icon: "heart", style: .tonal) { tapCount += 1 }
                     IconButton(icon: "star", style: .tonal) { tapCount += 1 }
@@ -71,27 +71,27 @@ struct IconButtonCatalogView: View {
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Examples") {
                 CodeExample(code: """
                     IconButton(
                         icon: "heart",
                         style: .filled,
                         size: .medium
                     ) {
-                        // アクション
+                        // Action
                     }
                     """)
             }
 
-            SectionCard(title: "実用例") {
-                VariantShowcase(title: "ツールバー") {
+            SectionCard(title: "Practical Example") {
+                VariantShowcase(title: "Toolbar") {
                     Card {
                         VStack(spacing: spacing.md) {
                             HStack {
-                                Text("記事のタイトル").typography(.titleMedium)
+                                Text("Article Title").typography(.titleMedium)
                                 Spacer()
                             }
-                            Text("本文のプレビューテキスト。")
+                            Text("Preview text of the article body.")
                                 .typography(.bodySmall)
                                 .foregroundStyle(colors.onSurfaceVariant)
                             HStack {

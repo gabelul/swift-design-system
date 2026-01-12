@@ -1,13 +1,13 @@
 import SwiftUI
 
-/// タイポグラフィカタログビュー
+/// Typography catalog view
 struct TypographyCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
 
     var body: some View {
-        CatalogPageContainer(title: "タイポグラフィ") {
-            CatalogOverview(description: "Material Design 3ベースの15種類のタイポグラフィトークン")
+        CatalogPageContainer(title: "Typography") {
+            CatalogOverview(description: "15 typography tokens based on Material Design 3")
 
             SectionCard(title: "Display") {
                 VStack(spacing: spacing.lg) {
@@ -35,9 +35,9 @@ struct TypographyCatalogView: View {
 
             SectionCard(title: "Body") {
                 VStack(spacing: spacing.lg) {
-                    TypographyDemoView(style: .bodyLarge, text: "Body Large - 標準的な本文テキスト")
-                    TypographyDemoView(style: .bodyMedium, text: "Body Medium - コンパクトな本文")
-                    TypographyDemoView(style: .bodySmall, text: "Body Small - 補足説明")
+                    TypographyDemoView(style: .bodyLarge, text: "Body Large - Standard body text")
+                    TypographyDemoView(style: .bodyMedium, text: "Body Medium - Compact body")
+                    TypographyDemoView(style: .bodySmall, text: "Body Small - Supplementary description")
                 }
             }
 
@@ -49,7 +49,7 @@ struct TypographyCatalogView: View {
                 }
             }
 
-            SectionCard(title: "フォントデザイン") {
+            SectionCard(title: "Font Design") {
                 VStack(spacing: spacing.lg) {
                     FontDesignDemoView(design: .default, name: "Default", sampleText: "Hello World 123")
                     FontDesignDemoView(design: .serif, name: "Serif", sampleText: "Hello World 123")
@@ -58,15 +58,15 @@ struct TypographyCatalogView: View {
                 }
             }
 
-            SectionCard(title: "使用例") {
+            SectionCard(title: "Usage Example") {
                 CodeExample(code: """
-                    Text("見出し")
+                    Text("Headline")
                         .typography(.headlineLarge)
 
-                    Text("本文テキスト")
+                    Text("Body text")
                         .typography(.bodyMedium)
 
-                    Text("明朝体で表示")
+                    Text("Display in serif")
                         .typography(.bodyMedium, design: .serif)
                     """)
             }

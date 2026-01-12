@@ -1,12 +1,12 @@
 import Foundation
 
-/// デザイントークン（Foundation）のアイテム
+/// Items for Design Tokens (Foundation)
 enum FoundationItem: String, CaseIterable, Identifiable {
-    case colors = "カラー"
-    case typography = "タイポグラフィ"
-    case spacing = "スペーシング"
-    case radius = "角丸"
-    case motion = "モーション"
+    case colors = "Colors"
+    case typography = "Typography"
+    case spacing = "Spacing"
+    case radius = "Radius"
+    case motion = "Motion"
 
     var id: String { rawValue }
 
@@ -22,11 +22,11 @@ enum FoundationItem: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .colors: return "カラーパレットとセマンティックカラー"
-        case .typography: return "フォントサイズと行間のスケール"
-        case .spacing: return "レイアウト用のスペーシングスケール"
-        case .radius: return "コーナー半径のスケール"
-        case .motion: return "アニメーションタイミングとモーション"
+        case .colors: return "Color palettes and semantic colors"
+        case .typography: return "Font size and line height scales"
+        case .spacing: return "Spacing scale for layouts"
+        case .radius: return "Corner radius scale"
+        case .motion: return "Animation timing and motion"
         }
     }
 }
