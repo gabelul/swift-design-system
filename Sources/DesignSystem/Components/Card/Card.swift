@@ -1,35 +1,45 @@
 import SwiftUI
 
-/// Card component.
+/// Card component
 ///
-/// Generic container for grouping and displaying content.
-/// Uses the surface color, corner radius, and elevation to separate content from
-/// the surrounding UI.
+/// A general-purpose container with elevation (shadow), corner radius, and background color.
+/// Used to group content and express visual hierarchy.
 ///
-/// ## Example
+/// ## Usage
 /// ```swift
 /// @Environment(\.spacingScale) var spacing
 ///
+/// // Basic usage
 /// Card {
+///     Text("Default card")
+///         .typography(.bodyMedium)
+/// }
+///
+/// // Customize elevation and spacing
+/// Card(elevation: .level2) {
 ///     VStack(alignment: .leading, spacing: spacing.md) {
-///         Text("Title")
+///         Text("Card Title")
 ///             .typography(.titleMedium)
-///         Text("Description")
+///         Text("Card description goes here.")
 ///             .typography(.bodyMedium)
 ///     }
 /// }
 ///
-/// // Specify elevation level
-/// Card(elevation: .level3) {
-///     Text("Elevated card")
+/// // Custom corner radius and background color
+/// Card(elevation: .level3, cornerRadius: 20, backgroundColor: colors.primaryContainer) {
+///     Text("Custom card")
+/// }
+///
+/// // Uniform padding
+/// Card(elevation: .level1, allSides: 24) {
+///     Text("Uniform padding")
 /// }
 /// ```
 ///
-/// ## Use cases
-/// - Grouping list items
-/// - Information cards
-/// - Dashboard widgets
-/// - Settings sections
+/// ## Design Guidelines
+/// - **level0–level1**: List items and flat cards
+/// - **level2**: Standard cards (recommended)
+/// - **level3–level5**: Emphasis and modal-style usage
 public struct Card<Content: View>: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.radiusScale) private var radiusScale
@@ -40,6 +50,14 @@ public struct Card<Content: View>: View {
     private let cornerRadius: CGFloat?
     private let backgroundColor: Color?
 
+    /// Creates a card
+    ///
+    /// - Parameters:
+    ///   - elevation: Shadow level (default: `.level1`)
+    ///   - padding: Content inset (default: 16pt on all sides)
+    ///   - cornerRadius: Corner radius (`nil` uses `RadiusScale.lg`)
+    ///   - backgroundColor: Background color (`nil` uses `ColorPalette.surface`)
+    ///   - content: Content to display inside the card
     public init(
         elevation: Elevation = .level1,
         padding: EdgeInsets = EdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16),
@@ -65,6 +83,14 @@ public struct Card<Content: View>: View {
 }
 
 public extension Card {
+    /// Creates a card with uniform padding
+    ///
+    /// - Parameters:
+    ///   - elevation: Shadow level (default: `.level1`)
+    ///   - padding: Uniform padding applied to all sides
+    ///   - cornerRadius: Corner radius (`nil` uses `RadiusScale.lg`)
+    ///   - backgroundColor: Background color (`nil` uses `ColorPalette.surface`)
+    ///   - content: Content to display inside the card
     init(
         elevation: Elevation = .level1,
         allSides padding: CGFloat,

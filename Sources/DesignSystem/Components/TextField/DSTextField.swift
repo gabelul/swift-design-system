@@ -36,6 +36,14 @@ import SwiftUI
 ///         text: $username,
 ///         supportingText: "Alphanumeric characters only"
 ///     )
+///
+///     // Multiline input
+///     DSTextField(
+///         "Comment",
+///         text: $comment,
+///         placeholder: "Enter a comment...",
+///         axis: .vertical
+///     )
 /// }
 /// ```
 ///
@@ -50,16 +58,30 @@ public struct DSTextField: View {
     private let title: String
     private let text: Binding<String>
     private let placeholder: String
+    private let axis: Axis
     private let style: TextFieldStyle
     private let supportingText: String?
     private let error: String?
     private let leadingIcon: String?
     private let trailingIcon: String?
 
+    /// Creates a DSTextField
+    ///
+    /// - Parameters:
+    ///   - title: Label text
+    ///   - text: Text binding
+    ///   - placeholder: Placeholder text
+    ///   - axis: Expansion direction. Use `.vertical` for multiline input (default: `.horizontal`)
+    ///   - style: Outlined / Filled
+    ///   - supportingText: Helper text
+    ///   - error: Error message
+    ///   - leadingIcon: Leading icon (SF Symbols)
+    ///   - trailingIcon: Trailing icon (SF Symbols)
     public init(
         _ title: String = "",
         text: Binding<String>,
         placeholder: String = "",
+        axis: Axis = .horizontal,
         style: TextFieldStyle = .outlined,
         supportingText: String? = nil,
         error: String? = nil,
@@ -69,6 +91,7 @@ public struct DSTextField: View {
         self.title = title
         self.text = text
         self.placeholder = placeholder
+        self.axis = axis
         self.style = style
         self.supportingText = supportingText
         self.error = error
@@ -93,7 +116,7 @@ public struct DSTextField: View {
                         .foregroundStyle(iconColor)
                 }
 
-                TextField(placeholder, text: text)
+                TextField(placeholder, text: text, axis: axis)
                     .typography(.bodyLarge)
                     .foregroundStyle(colorPalette.onSurface)
                     .focused($isFocused)

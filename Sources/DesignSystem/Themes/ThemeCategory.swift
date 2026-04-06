@@ -8,6 +8,7 @@ import Foundation
 /// - **standard**: Default basic theme
 /// - **brandPersonality**: Diverse themes expressing brand personality (Ocean, Forest, Sunset, etc.)
 /// - **accessibility**: WCAG-compliant high contrast theme
+/// - **custom**: App-specific custom theme
 public enum ThemeCategory: String, Sendable, CaseIterable, Identifiable {
     /// Standard theme (default)
     case standard = "Standard"
