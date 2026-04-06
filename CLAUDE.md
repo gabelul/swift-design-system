@@ -1,11 +1,15 @@
 # Swift Design System - English Fork
 
-## 📖 Project Overview
+## For AI Agents
 
-This is an **English-localized fork** of [no-problem-dev/swift-design-system](https://github.com/no-problem-dev/swift-design-system), a comprehensive SwiftUI design system library.
+**If you're generating app code with this library, read `AI_REFERENCE.md` first.** It has every component's API with copy-paste examples. This CLAUDE.md is for maintaining the fork itself.
+
+## Project Overview
+
+This is an **English-localized fork** of [no-problem-dev/swift-design-system](https://github.com/no-problem-dev/swift-design-system), a comprehensive SwiftUI design system library, extended with 15 additional components and DynamicTheme for AI-assisted app generation.
 
 **Original:** Japanese design system with hardcoded Japanese strings
-**This fork:** All user-facing code translated to English while maintaining architectural compatibility with upstream
+**This fork:** English translation + expanded component library + DynamicTheme
 
 ## 🎯 Purpose
 
