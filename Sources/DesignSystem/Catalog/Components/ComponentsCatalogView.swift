@@ -67,6 +67,8 @@ struct ComponentsCatalogView: View {
             AvatarCatalogView()
         case .badge:
             BadgeCatalogView()
+        case .bottomSheet:
+            BottomSheetCatalogView()
         case .button:
             ButtonCatalogView()
         case .card:
@@ -103,6 +105,12 @@ struct ComponentsCatalogView: View {
             SecureFieldCatalogView()
         case .skeleton:
             SkeletonCatalogView()
+        case .emptyState:
+            EmptyStateCatalogView()
+        case .errorState:
+            ErrorStateCatalogView()
+        case .loadingState:
+            LoadingStateCatalogView()
         case .snackbar:
             SnackbarCatalogView()
         case .statDisplay:
@@ -111,6 +119,8 @@ struct ComponentsCatalogView: View {
             StatusBannerCatalogView()
         case .textField:
             TextFieldCatalogView()
+        case .toast:
+            ToastCatalogView()
         case .videoPicker:
             #if canImport(UIKit)
             VideoPickerCatalogView()
