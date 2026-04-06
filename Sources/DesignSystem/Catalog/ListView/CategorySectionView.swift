@@ -24,12 +24,8 @@ struct CategorySectionView: View {
                 .typography(.bodySmall)
                 .foregroundStyle(colors.onSurfaceVariant)
 
-            // Item list
-            VStack(spacing: spacing.sm) {
-                ForEach(category.items) { item in
-                    CategoryItemRow(category: category, item: item)
-                }
-            }
+            // Navigate to category
+            CategoryItemRow(category: category)
         }
         .padding(spacing.lg)
         .background(colors.surface)

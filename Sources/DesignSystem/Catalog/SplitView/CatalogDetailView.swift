@@ -141,6 +141,12 @@ struct CatalogDetailView: View {
             case .aspectGrid:
                 AspectGridCatalogView()
                     .id(pattern)
+            case .flowLayout:
+                FlowLayoutCatalogView()
+                    .id(pattern)
+            case .screen:
+                ScreenCatalogView()
+                    .id(pattern)
             case .sectionCard:
                 SectionCardCatalogView()
                     .id(pattern)

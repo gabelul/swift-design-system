@@ -64,6 +64,10 @@ struct PatternsCatalogView: View {
         switch pattern {
         case .aspectGrid:
             AspectGridCatalogView()
+        case .flowLayout:
+            FlowLayoutCatalogView()
+        case .screen:
+            ScreenCatalogView()
         case .sectionCard:
             SectionCardCatalogView()
         }
