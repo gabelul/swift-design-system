@@ -87,17 +87,19 @@ Since Japanese is highly contextual, translation MUST be done by AI (Claude) rat
 - All UI strings in English
 - All code examples in English
 
-## 📊 Current Translation Status
+## 📊 Current Status
 
-**Status:** ✅ **100% English for all user-facing code**
+**Translation:** ✅ **100% English** — zero Japanese in any Swift source file
 
-- ✅ All catalog views (29 files)
-- ✅ All component APIs (20+ components)
-- ✅ All code examples and demos
-- ✅ All shared components
-- ✅ All routing and navigation
+**Components:** 25 total (10 upstream + 15 fork additions)
+- Upstream: Button, Card, Chip, DSTextField, FAB, IconButton, IconBadge, ProgressBar, Snackbar, StatDisplay, VideoPlayer
+- Fork additions: Accordion, Avatar, Badge, BottomSheet, DSSecureField, EmptyState, ErrorState, LoadingState, SearchField, Skeleton, StatusBanner, Toast
 
-**Remaining:** ~14 infrastructure files with minor Japanese (doesn't affect usage)
+**Layout:** 4 patterns (AspectGrid, SectionCard from upstream + FlowLayout, Screen from fork)
+
+**Themes:** 8 total (7 upstream + DynamicTheme from fork)
+
+**Documentation:** See `FORK_ADDITIONS.md` for complete list of what this fork adds vs upstream
 
 ## 🤖️ AI Assistant Role
 

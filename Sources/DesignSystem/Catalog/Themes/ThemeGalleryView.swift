@@ -50,6 +50,9 @@ public struct ThemeGalleryView: View {
                     }
                 }
 
+                // Dynamic Theme demo
+                DynamicThemeSection()
+
                 // Information section
                 InfoSection()
             }
@@ -216,6 +219,73 @@ private struct InfoSection: View {
             .background(colors.surface)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .padding(.horizontal, spacing.lg)
+        }
+    }
+}
+
+// MARK: - Dynamic Theme Demo
+
+private struct DynamicThemeSection: View {
+    @Environment(ThemeProvider.self) private var themeProvider
+    @Environment(\.colorPalette) private var colors
+    @Environment(\.spacingScale) private var spacing
+    @State private var brandColor = Color.indigo
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: spacing.md) {
+            HStack(spacing: spacing.sm) {
+                Image(systemName: "wand.and.stars")
+                    .font(.title3)
+                    .foregroundStyle(colors.primary)
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Dynamic Theme")
+                        .typography(.titleMedium)
+                        .foregroundStyle(colors.onSurface)
+
+                    Text("Generate a full palette from one brand color")
+                        .typography(.bodySmall)
+                        .foregroundStyle(colors.onSurfaceVariant)
+                }
+            }
+            .padding(.horizontal, spacing.lg)
+
+            VStack(spacing: spacing.md) {
+                ColorPicker("Brand Color", selection: $brandColor, supportsOpacity: false)
+                    .padding(.horizontal, spacing.lg)
+                    .padding(.vertical, spacing.sm)
+
+                Button("Apply Dynamic Theme") {
+                    let theme = DynamicTheme(brandColor: brandColor)
+                    themeProvider.applyTheme(theme)
+                }
+                .buttonStyle(.primary)
+                .padding(.horizontal, spacing.lg)
+
+                // Color preview
+                HStack(spacing: spacing.sm) {
+                    colorSwatch("Primary", color: brandColor)
+                    colorSwatch("Secondary", color: brandColor.adjustingHSB(hueShift: 0.083, saturationMultiplier: 0.8))
+                    colorSwatch("Tertiary", color: brandColor.adjustingHSB(hueShift: -0.083, saturationMultiplier: 0.9))
+                    colorSwatch("Surface", color: brandColor.asSurface())
+                }
+                .padding(.horizontal, spacing.lg)
+            }
+            .padding(.vertical, spacing.md)
+            .background(colors.surface)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            .padding(.horizontal, spacing.lg)
+        }
+    }
+
+    private func colorSwatch(_ label: String, color: Color) -> some View {
+        VStack(spacing: 4) {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(color)
+                .frame(height: 40)
+            Text(label)
+                .typography(.labelSmall)
+                .foregroundStyle(colors.onSurfaceVariant)
         }
     }
 }

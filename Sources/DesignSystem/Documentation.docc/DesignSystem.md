@@ -72,8 +72,10 @@ The following components are iOS-only (conditionally compiled with `#if canImpor
 
 ### Theme System
 
+- <doc:DynamicTheme>
 - ``ThemeCategory``
 - ``ThemeRegistry``
+- ``DynamicTheme``
 - ``DefaultTheme``
 - ``OceanTheme``
 - ``ForestTheme``
@@ -98,6 +100,8 @@ The following components are iOS-only (conditionally compiled with `#if canImpor
 ### Components - Input
 
 - ``DSTextField``
+- ``DSSecureField``
+- ``SearchField``
 - ``Chip``
 - ``ChipStyle``
 - ``ChipSize``
@@ -108,14 +112,33 @@ The following components are iOS-only (conditionally compiled with `#if canImpor
 ### Components - Display
 
 - ``Card``
+- ``Avatar``
+- ``AvatarSize``
+- ``Badge``
 - ``IconBadge``
 - ``IconBadgeSize``
 - ``StatDisplay``
 - ``StatDisplaySize``
 - ``ProgressBar``
+- ``Accordion``
+- ``Skeleton``
+- ``SkeletonShape``
+
+### Components - Feedback
+
 - ``Snackbar``
 - ``SnackbarState``
 - ``SnackbarAction``
+- ``Toast``
+- ``ToastState``
+- ``ToastLevel``
+- ``StatusBanner``
+- ``StatusBannerLevel``
+
+### Components - Overlay
+
+- ``BottomSheet``
+- ``BottomSheetDetent``
 
 ### Components - Action
 
@@ -125,10 +148,18 @@ The following components are iOS-only (conditionally compiled with `#if canImpor
 - ``FloatingActionButton``
 - ``FABSize``
 
+### State Views
+
+- ``EmptyState``
+- ``ErrorState``
+- ``LoadingState``
+
 ### Layout Patterns
 
 - ``SectionCard``
 - ``AspectGrid``
+- ``FlowLayout``
+- ``Screen``
 
 ### Pickers
 

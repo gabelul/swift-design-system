@@ -135,6 +135,18 @@ themeProvider.toggleMode()
 Seven built-in themes are available:
 Default, Ocean, Forest, Sunset, PurpleHaze, Monochrome, HighContrast
 
+### Quick Branding with DynamicTheme
+
+Generate a full palette from a single brand color — no need to define custom palettes:
+
+```swift
+@State var themeProvider = ThemeProvider(
+    initialTheme: DynamicTheme(brandColor: Color(hex: "#6366F1"))
+)
+```
+
+See <doc:DynamicTheme> for details on the color derivation algorithm.
+
 ## Topics
 
 ### Related
