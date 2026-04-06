@@ -61,6 +61,12 @@ struct ComponentsCatalogView: View {
     @ViewBuilder
     private func destinationView(for component: ComponentType) -> some View {
         switch component {
+        case .accordion:
+            AccordionCatalogView()
+        case .avatar:
+            AvatarCatalogView()
+        case .badge:
+            BadgeCatalogView()
         case .button:
             ButtonCatalogView()
         case .card:
@@ -91,10 +97,18 @@ struct ComponentsCatalogView: View {
             #endif
         case .progressBar:
             ProgressBarCatalogView()
+        case .searchField:
+            SearchFieldCatalogView()
+        case .secureField:
+            SecureFieldCatalogView()
+        case .skeleton:
+            SkeletonCatalogView()
         case .snackbar:
             SnackbarCatalogView()
         case .statDisplay:
             StatDisplayCatalogView()
+        case .statusBanner:
+            StatusBannerCatalogView()
         case .textField:
             TextFieldCatalogView()
         case .videoPicker:

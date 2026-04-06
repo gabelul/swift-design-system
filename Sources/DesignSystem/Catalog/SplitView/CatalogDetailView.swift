@@ -56,6 +56,15 @@ struct CatalogDetailView: View {
     private var componentDetailView: some View {
         if let component = componentItem {
             switch component {
+            case .accordion:
+                AccordionCatalogView()
+                    .id(component)
+            case .avatar:
+                AvatarCatalogView()
+                    .id(component)
+            case .badge:
+                BadgeCatalogView()
+                    .id(component)
             case .button:
                 ButtonCatalogView()
                     .id(component)
@@ -97,11 +106,23 @@ struct CatalogDetailView: View {
             case .progressBar:
                 ProgressBarCatalogView()
                     .id(component)
+            case .searchField:
+                SearchFieldCatalogView()
+                    .id(component)
+            case .secureField:
+                SecureFieldCatalogView()
+                    .id(component)
+            case .skeleton:
+                SkeletonCatalogView()
+                    .id(component)
             case .snackbar:
                 SnackbarCatalogView()
                     .id(component)
             case .statDisplay:
                 StatDisplayCatalogView()
+                    .id(component)
+            case .statusBanner:
+                StatusBannerCatalogView()
                     .id(component)
             case .textField:
                 TextFieldCatalogView()
