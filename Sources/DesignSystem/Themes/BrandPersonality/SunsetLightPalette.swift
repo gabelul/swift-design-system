@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Sunsetテーマ - ライトモードパレット
+/// Sunset theme - light mode palette
 struct SunsetLightPalette: ColorPalette {
     // MARK: - Primary
     var primary: Color { Color(hex: "#FF6B35") } // Coral Orange

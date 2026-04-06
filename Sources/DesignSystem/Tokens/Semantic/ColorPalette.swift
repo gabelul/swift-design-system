@@ -1,37 +1,37 @@
 import SwiftUI
 
-/// カラーパレットプロトコル
+/// Color palette protocol
 ///
-/// テーマごとに異なる色実装を提供し、アプリ全体で一貫した色の使用を保証します。
-/// Light/Darkテーマ、カスタムブランドカラーなど、様々なテーマに対応できます。
+/// Provides different color implementations per theme, ensuring consistent color usage across the app.
+/// Supports Light/Dark themes, custom brand colors, and more.
 ///
-/// ## 使用例
+/// ## Usage
 /// ```swift
 /// @Environment(\.colorPalette) var colors
 ///
 /// VStack {
-///     Text("見出し")
+///     Text("Heading")
 ///         .foregroundColor(colors.primary)
-///     Text("本文")
+///     Text("Body text")
 ///         .foregroundColor(colors.onSurface)
 /// }
 /// .background(colors.surface)
 /// ```
 ///
-/// ## カスタムテーマの作成
+/// ## Creating a Custom Theme
 /// ```swift
 /// struct MyBrandPalette: ColorPalette {
 ///     var primary: Color { Color(hex: "#007AFF") }
 ///     var background: Color { .white }
 ///     var surface: Color { Color(hex: "#F2F2F7") }
-///     // ... 他の必須プロパティを実装
+///     // ... implement other required properties
 /// }
 ///
-/// // Themeプロトコルでパレットを使用
+/// // Use the palette in a Theme
 /// struct MyBrandTheme: Theme {
 ///     var id: String { "myBrand" }
 ///     var name: String { "My Brand" }
-///     var description: String { "ブランドカラーテーマ" }
+///     var description: String { "Brand color theme" }
 ///     var category: ThemeCategory { .brandPersonality }
 ///     var previewColors: [Color] { [Color(hex: "#007AFF")] }
 ///
@@ -43,111 +43,111 @@ import SwiftUI
 ///     }
 /// }
 ///
-/// // ThemeProviderに登録
+/// // Register with ThemeProvider
 /// ThemeProvider(initialTheme: MyBrandTheme())
 /// ```
 public protocol ColorPalette: Sendable {
     // MARK: - Primary Colors
 
-    /// 主要なアクションやブランド要素に使用
+    /// Used for main actions and brand elements
     var primary: Color { get }
 
-    /// Primary背景上のテキスト/アイコン色
+    /// Text/icon color on Primary backgrounds
     var onPrimary: Color { get }
 
-    /// Primaryの薄いバリエーション（コンテナ背景用）
+    /// Lighter Primary variant (for container backgrounds)
     var primaryContainer: Color { get }
 
-    /// PrimaryContainer背景上のテキスト色
+    /// Text color on PrimaryContainer backgrounds
     var onPrimaryContainer: Color { get }
 
     // MARK: - Secondary Colors
 
-    /// 補助的なアクセントカラー
+    /// Secondary accent color
     var secondary: Color { get }
 
-    /// Secondary背景上のテキスト/アイコン色
+    /// Text/icon color on Secondary backgrounds
     var onSecondary: Color { get }
 
-    /// Secondaryの薄いバリエーション（コンテナ背景用）
+    /// Lighter Secondary variant (for container backgrounds)
     var secondaryContainer: Color { get }
 
-    /// SecondaryContainer背景上のテキスト色
+    /// Text color on SecondaryContainer backgrounds
     var onSecondaryContainer: Color { get }
 
     // MARK: - Tertiary Colors
 
-    /// 第3のアクセントカラー（追加の強調表示用）
+    /// Third accent color (for additional emphasis)
     var tertiary: Color { get }
 
-    /// Tertiary背景上のテキスト/アイコン色
+    /// Text/icon color on Tertiary backgrounds
     var onTertiary: Color { get }
 
     // MARK: - Background & Surface
 
-    /// アプリ全体の背景色
+    /// App-wide background color
     var background: Color { get }
 
-    /// Background上のテキスト色
+    /// Text color on Background
     var onBackground: Color { get }
 
-    /// カード、シート、ダイアログなどの表面色
+    /// Surface color for cards, sheets, dialogs, etc.
     var surface: Color { get }
 
-    /// Surface上のテキスト色
+    /// Text color on Surface
     var onSurface: Color { get }
 
-    /// Surfaceの代替色（微妙な差分をつける場合）
+    /// Alternative surface color (for subtle differentiation)
     var surfaceVariant: Color { get }
 
-    /// SurfaceVariant上のテキスト色
+    /// Text color on SurfaceVariant
     var onSurfaceVariant: Color { get }
 
     // MARK: - Semantic State Colors
 
-    /// エラー状態の表示に使用
+    /// Used for error states
     var error: Color { get }
 
-    /// Error背景上のテキスト色
+    /// Text color on Error backgrounds
     var onError: Color { get }
 
-    /// エラーの薄いバリエーション（コンテナ背景用）
+    /// Lighter error variant (for container backgrounds)
     var errorContainer: Color { get }
 
-    /// ErrorContainer背景上のテキスト色
+    /// Text color on ErrorContainer backgrounds
     var onErrorContainer: Color { get }
 
-    /// 警告状態の表示に使用
+    /// Used for warning states
     var warning: Color { get }
 
-    /// Warning背景上のテキスト色
+    /// Text color on Warning backgrounds
     var onWarning: Color { get }
 
-    /// 成功状態の表示に使用
+    /// Used for success states
     var success: Color { get }
 
-    /// Success背景上のテキスト色
+    /// Text color on Success backgrounds
     var onSuccess: Color { get }
 
-    /// 情報表示に使用
+    /// Used for informational displays
     var info: Color { get }
 
-    /// Info背景上のテキスト色
+    /// Text color on Info backgrounds
     var onInfo: Color { get }
 
     // MARK: - Outline & Border
 
-    /// ボーダー、区切り線、アウトラインに使用
+    /// Used for borders, dividers, and outlines
     var outline: Color { get }
 
-    /// Outlineの薄いバリエーション
+    /// Lighter outline variant
     var outlineVariant: Color { get }
 }
 
 // MARK: - Default Implementations
 
 public extension ColorPalette {
-    // 派生色にデフォルト実装を提供
+    // Default implementations for derived colors
     var primaryContainer: Color { primary.opacity(0.12) }
     var onPrimaryContainer: Color { primary }
     var secondaryContainer: Color { secondary.opacity(0.12) }
@@ -156,7 +156,7 @@ public extension ColorPalette {
     var errorContainer: Color { error.opacity(0.12) }
     var onErrorContainer: Color { error }
 
-    // on〜色のデフォルト
+    // Default on~ colors
     var onPrimary: Color { .white }
     var onSecondary: Color { .white }
     var onTertiary: Color { .white }

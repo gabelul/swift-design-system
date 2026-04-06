@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// PurpleHazeテーマ - ダークモードパレット
+/// PurpleHaze theme - dark mode palette
 struct PurpleHazeDarkPalette: ColorPalette {
     // MARK: - Primary
     var primary: Color { Color(hex: "#D896FF") } // Lighter purple for dark mode

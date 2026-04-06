@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// HighContrastテーマ - ライトモードパレット（WCAG AAA準拠）
+/// HighContrast theme - light mode palette (WCAG AAA compliant)
 struct HighContrastLightPalette: ColorPalette {
     // MARK: - Primary
     var primary: Color { Color(hex: "#0050B3") } // Deep blue for high contrast

@@ -2,20 +2,20 @@ import Foundation
 
 /// Primitive spacing tokens
 ///
-/// 基本的なスペーシング値を定義します。
-/// **直接使用は避け**、`SpacingScale`プロトコルの実装から参照してください。
+/// Defines base spacing values.
+/// **Avoid direct use** — reference through `SpacingScale` protocol implementations instead.
 ///
-/// ## 使用方法
+/// ## Usage
 /// ```swift
-/// // ❌ 避けるべき
+/// // Don't use directly
 /// .padding(PrimitiveSpacing.space16)
 ///
-/// // ✅ 推奨
+/// // Preferred
 /// @Environment(\.spacingScale) var spacing
 /// .padding(spacing.lg)
 /// ```
 ///
-/// カスタムスペーシングスケールでの使用：
+/// Reference in custom spacing scales:
 /// ```swift
 /// struct CustomSpacingScale: SpacingScale {
 ///     var lg: CGFloat { PrimitiveSpacing.space16 }

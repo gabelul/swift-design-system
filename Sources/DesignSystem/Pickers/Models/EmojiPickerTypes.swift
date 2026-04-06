@@ -1,8 +1,8 @@
 import Foundation
 
-/// 絵文字アイテム
+/// Emoji item
 ///
-/// 絵文字ピッカーで表示される個々の絵文字を表します。
+/// Represents an individual emoji displayed in the emoji picker.
 public struct EmojiItem: Identifiable, Sendable, Hashable {
     public let id: String
     public let emoji: String
@@ -15,25 +15,25 @@ public struct EmojiItem: Identifiable, Sendable, Hashable {
     }
 }
 
-/// 絵文字のカテゴリを表すプロトコル
+/// Protocol representing an emoji category
 ///
-/// 絵文字をグループ化するためのプロトコルです。
+/// Used to group emojis into categories.
 public protocol EmojiCategoryProtocol: Identifiable, Sendable {
     var id: String { get }
     var displayName: String { get }
     var emojis: [EmojiItem] { get }
 }
 
-/// 汎用的な絵文字カテゴリ実装
+/// General-purpose emoji category implementation
 ///
-/// ## 使用例
+/// ## Usage
 /// ```swift
 /// let smileyCategory = EmojiCategory(
 ///     id: "smileys",
-///     displayName: "顔・感情",
+///     displayName: "Faces & Emotions",
 ///     emojis: [
-///         EmojiItem(id: "smile", emoji: "😊", displayName: "笑顔"),
-///         EmojiItem(id: "laugh", emoji: "😂", displayName: "笑い"),
+///         EmojiItem(id: "smile", emoji: "😊", displayName: "Smile"),
+///         EmojiItem(id: "laugh", emoji: "😂", displayName: "Laugh"),
 ///     ]
 /// )
 ///
@@ -43,7 +43,7 @@ public protocol EmojiCategoryProtocol: Identifiable, Sendable {
 ///     let categories = [smileyCategory, /* ... */]
 ///
 ///     var body: some View {
-///         Button("絵文字を選択") {
+///         Button("Choose Emoji") {
 ///             showEmojiPicker = true
 ///         }
 ///         .emojiPicker(

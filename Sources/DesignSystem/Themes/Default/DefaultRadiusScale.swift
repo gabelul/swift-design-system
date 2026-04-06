@@ -1,6 +1,6 @@
 import Foundation
 
-/// デフォルトの角丸スケール
+/// Default corner radius scale
 public struct DefaultRadiusScale: RadiusScale {
     public init() {}
 

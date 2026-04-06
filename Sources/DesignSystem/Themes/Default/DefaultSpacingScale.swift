@@ -1,6 +1,6 @@
 import Foundation
 
-/// デフォルトのスペーシングスケール
+/// Default spacing scale
 public struct DefaultSpacingScale: SpacingScale {
     public init() {}
 

@@ -2,20 +2,20 @@ import Foundation
 
 /// Primitive radius tokens
 ///
-/// 基本的な角丸の値を定義します。
-/// **直接使用は避け**、`RadiusScale`プロトコルの実装から参照してください。
+/// Defines base corner radius values.
+/// **Avoid direct use** — reference through `RadiusScale` protocol implementations instead.
 ///
-/// ## 使用方法
+/// ## Usage
 /// ```swift
-/// // ❌ 避けるべき
+/// // Don't use directly
 /// .cornerRadius(PrimitiveRadius.radius8)
 ///
-/// // ✅ 推奨
+/// // Preferred
 /// @Environment(\.radiusScale) var radius
 /// .cornerRadius(radius.md)
 /// ```
 ///
-/// カスタム角丸スケールでの使用：
+/// Reference in custom radius scales:
 /// ```swift
 /// struct CustomRadiusScale: RadiusScale {
 ///     var md: CGFloat { PrimitiveRadius.radius8 }

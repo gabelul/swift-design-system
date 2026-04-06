@@ -1,11 +1,11 @@
 import Foundation
 
-/// 角丸スケールプロトコル
+/// Corner radius scale protocol
 ///
-/// 一貫した角丸（border-radius）を提供するためのスケールシステム。
-/// カード、ボタン、入力フィールドなどの角丸を統一できます。
+/// A scale system for providing consistent corner radii (border-radius).
+/// Unifies corner radii across cards, buttons, input fields, and more.
 ///
-/// ## 使用例
+/// ## Usage
 /// ```swift
 /// @Environment(\.radiusScale) var radius
 ///
@@ -13,44 +13,44 @@ import Foundation
 ///     .fill(Color.blue)
 ///     .frame(width: 100, height: 100)
 ///
-/// // または
-/// Text("ボタン")
+/// // Or
+/// Text("Button")
 ///     .padding()
 ///     .background(Color.blue)
 ///     .cornerRadius(radius.lg)
 /// ```
 ///
-/// ## スケール一覧
-/// - `none`: 0pt - 角丸なし（四角）
-/// - `xs`: 2pt - 最小の角丸
-/// - `sm`: 4pt - 小さい角丸
-/// - `md`: 8pt - 中程度の角丸（カードなどに推奨）
-/// - `lg`: 12pt - 大きい角丸
-/// - `xl`: 16pt - とても大きい角丸
-/// - `xxl`: 20pt - 非常に大きい角丸
-/// - `full`: 9999pt - 完全な円形（ボタン、アバターなど）
+/// ## Scale Reference
+/// - `none`: 0pt - No corner radius (square)
+/// - `xs`: 2pt - Smallest corner radius
+/// - `sm`: 4pt - Small corner radius
+/// - `md`: 8pt - Medium corner radius (recommended for cards)
+/// - `lg`: 12pt - Large corner radius
+/// - `xl`: 16pt - Very large corner radius
+/// - `xxl`: 20pt - Extra large corner radius
+/// - `full`: 9999pt - Fully circular (buttons, avatars, etc.)
 public protocol RadiusScale: Sendable {
-    /// 角丸なし（0pt）
+    /// No corner radius (0pt)
     var none: CGFloat { get }
 
-    /// 最小の角丸（2pt）
+    /// Smallest corner radius (2pt)
     var xs: CGFloat { get }
 
-    /// 小さい角丸（4pt）
+    /// Small corner radius (4pt)
     var sm: CGFloat { get }
 
-    /// 中程度の角丸（8pt）- カードなどに推奨
+    /// Medium corner radius (8pt) - recommended for cards
     var md: CGFloat { get }
 
-    /// 大きい角丸（12pt）
+    /// Large corner radius (12pt)
     var lg: CGFloat { get }
 
-    /// とても大きい角丸（16pt）
+    /// Very large corner radius (16pt)
     var xl: CGFloat { get }
 
-    /// 非常に大きい角丸（20pt）
+    /// Extra large corner radius (20pt)
     var xxl: CGFloat { get }
 
-    /// 完全な円形（9999pt）- ボタン、アバターなど
+    /// Fully circular (9999pt) - buttons, avatars, etc.
     var full: CGFloat { get }
 }

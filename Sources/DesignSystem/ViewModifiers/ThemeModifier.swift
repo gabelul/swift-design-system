@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// テーマを適用するView Modifier
+/// View modifier that applies a theme
 public struct ThemeModifier: ViewModifier {
     @Bindable var provider: ThemeProvider
 
@@ -13,16 +13,16 @@ public struct ThemeModifier: ViewModifier {
     }
 }
 
-/// テーマ環境値を提供する内部ビュー
-/// @Bindableによる変更追跡を確実に行うための専用ビュー
+/// Internal view that provides theme environment values
+/// Dedicated view to ensure reliable change tracking via @Bindable
 private struct ThemeEnvironmentView<Content: View>: View {
     @Bindable var provider: ThemeProvider
     @Environment(\.colorScheme) private var systemColorScheme
     let content: Content
 
-    /// 実際に使用するモードを解決
-    /// - `.system`: システムのColorSchemeに従う
-    /// - `.light`/`.dark`: ユーザーの手動選択を尊重
+    /// Resolves the actual mode to use
+    /// - `.system`: Follows the system ColorScheme
+    /// - `.light`/`.dark`: Respects the user's manual selection
     private var resolvedMode: ThemeMode {
         switch provider.themeMode {
         case .system:
@@ -32,13 +32,13 @@ private struct ThemeEnvironmentView<Content: View>: View {
         }
     }
 
-    /// 実際に適用するSwiftUIのColorScheme
+    /// The actual SwiftUI ColorScheme to apply
     private var resolvedColorScheme: ColorScheme {
         resolvedMode == .dark ? .dark : .light
     }
 
-    /// 実際に適用するカラーパレット（リアクティブ）
-    /// provider.currentThemeが変更されると自動的に再計算される
+    /// The actual color palette to apply (reactive)
+    /// Automatically recalculated when provider.currentTheme changes
     private var resolvedColorPalette: any ColorPalette {
         provider.currentTheme.colorPalette(for: resolvedMode)
     }

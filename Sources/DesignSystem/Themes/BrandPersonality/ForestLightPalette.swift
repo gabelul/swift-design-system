@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Forestテーマ - ライトモードパレット
+/// Forest theme - light mode palette
 struct ForestLightPalette: ColorPalette {
     // MARK: - Primary
     var primary: Color { Color(hex: "#2D5016") } // Deep Forest Green

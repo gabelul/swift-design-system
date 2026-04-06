@@ -8,7 +8,7 @@ struct FoundationCatalogView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: spacing.xl) {
-                // ヘッダー
+                // Header
                 VStack(spacing: spacing.sm) {
                     Image(systemName: "slider.horizontal.3")
                         .font(.system(size: 48))
@@ -25,7 +25,7 @@ struct FoundationCatalogView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.top, spacing.xl)
 
-                // Tokensリスト
+                // Tokens list
                 VStack(alignment: .leading, spacing: spacing.md) {
                     Text("Tokens")
                         .typography(.titleMedium)
