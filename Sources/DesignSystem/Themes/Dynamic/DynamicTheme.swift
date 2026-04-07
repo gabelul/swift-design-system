@@ -55,6 +55,8 @@ public struct DynamicTheme: Theme, Sendable {
             brandColor,
             brandColor.adjustingHSB(hueShift: 0.083, saturationMultiplier: 0.8),
             brandColor.adjustingHSB(hueShift: -0.083, saturationMultiplier: 0.9),
+            brandColor.asSurface(),
+            brandColor.asDarkSurface(),
         ]
     }
 
