@@ -1,6 +1,15 @@
 import SwiftUI
 
 /// Root host that installs presenter-backed Toast + Snackbar notifications.
+///
+/// This host should usually sit at the app root so child views can use
+/// `@Environment(\.notify)` without local notification state.
+///
+/// ## Usage
+/// ```swift
+/// ContentView()
+///     .installNotifications()
+/// ```
 public struct NotificationHost<Content: View>: View {
     private let content: Content
 
@@ -28,6 +37,10 @@ public struct NotificationHost<Content: View>: View {
 
 public extension View {
     /// Installs presenter-backed Toast + Snackbar notifications once at app root.
+    ///
+    /// This is the preferred notification path for new code. Standalone
+    /// `ToastState` and `SnackbarState` usage still works when you need local,
+    /// explicit control.
     func installNotifications() -> some View {
         NotificationHost {
             self

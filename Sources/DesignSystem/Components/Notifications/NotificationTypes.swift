@@ -10,6 +10,9 @@ public enum NotificationHaptics: Sendable {
 }
 
 /// Async action payload for presenter-driven snackbars.
+///
+/// Use this when a snackbar needs a single follow-up action such as
+/// "Undo", "Retry", or "View".
 public struct NotifyAction {
     /// Title shown on the snackbar action button.
     public let title: String
@@ -17,6 +20,11 @@ public struct NotifyAction {
     /// Async handler invoked when the action is tapped.
     public let handler: @MainActor () async -> Void
 
+    /// Creates a snackbar action.
+    ///
+    /// - Parameters:
+    ///   - title: The button title shown in the snackbar
+    ///   - handler: Async handler executed when the action is tapped
     public init(
         title: String,
         handler: @escaping @MainActor () async -> Void

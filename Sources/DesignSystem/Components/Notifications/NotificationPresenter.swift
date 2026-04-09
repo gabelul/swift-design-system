@@ -6,7 +6,51 @@ import UIKit
 /// Presenter-backed notification orchestration for Toast + Snackbar.
 ///
 /// Install once at app root via `installNotifications()`, then trigger
-/// notifications from any child view using `@Environment(\.notify)`.
+/// transient notifications from any child view using `@Environment(\.notify)`.
+///
+/// Unlike `StatusBanner`, which represents persistent state, this presenter is
+/// only for short-lived user feedback:
+/// - `Toast` for top, action-free feedback
+/// - `Snackbar` for bottom, action-capable feedback
+///
+/// ## Usage
+/// ```swift
+/// @main
+/// struct MyApp: App {
+///     var body: some Scene {
+///         WindowGroup {
+///             ContentView()
+///                 .installNotifications()
+///         }
+///     }
+/// }
+///
+/// struct ContentView: View {
+///     @Environment(\.notify) private var notify
+///
+///     var body: some View {
+///         VStack {
+///             Button("Save") {
+///                 notify?.toast("Saved", level: .success)
+///             }
+///
+///             Button("Delete") {
+///                 notify?.snackbar(
+///                     "Deleted",
+///                     action: .init(title: "Undo") {
+///                         await restore()
+///                     }
+///                 )
+///             }
+///         }
+///     }
+/// }
+/// ```
+///
+/// ## Design Guidelines
+/// - Use `Toast` for short, passive feedback
+/// - Use `Snackbar` when the user needs one action (undo, retry, view)
+/// - Keep `StatusBanner` separate for persistent state
 @MainActor
 @Observable
 public final class NotificationPresenter {
@@ -55,6 +99,12 @@ public final class NotificationPresenter {
     // MARK: - Public API
 
     /// Shows a toast at the top of the screen.
+    ///
+    /// - Parameters:
+    ///   - message: The short feedback message to display
+    ///   - level: Severity level controlling icon, color, and automatic haptics
+    ///   - haptics: Haptic behavior for this toast
+    ///   - duration: Seconds until auto-dismiss
     public func toast(
         _ message: String,
         level: ToastLevel = .info,
@@ -79,6 +129,14 @@ public final class NotificationPresenter {
     }
 
     /// Shows a snackbar at the bottom of the screen.
+    ///
+    /// Snackbars queue by default in the presenter so action-capable messages
+    /// do not overwrite each other.
+    ///
+    /// - Parameters:
+    ///   - message: The message to display
+    ///   - action: Optional single action button
+    ///   - duration: Seconds until auto-dismiss
     public func snackbar(
         _ message: String,
         action: NotifyAction? = nil,
