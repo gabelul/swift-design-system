@@ -55,6 +55,7 @@ struct DesignSystemCatalogApp: App {
     var body: some Scene {
         WindowGroup {
             DesignSystemCatalogView()
+                .installNotifications()
                 .theme(themeProvider)
         }
     }

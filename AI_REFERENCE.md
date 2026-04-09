@@ -127,6 +127,12 @@ StatusBanner("Offline", level: .error, icon: "wifi.slash", actionLabel: "Retry")
 
 ### Toast (auto-dismissing notification)
 ```swift
+// Preferred presenter-backed usage
+@Environment(\.notify) var notify
+
+notify?.toast("Saved", level: .success)
+
+// Legacy standalone usage
 @State var toast = ToastState()
 
 // Trigger
@@ -138,6 +144,14 @@ toast.show(message: "Saved", level: .success)
 
 ### Snackbar (notification with actions)
 ```swift
+// Preferred presenter-backed usage
+@Environment(\.notify) var notify
+
+notify?.snackbar("Deleted", action: .init(title: "Undo") {
+    await restore()
+})
+
+// Legacy standalone usage
 @State var snackbar = SnackbarState()
 
 snackbar.show(message: "Deleted", primaryAction: SnackbarAction(title: "Undo") { undo() })
@@ -145,6 +159,14 @@ snackbar.show(message: "Deleted", primaryAction: SnackbarAction(title: "Undo") {
 // In view body
 Snackbar(state: snackbar)
 ```
+
+### Notification installation (preferred)
+```swift
+ContentView()
+    .installNotifications()
+```
+
+`Toast` and `Snackbar` are event-driven notifications. `StatusBanner` stays separate as persistent, state-driven UI.
 
 ### BottomSheet
 ```swift

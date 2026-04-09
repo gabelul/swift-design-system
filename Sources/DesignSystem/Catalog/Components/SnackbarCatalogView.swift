@@ -4,6 +4,7 @@ import SwiftUI
 struct SnackbarCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
+    @Environment(\.notify) private var notify
     @State private var snackbarState = SnackbarState()
 
     var body: some View {
@@ -50,6 +51,31 @@ struct SnackbarCatalogView: View {
                         }
                     }
 
+                    SectionCard(title: "Presenter API (Preferred)") {
+                        VStack(alignment: .leading, spacing: spacing.md) {
+                            Button("Show Presenter Snackbar") {
+                                notify?.snackbar(
+                                    "Deleted",
+                                    action: .init(title: "Undo") {
+                                        await MainActor.run {}
+                                    }
+                                )
+                            }
+                            .buttonStyle(.primary)
+
+                            Button("Queue Two Snackbars") {
+                                notify?.snackbar("First message")
+                                notify?.snackbar(
+                                    "Second message",
+                                    action: .init(title: "View") {
+                                        await MainActor.run {}
+                                    }
+                                )
+                            }
+                            .buttonStyle(.secondary)
+                        }
+                    }
+
                     SectionCard(title: "Duration") {
                         HStack(spacing: spacing.md) {
                             Button("3 sec") {
@@ -93,6 +119,7 @@ struct SnackbarCatalogView: View {
 #Preview {
     NavigationStack {
         SnackbarCatalogView()
+            .installNotifications()
             .theme(ThemeProvider())
     }
 }

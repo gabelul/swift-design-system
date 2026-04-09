@@ -90,6 +90,32 @@ themeProvider.switchToTheme(id: "ocean")
 themeProvider.toggleMode()
 ```
 
+### Notifications
+
+```swift
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .installNotifications()
+        }
+    }
+}
+
+struct ContentView: View {
+    @Environment(\.notify) private var notify
+
+    var body: some View {
+        Button("Save") {
+            notify?.toast("Saved", level: .success)
+        }
+    }
+}
+```
+
+`Toast` and `Snackbar` are event-driven notifications. `StatusBanner` remains the persistent, state-driven lane.
+
 ## Documentation
 
 For detailed guides and the full API reference, see the DocC documentation.

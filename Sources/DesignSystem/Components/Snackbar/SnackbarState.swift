@@ -41,6 +41,10 @@ public final class SnackbarState {
     /// Auto-dismiss timer
     private var dismissTask: Task<Void, Never>?
 
+    /// Internal dismissal callback used by `NotificationPresenter` to present
+    /// the next queued snackbar.
+    var didDismiss: (@MainActor () -> Void)?
+
     public init() {}
 
     /// Shows the Snackbar
@@ -77,7 +81,11 @@ public final class SnackbarState {
     /// Hides the Snackbar
     public func dismiss() {
         dismissTask?.cancel()
+        let wasVisible = isVisible
         isVisible = false
+        if wasVisible {
+            didDismiss?()
+        }
     }
 }
 

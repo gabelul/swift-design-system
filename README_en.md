@@ -174,6 +174,34 @@ ScrollView {
 }
 ```
 
+### 4. Install notifications
+
+```swift
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .installNotifications()
+        }
+    }
+}
+
+struct ContentView: View {
+    @Environment(\.notify) private var notify
+
+    var body: some View {
+        Button("Delete") {
+            notify?.snackbar("Deleted", action: .init(title: "Undo") {
+                await restore()
+            })
+        }
+    }
+}
+```
+
+Use `Toast` and `Snackbar` for event-driven notifications. Keep `StatusBanner` for persistent, state-driven UI.
+
 ---
 
 ## Built‑in Themes
@@ -493,4 +521,3 @@ The included catalog app (`DesignSystemCatalog`) contains more complete examples
 - Full motion, typography, spacing, and color catalogs.
 
 For deeper details and any updates, please refer to the DocC documentation linked at the top.
-

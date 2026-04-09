@@ -3,6 +3,7 @@ import SwiftUI
 struct ToastCatalogView: View {
     @Environment(\.colorPalette) private var colors
     @Environment(\.spacingScale) private var spacing
+    @Environment(\.notify) private var notify
     @State private var toastState = ToastState()
 
     var body: some View {
@@ -21,7 +22,34 @@ struct ToastCatalogView: View {
                     }
                 }
 
+                SectionCard(title: "Presenter API (Preferred)") {
+                    VStack(spacing: spacing.sm) {
+                        Button("Presenter Success Toast") {
+                            notify?.toast("Changes saved", level: .success)
+                        }
+                        .buttonStyle(.primary)
+
+                        Button("Presenter Error Toast") {
+                            notify?.toast("Something went wrong", level: .error)
+                        }
+                        .buttonStyle(.secondary)
+
+                        Button("Deduplicate Example") {
+                            notify?.toast("Saved", level: .success)
+                            notify?.toast("Saved", level: .success)
+                        }
+                        .buttonStyle(.tertiary)
+                    }
+                }
+
                 CodeExample(code: """
+                @Environment(\\.notify) private var notify
+
+                notify?.toast("Saved", level: .success)
+                """)
+
+                CodeExample(code: """
+                // Legacy standalone usage
                 @State var toastState = ToastState()
                 
                 // Show
@@ -44,4 +72,10 @@ struct ToastCatalogView: View {
     }
 }
 
-#Preview { NavigationStack { ToastCatalogView().theme(ThemeProvider()) } }
+#Preview {
+    NavigationStack {
+        ToastCatalogView()
+            .installNotifications()
+            .theme(ThemeProvider())
+    }
+}

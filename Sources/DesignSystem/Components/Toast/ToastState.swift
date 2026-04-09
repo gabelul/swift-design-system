@@ -47,7 +47,6 @@ public final class ToastState {
 
     /// Auto-dismiss timer
     private var dismissTask: Task<Void, Never>?
-
     public init() {}
 
     /// Shows a toast notification
