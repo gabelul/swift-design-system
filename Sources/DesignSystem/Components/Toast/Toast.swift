@@ -1,4 +1,7 @@
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 /// Lightweight auto-dismissing notification
 ///
@@ -34,36 +37,44 @@ public struct Toast: View {
     }
 
     public var body: some View {
-        if state.isVisible {
-            HStack(spacing: spacing.sm) {
-                Image(systemName: state.icon ?? state.level.icon)
-                    .font(.system(size: 16, weight: .semibold))
-
-                Text(state.message)
-                    .typography(.bodySmall)
-                    .lineLimit(2)
-
-                Spacer()
-
-                Button {
-                    withAnimation { state.dismiss() }
-                } label: {
-                    Image(systemName: "xmark")
-                        .font(.system(size: 11, weight: .bold))
-                        .foregroundStyle(foregroundColor.opacity(0.6))
-                }
-                .buttonStyle(.plain)
+        GeometryReader { proxy in
+            if state.isVisible {
+                toastBody
+                    .padding(.horizontal, spacing.lg)
+                    .padding(.top, topInset(for: proxy) + spacing.sm)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .transition(.move(edge: .top).combined(with: .opacity))
+                    .animation(.spring(duration: 0.35, bounce: 0.2), value: state.isVisible)
             }
-            .foregroundStyle(foregroundColor)
-            .padding(.horizontal, spacing.lg)
-            .padding(.vertical, spacing.md)
-            .background(backgroundColor)
-            .clipShape(RoundedRectangle(cornerRadius: radius.md))
-            .padding(.horizontal, spacing.lg)
-            .padding(.top, spacing.sm)
-            .transition(.move(edge: .top).combined(with: .opacity))
-            .animation(.spring(duration: 0.35, bounce: 0.2), value: state.isVisible)
         }
+        .ignoresSafeArea(edges: .top)
+    }
+
+    private var toastBody: some View {
+        HStack(spacing: spacing.sm) {
+            Image(systemName: state.icon ?? state.level.icon)
+                .font(.system(size: 16, weight: .semibold))
+
+            Text(state.message)
+                .typography(.bodySmall)
+                .lineLimit(2)
+
+            Spacer()
+
+            Button {
+                withAnimation { state.dismiss() }
+            } label: {
+                Image(systemName: "xmark")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(foregroundColor.opacity(0.6))
+            }
+            .buttonStyle(.plain)
+        }
+        .foregroundStyle(foregroundColor)
+        .padding(.horizontal, spacing.lg)
+        .padding(.vertical, spacing.md)
+        .background(backgroundColor)
+        .clipShape(RoundedRectangle(cornerRadius: radius.md))
     }
 
     // MARK: - Level-based colors
@@ -84,6 +95,17 @@ public struct Toast: View {
         case .warning: return colors.warning
         case .error: return colors.error
         }
+    }
+
+    private func topInset(for proxy: GeometryProxy) -> CGFloat {
+        #if canImport(UIKit)
+        let sceneInset = UIApplication.shared.connectedScenes
+            .compactMap { ($0 as? UIWindowScene)?.keyWindow?.safeAreaInsets.top }
+            .max() ?? 0
+        return max(proxy.safeAreaInsets.top, sceneInset)
+        #else
+        return proxy.safeAreaInsets.top
+        #endif
     }
 }
 
