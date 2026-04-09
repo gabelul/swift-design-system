@@ -129,12 +129,12 @@ public struct Toast: View {
             }
             .onEnded { value in
                 let shouldDismiss = value.translation.height < -24 || abs(value.translation.width) > 80
-                if shouldDismiss {
-                    withAnimation {
+                withAnimation {
+                    if shouldDismiss {
                         state.dismiss()
                     }
+                    dragOffset = .zero
                 }
-                dragOffset = .zero
             }
     }
 }

@@ -76,6 +76,17 @@ public final class NotificationPresenter {
     /// transitions feel natural and don't visually collide.
     private let snackbarTransitionDelay: TimeInterval = 0.2
 
+    /// Task scheduled to present the next queued snackbar after dismissal.
+    private var pendingSnackbarTask: Task<Void, Never>?
+
+    #if canImport(UIKit)
+    /// Reused generator for success / warning / error notification haptics.
+    private let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+
+    /// Reused generator for lightweight informational haptics.
+    private let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+    #endif
+
     /// Creates a presenter for root-installed transient notifications.
     ///
     /// The presenter owns Toast + Snackbar orchestration. `StatusBanner`
@@ -89,10 +100,7 @@ public final class NotificationPresenter {
         self.snackbarState = snackbarState
 
         self.snackbarState.didDismiss = { [weak self] in
-            guard let self else { return }
-            Task { @MainActor in
-                await self.presentNextSnackbarIfNeeded()
-            }
+            self?.scheduleNextSnackbarIfNeeded()
         }
     }
 
@@ -123,6 +131,7 @@ public final class NotificationPresenter {
 
         guard !shouldSuppressToast(item) else { return }
 
+        rememberToast(item)
         announce(trimmed)
         playHaptics(for: level, policy: haptics)
         toastState.show(message: trimmed, level: level, duration: duration)
@@ -151,7 +160,7 @@ public final class NotificationPresenter {
             duration: duration
         )
 
-        if snackbarState.isVisible {
+        if snackbarState.isVisible || pendingSnackbarTask != nil {
             queue.enqueue(item)
             return
         }
@@ -176,20 +185,21 @@ public final class NotificationPresenter {
         guard case let .toast(message, level, _, _) = item else { return false }
 
         let fingerprint = "\(level)-\(message)"
-        let now = Date()
-
-        defer {
-            lastToastFingerprint = fingerprint
-            lastToastTimestamp = now
-        }
-
         guard let lastToastFingerprint,
               let lastToastTimestamp else {
             return false
         }
 
+        let now = Date()
         return fingerprint == lastToastFingerprint
             && now.timeIntervalSince(lastToastTimestamp) < duplicateToastSuppressionWindow
+    }
+
+    /// Stores the metadata of the most recently displayed toast.
+    private func rememberToast(_ item: NotificationQueueItem) {
+        guard case let .toast(message, level, _, _) = item else { return }
+        lastToastFingerprint = "\(level)-\(message)"
+        lastToastTimestamp = Date()
     }
 
     // MARK: - Snackbar routing
@@ -211,20 +221,36 @@ public final class NotificationPresenter {
         )
     }
 
-    /// Presents the next queued snackbar after the current one disappears.
-    private func presentNextSnackbarIfNeeded() async {
+    /// Schedules the next queued snackbar after the current one disappears.
+    ///
+    /// The presenter tracks an in-flight transition task so new snackbar calls
+    /// cannot race ahead of already queued work.
+    private func scheduleNextSnackbarIfNeeded() {
         guard !snackbarState.isVisible else { return }
         guard let next = queue.dequeue() else { return }
-
-        let delay = UInt64(snackbarTransitionDelay * 1_000_000_000)
-        try? await Task.sleep(nanoseconds: delay)
-
-        guard !snackbarState.isVisible else {
+        guard pendingSnackbarTask == nil else {
             queue.enqueue(next)
             return
         }
 
-        presentSnackbar(next)
+        pendingSnackbarTask = Task { [weak self] in
+            guard let self else { return }
+
+            let delay = UInt64(snackbarTransitionDelay * 1_000_000_000)
+            try? await Task.sleep(nanoseconds: delay)
+            guard !Task.isCancelled else { return }
+
+            await MainActor.run {
+                self.pendingSnackbarTask = nil
+
+                guard !self.snackbarState.isVisible else {
+                    self.queue.enqueue(next)
+                    return
+                }
+
+                self.presentSnackbar(next)
+            }
+        }
     }
 
     // MARK: - Feedback helpers
@@ -240,15 +266,17 @@ public final class NotificationPresenter {
     private func playHaptics(for level: ToastLevel, policy: NotificationHaptics) {
         guard policy == .automatic else { return }
         #if canImport(UIKit)
+        notificationFeedbackGenerator.prepare()
+        impactFeedbackGenerator.prepare()
         switch level {
         case .success:
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
+            notificationFeedbackGenerator.notificationOccurred(.success)
         case .warning:
-            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+            notificationFeedbackGenerator.notificationOccurred(.warning)
         case .error:
-            UINotificationFeedbackGenerator().notificationOccurred(.error)
+            notificationFeedbackGenerator.notificationOccurred(.error)
         case .info:
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            impactFeedbackGenerator.impactOccurred()
         }
         #endif
     }
