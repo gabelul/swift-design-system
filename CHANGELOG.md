@@ -9,6 +9,29 @@
 
 なし
 
+## [1.0.24-fork] - 2026-04-15
+
+Merged upstream v1.0.24 into the English fork. All new Japanese docs, comments,
+and preview strings translated to English. Fork-only components (DynamicTheme,
+Accordion, Avatar, Badge, BottomSheet, DSSecureField, EmptyState, ErrorState,
+LoadingState, SearchField, Skeleton, StatusBanner, Toast, Notifications,
+FlowLayout, Screen) preserved unchanged.
+
+### Added
+- **Section component family** — surface cards for settings and hub screens (ADR-014 upstream)
+  - `SectionCard(_ header:, footer:)` — small uppercase header + rounded surface + footer caption
+  - `SectionRow` — HStack row with unified padding. `contentShape(Rectangle())` makes the padding tappable too
+  - `SectionRowDivider` — 0.5pt hairline divider in `outlineVariant`
+  - `SectionNavigationLabel` — chevron label for `NavigationLink`
+  - All four built on DS tokens only (spacing / radius / typography / colorPalette)
+  - Works as a plain-SwiftUI stand-in for the iOS 26 Liquid Glass surface material look
+
+### Changed
+- **SectionCard** — existing `SectionCard(title:, elevation:)` initializer kept for backwards compatibility.
+  New code should use the `SectionCard(_ header:, footer:)` Surface Section style.
+- Moved `Sources/DesignSystem/Layout/Patterns/SectionCard.swift` → `Sources/DesignSystem/Components/Section/SectionCard.swift` (unified with the new Section family, avoids duplicate-type errors).
+- Extended `SectionCardCatalogView` with Surface Section demos covering Row, Divider, and NavigationLabel.
+
 ## [1.0.22] - 2026-01-06
 
 ### 追加

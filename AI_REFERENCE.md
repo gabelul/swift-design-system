@@ -217,7 +217,23 @@ IconButton(icon: "heart.fill", style: .filled, size: .medium) { toggleFavorite()
 // Styles: .standard, .filled, .tonal, .outlined
 ```
 
-### SectionCard
+### SectionCard — Surface Section (new, recommended)
+```swift
+SectionCard("Notifications", footer: "Manage in Settings") {
+    SectionRow {
+        Text("Morning reminder")
+        Spacer(minLength: 0)
+        Toggle("", isOn: $isOn).labelsHidden()
+    }
+    SectionRowDivider()
+    NavigationLink(destination: DetailView()) {
+        SectionNavigationLabel("Advanced", systemImage: "gear")
+    }
+}
+```
+Family: `SectionCard`, `SectionRow`, `SectionRowDivider`, `SectionNavigationLabel`.
+
+### SectionCard — Titled Card (legacy, still supported)
 ```swift
 SectionCard(title: "Account") {
     Text("Settings go here")

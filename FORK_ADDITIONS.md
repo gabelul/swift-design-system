@@ -2,7 +2,7 @@
 
 What this fork adds on top of the upstream [no-problem-dev/swift-design-system](https://github.com/no-problem-dev/swift-design-system).
 
-**Upstream version:** v1.0.23
+**Upstream version:** v1.0.24 (Section component family merged + translated)
 **Fork purpose:** English localization + expanded component library for AI-assisted iOS app generation
 
 ---

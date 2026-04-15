@@ -7,9 +7,53 @@ struct SectionCardCatalogView: View {
 
     var body: some View {
         CatalogPageContainer(title: "SectionCard") {
-            CatalogOverview(description: "A layout pattern for creating titled sections")
+            CatalogOverview(description: "Rounded surface cards for settings, hubs, and dashboards. Two styles: Surface Section (new, recommended) and Titled Card (legacy).")
 
-            SectionCard(title: "Structure") {
+            SectionCard("Surface Section — new API", footer: "The recommended style. Small uppercase header, rounded surface, optional footer caption. Stack SectionRow inside, separate with SectionRowDivider.") {
+                SectionRow {
+                    Text("Morning reminder")
+                    Spacer(minLength: 0)
+                    Text("ON").foregroundStyle(colors.onSurfaceVariant)
+                }
+                SectionRowDivider()
+                SectionRow {
+                    Label("Email", systemImage: "envelope")
+                    Spacer(minLength: 0)
+                    Text("user@example.com").foregroundStyle(colors.onSurfaceVariant)
+                }
+                SectionRowDivider()
+                SectionNavigationLabel("Advanced settings", systemImage: "gear")
+            }
+
+            SectionCard(title: "Surface Section — code") {
+                CodeExample(code: """
+                    SectionCard("Notifications", footer: "Manage in Settings") {
+                        SectionRow {
+                            Text("Morning reminder")
+                            Spacer(minLength: 0)
+                            Toggle("", isOn: $isOn).labelsHidden()
+                        }
+                        SectionRowDivider()
+                        NavigationLink(destination: DetailView()) {
+                            SectionNavigationLabel("Advanced", systemImage: "gear")
+                        }
+                    }
+                    """)
+            }
+
+            SectionCard(title: "Section family") {
+                VStack(alignment: .leading, spacing: spacing.md) {
+                    SpecItem(label: "SectionCard", value: "Outer surface + header/footer")
+                    Divider()
+                    SpecItem(label: "SectionRow", value: "Unified-padding row, full-width tap")
+                    Divider()
+                    SpecItem(label: "SectionRowDivider", value: "0.5pt hairline, outlineVariant")
+                    Divider()
+                    SpecItem(label: "SectionNavigationLabel", value: "NavigationLink label with chevron")
+                }
+            }
+
+            SectionCard(title: "Titled Card — legacy API (structure)") {
                 VStack(alignment: .leading, spacing: spacing.md) {
                     SpecItem(
                         label: "Title",

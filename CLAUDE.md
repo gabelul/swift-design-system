@@ -99,7 +99,9 @@ Since Japanese is highly contextual, translation MUST be done by AI (Claude) rat
 - Upstream: Button, Card, Chip, DSTextField, FAB, IconButton, IconBadge, ProgressBar, Snackbar, StatDisplay, VideoPlayer
 - Fork additions: Accordion, Avatar, Badge, BottomSheet, DSSecureField, EmptyState, ErrorState, LoadingState, SearchField, Skeleton, StatusBanner, Toast
 
-**Layout:** 4 patterns (AspectGrid, SectionCard from upstream + FlowLayout, Screen from fork)
+**Layout:** 3 patterns — AspectGrid (upstream) + FlowLayout, Screen (fork). `SectionCard` moved to `Components/Section/` in upstream v1.0.24 and is no longer a Layout pattern.
+
+**Section family (v1.0.24):** SectionCard, SectionRow, SectionRowDivider, SectionNavigationLabel
 
 **Themes:** 8 total (7 upstream + DynamicTheme from fork)
 
@@ -180,7 +182,7 @@ To understand the design system:
 
 **Upstream:** https://github.com/no-problem-dev/swift-design-system
 
-**Version:** Based on upstream v1.0.22
+**Version:** Based on upstream v1.0.24
 
 ---
 
