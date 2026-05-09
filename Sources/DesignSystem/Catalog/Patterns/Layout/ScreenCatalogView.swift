@@ -15,16 +15,16 @@ struct ScreenCatalogView: View {
                 // Preview
                 SectionCard(title: "Features") {
                     VStack(alignment: .leading, spacing: spacing.sm) {
-                        FeatureRow(icon: "scroll.fill", title: "ScrollView wrapper")
-                        FeatureRow(icon: "ruler.fill", title: "Consistent horizontal and vertical padding")
+                        FeatureRow(icon: "scroll.fill", title: "Optional outer ScrollView wrapper")
+                        FeatureRow(icon: "ruler.fill", title: "Configurable page padding density")
                         FeatureRow(icon: "paintbrush.fill", title: "Theme background color")
-                        FeatureRow(icon: "textformat", title: "Optional navigation title")
+                        FeatureRow(icon: "textformat", title: "Configurable navigation title display mode")
                     }
                 }
 
                 // Code examples
                 CodeExample(code: """
-                // With title
+                // Standard page
                 Screen("Settings") {
                     VStack(spacing: spacing.lg) {
                         SectionCard("Account") { ... }
@@ -32,16 +32,21 @@ struct ScreenCatalogView: View {
                     }
                 }
 
-                // Without title
-                Screen {
-                    Text("Content")
+                // Denser parity pass
+                Screen("Welcome", padding: .compact, titleDisplayMode: .inline) {
+                    content
+                }
+
+                // Custom scroll handling
+                Screen("Editor", scrollBehavior: .fixed, padding: .none) {
+                    customScrollBody
                 }
                 """)
 
                 BestPracticeItem(
                     icon: "checkmark.circle.fill",
                     title: "Use Screen as the root of every page",
-                    description: "Screen handles scroll, padding, and background so you don't repeat boilerplate across views.",
+                    description: "Screen handles scroll, padding, background, and title presentation so you can tune density without rewriting the page shell.",
                     isGood: true
                 )
             }

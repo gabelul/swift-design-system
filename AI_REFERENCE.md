@@ -14,7 +14,15 @@ Import with `import DesignSystem`. All components use design tokens from `@Envir
 )
 
 // Wrap your root view
-ContentView().theme(themeProvider)
+ContentView()
+    .theme(themeProvider)
+    .typographyProvider(
+        TypographyProvider(
+            sansFontName: "Inter",
+            serifFontName: "SourceSerif4",
+            scale: 1.0
+        )
+    )
 ```
 
 Change the hex color to rebrand the entire app. That's it.
@@ -45,6 +53,9 @@ Text("Label").typography(.labelSmall)
 // Sizes: display(L/M/S), headline(L/M/S), title(L/M/S), body(L/M/S), label(L/M/S)
 ```
 
+Use `TypographyProvider` at the app root when you need custom font families
+or a global typography scale while keeping semantic tokens intact.
+
 ---
 
 ## Components Quick Reference
@@ -53,6 +64,14 @@ Text("Label").typography(.labelSmall)
 ```swift
 Screen("Page Title") {
     // content gets ScrollView + padding + background automatically
+}
+
+Screen("Parity Pass", padding: .compact, titleDisplayMode: .inline) {
+    content
+}
+
+Screen("Editor", scrollBehavior: .fixed) {
+    customScrollBody
 }
 ```
 

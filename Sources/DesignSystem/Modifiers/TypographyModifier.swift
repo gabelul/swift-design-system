@@ -2,13 +2,15 @@ import SwiftUI
 
 /// ViewModifier that applies typography
 struct TypographyModifier: ViewModifier {
+    @Environment(\.typographyProvider) private var typographyProvider
+
     let token: Typography
     let design: Font.Design?
 
     func body(content: Content) -> some View {
         content
-            .font(design.map { token.font(design: $0) } ?? token.font)
-            .lineSpacing(token.lineHeight - token.size)
+            .font(typographyProvider.font(for: token, design: design))
+            .lineSpacing(typographyProvider.lineSpacing(for: token))
     }
 }
 

@@ -1,68 +1,70 @@
 import XCTest
 @testable import DesignSystem
 
+@MainActor
 final class ThemeProviderTests: XCTestCase {
-    func testInitialization() {
+    func testInitializationUsesDefaultThemeAndSystemMode() {
         let provider = ThemeProvider()
 
-        // デフォルトはLightテーマ
-        XCTAssertEqual(provider.colorScheme, .light)
-        XCTAssertNil(provider.customColorPalette)
+        XCTAssertEqual(provider.currentTheme.id, "default")
+        XCTAssertEqual(provider.themeMode, .system)
+        XCTAssertFalse(provider.availableThemes.isEmpty)
     }
 
-    func testInitializationWithDarkScheme() {
-        let provider = ThemeProvider(colorScheme: .dark)
+    func testInitializationWithCustomMode() {
+        let provider = ThemeProvider(initialMode: .dark)
 
-        XCTAssertEqual(provider.colorScheme, .dark)
+        XCTAssertEqual(provider.themeMode, .dark)
     }
 
-    func testSwitchToLight() {
-        let provider = ThemeProvider(colorScheme: .dark)
-
-        provider.switchToLight()
-
-        XCTAssertEqual(provider.colorScheme, .light)
-        XCTAssertNil(provider.customColorPalette)
-    }
-
-    func testSwitchToDark() {
-        let provider = ThemeProvider(colorScheme: .light)
-
-        provider.switchToDark()
-
-        XCTAssertEqual(provider.colorScheme, .dark)
-        XCTAssertNil(provider.customColorPalette)
-    }
-
-    func testCustomPaletteApplication() {
+    func testSwitchToThemeByIdentifier() {
         let provider = ThemeProvider()
-        let customPalette = LightColorPalette()
 
-        provider.applyCustomTheme(colorPalette: customPalette)
+        provider.switchToTheme(id: "ocean")
 
-        XCTAssertNotNil(provider.customColorPalette)
+        XCTAssertEqual(provider.currentTheme.id, "ocean")
     }
 
-    func testColorPaletteReturnsCorrectTheme() {
-        let lightProvider = ThemeProvider(colorScheme: .light)
-        let darkProvider = ThemeProvider(colorScheme: .dark)
+    func testApplyThemeReplacesCurrentTheme() {
+        let provider = ThemeProvider()
+        let theme = ForestTheme()
 
-        // Light theme
-        _ = lightProvider.colorPalette
-        XCTAssertEqual(lightProvider.colorScheme, .light)
+        provider.applyTheme(theme)
 
-        // Dark theme
-        _ = darkProvider.colorPalette
-        XCTAssertEqual(darkProvider.colorScheme, .dark)
+        XCTAssertEqual(provider.currentTheme.id, theme.id)
     }
 
-    func testCustomPaletteTakesPrecedence() {
-        let provider = ThemeProvider(colorScheme: .light)
-        let customPalette = DarkColorPalette()
+    func testToggleModeCyclesThroughAllModes() {
+        let provider = ThemeProvider(initialMode: .system)
 
-        provider.applyCustomTheme(colorPalette: customPalette)
+        provider.toggleMode()
+        XCTAssertEqual(provider.themeMode, .light)
 
-        // カスタムパレットが設定されている場合、colorSchemeに関わらずカスタムパレットが使われる
-        XCTAssertNotNil(provider.customColorPalette)
+        provider.toggleMode()
+        XCTAssertEqual(provider.themeMode, .dark)
+
+        provider.toggleMode()
+        XCTAssertEqual(provider.themeMode, .system)
+    }
+
+    func testRegisterThemeAppendsMissingTheme() {
+        let provider = ThemeProvider()
+        let initialCount = provider.availableThemes.count
+        let customTheme = DynamicTheme(brandColor: .indigo)
+
+        provider.registerTheme(customTheme)
+
+        XCTAssertEqual(provider.availableThemes.count, initialCount + 1)
+        XCTAssertTrue(provider.availableThemes.contains(where: { $0.id == customTheme.id }))
+    }
+
+    func testRegisterThemeReplacesExistingThemeWithSameIdentifier() {
+        let provider = ThemeProvider(initialTheme: DynamicTheme(brandColor: .indigo))
+        let replacement = DynamicTheme(brandColor: .mint)
+
+        provider.registerTheme(replacement)
+
+        let matches = provider.availableThemes.filter { $0.id == replacement.id }
+        XCTAssertEqual(matches.count, 1)
     }
 }
