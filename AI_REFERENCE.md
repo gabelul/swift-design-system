@@ -29,6 +29,34 @@ Change the hex color to rebrand the entire app. That's it.
 
 ---
 
+## Brand recipe (preferred app root setup)
+
+```swift
+private let recipe = BrandRecipe.dynamic(
+    brandColor: Color(hex: "#6366F1"),
+    sansFontName: "Inter",
+    serifFontName: "SourceSerif4",
+    screenDensity: .standard
+)
+
+@State private var themeProvider: ThemeProvider
+
+init() {
+    _themeProvider = State(initialValue: recipe.makeThemeProvider())
+}
+
+ContentView()
+    .installBrandRecipe(recipe, using: themeProvider)
+```
+
+Use `BrandRecipe` when you want one small source of truth for:
+- theme / brand color
+- font families
+- global typography scale
+- default page density
+
+---
+
 ## Tokens (always use these, never hardcode values)
 
 ```swift
@@ -63,10 +91,14 @@ or a global typography scale while keeping semantic tokens intact.
 ### Screen (page wrapper — use for every screen)
 ```swift
 Screen("Page Title") {
-    // content gets ScrollView + padding + background automatically
+    // content gets ScreenDensity-aware padding + background automatically
 }
 
-Screen("Parity Pass", padding: .compact, titleDisplayMode: .inline) {
+Screen("Hero", padding: .automatic, titleDisplayMode: .inline) {
+    content
+}
+
+Screen("Dashboard", padding: .compact) {
     content
 }
 
@@ -341,3 +373,20 @@ themeProvider.toggleMode()  // system → light → dark → system
 6. **Use `Toast` for confirmations**, `Snackbar` for actions with undo
 7. **Use `Skeleton` for loading**, not custom shimmer implementations
 8. **Use `StatusBanner` for inline alerts**, not custom colored HStacks
+
+---
+
+## Prototype-to-native rules
+
+When an AI receives an HTML prototype:
+- preserve hierarchy, density, grouping, and brand feel
+- adapt for native mobile instead of cloning the DOM
+- choose screen type first (onboarding / dashboard / form / detail)
+- choose page density second (`compact`, `standard`, `spacious`)
+- keep feature code on semantic DS primitives
+
+Do not:
+- copy web spacing literally
+- recreate nav chrome that `Screen` already owns
+- add a second vertical `ScrollView` inside `Screen` unless the screen truly needs a separate scrolling region
+- invent app-local typography wrappers when `TypographyProvider` already solves the font-family problem

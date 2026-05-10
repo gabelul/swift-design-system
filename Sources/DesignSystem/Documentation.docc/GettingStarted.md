@@ -23,7 +23,7 @@ Or use Xcode's File > Add Package Dependencies and enter the URL.
 
 ## Setup
 
-Configure a ``ThemeProvider`` at the root of your app and apply it with the `.theme()` modifier:
+Configure a ``ThemeProvider`` at the root of your app and apply it with the `.theme()` modifier. If the app has a brand-specific font personality, install ``TypographyProvider`` at the same root.
 
 ```swift
 @main
@@ -40,6 +40,30 @@ struct MyApp: App {
 ```
 
 This makes design tokens available to all child views.
+
+### Recommended app-brand setup
+
+```swift
+private let recipe = BrandRecipe.dynamic(
+    brandColor: Color(hex: "#6366F1"),
+    sansFontName: "Inter",
+    serifFontName: "SourceSerif4",
+    screenDensity: .standard
+)
+
+@State private var themeProvider: ThemeProvider
+
+init() {
+    _themeProvider = State(initialValue: recipe.makeThemeProvider())
+}
+
+var body: some Scene {
+    WindowGroup {
+        ContentView()
+            .installBrandRecipe(recipe, using: themeProvider)
+    }
+}
+```
 
 ## Using Design Tokens
 
@@ -156,3 +180,7 @@ See <doc:DynamicTheme> for details on the color derivation algorithm.
 - ``ColorPalette``
 - ``SpacingScale``
 - ``Typography``
+
+## Prototype-driven screens
+
+When translating HTML prototypes, prefer `Screen(padding: .automatic)` so the installed `ScreenDensity` can steer the page shell. See <doc:PrototypeTranslation> for the full adaptation playbook.

@@ -11,11 +11,17 @@ public enum ScreenScrollBehavior: Sendable {
 
 /// Screen padding preset.
 public enum ScreenPadding: Sendable {
+    /// Follow the nearest installed `ScreenDensity` environment value.
+    case automatic
+
     /// Default page padding: horizontal `spacing.lg`, vertical `spacing.xl`.
     case standard
 
     /// Denser page padding: horizontal `spacing.lg`, vertical `spacing.lg`.
     case compact
+
+    /// More generous page padding: horizontal `spacing.xl`, vertical `spacing.xxl`.
+    case spacious
 
     /// Remove page padding entirely.
     case none
@@ -23,10 +29,17 @@ public enum ScreenPadding: Sendable {
     /// Provide explicit page padding.
     case custom(horizontal: CGFloat, vertical: CGFloat)
 
-    fileprivate func horizontalPadding(spacing: any SpacingScale) -> CGFloat {
-        switch self {
+    func resolvedHorizontalPadding(
+        spacing: any SpacingScale,
+        density: ScreenDensity
+    ) -> CGFloat {
+        switch resolvedPadding(for: density) {
+        case .automatic:
+            return spacing.lg
         case .standard, .compact:
             return spacing.lg
+        case .spacious:
+            return spacing.xl
         case .none:
             return 0
         case let .custom(horizontal, _):
@@ -34,16 +47,36 @@ public enum ScreenPadding: Sendable {
         }
     }
 
-    fileprivate func verticalPadding(spacing: any SpacingScale) -> CGFloat {
-        switch self {
+    func resolvedVerticalPadding(
+        spacing: any SpacingScale,
+        density: ScreenDensity
+    ) -> CGFloat {
+        switch resolvedPadding(for: density) {
+        case .automatic:
+            return spacing.xl
         case .standard:
             return spacing.xl
         case .compact:
             return spacing.lg
+        case .spacious:
+            return spacing.xxl
         case .none:
             return 0
         case let .custom(_, vertical):
             return vertical
+        }
+    }
+
+    private func resolvedPadding(for density: ScreenDensity) -> ScreenPadding {
+        switch self {
+        case .automatic:
+            switch density {
+            case .compact: return .compact
+            case .standard: return .standard
+            case .spacious: return .spacious
+            }
+        default:
+            return self
         }
     }
 }
@@ -90,6 +123,16 @@ public enum ScreenTitleDisplayMode: Sendable {
 /// }
 /// ```
 ///
+/// ## Brand-driven density
+/// ```swift
+/// ContentView()
+///     .screenDensity(.spacious)
+///
+/// Screen("Onboarding", padding: .automatic) {
+///     content
+/// }
+/// ```
+///
 /// ## Without outer scrolling
 /// ```swift
 /// Screen("Editor", scrollBehavior: .fixed) {
@@ -99,6 +142,7 @@ public enum ScreenTitleDisplayMode: Sendable {
 public struct Screen<Content: View>: View {
     @Environment(\.colorPalette) private var colorPalette
     @Environment(\.spacingScale) private var spacing
+    @Environment(\.screenDensity) private var screenDensity
 
     private let title: String?
     private let scrollBehavior: ScreenScrollBehavior
@@ -117,7 +161,7 @@ public struct Screen<Content: View>: View {
     public init(
         _ title: String? = nil,
         scrollBehavior: ScreenScrollBehavior = .scrolls,
-        padding: ScreenPadding = .standard,
+        padding: ScreenPadding = .automatic,
         titleDisplayMode: ScreenTitleDisplayMode = .large,
         @ViewBuilder content: () -> Content
     ) {
@@ -149,8 +193,8 @@ public struct Screen<Content: View>: View {
 
     private var paddedContent: some View {
         content
-            .padding(.horizontal, padding.horizontalPadding(spacing: spacing))
-            .padding(.vertical, padding.verticalPadding(spacing: spacing))
+            .padding(.horizontal, padding.resolvedHorizontalPadding(spacing: spacing, density: screenDensity))
+            .padding(.vertical, padding.resolvedVerticalPadding(spacing: spacing, density: screenDensity))
     }
 }
 

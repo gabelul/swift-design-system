@@ -8,6 +8,11 @@ DesignSystem is a SwiftUI design system library based on a three-layer token arc
 Primitive → Semantic → Component.
 Its protocol-based design achieves both type safety and extensibility.
 
+Applying a theme is straightforward. For app generators, the preferred root setup is:
+- `ThemeProvider` for colors
+- `TypographyProvider` for font families and scale
+- optional `BrandRecipe` to keep theme, typography, and density aligned
+
 Applying a theme is straightforward:
 
 ```swift
@@ -55,9 +60,14 @@ The following components are iOS-only (conditionally compiled with `#if canImpor
 ### Essentials
 
 - <doc:GettingStarted>
+- <doc:BrandRecipes>
+- <doc:PrototypeTranslation>
 - <doc:TokenArchitecture>
 - <doc:CustomTheme>
 - ``ThemeProvider``
+- ``TypographyProvider``
+- ``BrandRecipe``
+- ``ScreenDensity``
 - ``Theme``
 - ``ThemeMode``
 
