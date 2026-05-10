@@ -117,6 +117,8 @@ struct ComponentsCatalogView: View {
             StatDisplayCatalogView()
         case .statusBanner:
             StatusBannerCatalogView()
+        case .statusPill:
+            StatusPillCatalogView()
         case .textField:
             TextFieldCatalogView()
         case .toast:

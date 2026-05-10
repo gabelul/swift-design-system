@@ -136,6 +136,9 @@ struct CatalogDetailView: View {
             case .statusBanner:
                 StatusBannerCatalogView()
                     .id(component)
+            case .statusPill:
+                StatusPillCatalogView()
+                    .id(component)
             case .textField:
                 TextFieldCatalogView()
                     .id(component)

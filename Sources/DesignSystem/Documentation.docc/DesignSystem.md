@@ -144,6 +144,9 @@ The following components are iOS-only (conditionally compiled with `#if canImpor
 - ``ToastLevel``
 - ``StatusBanner``
 - ``StatusBannerLevel``
+- ``StatusPill``
+- ``StatusPillTone``
+- ``StatusPillSize``
 
 ### Components - Overlay
 

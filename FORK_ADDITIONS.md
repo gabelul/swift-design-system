@@ -52,6 +52,7 @@ Generate a full light/dark color palette from a single brand color using HSB shi
 | **Toast** | `Components/Toast/Toast.swift` | Auto-dismissing notification from top (no actions, unlike Snackbar) |
 | **ToastState** | `Components/Toast/ToastState.swift` | Observable state manager for Toast |
 | **StatusBanner** | `Components/StatusBanner/StatusBanner.swift` | Inline colored banner for info/success/warning/error |
+| **StatusPill** | `Components/StatusBanner/StatusPill.swift` | Compact semantic success/warning/error/info pill |
 
 ### Overlay Components
 | Component | File | What it does |

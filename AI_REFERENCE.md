@@ -176,6 +176,13 @@ StatusBanner("Offline", level: .error, icon: "wifi.slash", actionLabel: "Retry")
 // Levels: .info, .success, .warning, .error
 ```
 
+### StatusPill
+```swift
+StatusPill("Ready", tone: .success)
+StatusPill("Almost Ready", tone: .warning, systemImage: "exclamationmark.circle.fill")
+// Use for semantic status; keep Chip for tags, filters, and brand-primary labels
+```
+
 ### Toast (auto-dismissing notification)
 ```swift
 // Preferred presenter-backed usage
