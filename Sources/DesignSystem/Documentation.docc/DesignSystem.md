@@ -147,6 +147,9 @@ The following components are iOS-only (conditionally compiled with `#if canImpor
 - ``StatusPill``
 - ``StatusPillTone``
 - ``StatusPillSize``
+- ``InsetCallout``
+- ``IconTile``
+- ``IconTileSize``
 
 ### Components - Overlay
 

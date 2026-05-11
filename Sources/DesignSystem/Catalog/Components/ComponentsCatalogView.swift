@@ -85,6 +85,8 @@ struct ComponentsCatalogView: View {
             IconBadgeCatalogView()
         case .iconButton:
             IconButtonCatalogView()
+        case .iconTile:
+            IconTileCatalogView()
         case .iconPicker:
             IconPickerCatalogView()
         case .imagePicker:
@@ -109,6 +111,8 @@ struct ComponentsCatalogView: View {
             EmptyStateCatalogView()
         case .errorState:
             ErrorStateCatalogView()
+        case .insetCallout:
+            InsetCalloutCatalogView()
         case .loadingState:
             LoadingStateCatalogView()
         case .snackbar:

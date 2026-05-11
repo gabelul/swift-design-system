@@ -53,6 +53,8 @@ Generate a full light/dark color palette from a single brand color using HSB shi
 | **ToastState** | `Components/Toast/ToastState.swift` | Observable state manager for Toast |
 | **StatusBanner** | `Components/StatusBanner/StatusBanner.swift` | Inline colored banner for info/success/warning/error |
 | **StatusPill** | `Components/StatusBanner/StatusPill.swift` | Compact semantic success/warning/error/info pill |
+| **IconTile** | `Components/IconBadge/IconTile.swift` | Rounded-square semantic icon tile for benefit rows and feature highlights |
+| **InsetCallout** | `Components/StatusBanner/InsetCallout.swift` | Lightly tinted semantic inset block for contextual guidance |
 
 ### Overlay Components
 | Component | File | What it does |

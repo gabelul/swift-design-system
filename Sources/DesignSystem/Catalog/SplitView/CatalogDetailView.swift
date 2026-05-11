@@ -92,6 +92,9 @@ struct CatalogDetailView: View {
             case .iconButton:
                 IconButtonCatalogView()
                     .id(component)
+            case .iconTile:
+                IconTileCatalogView()
+                    .id(component)
             case .iconPicker:
                 IconPickerCatalogView()
                     .id(component)
@@ -123,6 +126,9 @@ struct CatalogDetailView: View {
                     .id(component)
             case .errorState:
                 ErrorStateCatalogView()
+                    .id(component)
+            case .insetCallout:
+                InsetCalloutCatalogView()
                     .id(component)
             case .loadingState:
                 LoadingStateCatalogView()

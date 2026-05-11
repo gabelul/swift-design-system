@@ -183,6 +183,22 @@ StatusPill("Almost Ready", tone: .warning, systemImage: "exclamationmark.circle.
 // Use for semantic status; keep Chip for tags, filters, and brand-primary labels
 ```
 
+### IconTile
+```swift
+IconTile(systemName: "checkmark", tone: .success)
+IconTile(systemName: "lock.fill", tone: .info, size: .medium)
+// Use for rounded-square semantic icon tiles in benefit rows and feature highlights
+```
+
+### InsetCallout
+```swift
+InsetCallout(tone: .info, systemImage: "lock.fill", title: "Private sync") {
+    Text("Only you can see this data.")
+        .typography(.bodySmall)
+}
+// Use for lightly tinted contextual guidance inside cards/pages
+```
+
 ### Toast (auto-dismissing notification)
 ```swift
 // Preferred presenter-backed usage
