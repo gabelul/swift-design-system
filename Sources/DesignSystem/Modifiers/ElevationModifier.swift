@@ -3,11 +3,12 @@ import SwiftUI
 /// Elevationを適用するViewModifier
 struct ElevationModifier: ViewModifier {
     let level: Elevation
+    @Environment(\.colorPalette) private var colorPalette
     @Environment(\.colorScheme) private var colorScheme
 
     func body(content: Content) -> some View {
         content.shadow(
-            color: Color.black.opacity(level.opacity(for: colorScheme)),
+            color: colorPalette.shadow.opacity(level.opacity(for: colorScheme)),
             radius: level.radius,
             x: level.offset.width,
             y: level.offset.height

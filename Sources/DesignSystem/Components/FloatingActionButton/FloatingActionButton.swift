@@ -46,31 +46,96 @@ import SwiftUI
 /// - **Large**: 96pt直径 - 特に重要なアクション
 public struct FloatingActionButton: View {
     @Environment(\.colorPalette) private var colorPalette
+    @Environment(\.isEnabled) private var isEnabled
 
     private let icon: String
     private let size: FABSize
+    private let style: FABStyle
     private let action: () -> Void
 
     public init(
         icon: String,
         size: FABSize = .regular,
+        style: FABStyle = .primary,
         action: @escaping () -> Void
     ) {
         self.icon = icon
         self.size = size
+        self.style = style
         self.action = action
     }
 
     public var body: some View {
         Button(action: action) {
-            Image(systemName: icon)
-                .font(.system(size: size.iconSize, weight: .semibold))
-                .foregroundStyle(colorPalette.onPrimaryContainer)
-                .frame(width: size.diameter, height: size.diameter)
-                .background(colorPalette.primaryContainer)
-                .clipShape(Circle())
+            content
         }
-        .elevation(.level3)
+        .buttonStyle(.plain)
+        .opacity(isEnabled ? 1 : 0.6)
+    }
+
+    private var content: some View {
+        Image(systemName: icon)
+            .font(.system(size: size.iconSize, weight: .semibold))
+            .foregroundStyle(foregroundColor)
+            .frame(width: size.diameter, height: size.diameter)
+            .background(background)
+            .clipShape(Circle())
+            .elevation(style.elevation)
+    }
+
+    @ViewBuilder
+    private var background: some View {
+        switch style {
+        case .primary:
+            Circle()
+                .fill(colorPalette.primaryContainer)
+        case .secondary:
+            Circle()
+                .fill(colorPalette.secondaryContainer)
+        case .glass:
+            if #available(iOS 26.0, macOS 26.0, *) {
+                Circle()
+                    .fill(colorPalette.primary.opacity(0.05))
+                    .glassEffect(.regular.tint(colorPalette.primary.opacity(0.18)).interactive(true), in: Circle())
+            } else {
+                Circle()
+                    .fill(colorPalette.primary.opacity(0.06))
+                    .background(.ultraThinMaterial, in: Circle())
+            }
+        }
+    }
+
+    private var foregroundColor: Color {
+        switch style {
+        case .primary:
+            colorPalette.onPrimaryContainer
+        case .secondary:
+            colorPalette.onSecondaryContainer
+        case .glass:
+            colorPalette.primary
+        }
+    }
+
+}
+
+/// FABの表示スタイル。
+public enum FABStyle: Sendable {
+    /// テーマのPrimary containerを使う標準の主要アクション。
+    case primary
+
+    /// Secondary containerを使う補助的な浮遊アクション。
+    case secondary
+
+    /// Liquid Glass表現を使う浮遊アクション。
+    case glass
+
+    var elevation: Elevation {
+        switch self {
+        case .primary, .secondary:
+            .level3
+        case .glass:
+            .level4
+        }
     }
 }
 

@@ -1,68 +1,78 @@
 import XCTest
 @testable import DesignSystem
 
+@MainActor
 final class ThemeProviderTests: XCTestCase {
-    func testInitialization() {
+    func testDefaultInitialization() {
         let provider = ThemeProvider()
 
-        // デフォルトはLightテーマ
-        XCTAssertEqual(provider.colorScheme, .light)
-        XCTAssertNil(provider.customColorPalette)
+        // デフォルトモードは .system、ビルトインテーマが利用可能
+        XCTAssertEqual(provider.themeMode, .system)
+        XCTAssertFalse(provider.availableThemes.isEmpty)
+        XCTAssertEqual(provider.currentTheme.id, "default")
     }
 
-    func testInitializationWithDarkScheme() {
-        let provider = ThemeProvider(colorScheme: .dark)
-
-        XCTAssertEqual(provider.colorScheme, .dark)
+    func testInitializationWithMode() {
+        let provider = ThemeProvider(initialMode: .dark)
+        XCTAssertEqual(provider.themeMode, .dark)
     }
 
-    func testSwitchToLight() {
-        let provider = ThemeProvider(colorScheme: .dark)
+    func testToggleModeCyclesSystemLightDark() {
+        let provider = ThemeProvider(initialMode: .system)
 
-        provider.switchToLight()
+        provider.toggleMode()
+        XCTAssertEqual(provider.themeMode, .light)
 
-        XCTAssertEqual(provider.colorScheme, .light)
-        XCTAssertNil(provider.customColorPalette)
+        provider.toggleMode()
+        XCTAssertEqual(provider.themeMode, .dark)
+
+        provider.toggleMode()
+        XCTAssertEqual(provider.themeMode, .system)
     }
 
-    func testSwitchToDark() {
-        let provider = ThemeProvider(colorScheme: .light)
-
-        provider.switchToDark()
-
-        XCTAssertEqual(provider.colorScheme, .dark)
-        XCTAssertNil(provider.customColorPalette)
-    }
-
-    func testCustomPaletteApplication() {
+    func testSwitchToThemeByID() {
         let provider = ThemeProvider()
-        let customPalette = LightColorPalette()
+        guard let target = provider.availableThemes.last else {
+            return XCTFail("No bundled themes available")
+        }
 
-        provider.applyCustomTheme(colorPalette: customPalette)
-
-        XCTAssertNotNil(provider.customColorPalette)
+        provider.switchToTheme(id: target.id)
+        XCTAssertEqual(provider.currentTheme.id, target.id)
     }
 
-    func testColorPaletteReturnsCorrectTheme() {
-        let lightProvider = ThemeProvider(colorScheme: .light)
-        let darkProvider = ThemeProvider(colorScheme: .dark)
+    func testSwitchToUnknownThemeIsNoOp() {
+        let provider = ThemeProvider()
+        let before = provider.currentTheme.id
 
-        // Light theme
-        _ = lightProvider.colorPalette
-        XCTAssertEqual(lightProvider.colorScheme, .light)
-
-        // Dark theme
-        _ = darkProvider.colorPalette
-        XCTAssertEqual(darkProvider.colorScheme, .dark)
+        provider.switchToTheme(id: "nonexistent-theme")
+        XCTAssertEqual(provider.currentTheme.id, before)
     }
 
-    func testCustomPaletteTakesPrecedence() {
-        let provider = ThemeProvider(colorScheme: .light)
-        let customPalette = DarkColorPalette()
+    func testApplyThemeSetsCurrentTheme() {
+        let provider = ThemeProvider()
+        guard let target = provider.availableThemes.last else {
+            return XCTFail("No bundled themes available")
+        }
 
-        provider.applyCustomTheme(colorPalette: customPalette)
+        provider.applyTheme(target)
+        XCTAssertEqual(provider.currentTheme.id, target.id)
+    }
 
-        // カスタムパレットが設定されている場合、colorSchemeに関わらずカスタムパレットが使われる
-        XCTAssertNotNil(provider.customColorPalette)
+    func testRegisterExistingThemeKeepsCountStable() {
+        let provider = ThemeProvider()
+        let countBefore = provider.availableThemes.count
+
+        // 既存テーマの再登録は in-place 更新（重複追加しない）
+        if let existing = provider.availableThemes.first {
+            provider.registerTheme(existing)
+        }
+        XCTAssertEqual(provider.availableThemes.count, countBefore)
+    }
+
+    func testColorPaletteIsAccessible() {
+        let provider = ThemeProvider(initialMode: .light)
+        // モードに応じたパレットが解決できることのみ確認（クラッシュしない）
+        _ = provider.colorPalette
+        XCTAssertEqual(provider.themeMode, .light)
     }
 }

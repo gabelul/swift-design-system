@@ -42,6 +42,7 @@ import SwiftUI
 /// - **level3〜level5**: 強調・モーダル的な用途
 public struct Card<Content: View>: View {
     @Environment(\.colorPalette) private var colorPalette
+    @Environment(\.colorScheme) private var colorScheme
     @Environment(\.radiusScale) private var radiusScale
     @Environment(\.spacingScale) private var spacingScale
 
@@ -57,7 +58,7 @@ public struct Card<Content: View>: View {
     ///   - elevation: 影のレベル（デフォルト: `.level1`）
     ///   - padding: コンテンツの内側余白（`nil`の場合は`SpacingScale.lg`を上下左右に適用）
     ///   - cornerRadius: 角丸の半径（`nil`の場合は`RadiusScale.lg`を使用）
-    ///   - backgroundColor: 背景色（`nil`の場合は`ColorPalette.surface`を使用）
+    ///   - backgroundColor: 背景色（`nil`の場合はElevationに応じたSurface Tokenを使用）
     ///   - content: カード内に表示するコンテンツ
     public init(
         elevation: Elevation = .level1,
@@ -83,9 +84,42 @@ public struct Card<Content: View>: View {
         content
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(resolvedPadding)
-            .background(backgroundColor ?? colorPalette.surface)
+            .background {
+                cardBackground
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: cornerRadius ?? radiusScale.lg)
+                    .stroke(colorPalette.outlineVariant, lineWidth: 1)
+            }
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius ?? radiusScale.lg))
             .elevation(elevation)
+    }
+
+    @ViewBuilder
+    private var cardBackground: some View {
+        let shape = RoundedRectangle(cornerRadius: cornerRadius ?? radiusScale.lg)
+
+        if let backgroundColor {
+            shape.fill(backgroundColor)
+        } else {
+            let baseColor = elevatedSurfaceColor
+            shape
+                .fill(baseColor)
+                .overlay {
+                    shape.fill(colorPalette.primary.opacity(elevation.surfaceTintOpacity(for: colorScheme)))
+                }
+        }
+    }
+
+    private var elevatedSurfaceColor: Color {
+        switch elevation {
+        case .level0:
+            colorPalette.surface
+        case .level1, .level2, .level3:
+            colorPalette.elevatedSurface
+        case .level4, .level5:
+            colorPalette.elevatedSurfaceHigh
+        }
     }
 }
 
@@ -96,7 +130,7 @@ public extension Card {
     ///   - elevation: 影のレベル（デフォルト: `.level1`）
     ///   - padding: 上下左右に均一に適用するパディング値
     ///   - cornerRadius: 角丸の半径（`nil`の場合は`RadiusScale.lg`を使用）
-    ///   - backgroundColor: 背景色（`nil`の場合は`ColorPalette.surface`を使用）
+    ///   - backgroundColor: 背景色（`nil`の場合はElevationに応じたSurface Tokenを使用）
     ///   - content: カード内に表示するコンテンツ
     init(
         elevation: Elevation = .level1,

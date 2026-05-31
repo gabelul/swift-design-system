@@ -103,6 +103,15 @@ public protocol ColorPalette: Sendable {
     /// SurfaceVariant上のテキスト色
     var onSurfaceVariant: Color { get }
 
+    /// カード、浮遊ボタン、ポップオーバーなどの奥行き表現に使う影色
+    var shadow: Color { get }
+
+    /// 低〜中程度に浮いたコンテナの表面色
+    var elevatedSurface: Color { get }
+
+    /// 高く浮いたコンテナの表面色
+    var elevatedSurfaceHigh: Color { get }
+
     // MARK: - Semantic State Colors
 
     /// エラー状態の表示に使用
@@ -166,4 +175,8 @@ public extension ColorPalette {
     var onInfo: Color { .white }
 
     var outlineVariant: Color { outline.opacity(0.5) }
+
+    var shadow: Color { .black }
+    var elevatedSurface: Color { surface }
+    var elevatedSurfaceHigh: Color { elevatedSurface }
 }
