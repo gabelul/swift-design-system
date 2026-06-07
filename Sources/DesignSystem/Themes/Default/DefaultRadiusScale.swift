@@ -11,5 +11,6 @@ public struct DefaultRadiusScale: RadiusScale {
     public var lg: CGFloat { PrimitiveRadius.radius12 }
     public var xl: CGFloat { PrimitiveRadius.radius16 }
     public var xxl: CGFloat { PrimitiveRadius.radius20 }
+    public var card: CGFloat { PrimitiveRadius.radius24 }
     public var full: CGFloat { PrimitiveRadius.radiusFull }
 }

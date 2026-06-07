@@ -102,6 +102,28 @@ public protocol Motion: Sendable {
     /// - Response: 0.5s
     /// - Damping: 0.5 (より大きな弾み)
     var bounce: Animation { get }
+
+    /// 即応スプリング - 状態変化への素早い追従
+    ///
+    /// 入力可否の切り替え、相転移、リスト増減など、ユーザー操作や
+    /// ライブ更新に「すぐ付いてくる」感覚を与える短いスプリング。
+    /// SwiftUI ビルトインの `.snappy` 相当を語彙として固定する。
+    var snappy: Animation { get }
+
+    /// ストリーミング組み上がり - 部品が流れ込む出現
+    ///
+    /// LLM ストリーミングなどで UI 部品が逐次届いて組み上がる場面の
+    /// 出現アニメーション。slower(375ms) より一段ゆったり。
+    /// - Duration: 450ms
+    /// - Easing: Smooth spring
+    var stream: Animation { get }
+}
+
+public extension Motion {
+    /// 既存テーマの後方互換のためのデフォルト。
+    var snappy: Animation { .snappy }
+    /// 既存テーマの後方互換のためのデフォルト。
+    var stream: Animation { .smooth(duration: 0.45) }
 }
 
 // MARK: - Default Implementation
@@ -159,5 +181,15 @@ public struct DefaultMotion: Motion {
 
     public var bounce: Animation {
         .spring(response: 0.5, dampingFraction: 0.5)
+    }
+
+    // MARK: - Responsive / Streaming
+
+    public var snappy: Animation {
+        .snappy
+    }
+
+    public var stream: Animation {
+        .smooth(duration: 0.45)
     }
 }

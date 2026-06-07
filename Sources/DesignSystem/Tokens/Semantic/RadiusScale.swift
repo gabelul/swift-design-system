@@ -28,6 +28,7 @@ import Foundation
 /// - `lg`: 12pt - 大きい角丸
 /// - `xl`: 16pt - とても大きい角丸
 /// - `xxl`: 20pt - 非常に大きい角丸
+/// - `card`: 24pt - 主役サーフェス（コンポーザー、ヒーローカードなど）
 /// - `full`: 9999pt - 完全な円形（ボタン、アバターなど）
 public protocol RadiusScale: Sendable {
     /// 角丸なし（0pt）
@@ -51,6 +52,15 @@ public protocol RadiusScale: Sendable {
     /// 非常に大きい角丸（20pt）
     var xxl: CGFloat { get }
 
+    /// 主役サーフェスの角丸（24pt）- コンポーザー、ヒーローカードなど
+    /// 画面の主役となる大きな面に使う。xxl(20) より一段強い丸み。
+    var card: CGFloat { get }
+
     /// 完全な円形（9999pt）- ボタン、アバターなど
     var full: CGFloat { get }
+}
+
+public extension RadiusScale {
+    /// 既存テーマの後方互換のためのデフォルト（24pt）。
+    var card: CGFloat { 24 }
 }
