@@ -100,6 +100,9 @@ struct CatalogDetailView: View {
             case .linkCard:
                 LinkCardCatalogView()
                     .id(component)
+            case .mediaViewer:
+                MediaViewerCatalogView()
+                    .id(component)
             case .progressBar:
                 ProgressBarCatalogView()
                     .id(component)

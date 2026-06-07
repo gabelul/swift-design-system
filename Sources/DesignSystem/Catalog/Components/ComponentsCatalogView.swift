@@ -93,6 +93,8 @@ struct ComponentsCatalogView: View {
             #endif
         case .linkCard:
             LinkCardCatalogView()
+        case .mediaViewer:
+            MediaViewerCatalogView()
         case .progressBar:
             ProgressBarCatalogView()
         case .snackbar:
