@@ -9,6 +9,13 @@
 
 なし
 
+## [1.7.0] - 2026-06-14
+
+### 追加
+- `imagePicker` に `source: ImagePickerSource`（`.automatic` / `.camera` / `.photoLibrary`）を追加。
+  `.camera` 指定で chooser を出さずカメラを直接提示できる（カメラ専用ボタン用）。既定 `.automatic`
+  で従来挙動を維持（非破壊）。
+
 ## [1.6.0] - 2026-06-14
 
 ### 追加

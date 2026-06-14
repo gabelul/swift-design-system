@@ -25,45 +25,26 @@ public struct ImagePickerModifier: ViewModifier {
     @State private var showPermissionAlert = false
     @State private var permissionAlertConfig: PermissionAlertConfig?
 
+    let source: ImagePickerSource
     let maxSize: ByteSize?
     let onCompressionError: ((Error) -> Void)?
 
     public init(
         isPresented: Binding<Bool>,
         selectedImageData: Binding<Data?>,
+        source: ImagePickerSource = .automatic,
         maxSize: ByteSize? = nil,
         onCompressionError: ((Error) -> Void)? = nil
     ) {
         self._isPresented = isPresented
         self._selectedImageData = selectedImageData
+        self.source = source
         self.maxSize = maxSize
         self.onCompressionError = onCompressionError
     }
 
     public func body(content: Content) -> some View {
-        content
-            .confirmationDialog(
-                "画像を選択",
-                isPresented: $isPresented,
-                titleVisibility: .visible
-            ) {
-                // カメラが利用可能な場合のみ表示
-                if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                    Button("カメラで撮影") {
-                        requestPermissionAndShowPicker(for: .camera)
-                    }
-                    .tint(Color(colorPalette.primary))
-                }
-
-                Button("写真ライブラリから選択") {
-                    requestPermissionAndShowPicker(for: .photoLibrary)
-                }
-                .tint(Color(colorPalette.primary))
-
-                Button("キャンセル", role: .cancel) {
-                    isPresented = false
-                }
-            }
+        presentation(content)
             .sheet(item: $sourceType) { source in
                 ImagePickerViewController(
                     sourceType: source.uiImagePickerSourceType,
@@ -90,6 +71,47 @@ public struct ImagePickerModifier: ViewModifier {
             } message: { config in
                 Text(config.message)
             }
+    }
+
+    @ViewBuilder
+    private func presentation(_ content: Content) -> some View {
+        switch source {
+        case .automatic:
+            content.confirmationDialog(
+                "画像を選択",
+                isPresented: $isPresented,
+                titleVisibility: .visible
+            ) {
+                // カメラが利用可能な場合のみ表示
+                if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    Button("カメラで撮影") {
+                        requestPermissionAndShowPicker(for: .camera)
+                    }
+                    .tint(Color(colorPalette.primary))
+                }
+
+                Button("写真ライブラリから選択") {
+                    requestPermissionAndShowPicker(for: .photoLibrary)
+                }
+                .tint(Color(colorPalette.primary))
+
+                Button("キャンセル", role: .cancel) {
+                    isPresented = false
+                }
+            }
+        case .camera:
+            content.onChange(of: isPresented) { _, newValue in
+                guard newValue else { return }
+                isPresented = false
+                requestPermissionAndShowPicker(for: .camera)
+            }
+        case .photoLibrary:
+            content.onChange(of: isPresented) { _, newValue in
+                guard newValue else { return }
+                isPresented = false
+                requestPermissionAndShowPicker(for: .photoLibrary)
+            }
+        }
     }
 
     /// 権限をリクエストしてピッカーを表示
@@ -189,6 +211,19 @@ public struct ImagePickerModifier: ViewModifier {
             UIApplication.shared.open(settingsURL)
         }
     }
+}
+
+// MARK: - Public Types
+
+/// 画像ピッカーの提示ソース
+///
+/// - `automatic`: カメラ利用可なら「カメラ / 写真ライブラリ」の選択ダイアログを出し、不可ならライブラリへ直行する。
+/// - `camera`: 選択ダイアログを出さずカメラを直接提示する。
+/// - `photoLibrary`: 選択ダイアログを出さず写真ライブラリを直接提示する。
+public enum ImagePickerSource: Sendable {
+    case automatic
+    case camera
+    case photoLibrary
 }
 
 // MARK: - Shared Types
@@ -388,18 +423,21 @@ public extension View {
     /// - Parameters:
     ///   - isPresented: ピッカーの表示状態を制御するバインディング
     ///   - selectedImageData: 選択された画像のデータを受け取るバインディング
+    ///   - source: 提示ソース。`.camera` / `.photoLibrary` を指定すると選択ダイアログを出さず直接提示する。
     ///   - maxSize: 画像の最大サイズ。指定された場合、画像は自動的に圧縮されます。
     ///   - onCompressionError: 画像の圧縮または変換に失敗した場合に呼ばれるコールバック
     /// - Returns: モディファイアが適用されたビュー
     func imagePicker(
         isPresented: Binding<Bool>,
         selectedImageData: Binding<Data?>,
+        source: ImagePickerSource = .automatic,
         maxSize: ByteSize? = nil,
         onCompressionError: ((Error) -> Void)? = nil
     ) -> some View {
         modifier(ImagePickerModifier(
             isPresented: isPresented,
             selectedImageData: selectedImageData,
+            source: source,
             maxSize: maxSize,
             onCompressionError: onCompressionError
         ))
