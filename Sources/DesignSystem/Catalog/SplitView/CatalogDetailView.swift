@@ -56,6 +56,9 @@ struct CatalogDetailView: View {
     private var componentDetailView: some View {
         if let component = componentItem {
             switch component {
+            case .attachment:
+                AttachmentCatalogView()
+                    .id(component)
             case .button:
                 ButtonCatalogView()
                     .id(component)

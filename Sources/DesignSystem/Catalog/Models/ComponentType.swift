@@ -2,6 +2,7 @@ import SwiftUI
 
 /// コンポーネントの種類
 enum ComponentType: String, CaseIterable, Identifiable {
+    case attachment = "Attachment"
     case button = "Button"
     case card = "Card"
     case chip = "Chip"
@@ -29,6 +30,7 @@ enum ComponentType: String, CaseIterable, Identifiable {
 
     var icon: String {
         switch self {
+        case .attachment: return "paperclip"
         case .button: return "hand.tap.fill"
         case .card: return "rectangle.fill"
         case .chip: return "tag.fill"
@@ -56,6 +58,7 @@ enum ComponentType: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
+        case .attachment: return "選択済み添付のサムネイルと横スクロールストリップ"
         case .button: return "Primary, Secondary, Tertiaryの3種類"
         case .card: return "関連情報をグループ化するコンテナ"
         case .chip: return "ステータス、カテゴリ、フィルター用のコンパクトなラベル"

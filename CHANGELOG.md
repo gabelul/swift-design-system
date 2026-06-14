@@ -9,6 +9,13 @@
 
 なし
 
+## [1.6.0] - 2026-06-14
+
+### 追加
+- **添付 UI atom**: `AttachmentThumbnail`（画像/ファイルのサムネ + ✕ 削除）と
+  `AttachmentStrip`（横スクロールの純レイアウトコンテナ、ViewBuilder のみ受ける logic-less）。
+  ドメイン型・IO・state を持たず、削除は callback。Catalog に Attachment を追加。
+
 ## [1.3.2] - 2026-06-07
 
 ### 追加

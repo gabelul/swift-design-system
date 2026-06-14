@@ -61,6 +61,8 @@ struct ComponentsCatalogView: View {
     @ViewBuilder
     private func destinationView(for component: ComponentType) -> some View {
         switch component {
+        case .attachment:
+            AttachmentCatalogView()
         case .button:
             ButtonCatalogView()
         case .card:
