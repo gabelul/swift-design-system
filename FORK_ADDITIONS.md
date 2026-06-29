@@ -75,7 +75,7 @@ Generate a full light/dark color palette from a single brand color using HSB shi
 | Layout | File | What it does |
 |--------|------|-------------|
 | **FlowLayout** | `Layout/FlowLayout.swift` | Wrapping horizontal layout for tags, chips, filters |
-| **Screen** | `Layout/Screen.swift` | Page wrapper with configurable scrolling, padding density, and title display mode |
+| **Screen** | `Layout/Screen.swift` | Page wrapper with configurable scrolling, padding density, title display mode, and an owned pinned footer API for required CTAs |
 
 ## TypographyProvider + BrandRecipe (new)
 
@@ -91,6 +91,7 @@ Environment-driven typography resolver for custom font families and global scali
 - `Modifiers/TypographyModifier.swift`
 - `Layout/Screen.swift`
 - `Catalog/Patterns/Layout/ScreenCatalogView.swift`
+- `Tests/DesignSystemTests/ScreenBottomInsetTests.swift`
 
 **What it fixes:**
 - lets app-owned screens keep semantic typography tokens without an app-side typography wrapper
@@ -98,6 +99,7 @@ Environment-driven typography resolver for custom font families and global scali
 - keeps parity passes from drifting just because a brand uses non-system fonts
 - gives app roots one small setup recipe for theme + typography + density
 - teaches AI to adapt HTML prototypes for native mobile instead of copying them mechanically
+- lets scrollable pages pin required bottom actions without letting trailing content slip behind the CTA
 
 ---
 

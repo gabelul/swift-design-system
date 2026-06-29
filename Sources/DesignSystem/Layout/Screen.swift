@@ -148,6 +148,7 @@ public struct Screen<Content: View>: View {
     private let scrollBehavior: ScreenScrollBehavior
     private let padding: ScreenPadding
     private let titleDisplayMode: ScreenTitleDisplayMode
+    private let bottomInset: AnyView?
     private let content: Content
 
     /// Creates a screen with optional navigation title and layout controls.
@@ -169,6 +170,37 @@ public struct Screen<Content: View>: View {
         self.scrollBehavior = scrollBehavior
         self.padding = padding
         self.titleDisplayMode = titleDisplayMode
+        self.bottomInset = nil
+        self.content = content()
+    }
+
+    /// Creates a screen with a pinned bottom inset owned by the page shell.
+    ///
+    /// Use this overload when the screen has a required bottom action such as
+    /// a primary CTA. The inset is attached to the `Screen`'s own scroll
+    /// container so long content stops above the pinned footer instead of
+    /// scrolling behind it.
+    ///
+    /// - Parameters:
+    ///   - title: Navigation bar title (omit for untitled screens)
+    ///   - scrollBehavior: Whether `Screen` should provide the outer vertical scroll container.
+    ///   - padding: Page padding preset.
+    ///   - titleDisplayMode: Preferred navigation title presentation.
+    ///   - bottomInset: Footer content pinned to the bottom edge of the page shell.
+    ///   - content: The screen's content.
+    public init<BottomInset: View>(
+        _ title: String? = nil,
+        scrollBehavior: ScreenScrollBehavior = .scrolls,
+        padding: ScreenPadding = .automatic,
+        titleDisplayMode: ScreenTitleDisplayMode = .large,
+        @ViewBuilder bottomInset: () -> BottomInset,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.title = title
+        self.scrollBehavior = scrollBehavior
+        self.padding = padding
+        self.titleDisplayMode = titleDisplayMode
+        self.bottomInset = AnyView(bottomInset())
         self.content = content()
     }
 
@@ -183,10 +215,36 @@ public struct Screen<Content: View>: View {
     private var screenBody: some View {
         switch scrollBehavior {
         case .scrolls:
+            scrollViewBody
+        case .fixed:
+            fixedBody
+        }
+    }
+
+    @ViewBuilder
+    private var scrollViewBody: some View {
+        if let bottomInset {
             ScrollView {
                 paddedContent
             }
-        case .fixed:
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                bottomInset
+            }
+        } else {
+            ScrollView {
+                paddedContent
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var fixedBody: some View {
+        if let bottomInset {
+            paddedContent
+                .safeAreaInset(edge: .bottom, spacing: 0) {
+                    bottomInset
+                }
+        } else {
             paddedContent
         }
     }
