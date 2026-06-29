@@ -18,6 +18,7 @@ struct ScreenCatalogView: View {
                         FeatureRow(icon: "ruler.fill", title: "Density-aware page padding")
                         FeatureRow(icon: "paintbrush.fill", title: "Theme background color")
                         FeatureRow(icon: "textformat", title: "Configurable navigation title display mode")
+                        FeatureRow(icon: "rectangle.bottomthird.inset.filled", title: "Pinned bottom inset for required CTAs")
                     }
                 }
 
@@ -43,6 +44,17 @@ struct ScreenCatalogView: View {
                 // Custom scroll handling
                 Screen("Editor", scrollBehavior: .fixed, padding: .none) {
                     customScrollBody
+                }
+
+                // Pinned CTA owned by Screen
+                Screen("Checklist", bottomInset: {
+                    Button("Continue") { }
+                        .buttonStyle(.primary)
+                        .buttonSize(.large)
+                        .padding(spacing.lg)
+                        .background(colors.background)
+                }) {
+                    content
                 }
                 """)
 
@@ -74,6 +86,12 @@ struct ScreenCatalogView: View {
 
                         NavigationLink("Form / Action Recipe") {
                             FormActionRecipeExample()
+                        }
+                        .buttonStyle(.secondary)
+                        .buttonSize(.small)
+
+                        NavigationLink("Pinned Footer Recipe") {
+                            PinnedFooterRecipeExample()
                         }
                         .buttonStyle(.secondary)
                         .buttonSize(.small)
@@ -172,6 +190,34 @@ private struct FormActionRecipeExample: View {
                     Button("Cancel") {}
                         .buttonStyle(.secondary)
                         .buttonSize(.large)
+                }
+            }
+        }
+    }
+}
+
+private struct PinnedFooterRecipeExample: View {
+    @Environment(\.colorPalette) private var colors
+    @Environment(\.spacingScale) private var spacing
+
+    var body: some View {
+        Screen("Review", bottomInset: {
+            VStack(spacing: spacing.sm) {
+                Button("Share PDF") {}
+                    .buttonStyle(.primary)
+                    .buttonSize(.large)
+            }
+            .padding(.horizontal, spacing.lg)
+            .padding(.top, spacing.md)
+            .padding(.bottom, spacing.lg)
+            .background(colors.background)
+        }) {
+            VStack(alignment: .leading, spacing: spacing.lg) {
+                ForEach(0..<18, id: \.self) { index in
+                    SectionCard(title: "Section \(index + 1)") {
+                        Text("Long content now scrolls fully above the pinned footer instead of slipping behind it.")
+                            .typography(.bodyMedium)
+                    }
                 }
             }
         }
