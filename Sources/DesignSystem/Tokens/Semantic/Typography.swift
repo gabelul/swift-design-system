@@ -23,7 +23,7 @@ import SwiftUI
 /// - **Title**: titles (22–14pt) – card titles, dialogs
 /// - **Body**: body text (16–12pt) – paragraphs, descriptions
 /// - **Label**: labels (14–11pt) – buttons, tabs, form labels
-public enum Typography {
+public enum Typography: Sendable {
     // MARK: - Display
 
     /// Display Large – largest and most prominent text.
