@@ -11,20 +11,35 @@ public struct TypographyProvider: Sendable {
     public var monoFontName: String?
     public var scale: CGFloat
 
+    /// Tokens that render serif by default when a call site doesn't pin a design.
+    ///
+    /// This is the app's *editorial policy*: the DesignSystem itself stays
+    /// unopinionated (empty set = every token resolves sans, unchanged), but an
+    /// app can declare, once, which size roles carry its serif voice — e.g.
+    /// `[.displayLarge, .displayMedium, .displaySmall]` to make the whole display
+    /// tier serif app-wide. Beats hand-typing `design: .serif` on every title and
+    /// hoping nobody forgets. An explicit `design:` at the call site always wins.
+    public var serifTokens: Set<Typography>
+
     public init(
         sansFontName: String? = nil,
         serifFontName: String? = nil,
         monoFontName: String? = nil,
-        scale: CGFloat = 1.0
+        scale: CGFloat = 1.0,
+        serifTokens: Set<Typography> = []
     ) {
         self.sansFontName = sansFontName?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
         self.serifFontName = serifFontName?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
         self.monoFontName = monoFontName?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
         self.scale = scale
+        self.serifTokens = serifTokens
     }
 
     func font(for token: Typography, design: Font.Design?) -> Font {
-        let resolvedDesign = design ?? .default
+        // No design pinned at the call site? Fall back to the configured editorial
+        // policy — serif for tokens the app opted in, sans for the rest. SF Symbols
+        // ignore Font.Design, so sizing a glyph with a serif token is a harmless no-op.
+        let resolvedDesign = design ?? (serifTokens.contains(token) ? .serif : .default)
         let size = pointSize(for: token)
 
         guard let name = fontName(for: resolvedDesign) else {

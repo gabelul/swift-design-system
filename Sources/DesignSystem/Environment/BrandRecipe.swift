@@ -68,6 +68,7 @@ public struct BrandRecipe: Sendable {
         serifFontName: String? = nil,
         monoFontName: String? = nil,
         typographyScale: CGFloat = 1.0,
+        serifTokens: Set<Typography> = [],
         screenDensity: ScreenDensity = .standard,
         themeName: String = "Dynamic",
         themeID: String = "dynamic"
@@ -80,7 +81,8 @@ public struct BrandRecipe: Sendable {
                 sansFontName: sansFontName,
                 serifFontName: serifFontName,
                 monoFontName: monoFontName,
-                scale: typographyScale
+                scale: typographyScale,
+                serifTokens: serifTokens
             ),
             screenDensity: screenDensity
         )
