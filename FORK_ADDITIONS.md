@@ -100,6 +100,7 @@ Environment-driven typography resolver for custom font families and global scali
 - gives app roots one small setup recipe for theme + typography + density
 - teaches AI to adapt HTML prototypes for native mobile instead of copying them mechanically
 - lets scrollable pages pin required bottom actions without letting trailing content slip behind the CTA
+- `serifTokens` (v1.1.0): declare which tokens render serif by default so an app gets one editorial serif voice (e.g. the display tier for titles) without hand-typing `design: .serif` per call site — kills face drift where the same role goes serif on one screen and sans on the next
 
 ---
 

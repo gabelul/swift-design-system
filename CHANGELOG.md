@@ -9,6 +9,21 @@
 
 なし
 
+## [1.1.0] - 2026-07-02
+
+### Added
+- `TypographyProvider.serifTokens` — a `Set<Typography>` letting an app declare
+  which typography tokens render serif by default, instead of hand-typing
+  `design: .serif` at every call site. Empty by default, so existing consumers
+  are unchanged; an explicit `design:` at the call site still overrides. Threaded
+  through `BrandRecipe.dynamic(serifTokens:)`. Typical use: pass the display tier
+  (`[.displayLarge, .displayMedium, .displaySmall]`) to give an app one editorial
+  serif voice for titles app-wide.
+
+### Changed
+- `Typography` now conforms to `Sendable` (required for `Set<Typography>` inside
+  the `Sendable` `TypographyProvider` under strict concurrency).
+
 ## [1.0.24-fork] - 2026-04-15
 
 Merged upstream v1.0.24 into the English fork. All new Japanese docs, comments,
