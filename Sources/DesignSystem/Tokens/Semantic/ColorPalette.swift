@@ -103,6 +103,15 @@ public protocol ColorPalette: Sendable {
     /// Text color on SurfaceVariant
     var onSurfaceVariant: Color { get }
 
+    /// Shadow color used for depth on cards, floating buttons, popovers, etc.
+    var shadow: Color { get }
+
+    /// Surface color for low-to-medium elevated containers
+    var elevatedSurface: Color { get }
+
+    /// Surface color for highly elevated containers
+    var elevatedSurfaceHigh: Color { get }
+
     // MARK: - Semantic State Colors
 
     /// Used for error states
@@ -166,4 +175,8 @@ public extension ColorPalette {
     var onInfo: Color { .white }
 
     var outlineVariant: Color { outline.opacity(0.5) }
+
+    var shadow: Color { .black }
+    var elevatedSurface: Color { surface }
+    var elevatedSurfaceHigh: Color { elevatedSurface }
 }

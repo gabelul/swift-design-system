@@ -41,7 +41,7 @@ final class ColorPaletteTests: XCTestCase {
     func testDefaultImplementations() {
         let palette = LightColorPalette()
 
-        // Protocol extensionのデフォルト実装が機能することを確認
+        // Verify the protocol extension's default implementations work
         XCTAssertNotNil(palette.primaryContainer)
         XCTAssertNotNil(palette.secondaryContainer)
         XCTAssertNotNil(palette.errorContainer)

@@ -63,6 +63,8 @@ struct ComponentsCatalogView: View {
         switch component {
         case .accordion:
             AccordionCatalogView()
+        case .attachment:
+            AttachmentCatalogView()
         case .avatar:
             AvatarCatalogView()
         case .badge:
@@ -79,6 +81,8 @@ struct ComponentsCatalogView: View {
             ColorPickerCatalogView()
         case .emojiPicker:
             EmojiPickerCatalogView()
+        case .emptyState:
+            EmptyStateCatalogView()
         case .fab:
             FloatingActionButtonCatalogView()
         case .iconBadge:
@@ -99,6 +103,10 @@ struct ComponentsCatalogView: View {
                 Text("Image picker is only available on iOS")
             }
             #endif
+        case .linkCard:
+            LinkCardCatalogView()
+        case .mediaViewer:
+            MediaViewerCatalogView()
         case .progressBar:
             ProgressBarCatalogView()
         case .searchField:
@@ -107,8 +115,6 @@ struct ComponentsCatalogView: View {
             SecureFieldCatalogView()
         case .skeleton:
             SkeletonCatalogView()
-        case .emptyState:
-            EmptyStateCatalogView()
         case .errorState:
             ErrorStateCatalogView()
         case .insetCallout:
@@ -121,10 +127,16 @@ struct ComponentsCatalogView: View {
             StatDisplayCatalogView()
         case .statusBanner:
             StatusBannerCatalogView()
+        case .statusIndicator:
+            StatusIndicatorCatalogView()
         case .statusPill:
             StatusPillCatalogView()
+        case .stepIndicator:
+            StepIndicatorCatalogView()
         case .textField:
             TextFieldCatalogView()
+        case .timelineRow:
+            TimelineRowCatalogView()
         case .toast:
             ToastCatalogView()
         case .videoPicker:

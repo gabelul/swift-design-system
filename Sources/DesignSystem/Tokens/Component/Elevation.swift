@@ -74,17 +74,35 @@ public enum Elevation {
     public var opacity: Double {
         switch self {
         case .level0: return 0
-        case .level1: return 0.12
-        case .level2: return 0.14
-        case .level3: return 0.16
-        case .level4: return 0.18
-        case .level5: return 0.20
+        case .level1: return 0.08
+        case .level2: return 0.10
+        case .level3: return 0.12
+        case .level4: return 0.14
+        case .level5: return 0.16
         }
     }
 
     /// Adjusted opacity for dark mode
-    /// Shadows are harder to see in dark mode, so opacity is increased by 1.5x
+    /// In dark mode, depth is conveyed through surface brightness differences rather than dark shadows, so shadow opacity is kept subtle.
     public func opacity(for colorScheme: ColorScheme) -> Double {
-        colorScheme == .dark ? opacity * 1.5 : opacity
+        colorScheme == .dark ? opacity * 0.55 : opacity
+    }
+
+    /// Opacity of the tint layered on top of an elevated surface.
+    public func surfaceTintOpacity(for colorScheme: ColorScheme) -> Double {
+        switch self {
+        case .level0:
+            return 0
+        case .level1:
+            return colorScheme == .dark ? 0.03 : 0.015
+        case .level2:
+            return colorScheme == .dark ? 0.04 : 0.02
+        case .level3:
+            return colorScheme == .dark ? 0.05 : 0.025
+        case .level4:
+            return colorScheme == .dark ? 0.06 : 0.03
+        case .level5:
+            return colorScheme == .dark ? 0.07 : 0.035
+        }
     }
 }

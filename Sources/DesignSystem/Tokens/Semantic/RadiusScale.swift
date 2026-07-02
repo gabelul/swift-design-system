@@ -28,6 +28,7 @@ import Foundation
 /// - `lg`: 12pt - Large corner radius
 /// - `xl`: 16pt - Very large corner radius
 /// - `xxl`: 20pt - Extra large corner radius
+/// - `card`: 24pt - Hero surfaces (composers, hero cards, etc.)
 /// - `full`: 9999pt - Fully circular (buttons, avatars, etc.)
 public protocol RadiusScale: Sendable {
     /// No corner radius (0pt)
@@ -51,6 +52,15 @@ public protocol RadiusScale: Sendable {
     /// Extra large corner radius (20pt)
     var xxl: CGFloat { get }
 
+    /// Hero surface corner radius (24pt) - composers, hero cards, etc.
+    /// Used for the large surfaces that anchor a screen. One step stronger than xxl(20).
+    var card: CGFloat { get }
+
     /// Fully circular (9999pt) - buttons, avatars, etc.
     var full: CGFloat { get }
+}
+
+public extension RadiusScale {
+    /// Default for backward compatibility with existing themes (24pt).
+    var card: CGFloat { 24 }
 }

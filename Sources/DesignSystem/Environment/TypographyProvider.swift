@@ -1,11 +1,16 @@
 import SwiftUI
 
-/// Environment-driven typography resolver.
+/// App-configurable typography policy, expressed as a ``TypographyScale``.
 ///
-/// Lets apps keep semantic `Typography` tokens while swapping font families
-/// and applying a global scale without forking components or button styles.
-/// When no custom families are configured, DesignSystem falls back to system fonts.
-public struct TypographyProvider: Sendable {
+/// Lets apps keep semantic `Typography` tokens while swapping font families,
+/// applying a global scale, and declaring a serif editorial voice — without
+/// forking components or button styles. With nothing configured it resolves to
+/// system fonts, identical to ``DefaultTypographyScale``.
+///
+/// Since upstream v1.7.0 moved resolution to `TypographyScale`/`\.typographyScale`,
+/// this type conforms to `TypographyScale` and the `.typographyProvider(_:)`
+/// modifier installs it there. Existing app call sites don't change.
+public struct TypographyProvider: TypographyScale {
     public var sansFontName: String?
     public var serifFontName: String?
     public var monoFontName: String?
@@ -13,12 +18,12 @@ public struct TypographyProvider: Sendable {
 
     /// Tokens that render serif by default when a call site doesn't pin a design.
     ///
-    /// This is the app's *editorial policy*: the DesignSystem itself stays
-    /// unopinionated (empty set = every token resolves sans, unchanged), but an
-    /// app can declare, once, which size roles carry its serif voice — e.g.
-    /// `[.displayLarge, .displayMedium, .displaySmall]` to make the whole display
-    /// tier serif app-wide. Beats hand-typing `design: .serif` on every title and
-    /// hoping nobody forgets. An explicit `design:` at the call site always wins.
+    /// The app's *editorial policy*: the DesignSystem stays unopinionated (empty
+    /// set = every token resolves sans), but an app can declare, once, which size
+    /// roles carry its serif voice — e.g. `[.displayLarge, .displayMedium,
+    /// .displaySmall]` to make the whole display tier serif app-wide. Beats
+    /// hand-typing `design: .serif` on every title. An explicit `design:` at the
+    /// call site always wins.
     public var serifTokens: Set<Typography>
 
     public init(
@@ -35,93 +40,52 @@ public struct TypographyProvider: Sendable {
         self.serifTokens = serifTokens
     }
 
-    func font(for token: Typography, design: Font.Design?) -> Font {
-        // No design pinned at the call site? Fall back to the configured editorial
-        // policy — serif for tokens the app opted in, sans for the rest. SF Symbols
-        // ignore Font.Design, so sizing a glyph with a serif token is a harmless no-op.
-        let resolvedDesign = design ?? (serifTokens.contains(token) ? .serif : .default)
-        let size = pointSize(for: token)
+    public func style(for role: Typography) -> TypeStyle {
+        let isSerif = serifTokens.contains(role)
+        let resource: FontResource
+        let design: Font.Design?
 
-        guard let name = fontName(for: resolvedDesign) else {
-            return .system(size: size, weight: token.weight, design: resolvedDesign)
+        if isSerif {
+            if let serifFontName {
+                // A bundled/host serif font wins; a named font already carries its
+                // own design, so no system design axis is needed.
+                resource = .named(serifFontName)
+                design = nil
+            } else {
+                // No serif font configured → system serif (New York). SF Symbols
+                // ignore Font.Design, so serif on a glyph is a harmless no-op.
+                resource = .system
+                design = .serif
+            }
+        } else {
+            resource = sansFontName.map(FontResource.named) ?? .system
+            design = nil
         }
 
-        return Font
-            .custom(name, size: size, relativeTo: textStyle(for: token))
-            .weight(token.weight)
-    }
-
-    func pointSize(for token: Typography) -> CGFloat {
-        token.size * scale
-    }
-
-    func lineSpacing(for token: Typography) -> CGFloat {
-        (token.lineHeight - token.size) * scale
-    }
-
-    func fontName(for design: Font.Design) -> String? {
-        switch design {
-        case .serif:
-            return serifFontName ?? sansFontName
-        case .monospaced:
-            return monoFontName ?? sansFontName
-        case .rounded:
-            return sansFontName
-        case .default:
-            return sansFontName
-        @unknown default:
-            return sansFontName
-        }
-    }
-
-    private func textStyle(for token: Typography) -> Font.TextStyle {
-        switch token {
-        case .displayLarge: return .largeTitle
-        case .displayMedium: return .largeTitle
-        case .displaySmall: return .title
-        case .headlineLarge: return .title
-        case .headlineMedium: return .title2
-        case .headlineSmall: return .title3
-        case .titleLarge: return .headline
-        case .titleMedium: return .headline
-        case .titleSmall: return .subheadline
-        case .bodyLarge: return .body
-        case .bodyMedium: return .callout
-        case .bodySmall: return .footnote
-        case .labelLarge: return .callout
-        case .labelMedium: return .footnote
-        case .labelSmall: return .caption
-        }
-    }
-}
-
-private struct TypographyProviderKey: EnvironmentKey {
-    static let defaultValue = TypographyProvider()
-}
-
-public extension EnvironmentValues {
-    var typographyProvider: TypographyProvider {
-        get { self[TypographyProviderKey.self] }
-        set { self[TypographyProviderKey.self] = newValue }
+        return TypeStyle(
+            size: role.size * scale,
+            weight: role.weight,
+            leadingMultiplier: role.size > 0 ? role.lineHeight / role.size : 1,
+            fontResource: resource,
+            design: design
+        )
     }
 }
 
 public extension View {
-    /// Installs a typography provider for this subtree.
+    /// Installs an app typography policy for this subtree (as the Environment scale).
     ///
-    /// Example:
     /// ```swift
     /// ContentView()
     ///     .typographyProvider(
     ///         TypographyProvider(
-    ///             sansFontName: "Inter",
     ///             serifFontName: "SourceSerif4",
-    ///             scale: 1.0
+    ///             serifTokens: [.displayLarge, .displayMedium, .displaySmall]
     ///         )
     ///     )
     /// ```
     func typographyProvider(_ provider: TypographyProvider) -> some View {
-        environment(\.typographyProvider, provider)
+        environment(\.typographyScale, provider)
     }
 }
 

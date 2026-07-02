@@ -127,8 +127,14 @@ public struct DSTextField: View {
                         .foregroundStyle(iconColor)
                 }
             }
+            // macOS assumes pointer input, so field height is trimmed toward standard controls (reduced vertical padding).
+            #if os(macOS)
+            .padding(.horizontal, spacing.md)
+            .padding(.vertical, spacing.xs)
+            #else
             .padding(.horizontal, spacing.lg)
             .padding(.vertical, spacing.md)
+            #endif
             .background(backgroundColor)
             .overlay(border)
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))

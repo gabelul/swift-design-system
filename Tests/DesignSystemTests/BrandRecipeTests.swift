@@ -17,9 +17,9 @@ final class BrandRecipeTests: XCTestCase {
         )
 
         XCTAssertEqual(recipe.screenDensity, .spacious)
-        XCTAssertEqual(recipe.typographyProvider.fontName(for: .default), "Inter")
-        XCTAssertEqual(recipe.typographyProvider.fontName(for: .serif), "SourceSerif4")
-        XCTAssertEqual(recipe.typographyProvider.fontName(for: .monospaced), "JetBrainsMono")
+        XCTAssertEqual(recipe.typographyProvider.sansFontName, "Inter")
+        XCTAssertEqual(recipe.typographyProvider.serifFontName, "SourceSerif4")
+        XCTAssertEqual(recipe.typographyProvider.monoFontName, "JetBrainsMono")
         XCTAssertEqual(recipe.typographyProvider.scale, 1.1, accuracy: 0.001)
 
         let themeProvider = recipe.makeThemeProvider()

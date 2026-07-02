@@ -59,6 +59,9 @@ struct CatalogDetailView: View {
             case .accordion:
                 AccordionCatalogView()
                     .id(component)
+            case .attachment:
+                AttachmentCatalogView()
+                    .id(component)
             case .avatar:
                 AvatarCatalogView()
                     .id(component)
@@ -82,6 +85,9 @@ struct CatalogDetailView: View {
                     .id(component)
             case .emojiPicker:
                 EmojiPickerCatalogView()
+                    .id(component)
+            case .emptyState:
+                EmptyStateCatalogView()
                     .id(component)
             case .fab:
                 FloatingActionButtonCatalogView()
@@ -109,6 +115,12 @@ struct CatalogDetailView: View {
                     Text("Image picker is only available on iOS")
                 }
                 #endif
+            case .linkCard:
+                LinkCardCatalogView()
+                    .id(component)
+            case .mediaViewer:
+                MediaViewerCatalogView()
+                    .id(component)
             case .progressBar:
                 ProgressBarCatalogView()
                     .id(component)
@@ -120,9 +132,6 @@ struct CatalogDetailView: View {
                     .id(component)
             case .skeleton:
                 SkeletonCatalogView()
-                    .id(component)
-            case .emptyState:
-                EmptyStateCatalogView()
                     .id(component)
             case .errorState:
                 ErrorStateCatalogView()
@@ -142,11 +151,20 @@ struct CatalogDetailView: View {
             case .statusBanner:
                 StatusBannerCatalogView()
                     .id(component)
+            case .statusIndicator:
+                StatusIndicatorCatalogView()
+                    .id(component)
             case .statusPill:
                 StatusPillCatalogView()
                     .id(component)
+            case .stepIndicator:
+                StepIndicatorCatalogView()
+                    .id(component)
             case .textField:
                 TextFieldCatalogView()
+                    .id(component)
+            case .timelineRow:
+                TimelineRowCatalogView()
                     .id(component)
             case .toast:
                 ToastCatalogView()

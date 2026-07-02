@@ -1,33 +1,57 @@
+import SwiftUI
 import XCTest
 @testable import DesignSystem
 
+/// Covers `TypographyProvider` as a `TypographyScale` (upstream v1.7.0 model):
+/// custom font families, global scale, and the fork's serif-token policy.
 final class TypographyProviderTests: XCTestCase {
-    func testFontNameFallsBackToSansForSerifAndMonoWhenNeeded() {
-        let provider = TypographyProvider(sansFontName: "Inter")
+    func testResolvesSystemFontWhenNoFamiliesConfigured() {
+        let provider = TypographyProvider()
 
-        XCTAssertEqual(provider.fontName(for: .default), "Inter")
-        XCTAssertEqual(provider.fontName(for: .serif), "Inter")
-        XCTAssertEqual(provider.fontName(for: .monospaced), "Inter")
+        XCTAssertEqual(provider.style(for: .bodyMedium).fontResource, .system)
+        XCTAssertNil(provider.style(for: .bodyMedium).design)
     }
 
-    func testExplicitFontNamesOverrideFallbacks() {
+    func testSansFamilyAppliesToNonSerifTokens() {
+        let provider = TypographyProvider(sansFontName: "Inter")
+
+        XCTAssertEqual(provider.style(for: .bodyMedium).fontResource, .named("Inter"))
+    }
+
+    func testSerifTokensRenderSystemSerifWhenNoSerifFontConfigured() {
+        let provider = TypographyProvider(serifTokens: [.displaySmall])
+
+        let serif = provider.style(for: .displaySmall)
+        XCTAssertEqual(serif.fontResource, .system)
+        XCTAssertEqual(serif.design, .serif)
+
+        // A token outside the serif set stays sans.
+        XCTAssertNil(provider.style(for: .bodyMedium).design)
+    }
+
+    func testSerifFontNameAppliesToSerifTokens() {
         let provider = TypographyProvider(
             sansFontName: "Inter",
             serifFontName: "SourceSerif4",
-            monoFontName: "JetBrainsMono"
+            serifTokens: [.displaySmall]
         )
 
-        XCTAssertEqual(provider.fontName(for: .default), "Inter")
-        XCTAssertEqual(provider.fontName(for: .serif), "SourceSerif4")
-        XCTAssertEqual(provider.fontName(for: .monospaced), "JetBrainsMono")
+        XCTAssertEqual(provider.style(for: .displaySmall).fontResource, .named("SourceSerif4"))
+        XCTAssertEqual(provider.style(for: .bodyMedium).fontResource, .named("Inter"))
     }
 
-    func testPointSizeAndLineSpacingScaleWithProvider() {
+    func testScaleMultipliesSize() {
         let provider = TypographyProvider(scale: 1.25)
 
-        XCTAssertEqual(provider.pointSize(for: .headlineMedium), 35, accuracy: 0.001)
-        XCTAssertEqual(provider.lineSpacing(for: .headlineMedium), 10, accuracy: 0.001)
-        XCTAssertEqual(provider.pointSize(for: .labelSmall), 13.75, accuracy: 0.001)
-        XCTAssertEqual(provider.lineSpacing(for: .labelSmall), 6.25, accuracy: 0.001)
+        XCTAssertEqual(
+            provider.style(for: .headlineMedium).size,
+            Typography.headlineMedium.size * 1.25,
+            accuracy: 0.001
+        )
+        XCTAssertEqual(
+            provider.style(for: .labelSmall).size,
+            Typography.labelSmall.size * 1.25,
+            accuracy: 0.001
+        )
     }
 }

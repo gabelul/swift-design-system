@@ -25,45 +25,26 @@ public struct ImagePickerModifier: ViewModifier {
     @State private var showPermissionAlert = false
     @State private var permissionAlertConfig: PermissionAlertConfig?
 
+    let source: ImagePickerSource
     let maxSize: ByteSize?
     let onCompressionError: ((Error) -> Void)?
 
     public init(
         isPresented: Binding<Bool>,
         selectedImageData: Binding<Data?>,
+        source: ImagePickerSource = .automatic,
         maxSize: ByteSize? = nil,
         onCompressionError: ((Error) -> Void)? = nil
     ) {
         self._isPresented = isPresented
         self._selectedImageData = selectedImageData
+        self.source = source
         self.maxSize = maxSize
         self.onCompressionError = onCompressionError
     }
 
     public func body(content: Content) -> some View {
-        content
-            .confirmationDialog(
-                "Select Image",
-                isPresented: $isPresented,
-                titleVisibility: .visible
-            ) {
-                // Only show camera if available
-                if UIImagePickerController.isSourceTypeAvailable(.camera) {
-                    Button("Take Photo") {
-                        requestPermissionAndShowPicker(for: .camera)
-                    }
-                    .tint(Color(colorPalette.primary))
-                }
-
-                Button("Choose from Photo Library") {
-                    requestPermissionAndShowPicker(for: .photoLibrary)
-                }
-                .tint(Color(colorPalette.primary))
-
-                Button("Cancel", role: .cancel) {
-                    isPresented = false
-                }
-            }
+        presentation(content)
             .sheet(item: $sourceType) { source in
                 ImagePickerViewController(
                     sourceType: source.uiImagePickerSourceType,
@@ -90,6 +71,52 @@ public struct ImagePickerModifier: ViewModifier {
             } message: { config in
                 Text(config.message)
             }
+    }
+
+    /// Builds the presentation appropriate for `source`.
+    ///
+    /// `.automatic` shows a "Camera / Photo Library" selection dialog (or goes
+    /// straight to the library if the camera is unavailable). `.camera` and
+    /// `.photoLibrary` skip the dialog and present that source directly.
+    @ViewBuilder
+    private func presentation(_ content: Content) -> some View {
+        switch source {
+        case .automatic:
+            content.confirmationDialog(
+                "Select Image",
+                isPresented: $isPresented,
+                titleVisibility: .visible
+            ) {
+                // Only show camera if available
+                if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                    Button("Take Photo") {
+                        requestPermissionAndShowPicker(for: .camera)
+                    }
+                    .tint(Color(colorPalette.primary))
+                }
+
+                Button("Choose from Photo Library") {
+                    requestPermissionAndShowPicker(for: .photoLibrary)
+                }
+                .tint(Color(colorPalette.primary))
+
+                Button("Cancel", role: .cancel) {
+                    isPresented = false
+                }
+            }
+        case .camera:
+            content.onChange(of: isPresented) { _, newValue in
+                guard newValue else { return }
+                isPresented = false
+                requestPermissionAndShowPicker(for: .camera)
+            }
+        case .photoLibrary:
+            content.onChange(of: isPresented) { _, newValue in
+                guard newValue else { return }
+                isPresented = false
+                requestPermissionAndShowPicker(for: .photoLibrary)
+            }
+        }
     }
 
     /// Requests permission and shows the picker if allowed.
@@ -189,6 +216,19 @@ public struct ImagePickerModifier: ViewModifier {
             UIApplication.shared.open(settingsURL)
         }
     }
+}
+
+// MARK: - Public Types
+
+/// Image picker presentation source
+///
+/// - `automatic`: Shows a "Camera / Photo Library" selection dialog when the camera is available; goes directly to the library otherwise.
+/// - `camera`: Presents the camera directly without a selection dialog.
+/// - `photoLibrary`: Presents the photo library directly without a selection dialog.
+public enum ImagePickerSource: Sendable {
+    case automatic
+    case camera
+    case photoLibrary
 }
 
 // MARK: - Shared Types
@@ -388,18 +428,21 @@ public extension View {
     /// - Parameters:
     ///   - isPresented: Binding that controls whether the picker is shown.
     ///   - selectedImageData: Binding that receives the selected image data.
+    ///   - source: Presentation source. Specify `.camera` / `.photoLibrary` to present that source directly without a selection dialog.
     ///   - maxSize: Optional maximum size. When specified, the image is automatically compressed.
     ///   - onCompressionError: Callback invoked when compression or conversion fails.
     /// - Returns: A view with the modifier applied.
     func imagePicker(
         isPresented: Binding<Bool>,
         selectedImageData: Binding<Data?>,
+        source: ImagePickerSource = .automatic,
         maxSize: ByteSize? = nil,
         onCompressionError: ((Error) -> Void)? = nil
     ) -> some View {
         modifier(ImagePickerModifier(
             isPresented: isPresented,
             selectedImageData: selectedImageData,
+            source: source,
             maxSize: maxSize,
             onCompressionError: onCompressionError
         ))

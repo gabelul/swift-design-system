@@ -24,7 +24,7 @@ final class ColorHexTests: XCTestCase {
     }
 
     func testPrimitiveColorsAreValid() {
-        // Primitive colorsが正しくHEXから初期化されているか確認
+        // Verify primitive colors initialize correctly from hex
         XCTAssertNotNil(PrimitiveColors.blue500)
         XCTAssertNotNil(PrimitiveColors.gray900)
         XCTAssertNotNil(PrimitiveColors.red500)

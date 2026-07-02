@@ -1,0 +1,119 @@
+import SwiftUI
+
+/// A rounded thumbnail (atom) representing a single selected attachment.
+///
+/// Can represent either an image preview or a "file" (icon + name).
+/// Removal is requested via the ✕ in the top-right corner. It accepts no domain
+/// types and holds no internal state — the removal side effect is delegated
+/// to the caller's `onRemove`.
+///
+/// ```swift
+/// AttachmentThumbnail(image: Image("photo")) { remove(id) }
+/// AttachmentThumbnail(systemImage: "doc.text", fileName: "report.pdf") { remove(id) }
+/// ```
+public struct AttachmentThumbnail: View {
+    @Environment(\.colorPalette) private var colorPalette
+    @Environment(\.radiusScale) private var radiusScale
+    @Environment(\.spacingScale) private var spacingScale
+
+    private enum Content {
+        case image(Image)
+        case file(systemImage: String, fileName: String?)
+    }
+
+    private let content: Content
+    private let onRemove: () -> Void
+
+    /// For image attachments. Fills the frame with the preview image as-is.
+    /// - Parameters:
+    ///   - image: The preview image to display.
+    ///   - onRemove: Removal request invoked when the ✕ is tapped.
+    public init(image: Image, onRemove: @escaping () -> Void) {
+        self.content = .image(image)
+        self.onRemove = onRemove
+    }
+
+    /// For file/document attachments. Represents attachments with no preview image as an icon + name.
+    /// - Parameters:
+    ///   - systemImage: SF Symbols name representing the file type.
+    ///   - fileName: The file name (truncated to 1–2 lines).
+    ///   - onRemove: Removal request invoked when the ✕ is tapped.
+    public init(systemImage: String, fileName: String?, onRemove: @escaping () -> Void) {
+        self.content = .file(systemImage: systemImage, fileName: fileName)
+        self.onRemove = onRemove
+    }
+
+    private var side: CGFloat { ControlTokens.minTouchTarget + spacingScale.xl }
+
+    public var body: some View {
+        body(for: content)
+            .frame(width: side, height: side)
+            .clipShape(RoundedRectangle(cornerRadius: radiusScale.lg, style: .continuous))
+            .overlay(alignment: .topTrailing) { removeButton }
+    }
+
+    @ViewBuilder
+    private func body(for content: Content) -> some View {
+        switch content {
+        case let .image(image):
+            image
+                .resizable()
+                .scaledToFill()
+        case let .file(systemImage, fileName):
+            VStack(spacing: spacingScale.xs) {
+                Image(systemName: systemImage)
+                    .font(.system(size: 20, weight: .regular))
+                    .foregroundStyle(colorPalette.onSurfaceVariant)
+                if let fileName {
+                    Text(fileName)
+                        .typography(.labelSmall)
+                        .foregroundStyle(colorPalette.onSurfaceVariant)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.center)
+                }
+            }
+            .padding(spacingScale.xs)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(colorPalette.surfaceVariant)
+        }
+    }
+
+    private var removeButton: some View {
+        Button(action: onRemove) {
+            Image(systemName: "xmark.circle.fill")
+                .font(.system(size: 18, weight: .bold))
+                .symbolRenderingMode(.palette)
+                .foregroundStyle(colorPalette.onSurface, colorPalette.surface)
+                .padding(spacingScale.xs)
+                .contentShape(Rectangle())
+                .frame(
+                    width: ControlTokens.minTouchTarget,
+                    height: ControlTokens.minTouchTarget,
+                    alignment: .topTrailing
+                )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Remove attachment")
+    }
+}
+
+#Preview {
+    HStack {
+        AttachmentThumbnail(
+            image: Image(systemName: "photo"),
+            onRemove: {}
+        )
+        AttachmentThumbnail(
+            systemImage: "doc.text.fill",
+            fileName: "quarterly-report.pdf",
+            onRemove: {}
+        )
+        AttachmentThumbnail(
+            systemImage: "tablecells.fill",
+            fileName: nil,
+            onRemove: {}
+        )
+    }
+    .padding()
+    .theme(ThemeProvider())
+}

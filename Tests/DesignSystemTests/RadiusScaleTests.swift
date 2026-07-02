@@ -5,7 +5,7 @@ final class RadiusScaleTests: XCTestCase {
     func testDefaultRadiusScale() {
         let radius = DefaultRadiusScale()
 
-        // 正しい値が設定されているか確認
+        // Verify the correct values are set
         XCTAssertEqual(radius.none, 0)
         XCTAssertEqual(radius.xs, 2)
         XCTAssertEqual(radius.sm, 4)
@@ -19,7 +19,7 @@ final class RadiusScaleTests: XCTestCase {
     func testRadiusProgression() {
         let radius = DefaultRadiusScale()
 
-        // 角丸が正しく増加しているか確認（fullを除く）
+        // Verify corner radii increase in order (excluding full)
         XCTAssertLessThan(radius.none, radius.xs)
         XCTAssertLessThan(radius.xs, radius.sm)
         XCTAssertLessThan(radius.sm, radius.md)

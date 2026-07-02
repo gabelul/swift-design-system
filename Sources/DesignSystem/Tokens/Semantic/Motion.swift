@@ -102,6 +102,28 @@ public protocol Motion: Sendable {
     /// - Response: 0.5s
     /// - Damping: 0.5 (stronger bounce)
     var bounce: Animation { get }
+
+    /// Responsive spring – quick follow-through for state changes.
+    ///
+    /// A short spring that gives user interactions and live updates a feeling of
+    /// "keeping up immediately" — input enable/disable, phase transitions, list growth/shrink.
+    /// Fixes the vocabulary equivalent to SwiftUI's built-in `.snappy`.
+    var snappy: Animation { get }
+
+    /// Streaming assembly – appearance as pieces flow in.
+    ///
+    /// The appearance animation for cases where UI pieces arrive incrementally and
+    /// assemble, such as LLM streaming. One step gentler than slower (375ms).
+    /// - Duration: 450ms
+    /// - Easing: Smooth spring
+    var stream: Animation { get }
+}
+
+public extension Motion {
+    /// Default for backward compatibility with existing themes.
+    var snappy: Animation { .snappy }
+    /// Default for backward compatibility with existing themes.
+    var stream: Animation { .smooth(duration: 0.45) }
 }
 
 // MARK: - Default Implementation
@@ -158,5 +180,15 @@ public struct DefaultMotion: Motion {
 
     public var bounce: Animation {
         .spring(response: 0.5, dampingFraction: 0.5)
+    }
+
+    // MARK: - Responsive / Streaming
+
+    public var snappy: Animation {
+        .snappy
+    }
+
+    public var stream: Animation {
+        .smooth(duration: 0.45)
     }
 }

@@ -5,7 +5,7 @@ final class SpacingScaleTests: XCTestCase {
     func testDefaultSpacingScale() {
         let spacing = DefaultSpacingScale()
 
-        // 正しい値が設定されているか確認
+        // Verify the correct values are set
         XCTAssertEqual(spacing.none, 0)
         XCTAssertEqual(spacing.xxs, 2)
         XCTAssertEqual(spacing.xs, 4)
@@ -21,7 +21,7 @@ final class SpacingScaleTests: XCTestCase {
     func testSpacingProgression() {
         let spacing = DefaultSpacingScale()
 
-        // スペーシングが正しく増加しているか確認
+        // Verify spacing values increase in order
         XCTAssertLessThan(spacing.none, spacing.xxs)
         XCTAssertLessThan(spacing.xxs, spacing.xs)
         XCTAssertLessThan(spacing.xs, spacing.sm)

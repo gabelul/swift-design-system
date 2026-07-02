@@ -87,6 +87,16 @@ public extension EmptyState where Action == EmptyView {
             EmptyView()
         }
     }
+
+    /// Creates an empty state using upstream's `systemImage`/`description` naming.
+    ///
+    /// Bridges the merged-in upstream `EmptyState(systemImage:title:description:)`
+    /// call sites onto this fork's canonical `EmptyState` — one type, both spellings.
+    init(systemImage: String, title: String, description: String? = nil) {
+        self.init(icon: systemImage, title: title, message: description) {
+            EmptyView()
+        }
+    }
 }
 
 #Preview {

@@ -34,21 +34,42 @@ public enum ButtonSize: Sendable {
     case small
 
     /// Button height
+    ///
+    /// macOS assumes pointer-based interaction, so instead of the large
+    /// touch-oriented heights (56/48/40), it scales down to dimensions closer
+    /// to standard controls (per HIG, 44pt is the minimum hit region, not the
+    /// button's own size). iOS dimensions remain unchanged.
     var height: CGFloat {
+        #if os(macOS)
+        switch self {
+        case .large: return 32
+        case .medium: return 28
+        case .small: return 22
+        }
+        #else
         switch self {
         case .large: return 56
         case .medium: return 48
         case .small: return 40
         }
+        #endif
     }
 
     /// Horizontal padding
     var horizontalPadding: CGFloat {
+        #if os(macOS)
+        switch self {
+        case .large: return 16
+        case .medium: return 12
+        case .small: return 10
+        }
+        #else
         switch self {
         case .large: return 24
         case .medium: return 20
         case .small: return 16
         }
+        #endif
     }
 
     /// Typography token

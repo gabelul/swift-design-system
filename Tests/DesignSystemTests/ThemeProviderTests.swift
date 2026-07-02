@@ -25,6 +25,14 @@ final class ThemeProviderTests: XCTestCase {
         XCTAssertEqual(provider.currentTheme.id, "ocean")
     }
 
+    func testSwitchToUnknownThemeIsNoOp() {
+        let provider = ThemeProvider()
+        let before = provider.currentTheme.id
+
+        provider.switchToTheme(id: "nonexistent-theme")
+        XCTAssertEqual(provider.currentTheme.id, before)
+    }
+
     func testApplyThemeReplacesCurrentTheme() {
         let provider = ThemeProvider()
         let theme = ForestTheme()
@@ -66,5 +74,12 @@ final class ThemeProviderTests: XCTestCase {
 
         let matches = provider.availableThemes.filter { $0.id == replacement.id }
         XCTAssertEqual(matches.count, 1)
+    }
+
+    func testColorPaletteIsAccessible() {
+        let provider = ThemeProvider(initialMode: .light)
+        // Just confirm the mode-resolved palette is reachable without crashing.
+        _ = provider.colorPalette
+        XCTAssertEqual(provider.themeMode, .light)
     }
 }
