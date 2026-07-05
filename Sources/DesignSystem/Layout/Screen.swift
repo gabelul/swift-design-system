@@ -277,7 +277,22 @@ private extension View {
             view
             #endif
         } else {
+            #if os(iOS)
+            switch displayMode {
+            case .inline:
+                // Honor an explicit inline request even with no title. Without
+                // this, iOS falls back to its default .large mode and reserves
+                // empty large-title space — a phantom top gap that shows up once
+                // the screen adds a .principal toolbar item. Untitled screens
+                // using .large/.automatic keep the platform default so existing
+                // layouts don't shift.
+                navigationBarTitleDisplayMode(.inline)
+            case .large, .automatic:
+                self
+            }
+            #else
             self
+            #endif
         }
     }
 }
