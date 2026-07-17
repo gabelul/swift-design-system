@@ -67,7 +67,8 @@ public struct TypographyProvider: TypographyScale {
             weight: role.weight,
             leadingMultiplier: role.size > 0 ? role.lineHeight / role.size : 1,
             fontResource: resource,
-            design: design
+            design: design,
+            relativeTextStyle: role.relativeTextStyle
         )
     }
 }

@@ -151,6 +151,32 @@ public enum Typography: CaseIterable, Sendable {
         }
     }
 
+    /// The Dynamic Type text style this role scales *relative to*.
+    ///
+    /// The base point size stays `size` (so the default-size ramp is unchanged);
+    /// this only sets the scaling *rate* when the user raises their text size.
+    /// Each role maps to the built-in text style whose natural size is closest,
+    /// so a display headline scales like a large title and a caption like a
+    /// caption. Used by `.custom(_:size:relativeTo:)` in ``FontResource``.
+    public var relativeTextStyle: Font.TextStyle {
+        switch self {
+        case .displayLarge, .displayMedium, .displaySmall:
+            return .largeTitle
+        case .headlineLarge, .headlineMedium:
+            return .title
+        case .headlineSmall, .titleLarge:
+            return .title2
+        case .titleMedium, .bodyLarge:
+            return .body
+        case .titleSmall, .bodyMedium, .labelLarge:
+            return .subheadline
+        case .bodySmall, .labelMedium:
+            return .footnote
+        case .labelSmall:
+            return .caption2
+        }
+    }
+
     /// SwiftUI `Font`, compatible with Dynamic Type.
     public var font: Font {
         .system(size: size, weight: weight, design: .default)
