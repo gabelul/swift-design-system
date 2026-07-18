@@ -18,7 +18,7 @@ public struct PrimaryGlassButtonStyle: ButtonStyle {
             .typography(buttonSize.typography)
             .foregroundStyle(colorPalette.primary)
             .padding(.horizontal, buttonSize.horizontalPadding)
-            .frame(height: buttonSize.height)
+            .frame(minHeight: buttonSize.height)
             // macOS sizes to content width (per HIG, full-width fill is a watchOS idiom; macOS fits width to content).
             #if os(iOS)
             .frame(maxWidth: .infinity)

@@ -37,7 +37,7 @@ public struct TertiaryButtonStyle: ButtonStyle {
             .typography(buttonSize.typography)
             .foregroundStyle(colorPalette.primary)
             .padding(.horizontal, buttonSize.horizontalPadding)
-            .frame(height: buttonSize.height)
+            .frame(minHeight: buttonSize.height)
             .frame(maxWidth: .infinity)
             .background(
                 RoundedRectangle(cornerRadius: 100)

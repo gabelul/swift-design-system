@@ -18,7 +18,7 @@ public struct PrimaryTonalButtonStyle: ButtonStyle {
             .typography(buttonSize.typography)
             .foregroundStyle(colorPalette.onPrimaryContainer)
             .padding(.horizontal, buttonSize.horizontalPadding)
-            .frame(height: buttonSize.height)
+            .frame(minHeight: buttonSize.height)
             .frame(maxWidth: .infinity)
             .background {
                 RoundedRectangle(cornerRadius: 100)

@@ -85,6 +85,9 @@ public struct StatusPill: View {
             Text(title)
                 .typography(size.typography)
                 .fontWeight(.medium)
+                // Wrap instead of truncating at large text sizes — the pill grows
+                // vertically rather than clipping its label to "Setup in p…".
+                .fixedSize(horizontal: false, vertical: true)
         }
         .foregroundStyle(foregroundColor)
         .padding(.horizontal, size.horizontalPadding)

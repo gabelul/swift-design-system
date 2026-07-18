@@ -47,11 +47,15 @@ private struct TypographyStyledView<Content: View>: View {
             textStyle: style.relativeTextStyle,
             dynamicTypeSize: dynamicTypeSize
         )
-        // Line spacing and tracking scale with the point size so leading stays
-        // proportional as the text grows.
+        // Leading stays at the design delta rather than scaling with the point
+        // size. Scaling it looked right in theory but broke layout in practice:
+        // SwiftUI doesn't reliably include `.lineSpacing` in a Text's measured
+        // height, so at accessibility sizes the extra leading pushed wrapped text
+        // outside its own bounds and it overlapped whatever sat below. The font
+        // itself still scales, which is what carries legibility.
         return content
             .font(style.font(scaledSize: scaledSize, design: design))
-            .lineSpacing(max(0, scaledSize * style.leadingMultiplier - scaledSize))
+            .lineSpacing(max(0, style.lineHeight - style.size))
             .tracking((style.trackingEm ?? 0) * scaledSize)
     }
 }
