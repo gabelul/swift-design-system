@@ -36,11 +36,6 @@ public struct PrimaryButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .typography(buttonSize.typography)
-            // A multi-line label must keep its intrinsic height. Without this the
-            // button hands the label less height than it needs at accessibility text
-            // sizes, the label's last line renders outside the background shape, and
-            // it collides with whatever sits below the button.
-            .fixedSize(horizontal: false, vertical: true)
             .foregroundStyle(colorPalette.onPrimary)
             .padding(.horizontal, buttonSize.horizontalPadding)
             .frame(minHeight: buttonSize.height)
@@ -49,7 +44,7 @@ public struct PrimaryButtonStyle: ButtonStyle {
             .frame(maxWidth: .infinity)
             #endif
             .background(
-                RoundedRectangle(cornerRadius: 100)
+                RoundedRectangle(cornerRadius: buttonSize.cornerRadius)
                     .fill(colorPalette.primary)
                     .opacity(isEnabled ? 1.0 : 0.6)
             )
@@ -57,6 +52,13 @@ public struct PrimaryButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
             .opacity(isEnabled ? 1.0 : 0.6)
             .animate(motion.tap, value: configuration.isPressed)
+            // The whole button keeps the height it measured, background included.
+            // Putting this on the label alone is not enough: the squeeze happens to
+            // the button, so the background shape stays short while the label draws
+            // its full height centred inside it — which is how a multi-line title
+            // ends up bleeding above and below its own capsule at accessibility
+            // text sizes, on top of whatever sits below.
+            .fixedSize(horizontal: false, vertical: true)
     }
 }
 

@@ -39,6 +39,17 @@ public enum ButtonSize: Sendable {
     /// touch-oriented heights (56/48/40), it scales down to dimensions closer
     /// to standard controls (per HIG, 44pt is the minimum hit region, not the
     /// button's own size). iOS dimensions remain unchanged.
+    /// Corner radius for the button's background shape.
+    ///
+    /// Half the button's own height, which renders a single-line button as a
+    /// capsule exactly as before. The cap matters once a button grows taller than
+    /// one line: a literal "very large" radius would clamp to half the *rendered*
+    /// height, curving the corners inward across the first and last lines and
+    /// clipping their leading characters. Holding the radius at the single-line
+    /// value keeps the same corner curvature and lets tall buttons be rounded
+    /// rectangles instead of stadiums.
+    var cornerRadius: CGFloat { height / 2 }
+
     var height: CGFloat {
         #if os(macOS)
         switch self {
