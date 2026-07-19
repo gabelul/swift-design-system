@@ -27,10 +27,17 @@ struct HighContrastDarkPalette: ColorPalette {
     var onSurfaceVariant: Color { Color(hex: "#E0E0E0") }
 
     // MARK: - Semantic State
-    var error: Color { Color(hex: "#FF5252") } // Bright red for high contrast
+    // Dark text on bright fills. The default on-colors are .white, so without these
+    // overrides you get white text on a bright fill — unreadable.
+    // error can't stay #FF5252: its relative luminance of 0.279 caps the ratio at 6.58
+    // even with pure black text, so AAA (7.0) is unreachable. The fill itself is brightened instead.
+    var error: Color { Color(hex: "#FF8A80") } // Bright red for high contrast
+    var onError: Color { Color(hex: "#2D0000") }
     var warning: Color { Color(hex: "#FFD54F") } // Bright yellow for high contrast
     var success: Color { Color(hex: "#69F0AE") } // Bright green for high contrast
+    var onSuccess: Color { Color(hex: "#003828") }
     var info: Color { Color(hex: "#82B1FF") } // Matches primary
+    var onInfo: Color { Color(hex: "#00174A") } // Matches onPrimary since info matches primary
 
     // MARK: - Outline
     var outline: Color { Color(hex: "#E0E0E0") } // High contrast outline for dark mode

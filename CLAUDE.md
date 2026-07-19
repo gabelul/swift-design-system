@@ -176,13 +176,15 @@ To understand the design system:
 
 ---
 
-**Last Updated:** January 12, 2026
+**Last Updated:** July 19, 2026
 
 **Fork URL:** https://github.com/gabelul/swift-design-system
 
 **Upstream:** https://github.com/no-problem-dev/swift-design-system
 
-**Version:** Based on upstream v1.0.24
+**Version:** Based on upstream v1.7.0, plus the HighContrastTheme WCAG AAA contrast fix cherry-picked from upstream 2.0.0 (`07166c2`). The rest of 2.0.0 (Japanese doc rewrites, DocC, CI templates, snapshot infra) was deliberately skipped — see the sync strategy note below.
+
+**Sync strategy note (July 2026):** Upstream's recent releases are mostly Japanese documentation polish, which this fork would have to re-translate for zero code value. Prefer cherry-picking behavior-only commits over full `merge-upstream.sh merge` runs; check `git log --no-merges stable..upstream/main` and take only commits that change component behavior.
 
 ---
 
