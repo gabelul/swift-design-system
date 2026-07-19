@@ -94,6 +94,11 @@ public struct StatusPill: View {
         .padding(.vertical, size.verticalPadding)
         .background(backgroundColor)
         .clipShape(Capsule())
+        // Letting the label wrap isn't enough on its own: a parent that offers the
+        // pill less height than it needs will squeeze it anyway, and the capsule
+        // then draws shorter than its own text — clipping the descenders of
+        // "Setup in progress". The pill keeps the height it measured.
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     private var backgroundColor: Color {

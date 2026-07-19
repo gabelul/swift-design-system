@@ -17,6 +17,11 @@ public struct GlassButtonStyle: ButtonStyle {
     public func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .typography(buttonSize.typography)
+            // A multi-line label must keep its intrinsic height. Without this the
+            // button hands the label less height than it needs at accessibility text
+            // sizes, the label's last line renders outside the background shape, and
+            // it collides with whatever sits below the button.
+            .fixedSize(horizontal: false, vertical: true)
             .foregroundStyle(colorPalette.onSurface)
             .padding(.horizontal, buttonSize.horizontalPadding)
             .frame(minHeight: buttonSize.height)
