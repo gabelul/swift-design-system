@@ -40,17 +40,26 @@ public struct GlassButtonStyle: ButtonStyle {
             .fixedSize(horizontal: false, vertical: true)
     }
 
+    /// The background outline. A rounded rectangle capped at the single-line
+    /// radius rather than a capsule: a capsule's radius follows half the rendered
+    /// height, so once a button wraps to several lines the corners curve inward
+    /// across the first and last line and clip their leading characters. Short
+    /// buttons are unchanged — at one line this is exactly a capsule.
+    private var shape: RoundedRectangle {
+        RoundedRectangle(cornerRadius: buttonSize.cornerRadius, style: .continuous)
+    }
+
     @ViewBuilder
     private var backgroundShape: some View {
         if #available(iOS 26.0, macOS 26.0, *) {
-            Capsule()
+            shape
                 .fill(.clear)
-                .glassEffect(.regular.interactive(true), in: Capsule())
+                .glassEffect(.regular.interactive(true), in: shape)
         } else {
-            Capsule()
+            shape
                 .fill(.ultraThinMaterial)
                 .overlay {
-                    Capsule().strokeBorder(colorPalette.outlineVariant, lineWidth: 1)
+                    shape.strokeBorder(colorPalette.outlineVariant, lineWidth: 1)
                 }
         }
     }
