@@ -48,11 +48,13 @@ private struct TypographyStyledView<Content: View>: View {
             dynamicTypeSize: dynamicTypeSize
         )
         // Leading stays at the design delta rather than scaling with the point
-        // size. Scaling it looked right in theory but broke layout in practice:
-        // SwiftUI doesn't reliably include `.lineSpacing` in a Text's measured
-        // height, so at accessibility sizes the extra leading pushed wrapped text
-        // outside its own bounds and it overlapped whatever sat below. The font
-        // itself still scales, which is what carries legibility.
+        // size — scaling it made wrapped text at accessibility sizes far too airy,
+        // and the font scaling is what actually carries legibility.
+        //
+        // An earlier version of this comment claimed SwiftUI doesn't measure
+        // `.lineSpacing`. That is wrong: `TextMeasurementTests` shows a wrapped
+        // Text does report the taller height, so the leading here is safe for
+        // layout. Don't reintroduce truncation workarounds on that theory.
         return content
             .font(style.font(scaledSize: scaledSize, design: design))
             .lineSpacing(max(0, style.lineHeight - style.size))
