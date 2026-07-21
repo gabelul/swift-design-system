@@ -1,0 +1,84 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1784456770137,
+  "projectRoot": "/Volumes/MyEXT/Projects/Mobile/SwitfUI/swift-design-system",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "DesignSystemCatalog": {
+      "path": "DesignSystemCatalog",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1784456770124,
+      "keyFiles": []
+    },
+    "Sources": {
+      "path": "Sources",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1784456770125,
+      "keyFiles": []
+    },
+    "Tests": {
+      "path": "Tests",
+      "purpose": "Test files",
+      "fileCount": 0,
+      "lastAccessed": 1784456770128,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "CLAUDE.md",
+      "accessCount": 3,
+      "lastAccessed": 1784457233808,
+      "type": "file"
+    },
+    {
+      "path": "Tests/DesignSystemTests/ContrastRatioTests.swift",
+      "accessCount": 2,
+      "lastAccessed": 1784457199837,
+      "type": "file"
+    },
+    {
+      "path": "Sources/DesignSystem/Themes/Accessibility/HighContrastDarkPalette.swift",
+      "accessCount": 1,
+      "lastAccessed": 1784457211103,
+      "type": "file"
+    },
+    {
+      "path": "Sources/DesignSystem/Themes/Accessibility/HighContrastLightPalette.swift",
+      "accessCount": 1,
+      "lastAccessed": 1784457213859,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
