@@ -213,12 +213,60 @@ private struct PinnedFooterRecipeExample: View {
             .background(colors.background)
         }) {
             VStack(alignment: .leading, spacing: spacing.lg) {
+                NavigationLink("Open nested push probe") {
+                    PinnedFooterNavigationProbe()
+                }
+                .buttonStyle(.secondary)
+                .buttonSize(.small)
+
                 ForEach(0..<18, id: \.self) { index in
                     SectionCard(title: "Section \(index + 1)") {
                         Text("Long content now scrolls fully above the pinned footer instead of slipping behind it.")
                             .typography(.bodyMedium)
                     }
                 }
+            }
+        }
+    }
+}
+
+private struct PinnedFooterNavigationProbe: View {
+    private enum Route: String, Identifiable {
+        case editor
+
+        var id: String { rawValue }
+    }
+
+    @State private var route: Route?
+    @Environment(\.spacingScale) private var spacing
+
+    var body: some View {
+        Screen("Nested Push", padding: .compact, titleDisplayMode: .inline) {
+            VStack(alignment: .leading, spacing: spacing.lg) {
+                Text("Use the toolbar button to push one level deeper while the pinned-footer screen remains in the stack.")
+                    .typography(.bodyMedium)
+
+                Button("Open editor") {
+                    route = .editor
+                }
+                .buttonStyle(.secondary)
+                .buttonSize(.medium)
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    route = .editor
+                } label: {
+                    Image(systemName: "plus")
+                }
+                .accessibilityLabel("Open editor")
+            }
+        }
+        .navigationDestination(item: $route) { _ in
+            Screen("Nested Editor", padding: .compact, titleDisplayMode: .inline) {
+                Text("The nested navigation transaction completed.")
+                    .typography(.bodyMedium)
             }
         }
     }

@@ -177,9 +177,8 @@ public struct Screen<Content: View>: View {
     /// Creates a screen with a pinned bottom inset owned by the page shell.
     ///
     /// Use this overload when the screen has a required bottom action such as
-    /// a primary CTA. The inset is attached to the `Screen`'s own scroll
-    /// container so long content stops above the pinned footer instead of
-    /// scrolling behind it.
+    /// a primary CTA. The footer is laid out below the screen's content region,
+    /// so long content stops above it instead of scrolling behind it.
     ///
     /// - Parameters:
     ///   - title: Navigation bar title (omit for untitled screens)
@@ -224,11 +223,14 @@ public struct Screen<Content: View>: View {
     @ViewBuilder
     private var scrollViewBody: some View {
         if let bottomInset {
-            ScrollView {
-                paddedContent
-            }
-            .safeAreaInset(edge: .bottom, spacing: 0) {
+            VStack(spacing: 0) {
+                ScrollView {
+                    paddedContent
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+
                 bottomInset
+                    .frame(maxWidth: .infinity)
             }
         } else {
             ScrollView {
@@ -240,10 +242,13 @@ public struct Screen<Content: View>: View {
     @ViewBuilder
     private var fixedBody: some View {
         if let bottomInset {
-            paddedContent
-                .safeAreaInset(edge: .bottom, spacing: 0) {
-                    bottomInset
-                }
+            VStack(spacing: 0) {
+                paddedContent
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+
+                bottomInset
+                    .frame(maxWidth: .infinity)
+            }
         } else {
             paddedContent
         }
