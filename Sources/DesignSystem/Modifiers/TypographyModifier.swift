@@ -12,27 +12,24 @@ public extension View {
     /// ``DefaultTypographyScale`` (derived from the built-in values) keeps the
     /// original look.
     ///
-    /// Resolution needs an Environment read, so it's wrapped in the lightweight
-    /// ``TypographyStyledView`` rather than a `ViewModifier`. A modifier's
-    /// `body(content:)` is `@MainActor`-isolated, which triggers "non-Sendable
-    /// result" errors when called from a Sendable closure (PhotosPicker, etc.).
-    /// Building a View is nonisolated, so it stays safe inside Sendable closures.
+    /// Resolution needs an Environment read, so it is deferred to
+    /// ``TypographyModifier``. Constructing the modifier is nonisolated; SwiftUI
+    /// invokes its actor-isolated `body(content:)` when rendering the view.
     ///
     /// ```swift
     /// Text("Headline").typography(.headlineLarge)
     /// Text("Headline").typography(.headlineLarge, design: .serif)
     /// ```
-    func typography(_ token: Typography, design: Font.Design? = nil) -> some View {
-        TypographyStyledView(role: token, design: design, content: self)
+    nonisolated func typography(_ token: Typography, design: Font.Design? = nil) -> some View {
+        modifier(TypographyModifier(role: token, design: design))
     }
 }
 
-/// Internal View that resolves `.typography(_:)`. Reads the Environment scale and
-/// the user's Dynamic Type size, then applies the resolved font at a scaled size.
-private struct TypographyStyledView<Content: View>: View {
+/// Internal modifier that resolves `.typography(_:)`. Reads the Environment scale
+/// and the user's Dynamic Type size, then applies the resolved font at a scaled size.
+private struct TypographyModifier: ViewModifier {
     let role: Typography
     let design: Font.Design?
-    let content: Content
     @Environment(\.typographyScale) private var scale
     // Reading this makes `body` re-run whenever the user changes their text size,
     // so `scaledSize` below is always current — this is what makes the ramp
@@ -40,7 +37,12 @@ private struct TypographyStyledView<Content: View>: View {
     // equivalent, so we scale the point size ourselves).
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
-    var body: some View {
+    nonisolated init(role: Typography, design: Font.Design?) {
+        self.role = role
+        self.design = design
+    }
+
+    func body(content: Content) -> some View {
         let style = scale.style(for: role)
         let scaledSize = TypographyScaling.scaledSize(
             style.size,
